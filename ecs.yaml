@@ -54,6 +54,7 @@ Metadata:
 Parameters:
   PJPrefix:
     Type: String
+    Default: "dreamkast"
 
 #InternetALB
   InternetALBName:
@@ -64,7 +65,7 @@ Parameters:
   Certificate:
     Type: String
     # Update with the certificate ARN from Certificate Manager, which must exist in the same region.
-    Default: 'arn:aws:acm:region:123456789012:certificate/00000000-0000-0000-0000-000000000000'
+    Default: !Sub "arn:aws:iam::${AWS::AccountId}:certificate/00000000-0000-0000-0000-000000000000"
 
 #HostedZoneName
   HostedZoneName:
@@ -116,7 +117,12 @@ Parameters:
 #ECSTaskDesiredCount
   ECSTaskDesiredCount:
     Type: Number
-    Default: 1 
+    Default: 1
+
+#S3BucketName
+  S3BucketName:
+    Type: String
+    Default: "bucket"
 
 Resources:
 # ------------------------------------------------------------#
@@ -146,6 +152,11 @@ Resources:
   ECSTaskDesiredCount:
     Type: Number
     Default: 1 
+
+#S3BucketName
+  S3BucketName:
+    Type: String
+    Default: "bucket"
 
 Resources:
 # ------------------------------------------------------------#
@@ -190,8 +201,8 @@ Resources:
     Type: "AWS::EC2::SecurityGroupIngress"
     Properties: 
       IpProtocol: tcp
-      FromPort: 80
-      ToPort: 80
+      FromPort: 3000
+      ToPort: 3000
       SourceSecurityGroupId: !GetAtt [ ALBSecurityGroup, GroupId ] 
       GroupId: !GetAtt [ ECSSecurityGroup, GroupId ]
 
@@ -204,7 +215,7 @@ Resources:
       VpcId: { "Fn::ImportValue": !Sub "${PJPrefix}-vpc" } 
       Name: !Sub "${PJPrefix}-${TargetGroupName}"
       Protocol: HTTP
-      Port: 80
+      Port: 3000
       TargetType: ip
 
 # ------------------------------------------------------------#
@@ -274,14 +285,14 @@ Resources:
     Type: "AWS::ECS::TaskDefinition"
     Properties:
       Cpu: !Ref ECSTaskCPUUnit
-      ExecutionRoleArn: !Sub "arn:aws:iam::${AWS::AccountId}:role/ecsTaskExecutionRole"
+      ExecutionRoleArn: !GetAtt ecsTaskExecutionRole.Arn
+      TaskRoleArn: !GetAtt ecsTaskExecutionRole.Arn
       Family: !Sub "${PJPrefix}-${ECSTaskName}"
       Memory: !Ref ECSTaskMemory
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
-
-#ContainerDefinitions
+    #ContainerDefinitions
       ContainerDefinitions:
         - Name: !Sub "${PJPrefix}-${ECSContainerName}"
           Image: !Ref ECSImageName
@@ -293,10 +304,39 @@ Resources:
               awslogs-stream-prefix: !Ref PJPrefix
           MemoryReservation: 128
           PortMappings:
-            - HostPort: 80
+            - HostPort: 3000
               Protocol: tcp
-              ContainerPort: 80
-
+              ContainerPort: 3000
+          Environment:
+            - Name: MYSQL_DATABASE
+              Value: { "Fn::ImportValue": !Sub "${PJPrefix}-rds-endpoint" }
+            - Name: REDIS_URL
+              Value: { "Fn::ImportValue": !Sub "${PJPrefix}-redis-endpoint" }
+            - Name: SENTRY_DSN
+              Value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+            - Name: RAILS_ENV
+              Value: production
+            - Name: MYSQL_USER
+              ValueFrom: "admin"
+            - Name: MYSQL_PASSWORD
+              ValueFrom: "eUV2d^>~i#8g5FOL"
+#ecsTaskDefinitionRole
+  ecsTaskExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal:
+              Service:
+                - "ecs-tasks.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy
+        - arn:aws:iam::aws:policy/SecretsManagerReadWrite
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 # ------------------------------------------------------------#
 #  ECS Service
 # ------------------------------------------------------------#
@@ -310,7 +350,7 @@ Resources:
       LoadBalancers:
         -
           TargetGroupArn: !Ref TargetGroup
-          ContainerPort: 80
+          ContainerPort: 3000
           ContainerName: !Sub "${PJPrefix}-${ECSContainerName}"
       NetworkConfiguration:
        AwsvpcConfiguration:
@@ -322,6 +362,34 @@ Resources:
              - { "Fn::ImportValue": !Sub "${PJPrefix}-public-subnet-c" }
       ServiceName: !Sub "${PJPrefix}-${ECSServiceName}"
       TaskDefinition: !Ref ECSTaskDefinition
+      PlatformVersion: 1.4.0
+
+# ------------------------------------------------------------#
+# S3 Bucket
+# ------------------------------------------------------------#
+
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${PJPrefix}-${S3BucketName}"
+      AccessControl: Private
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
+
+# ------------------------------------------------------------#
+#  VPCS3Endpoint
+# ------------------------------------------------------------#
+  VPCS3Endpoint:
+    Type: "AWS::EC2::VPCEndpoint"
+    Properties:
+      RouteTableIds:
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-route-a" }
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-route-c" }
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.s3"
+      VpcId: { "Fn::ImportValue": !Sub "${PJPrefix}-vpc" }
 
 # ------------------------------------------------------------#
 # Output Parameters
@@ -387,10 +455,10 @@ Outputs:
       Name: !Sub "${PJPrefix}-${ECSContainerName}-name"
 
 #ECSImage
-  ECSImageName:
-    Value: !Ref ECSImageName
-    Export:
-      Name: !Sub "${ECSImageName}-name"
+  # ECSImageName:
+  #   Value: !Ref ECSImageName
+  #   Export:
+  #     Name: !Sub "${ECSImageName}-name"
 
 #ECSServiceName
   ECSService:
@@ -409,3 +477,15 @@ Outputs:
     Value: !Ref ECSTaskDesiredCount
     Export:
       Name: !Sub "${PJPrefix}-${ECSTaskName}-count"
+
+#S3BucketName
+  S3BucketName:
+    Value: !Ref S3Bucket
+    Export:
+      Name: !Sub "${PJPrefix}-bucket-id"
+
+#VPCS3Endpoint
+  VPCS3Endpoint:
+    Value: !Ref VPCS3Endpoint
+    Export:
+      Name: !Sub "${PJPrefix}-vpcs3endpoint-id"
