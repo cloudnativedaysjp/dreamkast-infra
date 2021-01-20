@@ -15,19 +15,25 @@ Metadata:
           - VPCCIDR
           - PublicSubnetACIDR
           - PublicSubnetCCIDR
+          - PublicSubnetDCIDR
           - PrivateSubnetACIDR
           - PrivateSubnetCCIDR
+          - PrivateSubnetDCIDR
     ParameterLabels: 
-      VPCCIDR:
+      VPCCIDR: 
         default: "VPC CIDR"
-      PublicSubnetACIDR:
+      PublicSubnetACIDR: 
         default: "PublicSubnetA CIDR"
-      PublicSubnetCCIDR:
+      PublicSubnetCCIDR: 
         default: "PublicSubnetC CIDR"
-      PrivateSubnetACIDR:
+      PublicSubnetDCIDR: 
+        default: "PublicSubnetD CIDR"
+      PrivateSubnetACIDR: 
         default: "PrivateSubnetA CIDR"
-      PrivateSubnetCCIDR:
+      PrivateSubnetCCIDR: 
         default: "PrivateSubnetC CIDR"
+      PrivateSubnetDCIDR: 
+        default: "PrivateSubnetD CIDR"
 
 # ------------------------------------------------------------#
 # Input Parameters

@@ -1,0 +1,104 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 'EKS Managed Nodes (SSH access: false)'
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  EKS cluster (dedicated VPC: false, dedicated IAM: true)
+Metadata: 
+  "AWS::CloudFormation::Interface": 
+    ParameterGroups: 
+      - Label: 
+          default: "Project Name Prefix"
+        Parameters: 
+          - PJPrefix
+Parameters:
+  PJPrefix:
+    Type: String
+Mappings:
+  ServicePrincipalPartitionMap:
+    aws:
+      EC2: ec2.amazonaws.com
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+    aws-cn:
+      EC2: ec2.amazonaws.com.cn
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+    aws-us-gov:
+      EC2: ec2.amazonaws.com
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+Resources:
+  LaunchTemplate:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateData:
+        MetadataOptions:
+          HttpPutResponseHopLimit: 2
+          HttpTokens: optional
+        SecurityGroupIds:
+          - !ImportValue 'dreamkast-prd-eks::ClusterSecurityGroupId'
+        TagSpecifications:
+          - ResourceType: instance
+            Tags:
+              - Key: Name
+                Value: dreamkast-cluster-spot-Node
+              - Key: alpha.eksctl.io/nodegroup-name
+                Value: spot
+              - Key: alpha.eksctl.io/nodegroup-type
+                Value: managed
+      LaunchTemplateName: !Sub '${AWS::StackName}'
+  ManagedNodeGroup:
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      AmiType: AL2_x86_64
+      ClusterName: dreamkast-cluster
+      InstanceTypes:
+        - c4.large
+        - c5.large
+        - c5d.large
+        - c5n.large
+        - c5a.large
+      CapacityType: SPOT
+      Labels:
+        alpha.eksctl.io/cluster-name: dreamkast-cluster
+        alpha.eksctl.io/nodegroup-name: spot
+      LaunchTemplate:
+        Id: !Ref LaunchTemplate
+      NodeRole: !GetAtt 
+        - NodeInstanceRole
+        - Arn
+      NodegroupName: spot
+      ScalingConfig:
+        DesiredSize: 2
+        MaxSize: 2
+        MinSize: 2
+      Subnets:
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-c" }
+      Tags:
+        alpha.eksctl.io/nodegroup-name: spot
+        alpha.eksctl.io/nodegroup-type: managed
+  NodeInstanceRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - !FindInMap 
+                  - ServicePrincipalPartitionMap
+                  - !Ref 'AWS::Partition'
+                  - EC2
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - !Sub >-
+          arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy'
+      Path: /
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}/NodeInstanceRole'
