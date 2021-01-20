@@ -44,10 +44,8 @@ Resources:
         SubnetIds:
         - { "Fn::ImportValue": !Sub "${PJPrefix}-public-subnet-a" }
         - { "Fn::ImportValue": !Sub "${PJPrefix}-public-subnet-c" }
-        - { "Fn::ImportValue": !Sub "${PJPrefix}-public-subnet-d" }
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-c" }
-        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-d" }
       RoleArn: !GetAtt 
         - ServiceRole
         - Arn

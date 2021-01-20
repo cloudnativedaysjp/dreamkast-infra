@@ -36,7 +36,7 @@ Resources:
           HttpPutResponseHopLimit: 2
           HttpTokens: optional
         SecurityGroupIds:
-          - !ImportValue 'dreamkast::ClusterSecurityGroupId'
+          - !ImportValue 'dreamkast-prd-eks::ClusterSecurityGroupId'
         TagSpecifications:
           - ResourceType: instance
             Tags:
@@ -75,7 +75,6 @@ Resources:
       Subnets:
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-c" }
-        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-d" }
       Tags:
         alpha.eksctl.io/nodegroup-name: spot
         alpha.eksctl.io/nodegroup-type: managed
