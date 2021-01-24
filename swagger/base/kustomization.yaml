@@ -8,5 +8,5 @@ resources:
 - service.yaml
 images:
 - name: dreamkast-api-mock
-  newName: foobar
-  newTag: bazz
+  newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-api-mock
+  newTag: 0a7bb30d246fee61d856792a26512c312d9f6cd6
