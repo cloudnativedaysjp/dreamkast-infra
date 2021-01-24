@@ -6,6 +6,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: contour
     ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: argocd.udcp.info
@@ -17,13 +19,21 @@ spec:
       - backend:
           serviceName: argocd-server
           servicePort: 443
+  tls:
+  - hosts:
+    - argocd.udcp.info
+    secretName: argocd-cert
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: argocd-server-grpc
+  namespace: argocd
   annotations:
     kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
   - host: grpc-internal.udcp.info
@@ -35,4 +45,4 @@ spec:
   tls:
   - hosts:
     - grpc-internal.udcp.info
-    secretName: argocd-cert
+    secretName: grpc-internal-cert
