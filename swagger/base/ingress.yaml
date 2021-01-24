@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: dreamkast-api-mock-ingress
+  namespace: swagger
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: dreamakast.main-alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: "dreamkast-prd-public-subnet-a, dreamkast-prd-public-subnet-c"
+    alb.ingress.kubernetes.io/healthcheck-path: /docs/
+    alb.ingress.kubernetes.io/success-codes: 200,304,301
+  labels:
+    app: dreamkast-api-mock
+spec:
+  rules:
+    - host: dreamkast-api-mock.udcp.info
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: "dreamkast-api-mock"
+              servicePort: 8080

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dreamkast-api-mock
+  name: dreamkast-api-mock
+  namespace: swagger
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: dreamkast-api-mock
+  type: NodePort
