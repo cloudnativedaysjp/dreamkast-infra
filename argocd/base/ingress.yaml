@@ -4,24 +4,35 @@ metadata:
   name: argocd
   namespace: argocd
   annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/group.name: dreamakast.main-alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/subnets: "dreamkast-prd-public-subnet-a, dreamkast-prd-public-subnet-c"
-    alb.ingress.kubernetes.io/backend-protocol: HTTPS
-    alb.ingress.kubernetes.io/conditions.argogrpc: |
-      [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    kubernetes.io/ingress.class: contour
+    ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: argocd.dev.udcp.info
+  - host: argocd.udcp.info
     http:
       paths:
       - backend:
           serviceName: argogrpc
           servicePort: 443
-        pathType: ImplementationSpecific
       - backend:
           serviceName: argocd-server
           servicePort: 443
-        pathType: ImplementationSpecific
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: argocd-server-grpc
+  annotations:
+    kubernetes.io/ingress.class: contour
+spec:
+  rules:
+  - host: grpc-internal.udcp.info
+    http:
+      paths:
+      - backend:
+          serviceName: argocd-server
+          servicePort: https
+  tls:
+  - hosts:
+    - grpc-internal.udcp.info
+    secretName: argocd-cert
