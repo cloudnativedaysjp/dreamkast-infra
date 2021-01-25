@@ -1,29 +1,3 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: argocd
-  namespace: argocd
-  annotations:
-    kubernetes.io/ingress.class: contour
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: letsencrypt
-spec:
-  rules:
-  - host: 
-    http:
-      paths:
-      - backend:
-          serviceName: argogrpc
-          servicePort: 443
-      - backend:
-          serviceName: argocd-server
-          servicePort: 443
-  tls:
-  - hosts:
-    - argocd.udcp.info
-    secretName: argocd-cert
----
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
@@ -31,11 +5,10 @@ metadata:
   namespace: argocd
 spec:
   virtualhost:
-    fqdn: argocd-grpc.udcp.info
+    fqdn: argocd.udcp.info
     tls:
       passthrough: true
   tcpproxy:
     services:
     - name: argocd-server
       port: 443
-
