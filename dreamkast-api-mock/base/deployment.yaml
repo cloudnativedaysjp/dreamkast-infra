@@ -4,7 +4,7 @@ metadata:
   labels:
     app: dreamkast-api-mock
   name: dreamkast-api-mock
-  namespace: swagger
+  namespace: dreamkast-api-mock
 spec:
   replicas: 1
   selector:
