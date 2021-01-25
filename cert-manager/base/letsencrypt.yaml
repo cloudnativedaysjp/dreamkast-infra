@@ -12,7 +12,7 @@ spec:
     solvers:
     - dns01:
         cloudDNS:
-          project: fe-kkusama
+          project: jacopen-project
           serviceAccountSecretRef:
             name: clouddns-jacopen
             key: service-account.json
