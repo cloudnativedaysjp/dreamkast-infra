@@ -4,7 +4,6 @@ namespace: dreamkast-api-mock
 resources:
 - deployment.yaml
 - ingress.yaml
-- ns.yaml
 - service.yaml
 images:
 - name: dreamkast-api-mock
