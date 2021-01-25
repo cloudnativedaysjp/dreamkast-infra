@@ -1,4 +1,4 @@
 bases:
   - ../../base
 patches:
-- argocd-server-service.yaml
+- service.yaml

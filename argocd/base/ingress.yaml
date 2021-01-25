@@ -1,27 +1,14 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
 metadata:
-  name: argocd
+  name: argocd-server-grpc
   namespace: argocd
-  annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/group.name: dreamakast.main-alb
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/subnets: "dreamkast-prd-public-subnet-a, dreamkast-prd-public-subnet-c"
-    alb.ingress.kubernetes.io/backend-protocol: HTTPS
-    alb.ingress.kubernetes.io/conditions.argogrpc: |
-      [{"field":"http-header","httpHeaderConfig":{"httpHeaderName": "Content-Type", "values":["application/grpc"]}}]
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
 spec:
-  rules:
-  - host: argocd.dev.udcp.info
-    http:
-      paths:
-      - backend:
-          serviceName: argogrpc
-          servicePort: 443
-        pathType: ImplementationSpecific
-      - backend:
-          serviceName: argocd-server
-          servicePort: 443
-        pathType: ImplementationSpecific
+  virtualhost:
+    fqdn: argocd.udcp.info
+    tls:
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: argocd-server
+      port: 443

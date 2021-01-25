@@ -5,9 +5,9 @@ metadata:
     app.kubernetes.io/component: server
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
+    projectcontour.io/upstream-protocol.h2c: "443"
   name: argocd-server
 spec:
-  type: NodePort
   ports:
   - name: http
     port: 80
