@@ -53,11 +53,11 @@ Resources:
       AmiType: AL2_x86_64
       ClusterName: dreamkast-cluster
       InstanceTypes:
-        - c4.large
-        - c5.large
-        - c5d.large
-        - c5n.large
-        - c5a.large
+        - m5.xlarge
+        - m4.xlarge
+        - m3.xlarge
+        - t3.xlarge
+        - t2.xlarge
       CapacityType: SPOT
       Labels:
         alpha.eksctl.io/cluster-name: dreamkast-cluster
@@ -70,7 +70,7 @@ Resources:
       NodegroupName: spot
       ScalingConfig:
         DesiredSize: 2
-        MaxSize: 2
+        MaxSize: 5
         MinSize: 2
       Subnets:
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
@@ -99,6 +99,7 @@ Resources:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonS3FullAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy'
       Policies:
         - PolicyDocument:
             Statement:
