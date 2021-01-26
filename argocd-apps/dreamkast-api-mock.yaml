@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dreamkast-api-mock
+  namespace: argocd
+spec:
+  destination:
+    namespace: dreamkast-api-mock
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dreamkast-api-mock/base
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
