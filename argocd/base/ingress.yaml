@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   virtualhost:
-    fqdn: argocd.udcp.info
+    fqdn: argocd.dev.cloudnativedays.jp
     tls:
       passthrough: true
   tcpproxy:

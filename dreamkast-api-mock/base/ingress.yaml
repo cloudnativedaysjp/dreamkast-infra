@@ -9,7 +9,7 @@ metadata:
     app: dreamkast-api-mock
 spec:
   rules:
-    - host: dreamkast-api-mock.udcp.info
+    - host: dreamkast-api-mock.dev.cloudnativedays.jp
       http:
         paths:
           - path: /
