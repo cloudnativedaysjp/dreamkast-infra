@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-apps
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd-apps
+    server: https://kubernetes.default.svc
+  project: argocd
+  source:
+    path: argocd-apps
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
