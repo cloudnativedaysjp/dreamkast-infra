@@ -10,8 +10,8 @@ spec:
   project: default
   source:
     path: dreamkast/base
-    repoURL: https://github.com/cloudnativedaysjp/dreamkast.git
-    targetRevision: master
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
