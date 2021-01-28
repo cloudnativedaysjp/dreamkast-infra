@@ -7,4 +7,4 @@ resources:
 - service.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 360ebdfe58ede4d1f3696782a3157a02f1501104
+  newTag: 2a4f3a16c1fe635b026966d5482e3b2ec7aa04a8
