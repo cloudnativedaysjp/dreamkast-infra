@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dreamkast-ui-IMAGE_TAG
+  name: dreamkast-ui-gitops
   namespace: argocd
 spec:
   destination:
