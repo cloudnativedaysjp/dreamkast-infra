@@ -1,15 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dreamkast-ui-IMAGE_TAG
+  name: dreamkast-ui-gitops
   namespace: argocd
 spec:
   destination:
-    namespace: dreamkast-dev
+    namespace: NAMESPACE
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: dreamkast-ui/overlays/gitops
+    path: dreamkast-ui/overlays/IMAGE_TAG
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
