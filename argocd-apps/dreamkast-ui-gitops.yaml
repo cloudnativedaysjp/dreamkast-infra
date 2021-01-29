@@ -5,11 +5,11 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: dreamkast-dev
+    namespace: NAMESPACE
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: dreamkast-ui/overlays/gitops
+    path: dreamkast-ui/overlays/IMAGE_TAG
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:

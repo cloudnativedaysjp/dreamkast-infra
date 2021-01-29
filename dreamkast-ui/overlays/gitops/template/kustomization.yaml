@@ -4,5 +4,4 @@ resources:
 - ../../base
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 98645a27681cd555b94ac0a1519a815cfd5286ed
-namespace: dreamkast-dev
+  newTag: template
