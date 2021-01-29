@@ -9,7 +9,7 @@ metadata:
     app: dreamkast-ui
 spec:
   rules:
-    - host: dreamkast-ui.dev.cloudnativedays.jp
+    - host: dreamkast-ui-IMAGE_TAG.dev.cloudnativedays.jp
       http:
         paths:
           - path: /
