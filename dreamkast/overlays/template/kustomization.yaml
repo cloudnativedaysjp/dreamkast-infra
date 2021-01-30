@@ -4,3 +4,5 @@ resources:
 - ../../base
 patches:
   - ingress.yaml
+  - mysql.yaml
+  - redis.yaml

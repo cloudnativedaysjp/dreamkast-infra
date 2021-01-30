@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dreamkast
+spec:
+  type: ClusterIP
+  ports:
+    - name: "http-port"
+      protocol: "TCP"
+      port: 80
+      targetPort: 3000
+  selector:
+    app: dreamkast
+    tier: dreamkast
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dreamkast
+  name: dreamkast-ui
+  namespace: dreamkast
+spec:
+  ports:
+  - port: 3001
+    protocol: TCP
+    targetPort: 3001
+  selector:
+    app: dreamkast
+    tier: dreamkast-ui
+  type: NodePort
