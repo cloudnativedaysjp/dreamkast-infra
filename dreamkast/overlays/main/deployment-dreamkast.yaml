@@ -91,7 +91,7 @@ spec:
         tier: dreamkast-ui
     spec:
       containers:
-      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:master
+      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
         name: dreamkast-ui
         ports:
         - containerPort: 3001
