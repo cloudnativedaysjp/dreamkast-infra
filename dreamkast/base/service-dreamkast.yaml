@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dreamkast-svc
+  name: dreamkast
 spec:
   type: ClusterIP
   ports:

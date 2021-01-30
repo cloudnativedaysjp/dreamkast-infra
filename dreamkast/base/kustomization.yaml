@@ -3,9 +3,10 @@ kind: Kustomization
 namespace: dreamkast
 resources:
 - deployment-dreamkast.yaml
+- deployment-ui.yaml
 - ingress.yaml
-- secret.yaml
-- service.yaml
+- service-dreamkast.yaml
+- service-ui.yaml
 images:
 - name: dreamkast
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs

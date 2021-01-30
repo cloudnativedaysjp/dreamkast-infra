@@ -13,9 +13,9 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: dreamkast-svc
+              serviceName: dreamkast
               servicePort: 80
           - path: /cndo2021/ui
             backend:
-              serviceName: dreamkast-ui-svc
+              serviceName: dreamkast-ui
               servicePort: 3001

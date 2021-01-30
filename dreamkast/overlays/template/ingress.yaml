@@ -8,4 +8,14 @@ metadata:
     app: dreamkast
 spec:
   rules:
-    - host: dreamkast-IMAGE_TAG.dev.cloudnativedays.jp
+    - host: dreamkast-BRANCH.dev.cloudnativedays.jp
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dreamkast-svc
+              servicePort: 80
+          - path: /cndo2021/ui
+            backend:
+              serviceName: dreamkast-ui-svc
+              servicePort: 3001
