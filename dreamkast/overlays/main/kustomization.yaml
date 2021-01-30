@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+- mysql.yaml
+- redis.yaml
+patchesStrategicMerge:
+- ingress.yaml
+- deployment-dreamkast.yaml
+images:
+- name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
+  newTag: e3e0a82870fac8f977e0e4ab0ae93ca6fbc45edd
