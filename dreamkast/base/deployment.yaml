@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast
   name: dreamkast
   namespace: default
 spec:
@@ -20,6 +19,7 @@ spec:
     metadata:
       labels:
         app: dreamkast
+        tier: dreamkast
     spec:
       containers:
       - name: dreamkast
@@ -27,36 +27,7 @@ spec:
         ports:
           - containerPort: 3000
             resources:
-        env:
-        - name: RAILS_ENV
-          value: "production"
-        - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
-        - name: MYSQL_DATABASE
-          value: "db"
-        - name: REDIS_URL
-          value: "redis://drr6rmpqht3l361.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
-        - name: SENTRY_DSN
-          value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
-        - name: S3_BUCKET
-          value: "dreamkast-test-bucket"
-        - name: S3_REGION
-          value: ap-northeast-1
-        - name: RAILS_MASTER_KEY
-          valueFrom:
-            secretKeyRef:
-              name: rails-app-secret
-              key: rails-app-secret
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: username
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: password
+
         # livenessProbe:
         #   httpGet:
         #     port: 3000
@@ -75,7 +46,6 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast-ui
   name: dreamkast-ui
   namespace: dreamkast
 spec:
@@ -89,6 +59,7 @@ spec:
     metadata:
       labels:
         app: dreamkast
+        tier: dreamkast-ui
     spec:
       containers:
       - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:master
