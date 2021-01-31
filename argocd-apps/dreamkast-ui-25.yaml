@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dreamkast-ui-25
+  namespace: argocd
+spec:
+  destination:
+    namespace: dreamkast-ui-25
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: dreamkast/overlays/ui-25
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
