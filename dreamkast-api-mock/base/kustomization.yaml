@@ -7,7 +7,7 @@ resources:
 - service.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-api-mock
-  newTag: 2df57460ebab3a75d5ee09dfcb785370cee2512d
+  newTag: a79b4fc84bc0a676d34cde4febc0bd7da2840f72
 - name: dreamkast-api-mock
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-api-mock
   newTag: 329df4c0aa0cb53796a112aae00dcf7530b5b26e
