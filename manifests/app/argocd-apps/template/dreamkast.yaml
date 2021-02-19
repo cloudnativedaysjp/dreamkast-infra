@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/app/dreamkast/overlays/development/BRANCH
+    path: manifests/app/dreamkast/overlays/ENVIRONMENT/BRANCH
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
