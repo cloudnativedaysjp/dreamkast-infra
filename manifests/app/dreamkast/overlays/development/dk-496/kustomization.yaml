@@ -10,5 +10,5 @@ patchesStrategicMerge:
 - deployment-dreamkast.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 3d84d713775440d0e581be50890b83e8aaacecae
+  newTag: d785f6e71839274599e72f5d042437dd83187675
 namespace: dreamkast-dk-496
