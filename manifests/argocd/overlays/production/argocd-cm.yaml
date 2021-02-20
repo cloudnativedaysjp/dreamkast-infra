@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   application.instanceLabelKey: argocd.argoproj.io/instance
-  url: https://argocd.dev.cloudnativedays.jp/
+  url: https://argocd.cloudnativedays.jp/
   oidc.config: |
     name: Auth0
     issuer: https://dreamkast.us.auth0.com/
