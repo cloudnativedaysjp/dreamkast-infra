@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: dreamkast-api-mock
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
     namespace: dreamkast-api-mock

@@ -5,7 +5,7 @@ metadata:
   name: cert-manager
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deleted
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
     namespace: cert-manager

@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: dreamkast-ui-35
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
     namespace: dreamkast-ui-35
