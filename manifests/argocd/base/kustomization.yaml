@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: argocd
 resources:
 - install.yaml
-- ingress.yaml
 - secret.yaml
