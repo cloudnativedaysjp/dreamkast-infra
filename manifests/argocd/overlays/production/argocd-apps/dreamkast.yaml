@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/app/argocd-apps/overlays/production
+    path: manifests/app/argocd-apps/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
