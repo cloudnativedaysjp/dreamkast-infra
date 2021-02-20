@@ -6,3 +6,4 @@ bases:
 - ../../base
 resources:
 - certificate.yaml
+- cert-delegation.yaml
