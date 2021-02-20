@@ -1,18 +1,19 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
 metadata:
   name: dreamkast-api-mock-ingress
   namespace: dreamkast-api-mock
-  annotations:
-    kubernetes.io/ingress.class: contour
   labels:
     app: dreamkast-api-mock
 spec:
-  rules:
-    - host: dreamkast-api-mock.dev.cloudnativedays.jp
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: "dreamkast-api-mock"
-              servicePort: 8080
+  virtualhost:
+    fqdn: dreamkast-api-mock.dev.cloudnativedays.jp
+    tls:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+      - name: dreamkast-api-mock
+        port: 8080

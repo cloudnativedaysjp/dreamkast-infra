@@ -6,6 +6,6 @@ resources:
 - mysql.yaml
 - redis.yaml
 - externalsecret.yaml
-patchesStrategicMerge:
 - ingress.yaml
+patchesStrategicMerge:
 - deployment-dreamkast.yaml
