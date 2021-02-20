@@ -5,14 +5,11 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: jacopen@gmail.com
+    email: ShotaKitazawa@users.noreply.github.com
     privateKeySecretRef:
       name: letsencrypt-staging
     server: https://acme-staging-v02.api.letsencrypt.org/directory
     solvers:
     - dns01:
-        cloudDNS:
-          project: jacopen-project
-          serviceAccountSecretRef:
-            name: clouddns-jacopen
-            key: service-account.json
+        route53:
+          region: ap-northeast-1
