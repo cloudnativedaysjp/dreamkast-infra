@@ -30,15 +30,15 @@ spec:
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
+          value: "dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
         - name: MYSQL_DATABASE
           value: "db"
         - name: REDIS_URL
-          value: "redis://drr6rmpqht3l361.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
+          value: "redis://drrlvc9l498pdp2.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
-          value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+          value: "https://82e52bc9814f478a917a9f4b2a190202@o414348.ingest.sentry.io/5303654"
         - name: S3_BUCKET
-          value: "dreamkast-prod-bucket"
+          value: "dreamkast-staging-bucket"
         - name: S3_REGION
           value: ap-northeast-1
         - name: RAILS_MASTER_KEY
