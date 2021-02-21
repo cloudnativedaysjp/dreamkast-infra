@@ -17,6 +17,12 @@ spec:
       - name: dreamkast
         port: 80
     - conditions:
+      - prefix: /cable
+      enableWebsockets: true
+      services:
+      - name: dreamkast
+        port: 80
+    - conditions:
       - prefix: /cndo2021/ui
       services:
       - name: dreamkast-ui
