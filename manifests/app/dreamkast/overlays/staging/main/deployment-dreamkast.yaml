@@ -32,7 +32,7 @@ spec:
         - name: MYSQL_HOST
           value: "dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
         - name: MYSQL_DATABASE
-          value: "db"
+          value: "dreamkast"
         - name: REDIS_URL
           value: "redis://drrlvc9l498pdp2.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
