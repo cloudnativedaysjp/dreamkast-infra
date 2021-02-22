@@ -9,7 +9,7 @@ spec:
   virtualhost:
     fqdn: staging.dev.cloudnativedays.jp
     tls:
-      secretName: cert-manager/wildcard-cloudnativedays-jp
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:
     - conditions:
       - prefix: /
