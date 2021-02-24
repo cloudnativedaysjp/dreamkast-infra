@@ -56,6 +56,21 @@ spec:
             secretKeyRef:
               name: db-secret
               key: password
+        - name: AUTH0_CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-secret
+              key: AUTH0_CLIENT_ID
+        - name: AUTH0_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-secret
+              key: AUTH0_CLIENT_SECRET
+        - name: AUTH0_DOMAIN
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-secret
+              key: AUTH0_DOMAIN
         # livenessProbe:
         #   httpGet:
         #     port: 3000
