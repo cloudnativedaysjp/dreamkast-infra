@@ -38,7 +38,7 @@ spec:
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
-          value: "dreamkast-prod-bucket"
+          value: "dreamkast-prd-bucket"
         - name: S3_REGION
           value: ap-northeast-1
         - name: RAILS_MASTER_KEY
