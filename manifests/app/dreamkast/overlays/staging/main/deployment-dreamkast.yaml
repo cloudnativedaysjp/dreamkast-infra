@@ -71,18 +71,24 @@ spec:
             secretKeyRef:
               name: dreamkast-secret
               key: AUTH0_DOMAIN
-        # livenessProbe:
-        #   httpGet:
-        #     port: 3000
-        #     path: /
-        #   failureThreshold: 5
-        #   periodSeconds: 5
-        # readinessProbe:
-        #   httpGet:
-        #     port: 3000
-        #     path: /
-        #   failureThreshold: 5
-        #   periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 30
+          periodSeconds: 10
 ---
 apiVersion: apps/v1
 kind: Deployment
