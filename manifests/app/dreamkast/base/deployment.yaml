@@ -26,19 +26,6 @@ spec:
         ports:
           - containerPort: 3000
             resources:
-
-        # livenessProbe:
-        #   httpGet:
-        #     port: 3000
-        #     path: /
-        #   failureThreshold: 5
-        #   periodSeconds: 5
-        # readinessProbe:
-        #   httpGet:
-        #     port: 3000
-        #     path: /
-        #   failureThreshold: 5
-        #   periodSeconds: 5
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -66,3 +53,21 @@ spec:
         ports:
         - containerPort: 3001
         resources: {}
+        livenessProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 5
+          periodSeconds: 5
+        startupProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 30
+          periodSeconds: 10
