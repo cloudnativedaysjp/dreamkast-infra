@@ -5,7 +5,7 @@ metadata:
     app: dreamkast
   name: dreamkast
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: dreamkast
