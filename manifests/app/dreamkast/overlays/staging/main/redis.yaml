@@ -45,7 +45,7 @@ spec:
         resources:
           limits:
             cpu: "0.1"
-            memory: "100Mi"
+            memory: "200Mi"
         volumeMounts:
         - mountPath: /redis-master-data
           name: data
@@ -67,5 +67,5 @@ metadata:
   name: redis-config
 data:
   redis.conf: |
-    maxmemory 2mb
+    maxmemory 100mb
     maxmemory-policy allkeys-lru
