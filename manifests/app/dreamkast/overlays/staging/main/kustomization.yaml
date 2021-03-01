@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - secret.yaml
 - ingress.yaml
+- redis.yaml
 - ../../../base/
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
