@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: redis
-        image: redis:5.0.4
+        image: redis:6.0.5
         command:
           - redis-server
           - "/redis-master/redis.conf"
