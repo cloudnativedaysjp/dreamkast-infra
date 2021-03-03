@@ -44,8 +44,8 @@ spec:
         - containerPort: 6379
         resources:
           limits:
-            cpu: "0.1"
-            memory: "200Mi"
+            cpu: "1"
+            memory: "400Mi"
         volumeMounts:
         - mountPath: /redis-master-data
           name: data
@@ -67,5 +67,5 @@ metadata:
   name: redis-config
 data:
   redis.conf: |
-    maxmemory 100mb
+    maxmemory 200mb
     maxmemory-policy allkeys-lru
