@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dreamkast-releasebot
+  name: dreamkast-releasebot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dreamkast-releasebot
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dreamkast-releasebot
+    spec:
+      containers:
+      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-releasebot:main
+        name: dreamkast-releasebot
+        args:
+          - --target-repositories=https://github.com/cloudnativedaysjp/dreamkast
+          - --target-repositories=https://github.com/cloudnativedaysjp/dreamkast-ui
+          - --base-branch=main
+          - --enable-auto-merge=false
+        env:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-releasebot
+              key: GITHUB_TOKEN
+        - name: SLACK_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-releasebot
+              key: SLACK_BOT_TOKEN
+        - name: SLACK_VERIFICATION_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-releasebot
+              key: SLACK_VERIFICATION_TOKEN
+        ports:
+        - containerPort: 8080
+        resources: {}
