@@ -1,17 +1,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dreamkast-development-ui-85
+  name: dreamkast-development-dk-573
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: dreamkast-ui-85
+    namespace: dreamkast-dk-573
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/app/dreamkast/overlays/development/ui-85
+    path: manifests/app/dreamkast/overlays/development/dk-573
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
