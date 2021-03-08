@@ -86,3 +86,56 @@ spec:
             path: /
           failureThreshold: 30
           periodSeconds: 10
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dreamkast
+  name: dreamkast-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dreamkast
+      tier: dreamkast-ui
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dreamkast
+        tier: dreamkast-ui
+    spec:
+      containers:
+      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:main
+        imagePullPolicy: Always
+        name: dreamkast-ui
+        ports:
+        - containerPort: 3001
+        livenessProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 5
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 5
+          periodSeconds: 5
+        startupProbe:
+          httpGet:
+            port: 3001
+            path: /cndo2021/ui/
+          failureThreshold: 30
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+---
