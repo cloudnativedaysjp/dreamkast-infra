@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast
   name: dreamkast
 spec:
   replicas: 1
@@ -10,6 +11,7 @@ spec:
   selector:
     matchLabels:
       app: dreamkast
+      tier: dreamkast
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -96,6 +98,7 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast-ui
   name: dreamkast-ui
 spec:
   replicas: 3
@@ -115,4 +118,3 @@ spec:
         name: dreamkast-ui
         ports:
         - containerPort: 3001
-        resources: {}
