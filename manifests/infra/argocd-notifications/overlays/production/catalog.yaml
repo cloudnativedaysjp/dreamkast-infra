@@ -218,6 +218,8 @@ data:
       send:
       - app-sync-succeeded
       when: app.status.operationState.phase in ['Succeeded']
+  service.slack: |
+    token: $token
   subscriptions: |
     - recipients:
       - slack:cndo2021-dreamkast
