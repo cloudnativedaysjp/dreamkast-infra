@@ -4,7 +4,6 @@ resources:
 - secret.yaml
 - ingress.yaml
 - redis.yaml
-- hpa.yaml
 - ../../../base/
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
