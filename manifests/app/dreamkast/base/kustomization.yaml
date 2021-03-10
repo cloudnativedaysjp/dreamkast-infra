@@ -5,3 +5,4 @@ resources:
 - service.yaml
 - secret.yaml
 - pdb.yaml
+- hpa.yaml
