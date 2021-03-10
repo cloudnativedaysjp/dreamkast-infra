@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast-ui
+    tier: dreamkast
   name: dreamkast
 spec:
   selector:
