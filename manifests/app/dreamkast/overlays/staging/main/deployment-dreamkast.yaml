@@ -3,12 +3,14 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast
   name: dreamkast
 spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: dreamkast
+      tier: dreamkast
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -25,7 +27,6 @@ spec:
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         ports:
           - containerPort: 3000
-            resources:
         env:
         - name: RAILS_ENV
           value: "production"
@@ -95,6 +96,7 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast-ui
   name: dreamkast-ui
 spec:
   replicas: 1
@@ -114,4 +116,3 @@ spec:
         name: dreamkast-ui
         ports:
         - containerPort: 3001
-        resources: {}
