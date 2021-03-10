@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  subscriptions: |
+    - recipients:
+      - slack:cndo2021-dreamkast
+      triggers:
+      - sync-operation-change
+  trigger.sync-operation-change: |
+    - when: app.status.operationState.phase in ['Succeeded']
+      send: [github-commit-status]
+    - when: app.status.operationState.phase in ['Running']
+      send: [github-commit-status]
+    - when: app.status.operationState.phase in ['Error', 'Failed']
+      send: [app-sync-failed, github-commit-status]
