@@ -3,11 +3,13 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast
   name: dreamkast
 spec:
   selector:
     matchLabels:
       app: dreamkast
+      tier: dreamkast
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -17,6 +19,7 @@ spec:
     metadata:
       labels:
         app: dreamkast
+        tier: dreamkast
     spec:
       containers:
       - name: dreamkast
@@ -28,7 +31,6 @@ spec:
               command: ["/bin/sh", "-c", "bin/rails db:migrate && bin/rails db:seed"]
         ports:
           - containerPort: 3000
-            resources:
         env:
         - name: RAILS_ENV
           value: "production"
