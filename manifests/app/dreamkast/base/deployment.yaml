@@ -3,13 +3,11 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast
   name: dreamkast
 spec:
   selector:
     matchLabels:
       app: dreamkast
-      tier: dreamkast
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -40,7 +38,6 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast-ui
   name: dreamkast-ui
 spec:
   replicas: 1
@@ -61,6 +58,7 @@ spec:
         name: dreamkast-ui
         ports:
         - containerPort: 3001
+        resources: {}
         livenessProbe:
           httpGet:
             port: 3001
@@ -79,10 +77,3 @@ spec:
             path: /cndo2021/ui/
           failureThreshold: 30
           periodSeconds: 10
-        resources:
-          requests:
-            memory: "128Mi"
-            cpu: "100m"
-          limits:
-            memory: "256Mi"
-            cpu: "200m"
