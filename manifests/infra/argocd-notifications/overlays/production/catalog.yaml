@@ -222,7 +222,7 @@ data:
     token: $token
   subscriptions: |
     - recipients:
-      - slack:cndo2021-dreamkast-notify
+      - slack:cndo2021-dreamkast-notification
       triggers:
       - on-deployed
       - on-sync-failed
