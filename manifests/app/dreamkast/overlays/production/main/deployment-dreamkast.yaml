@@ -6,7 +6,6 @@ metadata:
     tier: dreamkast
   name: dreamkast
 spec:
-  replicas: 1
   revisionHistoryLimit: 2
   selector:
     matchLabels:
