@@ -34,6 +34,10 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "1000m"
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","300"]
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -48,7 +52,11 @@ spec:
     matchLabels:
       app: dreamkast
       tier: dreamkast-ui
-  strategy: {}
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -86,3 +94,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","300"]
