@@ -23,3 +23,29 @@ spec:
       - type: Pods
         value: 1
         periodSeconds: 60
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: dreamkast-ui
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dreamkast-ui
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 2400
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60

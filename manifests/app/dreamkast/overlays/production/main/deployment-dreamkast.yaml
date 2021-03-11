@@ -152,7 +152,6 @@ metadata:
     tier: dreamkast-ui
   name: dreamkast-ui
 spec:
-  replicas: 10
   selector:
     matchLabels:
       app: dreamkast
