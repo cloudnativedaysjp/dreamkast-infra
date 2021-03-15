@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maintenance
+  namespace: dreamkast
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: maintenance
+  template:
+    metadata:
+      labels:
+        app: maintenance
+    spec:
+      containers:
+      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/maintenance:latest
+        imagePullPolicy: Always
+        name: maintenance
+      restartPolicy: Always
