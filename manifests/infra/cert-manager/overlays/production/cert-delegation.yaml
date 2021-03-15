@@ -8,3 +8,13 @@ spec:
     - secretName: wildcard-cloudnativedays-jp
       targetNamespaces:
       - "*"
+---
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: wildcard-dev-cloudnativedays-jp
+spec:
+  delegations:
+    - secretName: wildcard-dev-cloudnativedays-jp
+      targetNamespaces:
+      - "*"
