@@ -1,0 +1,9 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-certificates
+  namespace: argocd
+spec:
+  source:
+    path: manifests/infra/cert-manager/overlays/dreamkast-cluster
