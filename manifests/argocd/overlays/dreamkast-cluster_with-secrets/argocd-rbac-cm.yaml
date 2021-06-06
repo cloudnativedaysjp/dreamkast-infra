@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.default: role:readonly
+  policy.csv: |
+    g, dreamkast-core, role:admin
+  scopes: '[https://cloudnativedays.jp/claims/groups, email]' 

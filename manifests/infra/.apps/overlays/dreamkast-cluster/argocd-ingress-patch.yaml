@@ -1,0 +1,9 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-ingress
+  namespace: argocd
+spec:
+  source:
+    path: manifests/infra/argocd-ingress/overlays/dreamkast-cluster

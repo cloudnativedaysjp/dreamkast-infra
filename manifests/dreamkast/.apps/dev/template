@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dreamkast-dev-{{.variables.app_repository_alias}}-{{.pull_request.number}}
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  destination:
+    namespace: dreamkast-{{.variables.app_repository_alias}}-{{.pull_request.number}}
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/cloudopsdays/dreamkast-infra.git
+    path: manifests/dreamkast/overlays/dev/{{.variables.app_repository_alias}}-{{.pull_request.number}}
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
