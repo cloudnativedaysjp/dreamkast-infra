@@ -12,7 +12,7 @@ spec:
   source:
     path: manifests/argocd/overlays/development/argocd-apps
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: 426-prometheus
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

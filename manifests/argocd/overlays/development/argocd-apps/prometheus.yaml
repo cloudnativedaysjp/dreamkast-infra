@@ -14,7 +14,7 @@ spec:
   source:
     path: manifests/infra/prometheus/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: 426-prometheus
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
