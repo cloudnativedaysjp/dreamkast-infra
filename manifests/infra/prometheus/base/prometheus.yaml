@@ -1,4 +1,6 @@
+# https://github.com/prometheus-operator/kube-prometheus/tree/v0.8.0/manifests
 ---
+# prometheus-serviceAccount.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -6,10 +8,11 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
   name: prometheus-k8s
   namespace: monitoring
 ---
+# prometheus-clusterRole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -17,7 +20,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
   name: prometheus-k8s
 rules:
 - apiGroups:
@@ -31,6 +34,7 @@ rules:
   verbs:
   - get
 ---
+# prometheus-clusterRoleBinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -38,7 +42,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
   name: prometheus-k8s
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -49,6 +53,7 @@ subjects:
   name: prometheus-k8s
   namespace: monitoring
 ---
+# prometheus-roleSpecificNamespaces.yaml modified to ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
@@ -56,7 +61,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
   name: prometheus-k8s-service-discovery
 rules:
 - apiGroups:
@@ -86,6 +91,7 @@ rules:
   - list
   - watch
 ---
+# prometheus-roleBindingSpecificNamespaces.yaml modified to ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
@@ -93,7 +99,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
   name: prometheus-k8s-service-discovery
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -104,6 +110,7 @@ subjects:
   name: prometheus-k8s
   namespace: monitoring
 ---
+# prometheus-prometheus.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
@@ -111,7 +118,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
     prometheus: k8s
   name: k8s
   namespace: monitoring
@@ -122,9 +129,8 @@ spec:
       name: alertmanager-main
       namespace: monitoring
       port: web
-  enableFeatures: []
   externalLabels: {}
-  image: quay.io/prometheus/prometheus:v2.27.1
+  image: quay.io/prometheus/prometheus:v2.26.0
   nodeSelector:
     kubernetes.io/os: linux
   podMetadata:
@@ -132,7 +138,7 @@ spec:
       app.kubernetes.io/component: prometheus
       app.kubernetes.io/name: prometheus
       app.kubernetes.io/part-of: kube-prometheus
-      app.kubernetes.io/version: 2.27.1
+      app.kubernetes.io/version: 2.26.0
   podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
   probeNamespaceSelector: {}
@@ -141,7 +147,6 @@ spec:
   resources:
     requests:
       memory: 400Mi
-  ruleNamespaceSelector: {}
   ruleSelector:
     matchLabels:
       prometheus: k8s
@@ -153,8 +158,9 @@ spec:
   serviceAccountName: prometheus-k8s
   serviceMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
-  version: 2.27.1
+  version: 2.26.0
 ---
+# prometheus-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -162,7 +168,7 @@ metadata:
     app.kubernetes.io/component: prometheus
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 2.27.1
+    app.kubernetes.io/version: 2.26.0
     prometheus: k8s
   name: prometheus-k8s
   namespace: monitoring

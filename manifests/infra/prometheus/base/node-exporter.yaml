@@ -1,4 +1,4 @@
-# https://github.com/prometheus-operator/kube-prometheus/tree/main/manifests
+# https://github.com/prometheus-operator/kube-prometheus/tree/v0.8.0/manifests
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 1.1.2
   name: node-exporter
-  namespace: prometheus
+  namespace: monitoring
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -50,7 +50,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: node-exporter
-  namespace: prometheus
+  namespace: monitoring
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -61,7 +61,7 @@ metadata:
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 1.1.2
   name: node-exporter
-  namespace: prometheus
+  namespace: monitoring
 spec:
   selector:
     matchLabels:
@@ -114,7 +114,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        image: quay.io/brancz/kube-rbac-proxy:v0.10.0
+        image: quay.io/brancz/kube-rbac-proxy:v0.8.0
         name: kube-rbac-proxy
         ports:
         - containerPort: 9100
@@ -162,7 +162,7 @@ metadata:
     app.kubernetes.io/part-of: kube-prometheus
     app.kubernetes.io/version: 1.1.2
   name: node-exporter
-  namespace: prometheus
+  namespace: monitoring
 spec:
   clusterIP: None
   ports:

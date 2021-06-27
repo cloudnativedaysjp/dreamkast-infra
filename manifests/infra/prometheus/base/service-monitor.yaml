@@ -1,5 +1,5 @@
 ---
-# https://github.com/prometheus-operator/kube-prometheus/blob/main/manifests/node-exporter-serviceMonitor.yaml
+# https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.8.0/manifests/node-exporter-serviceMonitor.yaml
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
