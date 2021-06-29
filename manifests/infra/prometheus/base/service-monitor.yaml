@@ -40,7 +40,7 @@ metadata:
 spec:
   podMetricsEndpoints:
   - interval: 15s
-    port: "8000"
+    port: metrics
     scheme: http
   namespaceSelector:
     matchNames:
