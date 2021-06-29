@@ -33,17 +33,12 @@ spec:
       app.kubernetes.io/part-of: kube-prometheus
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
-  labels:
-    app.kubernetes.io/component: contour
-    app.kubernetes.io/name: contour
-    app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.1.2
   name: contour
   namespace: monitoring
 spec:
-  endpoints:
+  podMetricsEndpoints:
   - interval: 15s
     port: "8000"
     scheme: http
@@ -55,17 +50,12 @@ spec:
       app: contour
 ---
 apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
+kind: PodMonitor
 metadata:
-  labels:
-    app.kubernetes.io/component: contour
-    app.kubernetes.io/name: envoy
-    app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.1.2
   name: envoy
   namespace: monitoring
 spec:
-  endpoints:
+  podMetricsEndpoints:
   - interval: 15s
     path: "/stats/prometheus"
     port: "8002"
