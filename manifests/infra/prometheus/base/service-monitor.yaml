@@ -13,7 +13,6 @@ metadata:
 spec:
   endpoints:
   - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    interval: 15s
     port: https
     relabelings:
     - action: replace
@@ -39,8 +38,7 @@ metadata:
   namespace: monitoring
 spec:
   podMetricsEndpoints:
-  - interval: 15s
-    port: metrics
+  - port: metrics
     scheme: http
   namespaceSelector:
     matchNames:
@@ -56,8 +54,7 @@ metadata:
   namespace: monitoring
 spec:
   podMetricsEndpoints:
-  - interval: 15s
-    path: "/stats/prometheus"
+  - path: "/stats/prometheus"
     port: "8002"
     scheme: http
   namespaceSelector:
