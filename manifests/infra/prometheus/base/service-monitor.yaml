@@ -31,3 +31,31 @@ spec:
       app.kubernetes.io/component: exporter
       app.kubernetes.io/name: node-exporter
       app.kubernetes.io/part-of: kube-prometheus
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: contour
+    app.kubernetes.io/name: contour
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 1.1.2
+  name: contour
+  namespace: monitoring
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    interval: 15s
+    port: "8000"
+    relabelings:
+    - action: replace
+      regex: (.*)
+      replacement: $1
+      sourceLabels:
+      - __meta_kubernetes_pod_node_name
+      targetLabel: instance
+    scheme: http
+  jobLabel: app.kubernetes.io/name
+  selector:
+    matchLabels:
+      app: contour
