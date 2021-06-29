@@ -47,6 +47,9 @@ spec:
   - interval: 15s
     port: "8000"
     scheme: http
+  namespaceSelector:
+    matchNames:
+      - projectcontour
   selector:
     matchLabels:
       app: contour
@@ -67,6 +70,9 @@ spec:
     path: "/stats/prometheus"
     port: "8002"
     scheme: http
+  namespaceSelector:
+    matchNames:
+      - projectcontour
   selector:
     matchLabels:
       app: envoy
