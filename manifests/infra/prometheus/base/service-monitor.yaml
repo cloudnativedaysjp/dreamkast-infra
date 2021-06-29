@@ -44,18 +44,29 @@ metadata:
   namespace: monitoring
 spec:
   endpoints:
-  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    interval: 15s
+  - interval: 15s
     port: "8000"
-    relabelings:
-    - action: replace
-      regex: (.*)
-      replacement: $1
-      sourceLabels:
-      - __meta_kubernetes_pod_node_name
-      targetLabel: instance
     scheme: http
-  jobLabel: app.kubernetes.io/name
   selector:
     matchLabels:
       app: contour
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: contour
+    app.kubernetes.io/name: envoy
+    app.kubernetes.io/part-of: kube-prometheus
+    app.kubernetes.io/version: 1.1.2
+  name: envoy
+  namespace: monitoring
+spec:
+  endpoints:
+  - interval: 15s
+    path: "/stats/prometheus"
+    port: "8002"
+    scheme: http
+  selector:
+    matchLabels:
+      app: envoy
