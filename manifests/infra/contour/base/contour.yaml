@@ -1822,7 +1822,7 @@ spec:
           hostPort: 443
           name: https
           protocol: TCP
-        - containerPort: 8000
+        - containerPort: 8002
           name: metrics
           protocol: TCP
         readinessProbe:
