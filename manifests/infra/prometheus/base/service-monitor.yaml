@@ -55,7 +55,7 @@ metadata:
 spec:
   podMetricsEndpoints:
   - path: "/stats/prometheus"
-    port: "8002"
+    port: metrics
     scheme: http
   namespaceSelector:
     matchNames:
