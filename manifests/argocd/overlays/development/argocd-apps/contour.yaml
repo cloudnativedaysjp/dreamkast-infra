@@ -14,7 +14,7 @@ spec:
   source:
     path: manifests/infra/contour/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: 426-contour
   syncPolicy:
     automated:
       prune: true
