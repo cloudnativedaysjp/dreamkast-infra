@@ -13,7 +13,6 @@ metadata:
 spec:
   endpoints:
   - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-    interval: 15s
     port: https
     relabelings:
     - action: replace
@@ -31,3 +30,36 @@ spec:
       app.kubernetes.io/component: exporter
       app.kubernetes.io/name: node-exporter
       app.kubernetes.io/part-of: kube-prometheus
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: contour
+  namespace: monitoring
+spec:
+  podMetricsEndpoints:
+  - port: metrics
+    scheme: http
+  namespaceSelector:
+    matchNames:
+      - projectcontour
+  selector:
+    matchLabels:
+      app: contour
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: envoy
+  namespace: monitoring
+spec:
+  podMetricsEndpoints:
+  - path: "/stats/prometheus"
+    port: metrics
+    scheme: http
+  namespaceSelector:
+    matchNames:
+      - projectcontour
+  selector:
+    matchLabels:
+      app: envoy
