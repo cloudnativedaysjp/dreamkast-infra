@@ -1,0 +1,12 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  SQS queue Create
+
+Type: AWS::SQS::Queue
+Properties:
+  ContentBasedDeduplication: True
+  DelaySeconds: 10
+  FifoQueue: True
+  MessageRetentionPeriod: 60
+  QueueName: MailQueue
+  RedrivePolicy: Json
