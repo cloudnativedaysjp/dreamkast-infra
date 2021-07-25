@@ -44,6 +44,51 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
+    tier: dreamkast
+  name: dreamkast
+spec:
+  selector:
+    matchLabels:
+      app: dreamkast
+      tier: dreamkast-mail-worker
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dreamkast
+        tier: dreamkast-mail-worker
+    spec:
+      containers:
+      - name: dreamkast
+        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        command: ["bundle"]
+        args: [
+          "exec",
+          "aws_sqs_active_job",
+          "--queue",
+          "mail"
+        ]
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "400m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","300"]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dreamkast
     tier: dreamkast-ui
   name: dreamkast-ui
 spec:
