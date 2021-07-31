@@ -4,3 +4,4 @@ namespace: monitoring
 resources:
 - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.48.1/bundle.yaml
 - prometheus.yaml
+- node-exporter.yaml
