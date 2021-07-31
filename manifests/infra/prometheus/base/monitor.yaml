@@ -69,6 +69,24 @@ spec:
       app.kubernetes.io/part-of: argocd
 ---
 apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: argocd-repo-server
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: metrics
+    scheme: http
+  namespaceSelector:
+    matchNames:
+      - argocd
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: repo-server
+      app.kubernetes.io/name: argocd-repo-server
+      app.kubernetes.io/part-of: argocd
+---
+apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: contour
