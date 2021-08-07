@@ -15,6 +15,10 @@ spec:
     chart: loki-stack
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 2.4.1
+    helm:
+      parameters:
+      - name: loki.persistence.enabled
+        value: "true"
   syncPolicy:
     automated:
       prune: true
