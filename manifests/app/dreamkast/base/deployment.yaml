@@ -44,8 +44,8 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast-worker
-  name: dreamkast-worker
+    tier: dreamkast-mail-worker
+  name: dreamkast-mail--worker
 spec:
   selector:
     matchLabels:
