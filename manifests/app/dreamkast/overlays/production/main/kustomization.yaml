@@ -5,6 +5,7 @@ resources:
 - ingress.yaml
 - redis.yaml
 - hpa.yaml
+- cronjob.yaml
 - ../../../base/
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
