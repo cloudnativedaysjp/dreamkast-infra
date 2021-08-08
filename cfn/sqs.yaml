@@ -1,0 +1,24 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description:
+  SQS queue Create
+
+# ------------------------------------------------------------#
+# Input Parameters
+# ------------------------------------------------------------#
+Parameters:
+  PJPrefix:
+    Type: String
+
+Resources:
+# ------------------------------------------------------------#
+#  SQS
+# ------------------------------------------------------------#
+# SQS Create
+  SQS:
+    Type: AWS::SQS::Queue
+    Properties:
+      ContentBasedDeduplication: True
+      DelaySeconds: 10
+      FifoQueue: True
+      MessageRetentionPeriod: 60
+      QueueName: !Sub "${PJPrefix}MailQueue.fifo"
