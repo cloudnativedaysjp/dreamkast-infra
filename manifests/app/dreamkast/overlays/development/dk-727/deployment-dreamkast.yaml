@@ -6,7 +6,6 @@ metadata:
     tier: dreamkast
   name: dreamkast
 spec:
-  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: dreamkast
@@ -34,34 +33,20 @@ spec:
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
-        - name: MYSQL_DATABASE
-          value: "dreamkast"
+          value: "dreamkast-mysql"
         - name: REDIS_URL
           value: "redis://dreamkast-redis:6379"
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
-          value: "dreamkast-prd-bucket"
+          value: "dreamkast-test-bucket"
         - name: S3_REGION
           value: ap-northeast-1
-        - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/prodMailQueue.fifo"
         - name: RAILS_MASTER_KEY
           valueFrom:
             secretKeyRef:
               name: rails-app-secret
               key: rails-app-secret
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: username
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: password
         - name: AUTH0_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -77,25 +62,28 @@ spec:
             secretKeyRef:
               name: dreamkast-secret
               key: AUTH0_DOMAIN
+        - name: REVIEW_APP
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-secret
+              key: REVIEW_APP
       containers:
       - name: dreamkast
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        imagePullPolicy: Always
         ports:
           - containerPort: 3000
-            resources:
         env:
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
-        - name: MYSQL_DATABASE
-          value: "dreamkast"
+          value: "dreamkast-mysql"
         - name: REDIS_URL
           value: "redis://dreamkast-redis:6379"
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
-          value: "dreamkast-prd-bucket"
+          value: "dreamkast-test-bucket"
         - name: S3_REGION
           value: ap-northeast-1
         - name: RAILS_MASTER_KEY
@@ -103,16 +91,6 @@ spec:
             secretKeyRef:
               name: rails-app-secret
               key: rails-app-secret
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: username
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: password
         - name: AUTH0_CLIENT_ID
           valueFrom:
             secretKeyRef:
@@ -128,6 +106,11 @@ spec:
             secretKeyRef:
               name: dreamkast-secret
               key: AUTH0_DOMAIN
+        - name: REVIEW_APP
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-secret
+              key: REVIEW_APP
         livenessProbe:
           httpGet:
             port: 3000
@@ -146,28 +129,3 @@ spec:
             path: /
           failureThreshold: 30
           periodSeconds: 10
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    app: dreamkast
-    tier: dreamkast-ui
-  name: dreamkast-ui
-spec:
-  selector:
-    matchLabels:
-      app: dreamkast
-      tier: dreamkast-ui
-  strategy: {}
-  template:
-    metadata:
-      labels:
-        app: dreamkast
-        tier: dreamkast-ui
-    spec:
-      containers:
-      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-        name: dreamkast-ui
-        ports:
-        - containerPort: 3001
