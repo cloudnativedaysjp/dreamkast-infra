@@ -4,7 +4,7 @@ metadata:
   name: post-to-cicd2021-registration-status
 spec:
   # Execute every 10:00 JST but this configure is written by UTC
-  schedule: "0 */1 * * *"
+  schedule: "0 1 * * *"
   jobTemplate:
     spec:
       template:
