@@ -13,6 +13,20 @@ spec:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
     targetRevision: 6.15.0
+    helm:
+      values: |
+        datasources:
+          datasources.yaml:
+            apiVersion: 1
+            datasources:
+            - name: Prometheus
+              type: prometheus
+              url: http://prometheus-k8s:9090
+              isDefault: true
+      parameters:
+      - name: persistence.enabled
+        value: "true"
+          
   syncPolicy:
     automated:
       prune: true
