@@ -23,6 +23,9 @@ spec:
               type: prometheus
               url: http://prometheus-k8s:9090
               isDefault: true
+            - name: Loki
+              type: loki
+              url: http://loki:3100
       parameters:
       - name: persistence.enabled
         value: "true"
