@@ -22,8 +22,8 @@ spec:
       services:
       - name: dreamkast
         port: 80
-    - conditions:
-      - prefix: /cndo2021/ui
+    - conditions: #TODO: Need to resolve this hardcoded routing
+      - prefix: /cicd2021/ui
       services:
       - name: dreamkast-ui
         port: 3001
