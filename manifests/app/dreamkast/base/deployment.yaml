@@ -116,19 +116,19 @@ spec:
         livenessProbe:
           httpGet:
             port: 3001
-            path: /cndo2021/ui/
+            path: /cicd2021/ui/
           failureThreshold: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 3001
-            path: /cndo2021/ui/
+            path: /cicd2021/ui/
           failureThreshold: 5
           periodSeconds: 5
         startupProbe:
           httpGet:
             port: 3001
-            path: /cndo2021/ui/
+            path: /cicd2021/ui/
           failureThreshold: 30
           periodSeconds: 10
         resources:
