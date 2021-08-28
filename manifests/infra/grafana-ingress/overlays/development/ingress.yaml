@@ -1,0 +1,14 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  virtualhost:
+    fqdn: grafana.dev.cloudnativedays.jp
+    tls:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+  routes:
+  - services:
+      - name: grafana
+        port: 80
