@@ -34,6 +34,27 @@ spec:
               secureJsonData:
                 accessKey: ""
                 secretKey: ""
+        dashboardProviders:
+          dashboardproviders.yaml:
+            apiVersion: 1
+            providers:
+              - name: default
+                orgId: 1
+                folder:
+                type: file
+                disableDeletion: true
+                editable: false
+                options:
+                  path: /var/lib/grafana/dashboards/default
+        dashboards:
+          default:
+            Amazon RDS:
+              gnetId: 11264
+              revision: 2
+            Amazon EC2:
+              gnetId: 11265
+              revision: 2
+
       parameters:
       - name: persistence.enabled
         value: "true"
