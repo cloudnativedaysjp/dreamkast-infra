@@ -26,6 +26,11 @@ spec:
             - name: Loki
               type: loki
               url: http://loki:3100
+            - name: CloudWatch
+              type: cloudwatch
+              jsonData:
+                authType: default
+                defaultRegion: ap-northeast-1
       parameters:
       - name: persistence.enabled
         value: "true"
