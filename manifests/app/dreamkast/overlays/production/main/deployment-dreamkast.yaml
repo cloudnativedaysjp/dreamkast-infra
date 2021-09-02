@@ -82,7 +82,13 @@ spec:
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         ports:
           - containerPort: 3000
-            resources:
+        resources:
+          requests:
+            memory: "2048Mi"
+            cpu: "1500m"
+          limits:
+            memory: "2048Mi"
+            cpu: "1500m"
         env:
         - name: RAILS_ENV
           value: "production"
@@ -171,3 +177,10 @@ spec:
         name: dreamkast-ui
         ports:
         - containerPort: 3001
+        resources:
+          requests:
+            memory: "2048Mi"
+            cpu: "1500m"
+          limits:
+            memory: "2048Mi"
+            cpu: "1500m"
