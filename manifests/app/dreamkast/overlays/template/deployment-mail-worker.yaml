@@ -10,11 +10,6 @@ spec:
     matchLabels:
       app: dreamkast
       tier: dreamkast-mail-worker
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
