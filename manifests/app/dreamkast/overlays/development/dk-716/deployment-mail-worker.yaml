@@ -30,6 +30,8 @@ spec:
         env:
         - name: RAILS_ENV
           value: "production"
+        - name: AWS_REGION
+          value: "ap-northeast-1"
         - name: MYSQL_HOST
           value: "dreamkast-mysql"
         - name: REDIS_URL
