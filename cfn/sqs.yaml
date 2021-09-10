@@ -8,6 +8,7 @@ Description:
 Parameters:
   PJPrefix:
     Type: String
+    Default: "dreamkast-prd"
 
 Resources:
 # ------------------------------------------------------------#

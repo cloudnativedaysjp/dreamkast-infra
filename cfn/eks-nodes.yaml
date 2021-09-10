@@ -13,6 +13,16 @@ Metadata:
 Parameters:
   PJPrefix:
     Type: String
+    Default: "dreamkast-prd"
+  NodeDesiredSize:
+    Type: String
+    Default: "2"
+  NodeMaxSize:
+    Type: String
+    Default: "2"
+  NodeMinSize:
+    Type: String
+    Default: "5"
 Mappings:
   ServicePrincipalPartitionMap:
     aws:
@@ -36,7 +46,7 @@ Resources:
           HttpPutResponseHopLimit: 2
           HttpTokens: optional
         SecurityGroupIds:
-          - !ImportValue 'dreamkast-prd-eks::ClusterSecurityGroupId'
+          - { "Fn::ImportValue": !Sub "${PJPrefix}-eks::ClusterSecurityGroupId" }
         TagSpecifications:
           - ResourceType: instance
             Tags:
@@ -69,9 +79,9 @@ Resources:
         - Arn
       NodegroupName: spot
       ScalingConfig:
-        DesiredSize: 2
-        MaxSize: 5
-        MinSize: 2
+        DesiredSize: !Ref NodeDesiredSize
+        MaxSize: !Ref NodeMaxSize
+        MinSize: !Ref NodeMinSize
       Subnets:
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
         - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-c" }
@@ -100,6 +110,7 @@ Resources:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonS3FullAccess'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSESFullAccess'
       Policies:
         - PolicyDocument:
             Statement:
@@ -111,6 +122,28 @@ Resources:
                   - "secretsmanager:ListSecretVersionIds"
                 Resource: "*"
           PolicyName: "secrets-manager-read-only"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "route53:GetChange"
+                  - "route53:ChangeResourceRecordSets"
+                  - "route53:ListResourceRecordSets"
+                  - "route53:ListHostedZonesByName"
+                Resource: "*"
+          PolicyName: "cert-manager"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "autoscaling:CompleteLifecycleAction"
+                  - "autoscaling:DescribeAutoScalingInstances"
+                  - "autoscaling:DescribeTags"
+                  - "ec2:DescribeInstances"
+                  - "sqs:DeleteMessage"
+                  - "sqs:ReceiveMessage"
+                Resource: "*"
+          PolicyName: "spot-asg-termination-queue"
       Path: /
       Tags:
         - Key: Name

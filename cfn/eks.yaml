@@ -11,6 +11,7 @@ Metadata:
 Parameters:
   PJPrefix:
     Type: String
+    Default: "dreamkast-prd"
 Mappings:
   ServicePrincipalPartitionMap:
     aws:
@@ -49,7 +50,7 @@ Resources:
       RoleArn: !GetAtt 
         - ServiceRole
         - Arn
-      Version: '1.18'
+      Version: '1.21'
   ControlPlaneSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
