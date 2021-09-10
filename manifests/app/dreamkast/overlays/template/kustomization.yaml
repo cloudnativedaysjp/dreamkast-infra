@@ -7,6 +7,6 @@ resources:
 - redis.yaml
 - externalsecret.yaml
 - ingress.yaml
-- deployment-mail-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-mail-worker.yaml

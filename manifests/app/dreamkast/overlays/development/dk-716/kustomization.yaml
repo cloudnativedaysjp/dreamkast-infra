@@ -5,10 +5,10 @@ resources:
 - redis.yaml
 - externalsecret.yaml
 - ingress.yaml
-- deployment-mail-worker.yaml
 - ../../../base
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-mail-worker.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
   newTag: 79831c386c468f6487ff8a0e1df0466cbfeeee3d
