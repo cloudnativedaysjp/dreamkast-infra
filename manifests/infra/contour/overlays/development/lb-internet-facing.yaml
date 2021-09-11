@@ -4,6 +4,6 @@ kind: Service
 metadata:
   name: envoy
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
   namespace: projectcontour
 
