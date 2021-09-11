@@ -1,379 +1,55 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: 
-  VPC and Subnet Create
-
-Metadata: 
-  "AWS::CloudFormation::Interface": 
-    ParameterGroups: 
-      - Label: 
-          default: "Project Name Prefix"
-        Parameters: 
-          - PJPrefix
-      - Label: 
-          default: "Network Configuration"
-        Parameters: 
-          - VPCCIDR
-          - PublicSubnetACIDR
-          - PublicSubnetCCIDR
-          - PublicSubnetDCIDR
-          - PrivateSubnetACIDR
-          - PrivateSubnetCCIDR
-          - PrivateSubnetDCIDR
-    ParameterLabels: 
-      VPCCIDR: 
-        default: "VPC CIDR"
-      PublicSubnetACIDR: 
-        default: "PublicSubnetA CIDR"
-      PublicSubnetCCIDR: 
-        default: "PublicSubnetC CIDR"
-      PublicSubnetDCIDR: 
-        default: "PublicSubnetD CIDR"
-      PrivateSubnetACIDR: 
-        default: "PrivateSubnetA CIDR"
-      PrivateSubnetCCIDR: 
-        default: "PrivateSubnetC CIDR"
-      PrivateSubnetDCIDR: 
-        default: "PrivateSubnetD CIDR"
-
-# ------------------------------------------------------------#
-# Input Parameters
-# ------------------------------------------------------------# 
+Description:
+  Dreamkast test S3
 Parameters:
   PJPrefix:
     Type: String
     Default: "dreamkast-prd"
-
-  VPCCIDR:
+#S3BucketName
+  S3BucketName:
     Type: String
-    Default: "10.0.0.0/16"
-
-  PublicSubnetACIDR:
-    Type: String
-    Default: "10.0.0.0/18"
-
-  PublicSubnetCCIDR:
-    Type: String
-    Default: "10.0.64.0/18"
-
-  PrivateSubnetACIDR:
-    Type: String
-    Default: "10.0.128.0/18"
-
-  PrivateSubnetCCIDR:
-    Type: String
-    Default: "10.0.192.0/18"
-
-Resources: 
-# ------------------------------------------------------------#
-#  VPC
-# ------------------------------------------------------------#
-# VPC Create
-  VPC: 
-    Type: "AWS::EC2::VPC"
-    Properties: 
-      CidrBlock: !Ref VPCCIDR
-      EnableDnsSupport: "true"
-      EnableDnsHostnames: "true"
-      InstanceTenancy: default
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-vpc"
-
-# InternetGateway Create
-  InternetGateway: 
-    Type: "AWS::EC2::InternetGateway"
-    Properties: 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-igw"
-
-# IGW Attach
-  InternetGatewayAttachment: 
-    Type: "AWS::EC2::VPCGatewayAttachment"
-    Properties: 
-      InternetGatewayId: !Ref InternetGateway
-      VpcId: !Ref VPC 
+    Default: "bucket"
+Resources:
 
 # ------------------------------------------------------------#
-#  Subnet
-# ------------------------------------------------------------#          
-# Public SubnetA Create
-  PublicSubnetA: 
-    Type: "AWS::EC2::Subnet"
-    Properties: 
-      AvailabilityZone: "ap-northeast-1a"
-      CidrBlock: !Ref PublicSubnetACIDR
-      VpcId: !Ref VPC 
-      MapPublicIpOnLaunch: true
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-public-subnet-a"
-        - Key: kubernetes.io/role/elb
-          Value: 1
-
-# Public SubnetC Create
-  PublicSubnetC: 
-    Type: "AWS::EC2::Subnet"
-    Properties: 
-      AvailabilityZone: "ap-northeast-1c"
-      CidrBlock: !Ref PublicSubnetCCIDR
-      VpcId: !Ref VPC 
-      MapPublicIpOnLaunch: true
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-public-subnet-c"
-        - Key: kubernetes.io/role/elb
-          Value: 1
-                    
-# Private SubnetA Create
-  PrivateSubnetA: 
-    Type: "AWS::EC2::Subnet"
-    Properties: 
-      AvailabilityZone: "ap-northeast-1a"
-      CidrBlock: !Ref PrivateSubnetACIDR
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-private-subnet-a"
-        - Key: kubernetes.io/role/internal-elb
-          Value: 1
-
-# Private SubnetC Create
-  PrivateSubnetC: 
-    Type: "AWS::EC2::Subnet"
-    Properties: 
-      AvailabilityZone: "ap-northeast-1c"
-      CidrBlock: !Ref PrivateSubnetCCIDR
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-private-subnet-c"
-        - Key: kubernetes.io/role/internal-elb
-          Value: 1
-                    
-# ------------------------------------------------------------#
-#  RouteTable
-# ------------------------------------------------------------#          
-# Public RouteTableA Create
-  PublicRouteTableA: 
-    Type: "AWS::EC2::RouteTable"
-    Properties: 
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-public-route-a"
-          
-# Public RouteTableC Create
-  PublicRouteTableC: 
-    Type: "AWS::EC2::RouteTable"
-    Properties: 
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-public-route-c"
-
-# Private RouteTableA Create
-  PrivateRouteTableA: 
-    Type: "AWS::EC2::RouteTable"
-    Properties: 
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-private-route-a"
-
-# Private RouteTableC Create
-  PrivateRouteTableC: 
-    Type: "AWS::EC2::RouteTable"
-    Properties: 
-      VpcId: !Ref VPC 
-      Tags: 
-        - Key: Name
-          Value: !Sub "${PJPrefix}-private-route-c"
-
-# ------------------------------------------------------------#
-# Routing
+# S3 Bucket
 # ------------------------------------------------------------# 
-# PublicRouteA Create
-  PublicRouteA: 
-    Type: "AWS::EC2::Route"
-    Properties: 
-      RouteTableId: !Ref PublicRouteTableA 
-      DestinationCidrBlock: "0.0.0.0/0"
-      GatewayId: !Ref InternetGateway 
 
-# PublicRouteC Create
-  PublicRouteC: 
-    Type: "AWS::EC2::Route"
-    Properties: 
-      RouteTableId: !Ref PublicRouteTableC 
-      DestinationCidrBlock: "0.0.0.0/0"
-      GatewayId: !Ref InternetGateway
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${PJPrefix}-${S3BucketName}"
+      AccessControl: Private
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
 
 # ------------------------------------------------------------#
-# RouteTable Associate
-# ------------------------------------------------------------# 
-# PublicRouteTable Associate SubnetA
-  PublicSubnetARouteTableAssociation: 
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
-    Properties: 
-      SubnetId: !Ref PublicSubnetA 
-      RouteTableId: !Ref PublicRouteTableA
-
-# PublicRouteTable Associate SubnetC
-  PublicSubnetCRouteTableAssociation: 
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
-    Properties: 
-      SubnetId: !Ref PublicSubnetC 
-      RouteTableId: !Ref PublicRouteTableC
-                
-# PrivateRouteTable Associate SubnetA
-  PrivateSubnetARouteTableAssociation: 
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
-    Properties: 
-      SubnetId: !Ref PrivateSubnetA
-      RouteTableId: !Ref PrivateRouteTableA 
-
-# PrivateRouteTable Associate SubnetC
-  PrivateSubnetCRouteTableAssociation: 
-    Type: "AWS::EC2::SubnetRouteTableAssociation"
-    Properties: 
-      SubnetId: !Ref PrivateSubnetC
-      RouteTableId: !Ref PrivateRouteTableC
-
-
-  PrivateRouteA:
-    DependsOn:
-    - InternetGatewayAttachment
-    - NatGatewayA
-    Type: AWS::EC2::Route
+#  VPCS3Endpoint
+# ------------------------------------------------------------#
+  VPCS3Endpoint:
+    Type: "AWS::EC2::VPCEndpoint"
     Properties:
-      RouteTableId: !Ref PrivateRouteTableA
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGatewayA
-
-  PrivateRouteC:
-    DependsOn:
-    - InternetGatewayAttachment
-    - NatGatewayC
-    Type: AWS::EC2::Route
-    Properties:
-      RouteTableId: !Ref PrivateRouteTableC
-      DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: !Ref NatGatewayC
-
-  NatGatewayA:
-    DependsOn:
-    - NatGatewayEIPA
-    - PublicSubnetA
-    - InternetGatewayAttachment
-    Type: AWS::EC2::NatGateway
-    Properties:
-      AllocationId: !GetAtt 'NatGatewayEIPA.AllocationId'
-      SubnetId: !Ref PublicSubnetA
-      Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-NatGatewayAZ1'
-
-  NatGatewayC:
-    DependsOn:
-    - NatGatewayEIPC
-    - PublicSubnetC
-    - InternetGatewayAttachment
-    Type: AWS::EC2::NatGateway
-    Properties:
-      AllocationId: !GetAtt 'NatGatewayEIPC.AllocationId'
-      SubnetId: !Ref PublicSubnetC
-      Tags:
-      - Key: Name
-        Value: !Sub '${AWS::StackName}-NatGatewayAZ2'
-
-  NatGatewayEIPA:
-    DependsOn:
-    - InternetGatewayAttachment
-    Type: 'AWS::EC2::EIP'
-    Properties:
-      Domain: vpc
-
-  NatGatewayEIPC:
-    DependsOn:
-    - InternetGatewayAttachment
-    Type: 'AWS::EC2::EIP'
-    Properties:
-      Domain: vpc
+      RouteTableIds: 
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-route-a" }
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-route-c" }
+      ServiceName: !Sub "com.amazonaws.${AWS::Region}.s3"
+      VpcId: { "Fn::ImportValue": !Sub "${PJPrefix}-vpc" }
 
 # ------------------------------------------------------------#
 # Output Parameters
-# ------------------------------------------------------------#                
+# ------------------------------------------------------------# 
 Outputs:
-# VPC
-  VPC:
-    Value: !Ref VPC
+#S3BucketName
+  S3BucketName:
+    Value: !Ref S3Bucket
     Export:
-      Name: !Sub "${PJPrefix}-vpc"
+      Name: !Sub "${PJPrefix}-bucket-id"
 
-  VPCCIDR:
-    Value: !Ref VPCCIDR
+#VPCS3Endpoint
+  VPCS3Endpoint:
+    Value: !Ref VPCS3Endpoint
     Export:
-      Name: !Sub "${PJPrefix}-vpc-cidr"
-
-# Subnet
-  PublicSubnetA:
-    Value: !Ref PublicSubnetA
-    Export:
-      Name: !Sub "${PJPrefix}-public-subnet-a"
-
-  PublicSubnetACIDR:
-    Value: !Ref PublicSubnetACIDR
-    Export:
-      Name: !Sub "${PJPrefix}-public-subnet-a-cidr"
-
-  PublicSubnetC:
-    Value: !Ref PublicSubnetC
-    Export:
-      Name: !Sub "${PJPrefix}-public-subnet-c"
-
-  PublicSubnetCCIDR:
-    Value: !Ref PublicSubnetCCIDR
-    Export:
-      Name: !Sub "${PJPrefix}-public-subnet-c-cidr"
-
-  PrivateSubnetA:
-    Value: !Ref PrivateSubnetA
-    Export:
-      Name: !Sub "${PJPrefix}-private-subnet-a"
-    
-  PrivateSubnetACIDR:
-    Value: !Ref PrivateSubnetACIDR
-    Export:
-      Name: !Sub "${PJPrefix}-private-subnet-a-cidr"
-
-  PrivateSubnetC:
-    Value: !Ref PrivateSubnetC
-    Export:
-      Name: !Sub "${PJPrefix}-private-subnet-c"
-
-  PrivateSubnetCCIDR:
-    Value: !Ref PrivateSubnetCCIDR
-    Export:
-      Name: !Sub "${PJPrefix}-private-subnet-c-cidr"
-
-# Route
-  PublicRouteTableA:
-    Value: !Ref PublicRouteTableA
-    Export:
-      Name: !Sub "${PJPrefix}-public-route-a"
-
-  PublicRouteTableC:
-    Value: !Ref PublicRouteTableC
-    Export:
-      Name: !Sub "${PJPrefix}-public-route-c"
-
-  PrivateRouteTableA:
-    Value: !Ref PrivateRouteTableA
-    Export:
-      Name: !Sub "${PJPrefix}-private-route-a"
-
-  PrivateRouteTableC:
-    Value: !Ref PrivateRouteTableC
-    Export:
-      Name: !Sub "${PJPrefix}-private-route-c"
+      Name: !Sub "${PJPrefix}-vpcs3endpoint-id"
