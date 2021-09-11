@@ -68,7 +68,7 @@ Parameters:
     Default: "gp2"
   DBName:
     Type: String
-    Default: "db"
+    Default: "dreamkast"
   MultiAZ: 
     Default: "false"
     Type: String
