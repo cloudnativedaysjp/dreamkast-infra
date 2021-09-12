@@ -19,10 +19,10 @@ Parameters:
     Default: "2"
   NodeMaxSize:
     Type: String
-    Default: "2"
+    Default: "5"
   NodeMinSize:
     Type: String
-    Default: "5"
+    Default: "2"
 Mappings:
   ServicePrincipalPartitionMap:
     aws:
