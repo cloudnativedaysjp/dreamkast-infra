@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    projectcontour.io/upstream-protocol.h2c: "443"
+  name: argocd-server
