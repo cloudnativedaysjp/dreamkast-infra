@@ -5,5 +5,7 @@ resources:
 - ../../base
 - ./ingress.yaml
 images:
+- name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+  newTag: 0f89e43695d54ee7ead278ec7841bd793e15d234
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-releasebot
   newTag: latest
