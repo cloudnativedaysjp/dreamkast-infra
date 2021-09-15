@@ -7,9 +7,9 @@ metadata:
     app: dreamkast-releasebot
 spec:
   virtualhost:
-    fqdn: dreamkast-releasebot.dev.cloudnativedays.jp
+    fqdn: dreamkast-releasebot.cloudnativedays.jp
     tls:
-      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+      secretName: cert-manager/wildcard-cloudnativedays-jp
   routes:
     - conditions:
       - prefix: /
