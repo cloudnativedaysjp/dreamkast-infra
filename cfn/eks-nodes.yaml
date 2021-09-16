@@ -14,6 +14,9 @@ Parameters:
   PJPrefix:
     Type: String
     Default: "dreamkast-prd"
+  ClusterName:
+    Type: String
+    Default: "dreamkast-cluster"
   NodeDesiredSize:
     Type: String
     Default: "2"
@@ -51,7 +54,7 @@ Resources:
           - ResourceType: instance
             Tags:
               - Key: Name
-                Value: dreamkast-cluster-spot-Node
+                Value: !Sub '${ClusterName}-spot-Node'
               - Key: alpha.eksctl.io/nodegroup-name
                 Value: spot
               - Key: alpha.eksctl.io/nodegroup-type
@@ -61,7 +64,7 @@ Resources:
     Type: 'AWS::EKS::Nodegroup'
     Properties:
       AmiType: AL2_x86_64
-      ClusterName: dreamkast-cluster
+      ClusterName: !Ref ClusterName
       InstanceTypes:
         - m5.xlarge
         - m4.xlarge
@@ -70,7 +73,7 @@ Resources:
         - t2.xlarge
       CapacityType: SPOT
       Labels:
-        alpha.eksctl.io/cluster-name: dreamkast-cluster
+        alpha.eksctl.io/cluster-name: !Ref ClusterName
         alpha.eksctl.io/nodegroup-name: spot
       LaunchTemplate:
         Id: !Ref LaunchTemplate
