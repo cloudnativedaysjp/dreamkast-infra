@@ -78,7 +78,7 @@ Parameters:
     AllowedValues: [ "true", "false" ]
   QueryLongTime:
     Type: String
-    Default: "2"
+    Default: "1"
 
 Resources: 
 # ------------------------------------------------------------#
