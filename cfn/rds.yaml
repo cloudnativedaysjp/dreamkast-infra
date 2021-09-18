@@ -22,6 +22,7 @@ Metadata:
           - DBMasterUserName
           - DBPassword
           - MultiAZ
+          - QueryLongTime
     ParameterLabels:
       DBInstanceName:
         default: "DBInstanceName"
@@ -39,6 +40,8 @@ Metadata:
         default: "DBName"
       MultiAZ:
         default: "MultiAZ"
+      QueryLongTime:
+        default: "QueryLongTime"
 
 # ------------------------------------------------------------#
 # Input Parameters
@@ -59,7 +62,7 @@ Parameters:
     Default: "21"
   DBInstanceClass:
     Type: String
-    Default: "db.m6g.large"
+    Default: "db.t3.small"
   DBInstanceStorageSize:
     Type: String
     Default: "30"
@@ -73,6 +76,9 @@ Parameters:
     Default: "false"
     Type: String
     AllowedValues: [ "true", "false" ]
+  QueryLongTime:
+    Type: String
+    Default: "1"
 
 Resources: 
 # ------------------------------------------------------------#
@@ -127,6 +133,10 @@ Resources:
     Properties:
       Family: !Sub "MySQL${MySQLMajorVersion}"
       Description: !Sub "${PJPrefix}-${DBInstanceName}-parm"
+      Parameters:
+        slow_query_log: 1
+        long_query_time: !Ref QueryLongTime
+        log_output: FILE
 
 # ------------------------------------------------------------#
 #  SecurityGroup for RDS (MySQL)
@@ -183,4 +193,3 @@ Outputs:
     Value: !Ref MyRDSSecret
     Export:
       Name: !Sub "${PJPrefix}-rds-secret-arn"
-  
