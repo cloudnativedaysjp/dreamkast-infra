@@ -23,7 +23,7 @@ spec:
                       name: dreamkast-secret
                       key: SLACK_WEBHOOK_URL
                 - name: CONFERENCE_ABBR
-                  value: "cicd2021"
+                  value: "cndt2021"
                 - name: RAILS_ENV
                   value: "production"
                 - name: MYSQL_HOST
