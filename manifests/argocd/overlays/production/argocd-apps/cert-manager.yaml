@@ -1,0 +1,46 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: cert-manager
+    repoURL: https://charts.jetstack.io
+    targetRevision: "v1.5.3"
+    helm:
+      parameters:
+      - name: installCRDs
+        value: "true"
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-certificates
+  namespace: argocd
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: manifests/infra/cert-manager/overlays/production
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
