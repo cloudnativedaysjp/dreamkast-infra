@@ -113,13 +113,8 @@ spec:
             secretKeyRef:
               name: dreamkast-secret
               key: REVIEW_APP
-        - name: HOST_IP
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: status.hostIP
         - name: AWS_XRAY_DAEMON_ADDRESS
-          value: $(HOST_IP):2000
+          value: xray-service.amazon-cloudwatch:2000
         livenessProbe:
           httpGet:
             port: 3000
