@@ -2,15 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-apps
+  name: prometheus
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: argocd
+    namespace: monitoring
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: manifests/argocd/overlays/development/argocd-apps
+    path: manifests/infra/prometheus/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
