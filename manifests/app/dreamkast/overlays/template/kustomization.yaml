@@ -9,3 +9,4 @@ resources:
 - ingress.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-mail-worker.yaml

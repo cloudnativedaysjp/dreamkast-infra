@@ -35,6 +35,7 @@ Metadata:
 Parameters:
   PJPrefix:
     Type: String
+    Default: "dreamkast-prd"
 
   VPCCIDR:
     Type: String

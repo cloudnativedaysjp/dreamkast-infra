@@ -23,7 +23,7 @@ spec:
                       name: dreamkast-secret
                       key: SLACK_WEBHOOK_URL
                 - name: CONFERENCE_ABBR
-                  value: "cicd2021"
+                  value: "cndt2021"
                 - name: RAILS_ENV
                   value: "production"
                 - name: MYSQL_HOST
@@ -68,4 +68,37 @@ spec:
                     secretKeyRef:
                       name: dreamkast-secret
                       key: AUTH0_DOMAIN
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: post-left-idea-issues-to-slack
+spec:
+  # Execute every 10:00 JST but this configure is written by UTC
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: dreamkast
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              command:
+                - /bin/sh
+                - -c
+                - bundle exec rake util:post_left_idea_issues_to_slack
+              env:
+                - name: SLACK_CHANNEL_NAME
+                  value: "#cndt2021-notification"
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: SLACK_WEBHOOK_URL
+                - name: GITHUB_PERSONAL_ACCESS_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: GITHUB_PERSONAL_ACCESS_TOKEN
           restartPolicy: OnFailure

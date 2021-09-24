@@ -1,0 +1,18 @@
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: dreamkast-releasebot-ingress
+  labels:
+    app: dreamkast-releasebot
+spec:
+  virtualhost:
+    fqdn: dreamkast-releasebot.cloudnativedays.jp
+    tls:
+      secretName: cert-manager/wildcard-cloudnativedays-jp
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+      - name: dreamkast-releasebot
+        port: 8080

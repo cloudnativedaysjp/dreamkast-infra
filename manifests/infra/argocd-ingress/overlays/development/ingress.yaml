@@ -7,8 +7,8 @@ spec:
   virtualhost:
     fqdn: argocd.dev.cloudnativedays.jp
     tls:
-      passthrough: true
-  tcpproxy:
-    services:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+  routes:
+  - services:
     - name: argocd-server
-      port: 443
+      port: 80

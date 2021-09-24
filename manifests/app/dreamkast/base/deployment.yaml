@@ -26,7 +26,6 @@ spec:
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         ports:
           - containerPort: 3000
-            resources:
         resources:
           requests:
             memory: "256Mi"
@@ -45,7 +44,7 @@ metadata:
   labels:
     app: dreamkast
     tier: dreamkast-mail-worker
-  name: dreamkast-mail--worker
+  name: dreamkast-mail-worker
 spec:
   selector:
     matchLabels:
