@@ -51,7 +51,6 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
-
       parameters:
       - name: persistence.enabled
         value: "true"
