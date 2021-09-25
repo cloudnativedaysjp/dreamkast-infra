@@ -18,7 +18,7 @@ Resources:
   SQS:
     Type: AWS::SQS::Queue
     Properties:
-      ContentBasedDeduplication: True
+      ContentBasedDeduplication: False
       DelaySeconds: 10
       FifoQueue: True
       MessageRetentionPeriod: 60
