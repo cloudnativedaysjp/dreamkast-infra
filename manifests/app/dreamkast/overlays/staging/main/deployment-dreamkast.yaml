@@ -95,6 +95,8 @@ spec:
           value: "dreamkast-stg-bucket"
         - name: S3_REGION
           value: ap-northeast-1
+        - name: SQS_MAIL_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-stgMailQueue.fifo"
         - name: RAILS_MASTER_KEY
           valueFrom:
             secretKeyRef:
