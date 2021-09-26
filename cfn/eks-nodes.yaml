@@ -147,6 +147,13 @@ Resources:
                   - "sqs:ReceiveMessage"
                 Resource: "*"
           PolicyName: "spot-asg-termination-queue"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "cloudwatch:GetMetricData"
+                Resource: "*"
+          PolicyName: "grafana-get-metrics"
       Path: /
       Tags:
         - Key: Name
