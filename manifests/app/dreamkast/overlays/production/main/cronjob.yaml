@@ -89,6 +89,8 @@ spec:
                 - -c
                 - bundle exec rake util:post_left_idea_issues_to_slack
               env:
+                - name: RAILS_ENV
+                  value: "production"
                 - name: SLACK_CHANNEL_NAME
                   value: "#cndt2021-notification"
                 - name: SLACK_WEBHOOK_URL
