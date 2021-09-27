@@ -140,9 +140,13 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - "autoscaling:CompleteLifecycleAction"
+                  - "autoscaling:DescribeAutoScalingGroups"
                   - "autoscaling:DescribeAutoScalingInstances"
+                  - "autoscaling:DescribeLaunchConfigurations"
                   - "autoscaling:DescribeTags"
+                  - "autoscaling:SetDesiredCapacity"
+                  - "autoscaling:TerminateInstanceInAutoScalingGroup"
+                  - "autoscaling:CompleteLifecycleAction"
                   - "ec2:DescribeInstances"
                   - "sqs:DeleteMessage"
                   - "sqs:ReceiveMessage"
