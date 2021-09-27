@@ -93,6 +93,17 @@ spec:
                   value: "production"
                 - name: SLACK_CHANNEL_NAME
                   value: "#cndt2021-notification"
+                - name: S3_BUCKET
+                  value: "dreamkast-prd-bucket"
+                - name: S3_REGION
+                  value: ap-northeast-1
+                - name: SLACK_CHANNEL_NAME
+                  value: '#cndt2021-notification'
+                - name: RAILS_MASTER_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: rails-app-secret
+                      key: rails-app-secret
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:
