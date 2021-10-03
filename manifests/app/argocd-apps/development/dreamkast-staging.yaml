@@ -5,6 +5,14 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: >
+      dreamkast=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+    argocd-image-updater.argoproj.io/dreamkast.update-strategy: latest
+    argocd-image-updater.argoproj.io/dreamkast.allow-tags: regexp:^main-.*$
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds
+    argocd-image-updater.argoproj.io/write-back-target: kustomization:../../dreamkast/overlays/staging/main
+    argocd-image-updater.argoproj.io/git-branch: main
 spec:
   destination:
     namespace: dreamkast-staging
