@@ -1,6 +1,5 @@
 bases:
 - ../../base
-- ./argocd-apps/argocd-apps.yaml
 patches:
 - ./service.yaml
 - ./argocd-cm.yaml
