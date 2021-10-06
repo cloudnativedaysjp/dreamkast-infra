@@ -52,6 +52,8 @@ spec:
               gnetId: 11265
               revision: 2
       parameters:
+      - name: image.tag
+        value: "8.1.6"
       - name: persistence.enabled
         value: "true"
   syncPolicy:
