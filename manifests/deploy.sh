@@ -42,6 +42,19 @@ function _setup() {
       --from-literal=oidc.auth0.clientSecret=${CLIENT_SECRET} \
       --dry-run=client -o yaml >> ${MANIFEST_OVERLAY_DIR}/secret-argocd.yaml
   fi
+
+  if [ ! -e ${MANIFEST_OVERLAY_DIR}/secret-git-creds.yaml ]; then
+    ### user input ###
+    : ${GITHUB_USERNAME:=$(read -sp "input GitHub Username: " VAR; echo $VAR)}; echo ... 1>&2
+    : ${GITHUB_TOKEN:=$(read -sp "input GitHub Token: " VAR; echo $VAR)}; echo ... 1>&2
+
+    ### create secret files ###
+    echo "---" > ${MANIFEST_OVERLAY_DIR}/secret-git-creds.yaml
+    kubectl create secret generic git-creds \
+      --from-literal=username=${GITHUB_USERNAME} \
+      --from-literal=password=${GITHUB_TOKEN} \
+      --dry-run=client -o yaml >> ${MANIFEST_OVERLAY_DIR}/secret-git-creds.yaml
+  fi
 }
 
 function _build() {

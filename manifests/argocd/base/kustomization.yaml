@@ -4,4 +4,5 @@ kind: Kustomization
 namespace: argocd
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/v2.1.2/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v0.10.3/manifests/install.yaml
 - ns.yaml

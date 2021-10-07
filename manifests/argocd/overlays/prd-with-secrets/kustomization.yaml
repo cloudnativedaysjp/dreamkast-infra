@@ -5,3 +5,4 @@ namespace: argocd
 resources:
 - ../prd
 - secret-argocd.yaml
+- secret-git-creds.yaml

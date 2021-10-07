@@ -5,3 +5,4 @@ namespace: argocd
 resources:
 - ../dev
 - secret-argocd.yaml
+- secret-git-creds.yaml
