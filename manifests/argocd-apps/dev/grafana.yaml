@@ -52,7 +52,7 @@ spec:
               gnetId: 11265
               revision: 2
         envFromSecret: grafana-secret
-        grafana.ini:         
+        grafana.ini:
           auth.generic_oauth:
             enabled: true
             allow_sign_up: true
@@ -64,6 +64,8 @@ spec:
             auth_url: https://dreamkast.us.auth0.com/authorize
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
+            role_attribute_strict: true
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2021-Admin') && 'Admin'
       parameters:
       - name: persistence.enabled
         value: "true"
