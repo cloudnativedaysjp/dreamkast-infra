@@ -61,7 +61,6 @@ spec:
             team_ids:
             allowed_organizations:
             name: Auth0
-            client_id: 61c91hIk6j8dz2RAaNytOyHFgyKqilTX
             scopes: openid profile email
             auth_url: https://dreamkast.us.auth0.com/authorize
             token_url: https://dreamkast.us.auth0.com/oauth/token
