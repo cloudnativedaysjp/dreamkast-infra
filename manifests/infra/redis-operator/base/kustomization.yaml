@@ -1,0 +1,11 @@
+# Install ot-container-kit/redis-operator 0.8
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: redis-operator
+resources:
+- redis.redis.opstreelabs.in_redis.yaml
+- redis.redis.opstreelabs.in_redisclusters.yaml
+- serviceaccount.yaml
+- role.yaml
+- role_binding.yaml
+- manager.yaml
