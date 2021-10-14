@@ -1,15 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  labels:
-    control-plane: redis-operator
-  name: ot-operators
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-operator
-  namespace: ot-operators
   labels:
     control-plane: redis-operator
 spec:
