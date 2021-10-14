@@ -157,7 +157,7 @@ spec:
                           "exemplar": true,
                           "expr": "avg(irate(container_cpu_usage_seconds_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
                           "interval": "",
-                          "legendFormat": "",
+                          "legendFormat": "{{.pod}}",
                           "refId": "A"
                         }
                       ],
@@ -321,7 +321,7 @@ spec:
                           "exemplar": true,
                           "expr": "avg(irate(container_fs_reads_bytes_total{pod!=\"\",exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
                           "interval": "",
-                          "legendFormat": "",
+                          "legendFormat": "{{.pod}}",
                           "refId": "A"
                         }
                       ],
@@ -403,7 +403,7 @@ spec:
                           "exemplar": true,
                           "expr": "avg(irate(container_fs_writes_bytes_total{pod!=\"\",exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
                           "interval": "",
-                          "legendFormat": "",
+                          "legendFormat": "{{.pod}}",
                           "refId": "A"
                         }
                       ],
@@ -486,7 +486,7 @@ spec:
                           "exemplar": true,
                           "expr": "avg(irate(container_network_receive_bytes_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
                           "interval": "",
-                          "legendFormat": "",
+                          "legendFormat": "{{.pod}}",
                           "refId": "A"
                         }
                       ],
@@ -569,7 +569,7 @@ spec:
                           "exemplar": true,
                           "expr": "avg(irate(container_network_transmit_bytes_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
                           "interval": "",
-                          "legendFormat": "",
+                          "legendFormat": "{{.pod}}",
                           "refId": "A"
                         }
                       ],
