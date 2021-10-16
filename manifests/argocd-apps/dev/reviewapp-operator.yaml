@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reviewapp-operator
+  namespace: argocd
+spec:
+  destination:
+    namespace: reviewapp-operator-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    path: manifests/infra/reviewapp-operator/overlays/development
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reviewapps
+  namespace: argocd
+spec:
+  destination:
+    namespace: reviewapp-operator-system
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    path: manifests/reviewapps
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true

@@ -1,0 +1,502 @@
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ReviewAppManager
+metadata:
+  name: reviewapp-sample
+  namespace: reviewapp-operator-system
+spec:
+  appRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudnativedaysjp
+    repository: dreamkast
+    gitSecretRef:
+      name: git-creds
+      key: password
+    # TODO: https://github.com/cloudnativedaysjp/reviewapp-operator/issues/20
+    #ignoreLabels: []
+    #ignoreTitleExp: '^\[dreamkast-releasebot\]'
+  appRepoConfig:
+    message: |
+      Review app
+
+      https://dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
+  infraRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudnativedaysjp
+    repository: dreamkast
+    gitSecretRef:
+      name: git-creds
+      key: password
+  infraRepoConfig:
+    manifests:
+      templates:
+        - namespace: reviewapp-operator-system
+          name: dreamkast
+      dirpath: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+    argocdApp:
+      template:
+        namespace: reviewapp-operator-system
+        name: dreamkast
+      filepath: "manifests/app/argocd-apps/development/dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.yaml"
+  variables:
+    - AppRepositoryAlias=dk
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ApplicationTemplate
+metadata:
+  name: dreamkast
+  namespace: reviewapp-operator-system
+spec:
+  stable: &application |
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: "dreamkast-development-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+    spec:
+      destination:
+        namespace: "dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+        server: https://kubernetes.default.svc
+      project: default
+      source:
+        repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra
+        path: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+  candidate: *application
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ManifestsTemplate
+metadata:
+  name: manifeststemplate-sample
+spec:
+  stable: &manifests
+    kustomization.yaml: |
+      apiVersion: kustomize.config.k8s.io/v1beta1
+      kind: Kustomization
+      namespace: dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}
+      bases:
+      - ../../../base
+      resources:
+      - ns.yaml
+      - mysql.yaml
+      - redis.yaml
+      - externalsecret.yaml
+      - ingress.yaml
+      patchesStrategicMerge:
+      - deployment-dreamkast.yaml
+      - deployment-mail-worker.yaml
+    ns.yaml: |
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: dreamkast-{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}
+    mysql.yaml: |
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: dreamkast-mysql
+        labels:
+          app: dreamkast
+      spec:
+        ports:
+          - port: 3306
+        selector:
+          app: dreamkast
+          tier: mysql
+        clusterIP: None
+      ---
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: mysql-pv-claim
+        labels:
+          app: dreamkast
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+      ---
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: dreamkast-mysql
+        labels:
+          app: dreamkast
+      spec:
+        selector:
+          matchLabels:
+            app: dreamkast
+            tier: mysql
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: dreamkast
+              tier: mysql
+          spec:
+            containers:
+            - image: mysql:8.0
+              name: mysql
+              args:
+              - --character-set-server=utf8mb4
+              - --collation-server=utf8mb4_unicode_ci
+              - --default-authentication-plugin=mysql_native_password
+              env:
+              - name: MYSQL_USER
+                value: user
+              - name: MYSQL_PASSWORD
+                value: password
+              - name: MYSQL_ROOT_PASSWORD
+                value: password
+              - name: MYSQL_DATABASE
+                value: dreamkast
+              ports:
+              - containerPort: 3306
+                name: mysql
+              volumeMounts:
+              - name: mysql-persistent-storage
+                mountPath: /var/lib/mysql
+            volumes:
+            - name: mysql-persistent-storage
+              persistentVolumeClaim:
+                claimName: mysql-pv-claim
+    redis.yaml: |
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: dreamkast-redis
+        labels:
+          app: dreamkast
+      spec:
+        ports:
+          - port: 6379
+        selector:
+          app: dreamkast
+          tier: redis
+        clusterIP: None
+      ---
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: dreamkast-redis
+        labels:
+          app: dreamkast
+      spec:
+        selector:
+          matchLabels:
+            app: dreamkast
+            tier: redis
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: dreamkast
+              tier: redis
+          spec:
+            containers:
+            - name: redis
+              image: redis:6.0.5
+              command:
+                - redis-server
+                - "/redis-master/redis.conf"
+              env:
+              - name: MASTER
+                value: "true"
+              ports:
+              - containerPort: 6379
+              resources:
+                limits:
+                  cpu: "0.1"
+                  memory: "100Mi"
+              volumeMounts:
+              - mountPath: /redis-master-data
+                name: data
+              - mountPath: /redis-master
+                name: config
+            volumes:
+              - name: data
+                emptyDir: {}
+              - name: config
+                configMap:
+                  name: redis-config
+                  items:
+                  - key: redis.conf
+                    path: redis.conf
+      ---
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: redis-config
+      data:
+        redis.conf: |
+          maxmemory 2mb
+          maxmemory-policy allkeys-lru
+    externalsecret.yaml: |
+      apiVersion: 'kubernetes-client.io/v1'
+      kind: ExternalSecret
+      metadata:
+        name: dreamkast-secret
+      spec:
+        backendType: secretsManager
+        data:
+          - key: dreamkast/reviewapp-env
+            name: AUTH0_CLIENT_ID
+            property: AUTH0_CLIENT_ID
+          - key: dreamkast/reviewapp-env
+            name: AUTH0_CLIENT_SECRET
+            property: AUTH0_CLIENT_SECRET
+          - key: dreamkast/reviewapp-env
+            name: AUTH0_DOMAIN
+            property: AUTH0_DOMAIN
+          - key: dreamkast/reviewapp-env
+            name: REVIEW_APP
+            property: REVIEW_APP
+    ingress.yaml: |
+      apiVersion: projectcontour.io/v1
+      kind: HTTPProxy
+      metadata:
+        name: dreamkast
+        labels:
+          app: dreamkast
+      spec:
+        virtualhost:
+          fqdn: dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
+          tls:
+            secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+        routes:
+          - conditions:
+            - prefix: /
+            services:
+            - name: dreamkast
+              port: 80
+          - conditions:
+            - prefix: /cable
+            enableWebsockets: true
+            services:
+            - name: dreamkast
+              port: 80
+          - conditions: #TODO: Need to resolve this hardcoded routing
+            - prefix: /cicd2021/ui
+            services:
+            - name: dreamkast-ui
+              port: 3001
+    deployment-dreamkast.yaml: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        labels:
+          app: dreamkast
+          tier: dreamkast
+        name: dreamkast
+      spec:
+        selector:
+          matchLabels:
+            app: dreamkast
+            tier: dreamkast
+        strategy:
+          rollingUpdate:
+            maxSurge: 25%
+            maxUnavailable: 25%
+          type: RollingUpdate
+        template:
+          metadata:
+            labels:
+              app: dreamkast
+              tier: dreamkast
+          spec:
+            initContainers:
+            - name: initdb
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              imagePullPolicy: Always
+              command: ["/bin/bash", "-c"]
+              args:
+              - bundle exec rails db:migrate;
+                bundle exec rails db:seed_fu;
+              env:
+              - name: RAILS_ENV
+                value: "production"
+              - name: MYSQL_HOST
+                value: "dreamkast-mysql"
+              - name: REDIS_URL
+                value: "redis://dreamkast-redis:6379"
+              - name: SENTRY_DSN
+                value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+              - name: S3_BUCKET
+                value: "dreamkast-test-bucket"
+              - name: S3_REGION
+                value: ap-northeast-1
+              - name: SQS_MAIL_QUEUE_URL
+                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: RAILS_MASTER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: rails-app-secret
+                    key: rails-app-secret
+              - name: AUTH0_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_ID
+              - name: AUTH0_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_SECRET
+              - name: AUTH0_DOMAIN
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_DOMAIN
+              - name: REVIEW_APP
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: REVIEW_APP
+            containers:
+            - name: dreamkast
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 3000
+              env:
+              - name: RAILS_ENV
+                value: "production"
+              - name: MYSQL_HOST
+                value: "dreamkast-mysql"
+              - name: REDIS_URL
+                value: "redis://dreamkast-redis:6379"
+              - name: SENTRY_DSN
+                value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+              - name: S3_BUCKET
+                value: "dreamkast-test-bucket"
+              - name: S3_REGION
+                value: ap-northeast-1
+              - name: SQS_MAIL_QUEUE_URL
+                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: AWS_REGION
+                value: ap-northeast-1
+              - name: RAILS_MASTER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: rails-app-secret
+                    key: rails-app-secret
+              - name: AUTH0_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_ID
+              - name: AUTH0_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_SECRET
+              - name: AUTH0_DOMAIN
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_DOMAIN
+              - name: REVIEW_APP
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: REVIEW_APP
+              livenessProbe:
+                httpGet:
+                  port: 3000
+                  path: /
+                failureThreshold: 5
+                periodSeconds: 10
+              readinessProbe:
+                httpGet:
+                  port: 3000
+                  path: /
+                failureThreshold: 5
+                periodSeconds: 10
+              startupProbe:
+                httpGet:
+                  port: 3000
+                  path: /
+                failureThreshold: 30
+                periodSeconds: 10
+    deployment-mail-worker.yaml: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        labels:
+          app: dreamkast
+          tier: dreamkast-mail-worker
+        name: dreamkast-mail-worker
+      spec:
+        selector:
+          matchLabels:
+            app: dreamkast
+            tier: dreamkast-mail-worker
+        template:
+          metadata:
+            labels:
+              app: dreamkast
+              tier: dreamkast-mail-worker
+          spec:
+            containers:
+            - name: dreamkast
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              imagePullPolicy: Always
+              command: ["bundle"]
+              args: [
+                "exec",
+                "aws_sqs_active_job",
+                "--queue",
+                "mail"
+              ]
+              env:
+              - name: RAILS_ENV
+                value: "production"
+              - name: AWS_REGION
+                value: "ap-northeast-1"
+              - name: MYSQL_HOST
+                value: "dreamkast-mysql"
+              - name: REDIS_URL
+                value: "redis://dreamkast-redis:6379"
+              - name: SENTRY_DSN
+                value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+              - name: S3_BUCKET
+                value: "dreamkast-test-bucket"
+              - name: S3_REGION
+                value: ap-northeast-1
+              - name: SQS_MAIL_QUEUE_URL
+                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: RAILS_MASTER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: rails-app-secret
+                    key: rails-app-secret
+              - name: AUTH0_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_ID
+              - name: AUTH0_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_SECRET
+              - name: AUTH0_DOMAIN
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_DOMAIN
+              - name: REVIEW_APP
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: REVIEW_APP
+  candidate: *manifests
