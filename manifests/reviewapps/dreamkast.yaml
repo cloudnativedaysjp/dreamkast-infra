@@ -23,7 +23,7 @@ spec:
   infraRepoTarget:
     username: showks-containerdaysjp
     organization: cloudnativedaysjp
-    repository: dreamkast
+    repository: dreamkast-infra
     branch: main
     gitSecretRef:
       name: git-creds
