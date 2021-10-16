@@ -11,7 +11,7 @@ spec:
     repository: dreamkast
     gitSecretRef:
       name: git-creds
-      key: password
+      key: token
     # TODO: https://github.com/cloudnativedaysjp/reviewapp-operator/issues/20
     #ignoreLabels: []
     #ignoreTitleExp: '^\[dreamkast-releasebot\]'
@@ -24,9 +24,10 @@ spec:
     username: showks-containerdaysjp
     organization: cloudnativedaysjp
     repository: dreamkast
+    branch: main
     gitSecretRef:
       name: git-creds
-      key: password
+      key: token
   infraRepoConfig:
     manifests:
       templates:
