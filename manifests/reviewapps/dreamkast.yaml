@@ -2,7 +2,7 @@
 apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
 kind: ReviewAppManager
 metadata:
-  name: reviewapp-sample
+  name: dreamkast-dk
   namespace: reviewapp-operator-system
 spec:
   appRepoTarget:
@@ -73,7 +73,7 @@ spec:
 apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
 kind: ManifestsTemplate
 metadata:
-  name: manifeststemplate-sample
+  name: dreamkast
 spec:
   stable: &manifests
     kustomization.yaml: |
