@@ -51,7 +51,7 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
-            Kubernetes Pod:
+            Kubernetes-Pod:
               json: |
                 {
                   "annotations": {
