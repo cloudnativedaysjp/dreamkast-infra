@@ -23,7 +23,7 @@ spec:
       - name: dreamkast
         port: 80
     - conditions:
-      - prefix: /cicd2021/ui
+      - prefix: /cndt2021/ui
       services:
       - name: dreamkast-ui
         port: 3001
