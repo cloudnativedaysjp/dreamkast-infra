@@ -91,11 +91,14 @@ spec:
       patchesStrategicMerge:
       - deployment-dreamkast.yaml
       - deployment-mail-worker.yaml
+      images:
+      - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+        newTag: {{.AppRepo.LatestCommitSha}}
     ns.yaml: |
       apiVersion: v1
       kind: Namespace
       metadata:
-        name: dreamkast-{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}
+        name: dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}
     mysql.yaml: |
       apiVersion: v1
       kind: Service
