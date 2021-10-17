@@ -51,6 +51,631 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
+            Kubernetes Pod:
+              json: |
+                {
+                  "annotations": {
+                    "list": [
+                      {
+                        "builtIn": 1,
+                        "datasource": "-- Grafana --",
+                        "enable": true,
+                        "hide": true,
+                        "iconColor": "rgba(0, 211, 255, 1)",
+                        "name": "Annotations & Alerts",
+                        "target": {
+                          "limit": 100,
+                          "matchAny": false,
+                          "tags": [],
+                          "type": "dashboard"
+                        },
+                        "type": "dashboard"
+                      }
+                    ]
+                  },
+                  "description": "",
+                  "editable": true,
+                  "gnetId": null,
+                  "graphTooltip": 0,
+                  "id": 8,
+                  "iteration": 1633513632897,
+                  "links": [],
+                  "panels": [
+                    {
+                      "datasource": null,
+                      "description": "",
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "percentunit"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 0
+                      },
+                      "id": 2,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "avg(irate(container_cpu_usage_seconds_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
+                          "interval": "",
+                          "legendFormat": "{{.pod}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "CPU utilization per Pod [%]",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": null,
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "bytes"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 0
+                      },
+                      "id": 4,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "container_memory_usage_bytes{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}",
+                          "interval": "",
+                          "legendFormat": "",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Memory utilization per Pod",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": null,
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "binBps"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 8
+                      },
+                      "id": 6,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "avg(irate(container_fs_reads_bytes_total{pod!=\"\",exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
+                          "interval": "",
+                          "legendFormat": "{{.pod}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Disk READ per Pod",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": null,
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "binBps"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 8
+                      },
+                      "id": 7,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "avg(irate(container_fs_writes_bytes_total{pod!=\"\",exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
+                          "interval": "",
+                          "legendFormat": "{{.pod}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Disk WRITE per Pod",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": null,
+                      "description": "",
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "binBps"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 16
+                      },
+                      "id": 8,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "avg(irate(container_network_receive_bytes_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
+                          "interval": "",
+                          "legendFormat": "{{.pod}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Inbound network traffic per Pod",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": null,
+                      "description": "",
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "custom": {
+                            "axisLabel": "",
+                            "axisPlacement": "auto",
+                            "barAlignment": 0,
+                            "drawStyle": "line",
+                            "fillOpacity": 0,
+                            "gradientMode": "none",
+                            "hideFrom": {
+                              "legend": false,
+                              "tooltip": false,
+                              "viz": false
+                            },
+                            "lineInterpolation": "linear",
+                            "lineWidth": 1,
+                            "pointSize": 5,
+                            "scaleDistribution": {
+                              "type": "linear"
+                            },
+                            "showPoints": "auto",
+                            "spanNulls": false,
+                            "stacking": {
+                              "group": "A",
+                              "mode": "none"
+                            },
+                            "thresholdsStyle": {
+                              "mode": "off"
+                            }
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "binBps"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 16
+                      },
+                      "id": 9,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom"
+                        },
+                        "tooltip": {
+                          "mode": "single"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "exemplar": true,
+                          "expr": "avg(irate(container_network_transmit_bytes_total{pod!=\"\", exported_namespace=~\"$namespace\", pod=~\"$pod\"}[5m])) by (pod)",
+                          "interval": "",
+                          "legendFormat": "{{.pod}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Outbound network traffic per Pod",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": "Loki",
+                      "gridPos": {
+                        "h": 6,
+                        "w": 24,
+                        "x": 0,
+                        "y": 24
+                      },
+                      "id": 11,
+                      "options": {
+                        "dedupStrategy": "none",
+                        "enableLogDetails": true,
+                        "prettifyLogMessage": false,
+                        "showCommonLabels": false,
+                        "showLabels": false,
+                        "showTime": false,
+                        "sortOrder": "Descending",
+                        "wrapLogMessage": false
+                      },
+                      "targets": [
+                        {
+                          "expr": "{namespace=\"$namespace\", pod=~\"$pod\"}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Logs",
+                      "type": "logs"
+                    }
+                  ],
+                  "schemaVersion": 30,
+                  "style": "dark",
+                  "tags": [],
+                  "templating": {
+                    "list": [
+                      {
+                        "allValue": null,
+                        "current": {
+                          "selected": false,
+                          "text": "argocd",
+                          "value": "argocd"
+                        },
+                        "datasource": null,
+                        "definition": "label_values(exported_namespace)",
+                        "description": null,
+                        "error": null,
+                        "hide": 0,
+                        "includeAll": false,
+                        "label": null,
+                        "multi": false,
+                        "name": "namespace",
+                        "options": [],
+                        "query": {
+                          "query": "label_values(exported_namespace)",
+                          "refId": "StandardVariableQuery"
+                        },
+                        "refresh": 1,
+                        "regex": "",
+                        "skipUrlSync": false,
+                        "sort": 0,
+                        "type": "query"
+                      },
+                      {
+                        "allValue": null,
+                        "current": {
+                          "selected": false,
+                          "text": "All",
+                          "value": "$__all"
+                        },
+                        "datasource": null,
+                        "definition": "label_values(container_cpu_usage_seconds_total{exported_namespace=\"$namespace\"}, pod)",
+                        "description": null,
+                        "error": null,
+                        "hide": 0,
+                        "includeAll": true,
+                        "label": null,
+                        "multi": true,
+                        "name": "pod",
+                        "options": [],
+                        "query": {
+                          "query": "label_values(container_cpu_usage_seconds_total{exported_namespace=\"$namespace\"}, pod)",
+                          "refId": "StandardVariableQuery"
+                        },
+                        "refresh": 1,
+                        "regex": "",
+                        "skipUrlSync": false,
+                        "sort": 0,
+                        "type": "query"
+                      }
+                    ]
+                  },
+                  "time": {
+                    "from": "now-6h",
+                    "to": "now"
+                  },
+                  "timepicker": {},
+                  "timezone": "",
+                  "title": "Kubernetes Pod",
+                  "uid": "wQsYknD7k",
+                  "version": 1
+                }
         envFromSecret: grafana-secret
         grafana.ini:
           server:
