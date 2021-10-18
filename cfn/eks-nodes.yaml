@@ -159,6 +159,13 @@ Resources:
                   - "cloudwatch:GetMetricData"
                 Resource: "*"
           PolicyName: "grafana-get-metrics"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "ivs:*"
+                Resource: "*"
+          PolicyName: "ivs-full-access"
       Path: /
       Tags:
         - Key: Name
