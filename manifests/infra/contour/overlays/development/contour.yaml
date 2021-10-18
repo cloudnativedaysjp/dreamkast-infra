@@ -2923,7 +2923,8 @@ kind: Service
 metadata:
   name: envoy
   annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
   namespace: projectcontour
 spec:
   externalTrafficPolicy: Local
