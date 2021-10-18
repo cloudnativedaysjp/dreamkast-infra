@@ -697,6 +697,8 @@ spec:
         value: "8.1.6"
       - name: persistence.enabled
         value: "true"
+      - name: persistence.type
+        value: statefulset
   syncPolicy:
     automated:
       prune: true
