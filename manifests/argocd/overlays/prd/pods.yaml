@@ -83,7 +83,7 @@ spec:
       - name: argocd-repo-server
         resources:
           limits:
-            cpu: 200m
+            cpu: 500m
             memory: 512Mi
           requests:
             cpu: 200m
