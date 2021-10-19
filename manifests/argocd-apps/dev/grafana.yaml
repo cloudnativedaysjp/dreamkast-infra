@@ -51,6 +51,9 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
+            AWS CloudWatch Synthetics:
+              gnetId: 13892
+              revision: 2
             Cluster Monitoring for Kubernetes:
               gnetId: 10000
               revision: 1
