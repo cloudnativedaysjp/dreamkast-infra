@@ -51,6 +51,15 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
+            Cluster Monitoring for Kubernetes:
+              gnetId: 10000
+              revision: 1
+            Kubernetes Cluster (Prometheus):
+              gnetId: 6417
+              revision: 1
+            Logging Dashboard via Loki:
+              gnetId: 12611
+              revision: 1
             Kubernetes-Pod:
               json: |
                 {
