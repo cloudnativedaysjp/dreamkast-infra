@@ -55,12 +55,14 @@ spec:
               gnetId: 13892
               revision: 2
             Cluster Monitoring for Kubernetes:
+              datasource: Prometheus
               gnetId: 10000
               revision: 1
             Kubernetes Cluster (Prometheus):
               gnetId: 6417
               revision: 1
             Logging Dashboard via Loki:
+              datasource: Loki
               gnetId: 12611
               revision: 1
             Contour-HTTProxy:
