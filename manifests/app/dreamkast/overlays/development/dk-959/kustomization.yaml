@@ -14,4 +14,4 @@ patchesStrategicMerge:
 - deployment-mail-worker.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 26b5d766955f4e7aa85a9705103bb0c6ba6c8b4e
+  newTag: a79f3c574576f8f16d7de6161b63be82690494b4
