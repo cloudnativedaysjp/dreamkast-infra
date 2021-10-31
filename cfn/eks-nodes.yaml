@@ -111,6 +111,7 @@ Resources:
           arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AWSElementalMediaLiveFullAccess'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonS3FullAccess'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSESFullAccess'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSQSFullAccess'
