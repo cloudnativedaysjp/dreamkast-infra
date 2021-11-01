@@ -33,3 +33,9 @@ resource "github_membership" "membership_for_admin" {
   username = each.key
   role     = "admin"
 }
+
+resource "github_membership" "membership_for_member" {
+  for_each = toset( ["kusama"] )
+  username = each.key
+  role     = "member"
+}
