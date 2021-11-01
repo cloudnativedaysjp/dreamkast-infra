@@ -29,13 +29,13 @@ resource "github_repository" "cndt2021" {
 }
 
 resource "github_membership" "membership_for_admin" {
-  for_each = toset( ["jacopen"] )
+  for_each = toset( ["jacopen", "Fufuhu", "inductor", "jyoshise", "kojiha", "kyohmizu", "makocchi-git", "MasayaAoyama", "nabemasat", "ShotaKitazawa", "showks-containerdaysjp", "suzukin", "takaishi", "tsukaman", "zembutsu"] )
   username = each.key
   role     = "admin"
 }
 
 resource "github_membership" "membership_for_member" {
-  for_each = toset( ["kusama"] )
+  for_each = toset( ["capsmalt", "chago0419", "cyberblack28", "Gaku-Kunimi", "guni1192", "iaoiui", "ito-taka", "kaedemalu", "KaseiKondo", "kntks", "maktak1995", "naka-teruhisa", "nnao45", "oke-py", "oshiro3", "ryojsb", "ryoryotaro", "TakumaNakagame", "TakumaNakagame", "yassan", "Yoshiki0705"] )
   username = each.key
   role     = "member"
 }
