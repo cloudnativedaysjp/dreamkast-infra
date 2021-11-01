@@ -27,3 +27,9 @@ resource "github_repository" "cndt2021" {
   archive_on_destroy = true
   vulnerability_alerts = false
 }
+
+resource "github_membership" "membership_for_admin" {
+  for_each = toset( ["jacopen"] )
+  username = each.key
+  role     = "admin"
+}
