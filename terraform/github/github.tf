@@ -1,7 +1,9 @@
-provider "github" {}
+provider "github" {
+    owner = "cloudnativedaysjp"
+}
 
 resource "github_repository" "observability2021" {
-  name        = "cloudnativedaysjp/observability2021"
+  name        = "observability2021"
   description = "observability2021に関わるあれこれを管理していくリポジトリ"
 
   visibility = "private"
