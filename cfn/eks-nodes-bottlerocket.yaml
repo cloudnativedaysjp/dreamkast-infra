@@ -1,0 +1,153 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: 'EKS Managed Nodes (SSH access: false) [created by eksctl]'
+Metadata: 
+  "AWS::CloudFormation::Interface": 
+    ParameterGroups: 
+      - Label: 
+          default: "Project Name Prefix"
+        Parameters: 
+          - PJPrefix
+Parameters:
+  PJPrefix:
+    Type: String
+    Default: "dreamkast-prd"
+  ClusterName:
+    Type: String
+    Default: "dreamkast-cluster"
+  NodeDesiredSize:
+    Type: String
+    Default: "2"
+  NodeMaxSize:
+    Type: String
+    Default: "5"
+  NodeMinSize:
+    Type: String
+    Default: "2"
+Mappings:
+  ServicePrincipalPartitionMap:
+    aws:
+      EC2: ec2.amazonaws.com
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+    aws-cn:
+      EC2: ec2.amazonaws.com.cn
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+    aws-us-gov:
+      EC2: ec2.amazonaws.com
+      EKS: eks.amazonaws.com
+      EKSFargatePods: eks-fargate-pods.amazonaws.com
+Resources:
+  ManagedNodeGroup:
+    Type: 'AWS::EKS::Nodegroup'
+    Properties:
+      AmiType: BOTTLEROCKET_x86_64
+      ClusterName: !Ref ClusterName
+      InstanceTypes:
+        - m5.xlarge
+        - m4.xlarge
+        - m3.xlarge
+        - t3.xlarge
+        - t2.xlarge
+      CapacityType: SPOT
+      Labels:
+        alpha.eksctl.io/cluster-name: !Ref ClusterName
+        alpha.eksctl.io/nodegroup-name: managed-ng-private-bottlerocket-spot
+        role: worker
+      NodeRole: !GetAtt 
+        - NodeInstanceRole
+        - Arn
+      NodegroupName: managed-ng-private-bottlerocket-spot
+      ScalingConfig:
+        DesiredSize: !Ref NodeDesiredSize
+        MaxSize: !Ref NodeMaxSize
+        MinSize: !Ref NodeMinSize
+      Subnets:
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-a" }
+        - { "Fn::ImportValue": !Sub "${PJPrefix}-private-subnet-c" }
+      Tags:
+        alpha.eksctl.io/nodegroup-name: managed-ng-private-bottlerocket-spot
+        alpha.eksctl.io/nodegroup-type: managed
+        nodegroup-type: Bottlerocket
+  NodeInstanceRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+              - 'sts:AssumeRole'
+            Effect: Allow
+            Principal:
+              Service:
+                - !FindInMap 
+                  - ServicePrincipalPartitionMap
+                  - !Ref 'AWS::Partition'
+                  - EC2
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - !Sub >-
+          arn:${AWS::Partition}:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKSWorkerNodePolicy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonEKS_CNI_Policy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AWSElementalMediaLiveFullAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonS3FullAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSESFullAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSQSFullAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess'
+      Policies:
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "secretsmanager:GetResourcePolicy"
+                  - "secretsmanager:GetSecretValue"
+                  - "secretsmanager:DescribeSecret"
+                  - "secretsmanager:ListSecretVersionIds"
+                Resource: "*"
+          PolicyName: "secrets-manager-read-only"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "route53:GetChange"
+                  - "route53:ChangeResourceRecordSets"
+                  - "route53:ListResourceRecordSets"
+                  - "route53:ListHostedZonesByName"
+                Resource: "*"
+          PolicyName: "cert-manager"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "autoscaling:DescribeAutoScalingGroups"
+                  - "autoscaling:DescribeAutoScalingInstances"
+                  - "autoscaling:DescribeLaunchConfigurations"
+                  - "autoscaling:DescribeTags"
+                  - "autoscaling:SetDesiredCapacity"
+                  - "autoscaling:TerminateInstanceInAutoScalingGroup"
+                  - "autoscaling:CompleteLifecycleAction"
+                  - "ec2:DescribeInstances"
+                  - "sqs:DeleteMessage"
+                  - "sqs:ReceiveMessage"
+                Resource: "*"
+          PolicyName: "spot-asg-termination-queue"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "cloudwatch:GetMetricData"
+                  - "cloudwatch:ListMetrics"
+                Resource: "*"
+          PolicyName: "grafana-get-metrics"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "ivs:*"
+                Resource: "*"
+          PolicyName: "ivs-full-access"
+      Path: /
+      Tags:
+        - Key: Name
+          Value: !Sub '${AWS::StackName}/NodeInstanceRole'
