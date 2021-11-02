@@ -58,4 +58,3 @@ spec:
                     secretKeyRef:
                       name: dreamkast-secret
                       key: REVIEW_APP
-                  restartPolicy: OnFailure
