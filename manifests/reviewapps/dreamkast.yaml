@@ -512,6 +512,7 @@ spec:
       spec:
         schedule: "*/1 * * * *"
         startingDeadlineSeconds: 120
+        concurrencyPolicy: Forbid
         jobTemplate:
           spec:
             template:
