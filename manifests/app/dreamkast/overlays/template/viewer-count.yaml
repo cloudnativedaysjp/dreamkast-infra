@@ -4,6 +4,7 @@ metadata:
   name: viewer-count
 spec:
   schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 120
   jobTemplate:
     spec:
       template:

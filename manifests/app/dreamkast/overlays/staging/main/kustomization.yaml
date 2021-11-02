@@ -6,6 +6,7 @@ resources:
 - redis.yaml
 - hpa.yaml
 - ../../../base/
+- viewer-count.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 - deployment-mail-worker.yaml
