@@ -8,6 +8,7 @@ spec:
     spec:
       template:
         spec:
+          startingDeadlineSeconds: 120
           containers:
             - name: dreamkast
               image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main

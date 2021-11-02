@@ -3,7 +3,6 @@ kind: CronJob
 metadata:
   name: viewer-count
 spec:
-  # Execute every 10:00 JST but this configure is written by UTC
   schedule: "*/1 * * * *"
   jobTemplate:
     spec:
