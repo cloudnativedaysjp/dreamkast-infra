@@ -88,6 +88,7 @@ spec:
       - redis.yaml
       - externalsecret.yaml
       - ingress.yaml
+      - viewer-count.yaml
       patchesStrategicMerge:
       - deployment-dreamkast.yaml
       - deployment-mail-worker.yaml
@@ -510,11 +511,11 @@ spec:
         name: viewer-count
       spec:
         schedule: "*/1 * * * *"
+        startingDeadlineSeconds: 120
         jobTemplate:
           spec:
             template:
               spec:
-                startingDeadlineSeconds: 120
                 containers:
                   - name: dreamkast
                     image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main

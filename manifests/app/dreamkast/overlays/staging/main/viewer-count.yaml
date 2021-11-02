@@ -4,11 +4,11 @@ metadata:
   name: viewer-count
 spec:
   schedule: "*/1 * * * *"
+  startingDeadlineSeconds: 120
   jobTemplate:
     spec:
       template:
         spec:
-          startingDeadlineSeconds: 120
           containers:
             - name: dreamkast
               image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
