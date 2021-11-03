@@ -142,6 +142,13 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
+                  - "iam:PassRole"
+                Resource: "*"
+          PolicyName: "AllowPassRolePolicy"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
                   - "autoscaling:DescribeAutoScalingGroups"
                   - "autoscaling:DescribeAutoScalingInstances"
                   - "autoscaling:DescribeLaunchConfigurations"
