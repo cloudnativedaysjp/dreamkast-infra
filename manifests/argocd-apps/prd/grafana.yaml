@@ -1512,7 +1512,7 @@ spec:
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2021-Admin') && 'Admin'
       parameters:
       - name: image.tag
-        value: "8.1.6"
+        value: "8.2.3"
       - name: persistence.enabled
         value: "true"
       - name: persistence.type
