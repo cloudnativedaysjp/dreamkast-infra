@@ -71,6 +71,6 @@ resource "github_team" "dreamkast_admin" {
 }
 
 resource "github_team" "o11y2022" {
-  name = "Observability2022"
+  name = "o11y2022"
   privacy = "closed"
 }
