@@ -70,11 +70,6 @@ resource "github_team" "dreamkast_admin" {
   privacy = "closed"
 }
 
-resource "github_team" "dreamkast_admin" {
-  name = "dreamkast_admin"
-  privacy = "closed"
-}
-
 resource "github_team" "o11y2022" {
   name = "Observability2022"
   privacy = "closed"
