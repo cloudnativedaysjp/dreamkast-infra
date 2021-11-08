@@ -4,7 +4,7 @@ metadata:
   labels:
     app: dreamkast
     tier: dreamkast
-  name: dreamkast
+  name: dreamkast-main
 spec:
   revisionHistoryLimit: 2
   selector:
