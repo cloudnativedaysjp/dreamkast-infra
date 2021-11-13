@@ -11,3 +11,4 @@ resources:
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 - deployment-mail-worker.yaml
+- deployment-chat-worker.yaml

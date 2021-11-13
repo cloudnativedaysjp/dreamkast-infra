@@ -10,6 +10,7 @@ resources:
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 - deployment-mail-worker.yaml
+- deployment-chat-worker.yaml
 namespace: dreamkast-staging
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs

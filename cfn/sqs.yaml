@@ -23,3 +23,10 @@ Resources:
       FifoQueue: True
       MessageRetentionPeriod: 60
       QueueName: !Sub "${PJPrefix}MailQueue.fifo"
+
+  ChatQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      DelaySeconds: 10
+      MessageRetentionPeriod: 60
+      QueueName: !Sub "${PJPrefix}ChatQueue"
