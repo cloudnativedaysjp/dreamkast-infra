@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dreamkast-dk-1021
+bases:
+- ../../../base
+resources:
+- ns.yaml
+- mysql.yaml
+- redis.yaml
+- externalsecret.yaml
+- ingress.yaml
+- viewer-count.yaml
+patchesStrategicMerge:
+- deployment-dreamkast.yaml
+- deployment-mail-worker.yaml
+images:
+- name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+  newTag: cb8547077b098086363d287fb65e9c9fe3b1b7ea
