@@ -43,7 +43,9 @@ spec:
         - name: S3_REGION
           value: ap-northeast-1
         - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devMailQueue.fifo"
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
+        - name: SQS_FIFO_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:
@@ -93,7 +95,9 @@ spec:
         - name: S3_REGION
           value: ap-northeast-1
         - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
+        - name: SQS_FIFO_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
         - name: AWS_REGION
           value: ap-northeast-1
         - name: RAILS_MASTER_KEY

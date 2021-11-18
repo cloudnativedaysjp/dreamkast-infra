@@ -10,4 +10,4 @@ resources:
 - viewer-count.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- deployment-mail-worker.yaml
+- deployment-fifo-worker.yaml

@@ -43,13 +43,13 @@ kind: Deployment
 metadata:
   labels:
     app: dreamkast
-    tier: dreamkast-mail-worker
-  name: dreamkast-mail-worker
+    tier: dreamkast-fifo-worker
+  name: dreamkast-fifo-worker
 spec:
   selector:
     matchLabels:
       app: dreamkast
-      tier: dreamkast-mail-worker
+      tier: dreamkast-fifo-worker
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -59,7 +59,7 @@ spec:
     metadata:
       labels:
         app: dreamkast
-        tier: dreamkast-mail-worker
+        tier: dreamkast-fifo-worker
     spec:
       containers:
       - name: dreamkast
@@ -69,7 +69,7 @@ spec:
           "exec",
           "aws_sqs_active_job",
           "--queue",
-          "mail"
+          "fifo"
         ]
         resources:
           requests:
