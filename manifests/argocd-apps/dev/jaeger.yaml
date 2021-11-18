@@ -22,7 +22,7 @@ spec:
       - name: provisionDataStore.elasticsearch
         value: "true"
       - name: storage.type
-        value: "true"
+        value: "elasticsearch"
   syncPolicy:
     automated:
       prune: true
