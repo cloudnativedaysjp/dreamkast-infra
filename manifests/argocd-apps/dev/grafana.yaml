@@ -31,6 +31,9 @@ spec:
               jsonData:
                 authType: default
                 defaultRegion: ap-northeast-1
+            - name: Jaeger
+              type: jaeger
+              url: http://jaeger-query:80
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
