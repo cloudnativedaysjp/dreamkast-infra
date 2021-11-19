@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: jaeger
+  name: jaeger-tracing
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    chart: jaeger
+    chart: jaeger-tracing
     repoURL: https://jaegertracing.github.io/helm-charts
     targetRevision: 0.51.3
     helm:
