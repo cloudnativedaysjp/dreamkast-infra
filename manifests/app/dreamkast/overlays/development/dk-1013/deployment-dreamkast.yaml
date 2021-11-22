@@ -96,6 +96,10 @@ spec:
           value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
         - name: AWS_REGION
           value: ap-northeast-1
+        - name: DREAMKAST_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         - name: RAILS_MASTER_KEY
           valueFrom:
             secretKeyRef:
