@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dreamkast-dk-1014
+namespace: dreamkast-dk-1032
 bases:
 - ../../../base
 resources:
@@ -15,4 +15,4 @@ patchesStrategicMerge:
 - deployment-mail-worker.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 48d3aa7cd3938b82f41c4c29b9673d25ebe5b942
+  newTag: 326b5d4b0ec03f191b2b1da62359f42c0c332e25
