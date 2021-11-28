@@ -15,8 +15,9 @@ spec:
     path: manifests/infra/prometheus/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
-  syncPolicy:
-    automated:
-      prune: true
-    syncOptions:
-    - CreateNamespace=true
+  syncPolicy: {}
+#  syncPolicy:
+#    automated:
+#      prune: true
+#    syncOptions:
+#    - CreateNamespace=true
