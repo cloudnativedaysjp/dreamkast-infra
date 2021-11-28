@@ -10,9 +10,10 @@ resources:
 - externalsecret.yaml
 - ingress.yaml
 - viewer-count.yaml
+- deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- deployment-mail-worker.yaml
+- delete-deployment-mail-worker.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
   newTag: 3a0a2b7f5e0f0c969f688e095f9514806637a44f
