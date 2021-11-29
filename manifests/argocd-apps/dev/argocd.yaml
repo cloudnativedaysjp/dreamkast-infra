@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     path: manifests/argocd/overlays/dev
