@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: dreamkast-releasebot
     server: https://kubernetes.default.svc
-  project: default
+  project: cd
   source:
     path: manifests/app/dreamkast-releasebot/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

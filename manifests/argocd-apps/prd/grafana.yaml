@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
@@ -1535,7 +1535,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     path: manifests/infra/grafana-ingress/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

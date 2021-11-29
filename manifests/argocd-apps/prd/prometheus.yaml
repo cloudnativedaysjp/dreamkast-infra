@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     path: manifests/infra/prometheus/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
