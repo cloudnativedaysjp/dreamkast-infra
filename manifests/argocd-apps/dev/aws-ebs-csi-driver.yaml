@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: kube-system
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     chart: aws-ebs-csi-driver
     repoURL: https://kubernetes-sigs.github.io/aws-ebs-csi-driver

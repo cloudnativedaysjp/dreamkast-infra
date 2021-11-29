@@ -13,7 +13,7 @@ spec:
   destination:
     namespace: dreamkast-dk-1018
     server: https://kubernetes.default.svc
-  project: default
+  project: app
   source:
     path: manifests/app/dreamkast/overlays/development/dk-1018
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra

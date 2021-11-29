@@ -60,7 +60,7 @@ spec:
       destination:
         namespace: "dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
         server: https://kubernetes.default.svc
-      project: default
+      project: app
       source:
         repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra
         path: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
