@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     path: manifests/infra/grafana-ingress/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

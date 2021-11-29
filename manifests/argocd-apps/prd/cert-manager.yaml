@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
@@ -34,7 +34,7 @@ spec:
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     path: manifests/infra/cert-manager/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

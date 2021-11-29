@@ -2,13 +2,13 @@
 apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
 kind: ReviewAppManager
 metadata:
-  name: dreamkast-dk
+  name: dreamkast-ui
   namespace: reviewapp-operator-system
 spec:
   appRepoTarget:
     username: showks-containerdaysjp
     organization: cloudnativedaysjp
-    repository: dreamkast
+    repository: dreamkast-ui
     gitSecretRef:
       name: git-creds
       key: token
@@ -40,7 +40,7 @@ spec:
         name: dreamkast
       filepath: "manifests/app/argocd-apps/development/dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.yaml"
   variables:
-    - AppRepositoryAlias=dk
+    - AppRepositoryAlias=ui
 ---
 apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
 kind: ApplicationTemplate
@@ -94,7 +94,7 @@ spec:
       - deployment-dreamkast.yaml
       - delete-deployment-mail-worker.yaml
       images:
-      - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+      - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
         newTag: {{.AppRepo.LatestCommitSha}}
     ns.yaml: |
       apiVersion: v1

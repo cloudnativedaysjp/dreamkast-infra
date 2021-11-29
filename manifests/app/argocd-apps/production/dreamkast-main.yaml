@@ -9,7 +9,7 @@ spec:
   destination:
     namespace: dreamkast
     server: https://kubernetes.default.svc
-  project: default
+  project: app
   source:
     path: manifests/app/dreamkast/overlays/production/main
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
