@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     path: manifests/release
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
