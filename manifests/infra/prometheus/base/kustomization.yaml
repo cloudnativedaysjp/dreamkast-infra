@@ -3,5 +3,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
 - prometheus.yaml
+- prometheus-crd.yaml
 - node-exporter.yaml
 - monitor.yaml
