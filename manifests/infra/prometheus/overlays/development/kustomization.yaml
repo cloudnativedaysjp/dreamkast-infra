@@ -7,4 +7,3 @@ patchesStrategicMerge:
 - node-exporter.yaml
 - prometheus.yaml
 - prometheus-crd.yaml
-- service-selector.yaml
