@@ -1,4 +1,4 @@
-# https://github.com/prometheus-operator/kube-prometheus/blob/0a5b89954a2c6d2ced4ca79c2a24bd094e7c9247/manifests v2.31.1
+# https://github.com/prometheus-operator/kube-prometheus/tree/0a5b89954a2c6d2ced4ca79c2a24bd094e7c9247/manifests v2.31.1
 ---
 # prometheus-serviceAccount.yaml
 apiVersion: v1
