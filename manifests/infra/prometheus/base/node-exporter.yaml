@@ -1,4 +1,4 @@
-# https://github.com/prometheus-operator/kube-prometheus/tree/v0.9.0/manifests
+# https://github.com/prometheus-operator/kube-prometheus/tree/a9054030d7768c78ea65d74f70bb1f60350002e8/manifests v1.3.0
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.2.2
+    app.kubernetes.io/version: 1.3.0
   name: node-exporter
   namespace: monitoring
 ---
@@ -18,7 +18,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.2.2
+    app.kubernetes.io/version: 1.3.0
   name: node-exporter
 rules:
 - apiGroups:
@@ -41,7 +41,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.2.2
+    app.kubernetes.io/version: 1.3.0
   name: node-exporter
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -59,7 +59,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.2.2
+    app.kubernetes.io/version: 1.3.0
   name: node-exporter
   namespace: monitoring
 spec:
@@ -70,11 +70,13 @@ spec:
       app.kubernetes.io/part-of: kube-prometheus
   template:
     metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: node-exporter
       labels:
         app.kubernetes.io/component: exporter
         app.kubernetes.io/name: node-exporter
         app.kubernetes.io/part-of: kube-prometheus
-        app.kubernetes.io/version: 1.2.2
+        app.kubernetes.io/version: 1.3.0
     spec:
       containers:
       - args:
@@ -83,10 +85,10 @@ spec:
         - --path.rootfs=/host/root
         - --no-collector.wifi
         - --no-collector.hwmon
-        - --collector.filesystem.ignored-mount-points=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/pods/.+)($|/)
+        - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/pods/.+)($|/)
         - --collector.netclass.ignored-devices=^(veth.*|[a-f0-9]{15})$
         - --collector.netdev.device-exclude=^(veth.*|[a-f0-9]{15})$
-        image: quay.io/prometheus/node-exporter:v1.2.2
+        image: quay.io/prometheus/node-exporter:v1.3.0
         name: node-exporter
         resources:
           limits:
@@ -160,7 +162,7 @@ metadata:
     app.kubernetes.io/component: exporter
     app.kubernetes.io/name: node-exporter
     app.kubernetes.io/part-of: kube-prometheus
-    app.kubernetes.io/version: 1.2.2
+    app.kubernetes.io/version: 1.3.0
   name: node-exporter
   namespace: monitoring
 spec:
