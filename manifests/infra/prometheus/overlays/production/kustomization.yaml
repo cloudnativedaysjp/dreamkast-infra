@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.52.1/bundle.yaml
 - ../../base
+patchesStrategicMerge:
+- prometheus-crd.yaml

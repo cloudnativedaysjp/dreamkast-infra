@@ -6,3 +6,4 @@ resources:
 patchesStrategicMerge:
 - node-exporter.yaml
 - prometheus.yaml
+- prometheus-crd.yaml
