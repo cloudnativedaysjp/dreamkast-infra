@@ -5,6 +5,5 @@ resources:
 - ../../base
 - service-monitor.yaml
 patchesStrategicMerge:
-- prometheus.yaml
 - prometheus-crd.yaml
 - service-selector.yaml
