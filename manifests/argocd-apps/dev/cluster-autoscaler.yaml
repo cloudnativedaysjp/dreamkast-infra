@@ -18,7 +18,7 @@ spec:
     helm:
       parameters:
       - name: autoDiscovery.clusterName
-        value: ap-northeast-1
+        value: dreamkast-dev-cluster
       - name: awsRegion
         value: ap-northeast-1
       - name: rbac.serviceAccount.create
