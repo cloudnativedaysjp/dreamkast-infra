@@ -23,9 +23,21 @@ spec:
               name: telegraf-config
               subPath: telegraf.conf
               readOnly: true
-          envFrom:
-            - secretRef:
-                name: telegraf-secrets
+          env:
+          - name: MYSQL_HOST
+            value: "mysql"
+          - name: MYSQL_PORT
+            value: "3306"
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: username
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: password
       volumes:
         - name: telegraf-config
           configMap:
