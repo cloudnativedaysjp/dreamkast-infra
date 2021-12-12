@@ -32,12 +32,12 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: telegraf-secrets
-                key: username
+                key: MYSQL_USER
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: telegraf-secrets
-                key: password
+                key: MYSQL_PASSWORD
       volumes:
         - name: telegraf-config
           configMap:
