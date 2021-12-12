@@ -6,4 +6,3 @@ resources:
 - service-monitor.yaml
 patchesStrategicMerge:
 - prometheus-crd.yaml
-- service-selector.yaml
