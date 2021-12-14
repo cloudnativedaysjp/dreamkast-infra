@@ -15,7 +15,7 @@ Resources:
 #  SQS
 # ------------------------------------------------------------#
 # SQS Create
-  DeplecatedSQS:
+  SQS:
     Type: AWS::SQS::Queue
     Properties:
       ContentBasedDeduplication: False
@@ -23,7 +23,7 @@ Resources:
       FifoQueue: True
       MessageRetentionPeriod: 60
       QueueName: !Sub "${PJPrefix}MailQueue.fifo"
-  SQS:
+  FifoSQS:
     Type: AWS::SQS::Queue
     Properties:
       ContentBasedDeduplication: False
