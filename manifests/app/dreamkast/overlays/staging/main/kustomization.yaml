@@ -7,9 +7,9 @@ resources:
 - hpa.yaml
 - ../../../base/
 - viewer-count.yaml
+- deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- deployment-fifo-worker.yaml
 - delete-deployment-mail-worker.yaml
 namespace: dreamkast-staging
 images:
