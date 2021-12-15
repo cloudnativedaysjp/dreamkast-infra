@@ -68,6 +68,10 @@ spec:
               datasource: Loki
               gnetId: 12611
               revision: 1
+            Persistent Volume Usage:
+              datasource: Prometheus
+              gnetId: 13646
+              revision: 1
             Contour-HTTProxy:
               json: |
                 {
