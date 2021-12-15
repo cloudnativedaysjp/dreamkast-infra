@@ -5,6 +5,7 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  retention: 120d
   storage:
     volumeClaimTemplate:
       spec:
