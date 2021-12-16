@@ -35,7 +35,7 @@ data:
       ## Telegraf will send metrics to outputs in batches of at most
       ## metric_batch_size metrics.
       ## This controls the size of writes that Telegraf sends to output plugins.
-      metric_batch_size = 1000
+      metric_batch_size = 200
 
       ## For failed writes, telegraf will cache metric_buffer_limit metrics for each
       ## output, and will flush this buffer on a successful write. Oldest metrics
@@ -51,7 +51,7 @@ data:
 
       ## Default flushing interval for all outputs. Maximum flush_interval will be
       ## flush_interval + flush_jitter
-      flush_interval = "1h"
+      flush_interval = "30s"
       ## Jitter the flush interval by a random amount. This is primarily to avoid
       ## large write spikes for users running a large number of telegraf instances.
       ## ie, a jitter of 5s and interval 10s means flushes will happen every 10-15s
@@ -94,12 +94,17 @@ data:
       dsn = "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/dreamkast"
     
       [[inputs.sql.query]]
-        query="SELECT t.id,t.title,td.name AS talk_difficulity,tc.name AS talk_category,t.expected_participants,t.execution_phases,p.label AS proposed_labels,p.params AS proposed_params FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id LEFT JOIN talk_categories tc ON t.talk_category_id = tc.id LEFT JOIN proposal_items p ON t.id = p.talk_id AND ( p.label = 'language' OR p.label = 'whether_it_can_be_published' OR p.label = 'session_time' );"
+        query="SELECT t.id,t.title,td.name AS talk_difficulity,tc.name AS talk_category,t.expected_participants,t.execution_phases FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id LEFT JOIN talk_categories tc ON t.talk_category_id = tc.id WHERE t.conference_id='${CONF_ID}'"
         measurement = "dreamkast_talks"
-        tag_columns_include = [ "title", "talk_difficulty", "talk_category", "expected_participants", "execution_phases", "proposed_labels", "proposed_params" ]
+        tag_columns_include = [ "title", "talk_difficulty", "talk_category", "expected_participants", "execution_phases" ]
+      [[inputs.sql.query]]
+        query="SELECT id,talk_id,label,params FROM proposal_items WHERE conference_id='${CONF_ID}' AND ( label = 'language' OR label = 'whether_it_can_be_published' OR label = 'session_time' )"
+        measurement = "dreamkast_proposal_items"
+        tag_columns_include = [ "talk_id", "labels", "params" ]
+    
     [[inputs.github]]
-      ## prevent rate limit, query per hour
-      interval = "1h"
+      ## prevent rate limit, query per 30min
+      interval = "30m"
       ## List of repositories to monitor
       repositories = [
         "cloudnativedaysjp/dreamkast",
