@@ -24,6 +24,8 @@ spec:
               subPath: telegraf.conf
               readOnly: true
           env:
+          - name: CONF_ID
+            value: "2"
           - name: MYSQL_HOST
             value: "mysql"
           - name: MYSQL_PORT
