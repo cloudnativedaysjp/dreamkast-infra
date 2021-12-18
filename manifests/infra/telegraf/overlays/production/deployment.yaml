@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - image: telegraf
+          name: telegraf
+          env:
+          - name: CONF_ID
+            value: "5"
+          - name: MYSQL_HOST
+            value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com""
