@@ -157,19 +157,3 @@ spec:
   selector:
     matchLabels:
       app: envoy
----
-apiVersion: monitoring.coreos.com/v1
-kind: PodMonitor
-metadata:
-  name: telegraf
-  namespace: monitoring
-spec:
-  podMetricsEndpoints:
-  - port: metrics
-    scheme: http
-  namespaceSelector:
-    matchNames:
-      - monitoring
-  selector:
-    matchLabels:
-      app: telegraf
