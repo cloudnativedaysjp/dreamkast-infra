@@ -13,19 +13,3 @@ spec:
   selector:
     matchLabels:
       prometheus: k8s
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: telegraf
-  namespace: monitoring
-spec:
-  endpoints:
-  - port: metrics
-    scheme: http
-  namespaceSelector:
-    matchNames:
-      - monitoring
-  selector:
-    matchLabels:
-      app: telegraf
