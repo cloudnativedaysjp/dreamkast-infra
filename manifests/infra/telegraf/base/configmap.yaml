@@ -104,7 +104,11 @@ data:
       [[inputs.sql.query]]
         query = "SELECT COUNT(id) as count FROM proposals WHERE conference_id = '${CONF_ID}'"
         measurement = "dreamkast_proposals"
-    
+      [[inputs.sql.query]]
+        query = "SELECT COUNT(t.id) as count, td.name AS talk_difficulty FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id WHERE t.conference_id='${CONF_ID}' GROUP BY talk_difficulty"
+        measurement = "dreamkast_talk_difficulties"
+        tag_columns_include = [ "talk_difficulty" ]
+  
     [[inputs.github]]
       ## prevent rate limit, query per 30min
       interval = "30m"
