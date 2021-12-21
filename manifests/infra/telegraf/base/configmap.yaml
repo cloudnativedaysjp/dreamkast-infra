@@ -94,11 +94,11 @@ data:
       dsn = "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/dreamkast"
     
       [[inputs.sql.query]]
-        query="SELECT t.id,t.title,td.name AS talk_difficulty,tc.name AS talk_category,t.expected_participants,t.execution_phases FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id LEFT JOIN talk_categories tc ON t.talk_category_id = tc.id WHERE t.conference_id='${CONF_ID}'"
+        query="SELECT t.id,t.title,td.name AS talk_difficulty FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id WHERE t.conference_id='${CONF_ID}'"
         measurement = "dreamkast_talks"
-        tag_columns_include = [ "title", "talk_difficulty", "talk_category", "expected_participants", "execution_phases" ]
+        tag_columns_include = [ "title", "talk_difficulty" ]
       [[inputs.sql.query]]
-        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE ( p.label = 'presentation_method' OR p.label = 'session_time' ) AND p.conference_id='${CONF_ID}'"
+        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE ( p.label = 'presentation_method' OR p.label = 'session_time' OR p.label = 'assumed_visitor' OR p.label = 'execution_phase' ) AND p.conference_id='${CONF_ID}'"
         measurement = "dreamkast_proposal_items"
         tag_columns_include = [ "labels", "params" ]
       [[inputs.sql.query]]
