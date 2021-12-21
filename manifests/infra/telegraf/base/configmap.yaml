@@ -98,7 +98,7 @@ data:
         measurement = "dreamkast_talks"
         tag_columns_include = [ "title", "talk_difficulty" ]
       [[inputs.sql.query]]
-        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE ( p.label = 'presentation_method' OR p.label = 'session_time' OR p.label = 'assumed_visitor' OR p.label = 'execution_phase' ) AND p.conference_id='${CONF_ID}'"
+        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE ( p.label = 'presentation_method' OR p.label = 'assumed_visitor' OR p.label = 'execution_phase' ) AND p.conference_id='${CONF_ID}'"
         measurement = "dreamkast_proposal_items"
         tag_columns_include = [ "labels", "params" ]
       [[inputs.sql.query]]
