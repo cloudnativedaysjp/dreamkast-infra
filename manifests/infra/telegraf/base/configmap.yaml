@@ -94,7 +94,7 @@ data:
       dsn = "${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${MYSQL_HOST}:${MYSQL_PORT})/dreamkast"
     
       [[inputs.sql.query]]
-        query="SELECT t.id,t.title,td.name AS talk_difficulity,tc.name AS talk_category,t.expected_participants,t.execution_phases FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id LEFT JOIN talk_categories tc ON t.talk_category_id = tc.id WHERE t.conference_id='${CONF_ID}'"
+        query="SELECT t.id,t.title,td.name AS talk_difficulty,tc.name AS talk_category,t.expected_participants,t.execution_phases FROM talks t LEFT JOIN talk_difficulties td ON t.talk_difficulty_id = td.id LEFT JOIN talk_categories tc ON t.talk_category_id = tc.id WHERE t.conference_id='${CONF_ID}'"
         measurement = "dreamkast_talks"
         tag_columns_include = [ "title", "talk_difficulty", "talk_category", "expected_participants", "execution_phases" ]
       [[inputs.sql.query]]
