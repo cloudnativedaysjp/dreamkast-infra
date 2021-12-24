@@ -18,10 +18,14 @@ spec:
       containers:
         - image: telegraf
           name: telegraf
+          args:
+          - --config
+          - /etc/telegraf/telegraf.conf
+          - --watch-config
+          - inotify
           volumeMounts:
-            - mountPath: /etc/telegraf/telegraf.conf
+            - mountPath: /etc/telegraf/
               name: telegraf-config
-              subPath: telegraf.conf
               readOnly: true
           env:
           - name: CONF_ID
