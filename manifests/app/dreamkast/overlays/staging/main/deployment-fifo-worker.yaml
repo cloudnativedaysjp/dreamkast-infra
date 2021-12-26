@@ -21,13 +21,12 @@ spec:
       - name: dreamkast
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         imagePullPolicy: Always
-        command: ["bundle"]
-        args: [
-          "exec",
-          "aws_sqs_active_job",
-          "--queue",
-          "fifo"
-        ]
+        - args:
+          - exec
+          - rake
+          - aws_sqs:fifo_job
+        command:
+          - bundle
         env:
         - name: RAILS_ENV
           value: "production"
