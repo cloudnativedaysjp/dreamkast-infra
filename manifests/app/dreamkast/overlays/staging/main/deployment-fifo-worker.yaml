@@ -21,7 +21,7 @@ spec:
       - name: dreamkast
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         imagePullPolicy: Always
-        - args:
+        args:
           - exec
           - rake
           - aws_sqs:fifo_job
