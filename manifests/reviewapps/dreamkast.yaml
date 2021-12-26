@@ -474,9 +474,8 @@ spec:
             containers:
             - args:
               - exec
-              - aws_sqs_active_job
-              - --queue
-              - fifo
+              - rake
+              - aws_sqs:fifo_job
               command:
               - bundle
               env:
