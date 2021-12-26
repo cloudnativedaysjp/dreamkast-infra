@@ -22,7 +22,7 @@ spec:
         tier: dreamkast-fifo-worker
     spec:
       initContainers:
-      - name: create_sqs
+      - name: initsqs
         image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
