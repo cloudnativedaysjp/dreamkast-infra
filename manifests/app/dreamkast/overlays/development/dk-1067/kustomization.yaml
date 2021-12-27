@@ -13,7 +13,6 @@ resources:
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- delete-deployment-mail-worker.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
   newTag: 490fac175a84472290ba023ca78d3bba4d00ac52
