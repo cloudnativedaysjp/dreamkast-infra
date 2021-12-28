@@ -11,33 +11,5 @@ spec:
           containers:
           - name: mysql
             env:
-            - name: RDS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: MYSQL_PASSWORD
-            - name: RDS_USER
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: MYSQL_USER
             - name: RDS_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: MYSQL_SERVERNAME
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_PASSWORD
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_USER
-            - name: MYSQL_HOST
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: MYSQL_SERVERNAME
+              value: dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
