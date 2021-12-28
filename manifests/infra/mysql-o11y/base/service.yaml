@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-o11y
+  namespace: mysql-o11y
+  labels:
+    app: mysql-o11y
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql-o11y
+    tier: mysql
+  clusterIP: None

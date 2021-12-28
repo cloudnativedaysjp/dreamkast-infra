@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mysql-o11y
+  namespace: mysql-o11y
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mysql
+            image: mysql:8.0
+            args: ["mysqldump --single-transaction --quick --master-data --set-charset -u $RDS_USER -p $RDS_PASSWORD -h $RDS_HOST dreamkast conference_days conferences proposal_item_configs proposal_items proposals talk_categories talk_difficulties talk_times talks talks_speakers tracks > $HOME/rds.dump", "mysql -u $MYSQL_USER -p $MYSQL_PASSWORD  -h $MYSQL_HOST dreamkast < $HOME/rds.dump"]
+            env:
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_PASSWORD
+            - name: RDS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_USER
+            - name: RDS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_SERVERNAME
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_SERVERNAME
+          restartPolicy: OnFailure

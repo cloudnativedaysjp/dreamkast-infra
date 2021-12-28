@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mysql-o11y
+  namespace: mysql-o11y
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mysql
+            env:
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_PASSWORD
+            - name: RDS_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_USER
+            - name: RDS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: rds-secret
+                  key: MYSQL_SERVERNAME
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_PASSWORD
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_USER
+            - name: MYSQL_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_SERVERNAME
