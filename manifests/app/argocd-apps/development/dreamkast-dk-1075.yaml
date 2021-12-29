@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    dreamkast.cloudnativedays.jp/app-commit-hash: 14685b3b0c6ee41df44ec6eb55aa029d42694969
+    dreamkast.cloudnativedays.jp/app-commit-hash: 5a123d9c469796c578cc777945952274bfa7200c
     dreamkast.cloudnativedays.jp/app-organization: cloudnativedaysjp
     dreamkast.cloudnativedays.jp/app-repository: dreamkast
   finalizers:
