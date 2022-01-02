@@ -144,14 +144,6 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - "cloudwatch:GetMetricData"
-                  - "cloudwatch:ListMetrics"
-                Resource: "*"
-          PolicyName: "grafana-get-metrics"
-        - PolicyDocument:
-            Statement:
-              - Effect: "Allow"
-                Action:
                   - "ivs:*"
                 Resource: "*"
           PolicyName: "ivs-full-access"
