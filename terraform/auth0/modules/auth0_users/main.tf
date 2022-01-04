@@ -22,3 +22,7 @@ resource "auth0_user" "this" {
     ]
   }
 }
+
+output "user_id" {
+  value = auth0_user.this.id
+}
