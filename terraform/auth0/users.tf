@@ -6,3 +6,7 @@ module "users" {
   role_name_to_role_id = local.role_name_to_role_id
   members_of_roles = var.members_of_roles
 }
+
+output "user_id" {
+  value = module.users[*]
+}
