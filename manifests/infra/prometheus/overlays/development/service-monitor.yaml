@@ -13,3 +13,20 @@ spec:
   selector:
     matchLabels:
       prometheus: k8s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: social-analysis
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: web
+    scheme: http
+    path: /actuator/prometheus
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app: social-analysis
