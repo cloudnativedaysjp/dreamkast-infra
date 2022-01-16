@@ -95,6 +95,7 @@ Resources:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AmazonSQSFullAccess'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchAgentServerPolicy'
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/CloudWatchSyntheticsReadOnlyAccess'
+        - !Sub 'arn:${AWS::Partition}:iam::aws:policy/AWSElementalMediaPackageFullAccess'
       Policies:
         - PolicyDocument:
             Statement:
