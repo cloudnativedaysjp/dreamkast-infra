@@ -60,7 +60,7 @@ spec:
       destination:
         namespace: "dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
         server: https://kubernetes.default.svc
-      project: default
+      project: app
       source:
         repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra
         path: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
@@ -89,9 +89,9 @@ spec:
       - externalsecret.yaml
       - ingress.yaml
       - viewer-count.yaml
+      - deployment-fifo-worker.yaml
       patchesStrategicMerge:
       - deployment-dreamkast.yaml
-      - deployment-mail-worker.yaml
       images:
       - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
         newTag: {{.AppRepo.LatestCommitSha}}
@@ -339,8 +339,12 @@ spec:
                 value: "dreamkast-test-bucket"
               - name: S3_REGION
                 value: ap-northeast-1
-              - name: SQS_MAIL_QUEUE_URL
-                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: SQS_FIFO_QUEUE_URL
+                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
+              - name: DREAMKAST_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
               - name: RAILS_MASTER_KEY
                 valueFrom:
                   secretKeyRef:
@@ -385,10 +389,14 @@ spec:
                 value: "dreamkast-test-bucket"
               - name: S3_REGION
                 value: ap-northeast-1
-              - name: SQS_MAIL_QUEUE_URL
-                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: SQS_FIFO_QUEUE_URL
+                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
               - name: AWS_REGION
                 value: ap-northeast-1
+              - name: DREAMKAST_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
               - name: RAILS_MASTER_KEY
                 valueFrom:
                   secretKeyRef:
@@ -432,41 +440,40 @@ spec:
                   path: /
                 failureThreshold: 30
                 periodSeconds: 10
-    deployment-mail-worker.yaml: |
+    deployment-fifo-worker.yaml: |
       apiVersion: apps/v1
       kind: Deployment
       metadata:
         labels:
           app: dreamkast
-          tier: dreamkast-mail-worker
-        name: dreamkast-mail-worker
+          tier: dreamkast-fifo-worker
+        name: dreamkast-fifo-worker
       spec:
         selector:
           matchLabels:
             app: dreamkast
-            tier: dreamkast-mail-worker
+            tier: dreamkast-fifo-worker
+        strategy:
+          rollingUpdate:
+            maxSurge: 25%
+            maxUnavailable: 25%
+          type: RollingUpdate
         template:
           metadata:
             labels:
               app: dreamkast
-              tier: dreamkast-mail-worker
+              tier: dreamkast-fifo-worker
           spec:
-            containers:
-            - name: dreamkast
+            initContainers:
+            - name: initsqs
               image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
               imagePullPolicy: Always
-              command: ["bundle"]
-              args: [
-                "exec",
-                "aws_sqs_active_job",
-                "--queue",
-                "mail"
-              ]
+              command: ["/bin/bash", "-c"]
+              args:
+                - bundle exec rake aws_sqs:create_sqs
               env:
               - name: RAILS_ENV
                 value: "production"
-              - name: AWS_REGION
-                value: "ap-northeast-1"
               - name: MYSQL_HOST
                 value: "dreamkast-mysql"
               - name: REDIS_URL
@@ -477,8 +484,10 @@ spec:
                 value: "dreamkast-test-bucket"
               - name: S3_REGION
                 value: ap-northeast-1
-              - name: SQS_MAIL_QUEUE_URL
-                value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+              - name: DREAMKAST_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
               - name: RAILS_MASTER_KEY
                 valueFrom:
                   secretKeyRef:
@@ -504,6 +513,77 @@ spec:
                   secretKeyRef:
                     name: dreamkast-secret
                     key: REVIEW_APP
+            containers:
+            - args:
+              - exec
+              - rake
+              - aws_sqs:fifo_job
+              command:
+              - bundle
+              env:
+              - name: RAILS_ENV
+                value: production
+              - name: AWS_REGION
+                value: ap-northeast-1
+              - name: MYSQL_HOST
+                value: dreamkast-mysql
+              - name: REDIS_URL
+                value: redis://dreamkast-redis:6379
+              - name: SENTRY_DSN
+                value: https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644
+              - name: S3_BUCKET
+                value: dreamkast-test-bucket
+              - name: S3_REGION
+                value: ap-northeast-1
+              - name: SQS_FIFO_QUEUE_URL
+                value: https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo
+              - name: SQS_FIFO_QUEUE_URL
+                value: https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo
+              - name: DREAMKAST_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
+              - name: RAILS_MASTER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    key: rails-app-secret
+                    name: rails-app-secret
+              - name: AUTH0_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    key: AUTH0_CLIENT_ID
+                    name: dreamkast-secret
+              - name: AUTH0_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    key: AUTH0_CLIENT_SECRET
+                    name: dreamkast-secret
+              - name: AUTH0_DOMAIN
+                valueFrom:
+                  secretKeyRef:
+                    key: AUTH0_DOMAIN
+                    name: dreamkast-secret
+              - name: REVIEW_APP
+                valueFrom:
+                  secretKeyRef:
+                    key: REVIEW_APP
+                    name: dreamkast-secret
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              imagePullPolicy: Always
+              lifecycle:
+                preStop:
+                  exec:
+                    command:
+                    - /bin/sleep
+                    - "300"
+              name: dreamkast
+              resources:
+                limits:
+                  cpu: 500m
+                  memory: 512Mi
+                requests:
+                  cpu: 400m
+                  memory: 256Mi
     viewer-count.yaml: |
       apiVersion: batch/v1
       kind: CronJob
@@ -537,10 +617,14 @@ spec:
                         value: "dreamkast-test-bucket"
                       - name: S3_REGION
                         value: ap-northeast-1
-                      - name: SQS_MAIL_QUEUE_URL
-                        value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devMailQueue.fifo"
+                      - name: SQS_FIFO_QUEUE_URL
+                        value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devFifoQueue.fifo"
                       - name: AWS_REGION
                         value: ap-northeast-1
+                      - name: DREAMKAST_NAMESPACE
+                        valueFrom:
+                          fieldRef:
+                            fieldPath: metadata.namespace
                       - name: RAILS_MASTER_KEY
                         valueFrom:
                           secretKeyRef:

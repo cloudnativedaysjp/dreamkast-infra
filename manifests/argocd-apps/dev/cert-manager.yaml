@@ -10,11 +10,11 @@ spec:
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
-    targetRevision: "v1.5.3"
+    targetRevision: "v1.6.1"
     helm:
       parameters:
       - name: installCRDs
@@ -34,7 +34,7 @@ spec:
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
-  project: default
+  project: infra
   source:
     path: manifests/infra/cert-manager/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

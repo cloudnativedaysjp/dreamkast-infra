@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jaeger-tracing
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    chart: jaeger
+    repoURL: https://jaegertracing.github.io/helm-charts
+    targetRevision: 0.51.3
+    helm:
+      parameters:
+      - name: provisionDataStore.cassandra
+        value: "false"
+      - name: provisionDataStore.elasticsearch
+        value: "true"
+      - name: storage.type
+        value: "elasticsearch"
+      - name: elasticsearch.replicas
+        value: "1"
+      - name: elasticsearch.minimumMasterNodes
+        value: "1"
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true

@@ -8,11 +8,11 @@ spec:
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.15.0
+    targetRevision: 6.19.2
     helm:
       values: |
         datasources:
@@ -31,6 +31,9 @@ spec:
               jsonData:
                 authType: default
                 defaultRegion: ap-northeast-1
+            - name: Jaeger
+              type: jaeger
+              url: http://jaeger-tracing-query:80
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -51,9 +54,6 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
-            AWS CloudWatch Synthetics:
-              gnetId: 13892
-              revision: 2
             Cluster Monitoring for Kubernetes:
               datasource: Prometheus
               gnetId: 10000
@@ -65,6 +65,10 @@ spec:
               datasource: Loki
               gnetId: 12611
               revision: 1
+            Persistent Volume Usage:
+              datasource: Prometheus
+              gnetId: 13646
+              revision: 2
             Contour-HTTProxy:
               json: |
                 {
@@ -1509,10 +1513,10 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: true
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2021-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
       parameters:
       - name: image.tag
-        value: "8.2.3"
+        value: "8.3.3"
       - name: persistence.enabled
         value: "true"
       - name: persistence.type
@@ -1532,7 +1536,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     path: manifests/infra/grafana-ingress/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git

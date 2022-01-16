@@ -19,7 +19,15 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       ContentBasedDeduplication: False
-      DelaySeconds: 10
+      DelaySeconds: 0
       FifoQueue: True
       MessageRetentionPeriod: 60
       QueueName: !Sub "${PJPrefix}MailQueue.fifo"
+  FifoSQS:
+    Type: AWS::SQS::Queue
+    Properties:
+      ContentBasedDeduplication: False
+      DelaySeconds: 0
+      FifoQueue: True
+      MessageRetentionPeriod: 60
+      QueueName: !Sub "${PJPrefix}FifoQueue.fifo"
