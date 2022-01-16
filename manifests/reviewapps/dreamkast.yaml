@@ -301,7 +301,7 @@ spec:
         labels:
           app: dreamkast
           tier: dreamkast
-        name: dreamkast
+        name: dreamkast-main
       spec:
         selector:
           matchLabels:
