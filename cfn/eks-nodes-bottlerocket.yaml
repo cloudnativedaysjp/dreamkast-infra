@@ -103,7 +103,7 @@ Resources:
                 Action:
                   - "ssm:PutParameter"
                   - "ssm:DeleteParameter"
-                Resource: "arn:aws:ssm:region:account-id:parameter/medialive/*"
+                Resource: "arn:aws:ssm:us-east-1:${AWS::AccountId}:parameter/medialive/*"
           PolicyName: "ssm-parameter-create-and-delete"
         - PolicyDocument:
             Statement:
