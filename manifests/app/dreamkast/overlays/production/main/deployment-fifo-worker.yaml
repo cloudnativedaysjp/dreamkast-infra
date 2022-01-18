@@ -35,7 +35,7 @@ spec:
         - name: MYSQL_DATABASE
           value: "dreamkast"
         - name: REDIS_URL
-          value: "redis://dreamkast-redis:6379"
+          value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
