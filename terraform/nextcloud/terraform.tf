@@ -1,4 +1,11 @@
 terraform {
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "kusama"
+    workspaces {
+      name = "nextcloud"
+    }
+  }
   required_providers {
     sakuracloud = {
       source  = "sacloud/sakuracloud"
