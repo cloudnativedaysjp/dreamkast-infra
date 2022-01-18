@@ -3,7 +3,7 @@ data "tfe_organization" "org" {
 }
 
 variable "oauth_token_id" {
-  default = "ot-dF6Fozb1a8o8NXq8"
+  default = "ot-TXWpAfuW6HpR3aCT"
 }
 
 resource "tfe_workspace" "nextcloud" {
