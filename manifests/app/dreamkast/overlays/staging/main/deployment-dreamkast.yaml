@@ -101,8 +101,8 @@ spec:
           value: ap-northeast-1
         - name: AWS_REGION
           value: ap-northeast-1
-        - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-stgMailQueue.fifo"
+        - name: SQS_FIFO_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-stgFifoQueue.fifo"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:

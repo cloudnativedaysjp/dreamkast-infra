@@ -1,0 +1,14 @@
+# prometheus-prometheus.yaml
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: k8s
+  namespace: monitoring
+spec:
+  retention: 120d
+  storage:
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 150Gi

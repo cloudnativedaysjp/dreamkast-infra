@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     chart: jaeger
     repoURL: https://jaegertracing.github.io/helm-charts
@@ -23,6 +23,10 @@ spec:
         value: "true"
       - name: storage.type
         value: "elasticsearch"
+      - name: elasticsearch.replicas
+        value: "1"
+      - name: elasticsearch.minimumMasterNodes
+        value: "1"
   syncPolicy:
     automated:
       prune: true

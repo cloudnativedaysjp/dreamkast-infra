@@ -7,12 +7,12 @@ resources:
 - hpa.yaml
 - ../../../base/
 - viewer-count.yaml
+- deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- deployment-mail-worker.yaml
 namespace: dreamkast-staging
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: ed71695ddb24bac14383859e4232c5036f4f1da5
+  newTag: 12d387d959e7ec2078cc5d23687ce45c22b858d5
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: c11a7fb415f345baed2ceedda5d38c00734e4826
+  newTag: 5eabc8967b2c9c28961998a0c0940211afdcf4ca

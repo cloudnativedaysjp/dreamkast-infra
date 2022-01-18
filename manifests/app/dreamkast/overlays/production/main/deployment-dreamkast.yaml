@@ -38,15 +38,15 @@ spec:
         - name: MYSQL_DATABASE
           value: "dreamkast"
         - name: REDIS_URL
-          value: "redis://dreamkast-redis:6379"
+          value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
           value: "dreamkast-prd-bucket"
         - name: S3_REGION
           value: ap-northeast-1
-        - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/prodMailQueue.fifo"
+        - name: SQS_FIFO_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prodFifoQueue.fifo"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:
@@ -101,7 +101,7 @@ spec:
         - name: MYSQL_DATABASE
           value: "dreamkast"
         - name: REDIS_URL
-          value: "redis://dreamkast-redis:6379"
+          value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
           value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
         - name: S3_BUCKET
@@ -110,8 +110,8 @@ spec:
           value: ap-northeast-1
         - name: AWS_REGION
           value: ap-northeast-1
-        - name: SQS_MAIL_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prdMailQueue.fifo"
+        - name: SQS_FIFO_QUEUE_URL
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prdFifoQueue.fifo"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:

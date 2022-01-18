@@ -8,11 +8,11 @@ spec:
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc
-  project: default
+  project: monitoring
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.15.0
+    targetRevision: 6.19.2
     helm:
       values: |
         datasources:
@@ -54,9 +54,6 @@ spec:
             Amazon EC2:
               gnetId: 11265
               revision: 2
-            AWS CloudWatch Synthetics:
-              gnetId: 13892
-              revision: 2
             Cluster Monitoring for Kubernetes:
               datasource: Prometheus
               gnetId: 10000
@@ -68,6 +65,17 @@ spec:
               datasource: Loki
               gnetId: 12611
               revision: 1
+            o11y2022 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e04a8e5c78e46d1fd90dade553e67469c7e2b28d/dashboards/o11y2022-cfp.json
+            Persistent Volume Usage:
+              datasource: Prometheus
+              gnetId: 13646
+              revision: 2
+            AWS Billing:
+              datasource: CloudWatch
+              gnetId: 139
+              revision: 16
             Contour-HTTProxy:
               json: |
                 {
@@ -1512,10 +1520,10 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: true
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2021-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
       parameters:
       - name: image.tag
-        value: "8.2.3"
+        value: "8.3.3"
       - name: persistence.enabled
         value: "true"
       - name: persistence.type
