@@ -101,6 +101,14 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
+                  - "ssm:PutParameter"
+                  - "ssm:DeleteParameter"
+                Resource: "arn:aws:ssm:region:account-id:parameter/medialive/*"
+          PolicyName: "ssm-parameter-create-and-delete"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
                   - "secretsmanager:GetResourcePolicy"
                   - "secretsmanager:GetSecretValue"
                   - "secretsmanager:DescribeSecret"
