@@ -1,5 +1,0 @@
-$patch: delete
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: dreamkast-mail-worker
