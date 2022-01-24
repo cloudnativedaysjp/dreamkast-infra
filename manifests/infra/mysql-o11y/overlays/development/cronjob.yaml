@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: mysql-o11y
-  namespace: mysql-o11y
+  namespace: monitoring
 spec:
   jobTemplate:
     spec:
