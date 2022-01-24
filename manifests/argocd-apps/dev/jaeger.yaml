@@ -25,11 +25,6 @@ spec:
         elasticsearch:
           replicas: 1
           extraEnvs:
-            - name: ELASTIC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: elastic-config-credentials
-                  key: password
             - name: discovery.type
               value: single-node
             - name: cluster.initial_master_nodes
