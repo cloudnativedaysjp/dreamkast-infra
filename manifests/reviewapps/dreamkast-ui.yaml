@@ -12,9 +12,8 @@ spec:
     gitSecretRef:
       name: git-creds
       key: token
-    # TODO: https://github.com/cloudnativedaysjp/reviewapp-operator/issues/20
-    #ignoreLabels: []
-    #ignoreTitleExp: '^\[dreamkast-releasebot\]'
+    ignoreLabels: ["reviewapps/ignore"]
+    ignoreTitleExp: '^\[dreamkast-releasebot\]'
   appRepoConfig:
     message: |
       Review app
