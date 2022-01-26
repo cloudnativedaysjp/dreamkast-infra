@@ -1521,6 +1521,9 @@ spec:
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: true
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+        serviceAccount:
+          annotations:
+            eks.amazonaws.com/role-arn: arn:aws:iam::607167088920:role/grafana-dev-irsa-Role-DMHFXAVVPUED
       parameters:
       - name: image.tag
         value: "8.3.3"

@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM Role & Policy for serviceaccount "monitoring/grafana"
+Parameters:
+  ClusterOIDCURL:
+    Type: String
+    Description: The OpenID Connect URL without protocol (the "https://" prefix)
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prd
+Resources:
+  Role:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument: !Sub |
+        {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRoleWithWebIdentity",
+              "Condition": {
+                "StringEquals": {
+                  "${ClusterOIDCURL}:aud": "sts.amazonaws.com",
+                  "${ClusterOIDCURL}:sub": "system:serviceaccount:monitoring:grafana"
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Federated": "arn:aws:iam::${AWS::AccountId}:oidc-provider/${ClusterOIDCURL}"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+  Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyDocument:
+        Statement:
+          - Action:
+              - "cloudwatch:GetMetricData"
+              - "cloudwatch:ListMetrics"
+            Effect: Allow
+            Resource: '*'
+        Version: "2012-10-17"
+      PolicyName: !Sub "grafana-${Environment}"
+      Roles:
+        - !Ref Role
+Outputs:
+  Role:
+    Value: !GetAtt Role.Arn
