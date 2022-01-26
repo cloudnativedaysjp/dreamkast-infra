@@ -10,6 +10,8 @@ spec:
         spec:
           containers:
           - name: mysql
+            image: mysql:8.0
+            args: ["mysqldump --single-transaction --quick --set-charset -u $RDS_USER -p $RDS_PASSWORD -h $RDS_HOST dreamkast conference_days conferences proposal_item_configs proposal_items proposals talk_categories talk_difficulties talk_times talks talks_speakers tracks stats_of_registrants viewer_counts chat_messages > $HOME/rds.dump; mysql -u $MYSQL_USER -p $MYSQL_PASSWORD  -h $MYSQL_HOST dreamkast < $HOME/rds.dump"]
             env:
             - name: RDS_HOST
               value: dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
