@@ -13,7 +13,8 @@ spec:
           - name: mysql
             image: mysql:8.0
             command: ["/bin/sh", "-c"]
-            args: ["mysqldump --single-transaction --quick --set-charset -u $RDS_USER -p $RDS_PASSWORD -h $RDS_HOST dreamkast conference_days conferences proposal_item_configs proposal_items proposals talk_categories talk_difficulties talk_times talks talks_speakers tracks stats_of_registrants viewer_counts > $HOME/rds.dump; mysql -u $MYSQL_USER -p $MYSQL_PASSWORD -h $MYSQL_HOST dreamkast < $HOME/rds.dump"]
+            args: 
+            - mysqldump --single-transaction --quick --set-charset -u $RDS_USER -p "$RDS_PASSWORD" -h $RDS_HOST dreamkast conference_days conferences proposal_item_configs proposal_items proposals talk_categories talk_difficulties talk_times talks talks_speakers tracks stats_of_registrants viewer_counts > $HOME/rds.dump; mysql -u $MYSQL_USER -p "$MYSQL_PASSWORD" -h $MYSQL_HOST dreamkast < $HOME/rds.dump
             env:
             - name: RDS_PASSWORD
               valueFrom:
