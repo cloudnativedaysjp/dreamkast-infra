@@ -11,6 +11,8 @@ resource "uptimerobot_monitor" "dreamkast-by-terraform" {
   alert_contact {
     id = data.uptimerobot_alert_contact.default_alert_contact.id
   }
+
+  interval = 60
 }
 
 resource "uptimerobot_monitor" "website-by-terraform" {
@@ -25,4 +27,6 @@ resource "uptimerobot_monitor" "website-by-terraform" {
   alert_contact {
     id = data.uptimerobot_alert_contact.default_alert_contact.id
   }
+
+  interval = 60
 }
