@@ -37,7 +37,8 @@ spec:
             - talk_times
             - talks
             - talks_speakers
-            - tracks stats_of_registrants
+            - tracks
+            - stats_of_registrants
             - viewer_counts
             - >
             - $HOME/rds.dump;
