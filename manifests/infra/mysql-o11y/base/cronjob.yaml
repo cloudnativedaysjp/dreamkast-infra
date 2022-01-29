@@ -39,7 +39,6 @@ spec:
             - talks_speakers
             - tracks stats_of_registrants
             - viewer_counts
-            - chat_messages
             - >
             - $HOME/rds.dump;
             - mysql
