@@ -30,12 +30,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
-                  key: MYSQL_PASSWORD
+                  key: password
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
                   name: mysql-secret
-                  key: MYSQL_USER
+                  key: username
             - name: MYSQL_HOST
               value: mysql-o11y
           restartPolicy: OnFailure
