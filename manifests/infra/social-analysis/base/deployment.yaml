@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-analysis-deployment
+spec:
+  selector:
+    matchLabels:
+      app: social-analysis
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: social-analysis
+    spec:
+      volumes:
+      - name: workdir
+        emptyDir: {}
+      initContainers:
+      - name: jpn-dictionary
+        image: busybox
+        command:
+        - wget
+        - "-O"
+        - "/work-dir/data.trim"
+        - https://www.cl.ecei.tohoku.ac.jp/resources/sent_lex/pn.csv.m3.120408.trim
+        volumeMounts:
+        - name: workdir
+          mountPath: "/work-dir"
+      containers:
+      - image: ghcr.io/cloudnativedaysjp/social-analysis:0.0.1-snapshot
+        name: social-analysis
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        volumeMounts:
+          - mountPath: /work-dir
+            name: workdir
+            readOnly: true
+        env:
+        - name: LOGGING_LEVEL_JP_CLOUDNATIVEDAYS_SOCIAL_ANALYSIS
+          value: INFO
+        - name: SENTIMENT_FILE 
+          value: "/work-dir/data.trim"
+        - name: TWITTER_QUERY
+          value: "#o11y2022"
+        - name: TWITTER_ENABLED
+          value: "true"
+        - name: SLACK_ENABLED
+          value: "true"
+        - name: twitter4j.oauth.consumerKey
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: twitter4j.oauth.consumerKey
+        - name: twitter4j.oauth.consumerSecret
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: twitter4j.oauth.consumerSecret
+        - name: twitter4j.oauth.accessToken
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: twitter4j.oauth.accessToken
+        - name: twitter4j.oauth.accessTokenSecret
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: twitter4j.oauth.accessTokenSecret
+        - name: SLACK_APP_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: slack.app.token
+        - name: SLACK_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: social-analysis-secrets
+              key: slack.bot.token

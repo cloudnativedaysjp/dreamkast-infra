@@ -2,6 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: reviewapp-operator-system
 bases:
-- https://github.com/cloudnativedaysjp/reviewapp-operator/releases/download/v0.0.3/install.yaml
+- https://github.com/cloudnativedaysjp/reviewapp-operator/releases/download/v0.0.7/install.yaml
 patchesStrategicMerge:
 - pod.yaml

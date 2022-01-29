@@ -10,10 +10,9 @@ resources:
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
-- delete-deployment-mail-worker.yaml
 namespace: dreamkast-staging
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 83f49de412bd54d1713f44640035cd2c6e51628a
+  newTag: f787df09820064ef7020c36c6f73a2d0ca055386
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: c11a7fb415f345baed2ceedda5d38c00734e4826
+  newTag: 5eabc8967b2c9c28961998a0c0940211afdcf4ca
