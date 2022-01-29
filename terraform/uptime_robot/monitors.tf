@@ -13,6 +13,12 @@ resource "uptimerobot_monitor" "dreamkast-by-terraform" {
   }
 
   interval = 60
+
+  lifecycle {
+    ignore_changes = [
+      alert_contact
+    ]
+  }
 }
 
 resource "uptimerobot_monitor" "website-by-terraform" {
@@ -29,4 +35,10 @@ resource "uptimerobot_monitor" "website-by-terraform" {
   }
 
   interval = 60
+
+  lifecycle {
+    ignore_changes = [
+      alert_contact
+    ]
+  }
 }
