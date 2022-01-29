@@ -1,4 +1,11 @@
 terraform {
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "kusama"
+    workspaces {
+      name = "uptime_robot"
+    }
+  }
   required_providers {
     uptimerobot = {
       source = "louy/uptimerobot"
