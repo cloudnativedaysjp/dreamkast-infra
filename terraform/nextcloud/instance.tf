@@ -23,10 +23,10 @@ resource "sakuracloud_disk" "nextcloud_boot" {
 }
 
 resource "sakuracloud_disk" "nextcloud_data" {
-  name = "nextcloud-data"
-  plan = "hdd"
-  connector         = "virtio"
-  size = 2048
+  name      = "nextcloud-data"
+  plan      = "ssd"
+  connector = "virtio"
+  size      = 2048
 
   lifecycle {
     ignore_changes = [
@@ -48,8 +48,8 @@ resource "sakuracloud_server" "nextcloud" {
   }
 
   disk_edit_parameter {
-    hostname = "nextcloud"
-    password = random_password.password.result
-    ssh_key_ids = [for l in sakuracloud_ssh_key.key : l.id ]
+    hostname    = "nextcloud"
+    password    = random_password.password.result
+    ssh_key_ids = [for l in sakuracloud_ssh_key.key : l.id]
   }
 }

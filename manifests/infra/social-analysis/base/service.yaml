@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: social-analysis
+  name: social-analysis
+spec:
+  ports:
+  - name: "web"
+    targetPort: 8080
+    port: 8080
+  selector:
+    app: social-analysis

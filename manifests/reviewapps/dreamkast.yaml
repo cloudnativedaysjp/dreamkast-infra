@@ -12,9 +12,8 @@ spec:
     gitSecretRef:
       name: git-creds
       key: token
-    # TODO: https://github.com/cloudnativedaysjp/reviewapp-operator/issues/20
-    #ignoreLabels: []
-    #ignoreTitleExp: '^\[dreamkast-releasebot\]'
+    ignoreLabels: ["reviewapps/ignore"]
+    ignoreTitleExp: '^\[dreamkast-releasebot\]'
   appRepoConfig:
     message: |
       Review app
@@ -92,7 +91,6 @@ spec:
       - deployment-fifo-worker.yaml
       patchesStrategicMerge:
       - deployment-dreamkast.yaml
-      - delete-deployment-mail-worker.yaml
       images:
       - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
         newTag: {{.AppRepo.LatestCommitSha}}
@@ -441,12 +439,6 @@ spec:
                   path: /
                 failureThreshold: 30
                 periodSeconds: 10
-    delete-deployment-mail-worker.yaml: |
-      $patch: delete
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: dreamkast-mail-worker
     deployment-fifo-worker.yaml: |
       apiVersion: apps/v1
       kind: Deployment
@@ -471,12 +463,60 @@ spec:
               app: dreamkast
               tier: dreamkast-fifo-worker
           spec:
+            initContainers:
+            - name: initsqs
+              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              imagePullPolicy: Always
+              command: ["/bin/bash", "-c"]
+              args:
+                - bundle exec rake aws_sqs:create_sqs
+              env:
+              - name: RAILS_ENV
+                value: "production"
+              - name: MYSQL_HOST
+                value: "dreamkast-mysql"
+              - name: REDIS_URL
+                value: "redis://dreamkast-redis:6379"
+              - name: SENTRY_DSN
+                value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
+              - name: S3_BUCKET
+                value: "dreamkast-test-bucket"
+              - name: S3_REGION
+                value: ap-northeast-1
+              - name: DREAMKAST_NAMESPACE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.namespace
+              - name: RAILS_MASTER_KEY
+                valueFrom:
+                  secretKeyRef:
+                    name: rails-app-secret
+                    key: rails-app-secret
+              - name: AUTH0_CLIENT_ID
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_ID
+              - name: AUTH0_CLIENT_SECRET
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_CLIENT_SECRET
+              - name: AUTH0_DOMAIN
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: AUTH0_DOMAIN
+              - name: REVIEW_APP
+                valueFrom:
+                  secretKeyRef:
+                    name: dreamkast-secret
+                    key: REVIEW_APP
             containers:
             - args:
               - exec
-              - aws_sqs_active_job
-              - --queue
-              - fifo
+              - rake
+              - aws_sqs:fifo_job
               command:
               - bundle
               env:

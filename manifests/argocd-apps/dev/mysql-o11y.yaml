@@ -10,7 +10,7 @@ spec:
   destination:
     namespace: mysql-o11y
     server: https://kubernetes.default.svc
-  project: mysql-o11y
+  project: monitoring
   source:
     path: manifests/infra/mysql-o11y/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
