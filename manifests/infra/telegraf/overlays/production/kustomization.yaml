@@ -4,5 +4,3 @@ namespace: monitoring
 resources:
 - secrets.yaml
 - ../../base/
-patchesStrategicMerge:
-- deployment.yaml
