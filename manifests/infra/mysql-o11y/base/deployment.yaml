@@ -34,6 +34,11 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mysql-secrets
+              key: root_password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secrets
               key: password
         - name: MYSQL_DATABASE
           value: dreamkast
