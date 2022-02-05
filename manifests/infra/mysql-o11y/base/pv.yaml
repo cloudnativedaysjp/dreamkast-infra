@@ -2,7 +2,6 @@ kind: PersistentVolume
 apiVersion: v1
 metadata:
   name: mysql-pv-volume 
-  namespace: monitoring
   labels:
     type: local
 spec:
