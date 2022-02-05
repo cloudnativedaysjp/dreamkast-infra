@@ -18,24 +18,24 @@ spec:
             - name: RDS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: rds-secret
+                  name: rds-secrets
                   key: password
             - name: RDS_USER
               valueFrom:
                 secretKeyRef:
-                  name: rds-secret
+                  name: rds-secrets
                   key: username
             - name: RDS_HOST
               value: aws.amazon.com
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
+                  name: mysql-secrets
                   key: password
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: mysql-secret
+                  name: mysql-secrets
                   key: username
             - name: MYSQL_HOST
               value: mysql-o11y

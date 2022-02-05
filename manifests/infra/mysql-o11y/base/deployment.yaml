@@ -28,12 +28,12 @@ spec:
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: mysql-secrets
               key: username
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: mysql-secrets
               key: password
         - name: MYSQL_DATABASE
           value: dreamkast
