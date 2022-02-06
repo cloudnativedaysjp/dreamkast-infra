@@ -1,0 +1,35 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blackbox-exporter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    chart: prometheus-blackbox-exporter
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 5.3.2
+    helm:
+      values: |
+        pspEnabled: false 
+        serviceMonitor:
+          enabled: true 
+          targets:
+          - name: o11ycon
+            url: https://event.cloudnativedays.jp/o11y2022
+            labels: {}
+            interval: 60s
+            scrapeTimeout: 60s
+            module: http_2xx
+            additionalMetricsRelabels: {}
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
