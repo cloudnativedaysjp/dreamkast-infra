@@ -4,6 +4,6 @@ kind: Service
 metadata:
   name: envoy
   annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb-ip"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
   namespace: projectcontour
-
