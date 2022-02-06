@@ -3,6 +3,4 @@ kind: Kustomization
 resources:
 - cronjob.yaml
 - deployment.yaml
-- pv.yaml
-- pvc.yaml
 - service.yaml
