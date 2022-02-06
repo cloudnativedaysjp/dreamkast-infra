@@ -9,6 +9,7 @@ spec:
         spec:
           containers:
           - name: mysql
+            image: mysql:8.0
             env:
             - name: RDS_HOST
               value: dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
