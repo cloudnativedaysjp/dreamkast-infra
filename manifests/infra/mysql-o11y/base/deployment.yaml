@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-o11y
-  namespace: monitoring
   labels:
     app: mysql-o11y
 spec:
