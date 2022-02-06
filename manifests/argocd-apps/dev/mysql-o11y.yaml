@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: mysql-o11y
+    namespace: monitoring
     server: https://kubernetes.default.svc
   project: monitoring
   source:
