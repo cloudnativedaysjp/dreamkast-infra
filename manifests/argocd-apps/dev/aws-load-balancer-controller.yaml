@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cluster-autoscaler
+  name: aws-load-balancer-controller
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
@@ -12,20 +12,18 @@ spec:
     server: https://kubernetes.default.svc
   project: infra
   source:
-    chart: cluster-autoscaler
-    repoURL: https://kubernetes.github.io/autoscaler
-    targetRevision: 9.13.0
+    chart: eks/aws-load-balancer-controller
+    repoURL: https://aws.github.io/eks-charts
+    targetRevision: 1.3.3
     helm:
-      releaseName: aws-cluster-autoscaler
+      releaseName: aws-load-balancer-controller
       parameters:
-      - name: autoDiscovery.clusterName
+      - name: clusterName
         value: dreamkast-dev-cluster
-      - name: awsRegion
-        value: ap-northeast-1
-      - name: rbac.serviceAccount.create
+      - name: serviceAccount.create
         value: "false"
-      - name: rbac.serviceAccount.name
-        value: cluster-autoscaler
+      - name: serviceAccount.name
+        value: aws-load-balancer-controller
   syncPolicy:
     automated:
       prune: true
