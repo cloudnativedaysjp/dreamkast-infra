@@ -19,7 +19,7 @@ spec:
       releaseName: aws-load-balancer-controller
       parameters:
       - name: clusterName
-        value: dreamkast-dev-cluster
+        value: dreamkast-cluster
       - name: serviceAccount.create
         value: "false"
       - name: serviceAccount.name
