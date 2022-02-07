@@ -110,16 +110,6 @@ Resources:
             Statement:
               - Effect: "Allow"
                 Action:
-                  - "secretsmanager:GetResourcePolicy"
-                  - "secretsmanager:GetSecretValue"
-                  - "secretsmanager:DescribeSecret"
-                  - "secretsmanager:ListSecretVersionIds"
-                Resource: "*"
-          PolicyName: "secrets-manager-read-only"
-        - PolicyDocument:
-            Statement:
-              - Effect: "Allow"
-                Action:
                   - "route53:GetChange"
                   - "route53:ChangeResourceRecordSets"
                   - "route53:ListResourceRecordSets"
@@ -133,22 +123,6 @@ Resources:
                   - "iam:PassRole"
                 Resource: "*"
           PolicyName: "AllowPassRolePolicy"
-        - PolicyDocument:
-            Statement:
-              - Effect: "Allow"
-                Action:
-                  - "autoscaling:DescribeAutoScalingGroups"
-                  - "autoscaling:DescribeAutoScalingInstances"
-                  - "autoscaling:DescribeLaunchConfigurations"
-                  - "autoscaling:DescribeTags"
-                  - "autoscaling:SetDesiredCapacity"
-                  - "autoscaling:TerminateInstanceInAutoScalingGroup"
-                  - "autoscaling:CompleteLifecycleAction"
-                  - "ec2:DescribeInstances"
-                  - "sqs:DeleteMessage"
-                  - "sqs:ReceiveMessage"
-                Resource: "*"
-          PolicyName: "spot-asg-termination-queue"
         - PolicyDocument:
             Statement:
               - Effect: "Allow"
