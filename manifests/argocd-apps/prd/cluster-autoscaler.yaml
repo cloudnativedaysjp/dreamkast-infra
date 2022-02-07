@@ -19,7 +19,7 @@ spec:
       releaseName: aws-cluster-autoscaler
       parameters:
       - name: autoDiscovery.clusterName
-        value: dreamkast-dev-cluster
+        value: dreamkast-cluster
       - name: awsRegion
         value: ap-northeast-1
       - name: rbac.serviceAccount.create
