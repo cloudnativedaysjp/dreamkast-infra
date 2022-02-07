@@ -69,6 +69,7 @@ Resources:
         alpha.eksctl.io/nodegroup-name: managed-ng-private-bottlerocket-spot
         alpha.eksctl.io/nodegroup-type: managed
         nodegroup-type: Bottlerocket
+        karpenter.sh/discovery: !Ref ClusterName
   NodeInstanceRole:
     Type: 'AWS::IAM::Role'
     Properties:
