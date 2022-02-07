@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: aws-cluster-autoscaler
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  destination:
+    namespace: kube-system
+    server: https://kubernetes.default.svc
+  project: infra
+  source:
+    chart: cluster-autoscaler
+    repoURL: https://kubernetes.github.io/autoscaler
+    targetRevision: 9.10.8
+    helm:
+      releaseName: aws-cluster-autoscaler
+      parameters:
+      - name: autoDiscovery.clusterName
+        value: dreamkast-dev-cluster
+      - name: awsRegion
+        value: ap-northeast-1
+      - name: rbac.serviceAccount.create
+        value: "false"
+      - name: rbac.serviceAccount.name
+        value: cluster-autoscaler
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
