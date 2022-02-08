@@ -104,11 +104,6 @@ data:
       [[inputs.sql.query]]
         query="SELECT number_of_registrants FROM stats_of_registrants WHERE conference_id='${CONF_ID}'"
         measurement = "dreamkast"
-      [[inputs.sql.query]]
-        query="SELECT v.count,t.id AS talk_id FROM viewer_counts v LEFT JOIN talks t ON v.talk_id = t.id WHERE v.conference_id='${CONF_ID}'"
-        measurement = "dreamkast_talk"
-        tag_columns_include = [ "talk_id" ]
-        field_columns_exclude = ["talk_id" ]
   
     [[inputs.github]]
       ## prevent rate limit, query per 30min
