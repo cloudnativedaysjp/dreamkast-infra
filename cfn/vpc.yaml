@@ -57,6 +57,10 @@ Parameters:
     Type: String
     Default: "10.0.192.0/18"
 
+  ClusterName:
+    Type: String
+    Default: "dreamkast-cluster"
+
 Resources: 
 # ------------------------------------------------------------#
 #  VPC
@@ -118,6 +122,10 @@ Resources:
           Value: !Sub "${PJPrefix}-public-subnet-c"
         - Key: kubernetes.io/role/elb
           Value: 1
+        - Key: !Sub "kubernetes.io/cluster/${ClusterName}"
+          Value: owned
+        - Key: karpenter.sh/discovery
+          Value: !Ref ClusterName
                     
 # Private SubnetA Create
   PrivateSubnetA: 
@@ -131,6 +139,10 @@ Resources:
           Value: !Sub "${PJPrefix}-private-subnet-a"
         - Key: kubernetes.io/role/internal-elb
           Value: 1
+        - Key: !Sub "kubernetes.io/cluster/${ClusterName}"
+          Value: owned
+        - Key: karpenter.sh/discovery
+          Value: !Ref ClusterName
 
 # Private SubnetC Create
   PrivateSubnetC: 

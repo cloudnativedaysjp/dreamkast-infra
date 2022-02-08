@@ -15,6 +15,9 @@ Parameters:
   EKSVersion:
     Type: String
     Default: "1.21"
+  ClusterName:
+    Type: String
+    Default: "dreamkast-cluster"
 Mappings:
   ServicePrincipalPartitionMap:
     aws:
@@ -41,7 +44,7 @@ Resources:
   ControlPlane:
     Type: 'AWS::EKS::Cluster'
     Properties:
-      Name: dreamkast-cluster
+      Name: !Ref ClusterName
       ResourcesVpcConfig:
         SecurityGroupIds:
           - !Ref ControlPlaneSecurityGroup
