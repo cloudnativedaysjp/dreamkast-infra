@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: mysql-o11y
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/10 17 * * *"
   jobTemplate:
     spec:
       template:
