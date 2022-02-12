@@ -97,7 +97,6 @@ spec:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/48af40799e166126799fc86fa34be9db879629d2/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
-              datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/fd5ec445ad41b900765e1bd69ab7f59d7060aa4c/dashboards/Kubernetes-Pod.json
         envFromSecret: grafana-secret
         grafana.ini:
