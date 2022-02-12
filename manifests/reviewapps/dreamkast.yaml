@@ -88,6 +88,7 @@ spec:
       - externalsecret.yaml
       - ingress.yaml
       - viewer-count.yaml
+      - polling-harvest-job-and-update-video.yaml
       - deployment-fifo-worker.yaml
       patchesStrategicMerge:
       - deployment-dreamkast.yaml
