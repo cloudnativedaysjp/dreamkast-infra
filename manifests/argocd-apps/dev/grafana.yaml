@@ -85,6 +85,12 @@ spec:
               datasource: Loki
               gnetId: 12611
               revision: 1
+            o11y2022 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e04a8e5c78e46d1fd90dade553e67469c7e2b28d/dashboards/o11y2022-cfp.json
+            o11y2022 main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/763374fa6c81e478a568a20d745483244c5fdc89/dashboards/o11y2022-main.json  
             Persistent Volume Usage:
               datasource: Prometheus
               gnetId: 13646
