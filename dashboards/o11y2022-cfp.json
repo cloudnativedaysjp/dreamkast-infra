@@ -625,12 +625,12 @@
   },
   "time": {
     "from": "2021-12-14T15:00:00.000Z",
-    "to": "now"
+    "to": "2022-01-26T15:00:00.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "#o11y2022 proposal",
   "uid": "N4HUPtT6z",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
