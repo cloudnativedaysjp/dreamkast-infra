@@ -1,9 +1,9 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: viewer-count
+  name: polling-harvest-job-and-update-video
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "*/3 * * * *"
   startingDeadlineSeconds: 120
   concurrencyPolicy: Forbid
   jobTemplate:
@@ -16,7 +16,7 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - bundle exec rake util:get_and_save_current_attendees
+                - bundle exec rake util:polling_harvest_job_and_update_video
               env:
                 - name: RAILS_ENV
                   value: "production"
@@ -32,6 +32,16 @@ spec:
                   value: ap-northeast-1
                 - name: SQS_FIFO_QUEUE_URL
                   value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devFifoQueue.fifo"
+                - name: SLACK_WEBHOOK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: SLACK_WEBHOOK_URL_FOR_HARVEST_JOB_NOTIFICATION
+                - name: SLACK_CHANNEL
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: SLACK_CHANNEL_FOR_HARVEST_JOB_NOTIFICATION
                 - name: AWS_REGION
                   value: ap-northeast-1
                 - name: DREAMKAST_NAMESPACE
