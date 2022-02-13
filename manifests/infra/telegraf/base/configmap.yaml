@@ -101,9 +101,6 @@ data:
         query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE ( p.label = 'presentation_method' OR p.label = 'assumed_visitor' OR p.label = 'execution_phase' OR p.label = 'whether_it_can_be_published') AND p.conference_id='${CONF_ID}'"
         measurement = "dreamkast_proposal_items"
         tag_columns_include = [ "labels", "params" ]
-      [[inputs.sql.query]]
-        query="SELECT number_of_registrants FROM stats_of_registrants WHERE conference_id='${CONF_ID}'"
-        measurement = "dreamkast"
   
     [[inputs.github]]
       ## prevent rate limit, query per 30min
