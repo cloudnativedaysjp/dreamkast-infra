@@ -22,7 +22,7 @@ spec:
               -u $RDS_USER -p"$RDS_PASSWORD" -h $RDS_HOST dreamkast \
               conference_days conferences proposal_item_configs proposal_items \
               proposals talk_categories talk_difficulties talk_times talks talks_speakers \
-              tracks stats_of_registrants viewer_counts \
+              tracks \
               > $HOME/rds.dump; \
               mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" -h $MYSQL_HOST dreamkast < $HOME/rds.dump
             env:
