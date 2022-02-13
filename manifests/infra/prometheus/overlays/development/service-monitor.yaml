@@ -13,3 +13,20 @@ spec:
   selector:
     matchLabels:
       prometheus: k8s
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: dreamkast-metrics
+  namespace: monitoring
+spec:
+  endpoints:
+  - path: /metrics
+    port: http-port
+  namespaceSelector:
+    matchNames:
+    - dreamkast-staging
+  selector:
+    matchLabels:
+      app: dreamkast
+      tier: dreamkast
