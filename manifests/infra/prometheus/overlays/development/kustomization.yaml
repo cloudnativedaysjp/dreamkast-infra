@@ -4,5 +4,6 @@ resources:
 - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.52.1/bundle.yaml
 - ../../base
 - service-monitor.yaml
+- probe.yaml
 patchesStrategicMerge:
 - prometheus-crd.yaml
