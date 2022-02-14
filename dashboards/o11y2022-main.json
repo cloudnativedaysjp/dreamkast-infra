@@ -23,7 +23,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 23,
-  "iteration": 1644673506420,
+  "iteration": 1644839058613,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -271,7 +271,7 @@
             "overrides": []
           },
           "gridPos": {
-            "h": 14,
+            "h": 17,
             "w": 24,
             "x": 0,
             "y": 2
@@ -300,7 +300,7 @@
               "refId": "A"
             }
           ],
-          "title": "いいね数(o11y2022プレイベントデモ用)",
+          "title": "いいね数(o11y2022プレイベントデモ用){{$queryString}}",
           "type": "timeseries"
         },
         {
@@ -382,7 +382,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 16
+            "y": 19
           },
           "id": 32,
           "options": {
@@ -465,7 +465,7 @@
             "h": 12,
             "w": 24,
             "x": 0,
-            "y": 24
+            "y": 27
           },
           "id": 14,
           "options": {
@@ -494,6 +494,104 @@
           "title": "social_twitter_retweets{{$queryString}}",
           "type": "timeseries"
         },
+        {
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 39
+          },
+          "id": 36,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "max(social_twitter_sentiment) by (tweetId) AND max(social_twitter_favorites{queryString=\"$queryString\"}) by (tweetId)",
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "social_twitter_sentiment{{$queryString}",
+          "type": "timeseries"
+        }
+      ],
+      "repeat": "queryString",
+      "title": "Twitter{{$queryString}}",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 34,
+      "panels": [
         {
           "description": "twitter 感情分析一覧",
           "fieldConfig": {
@@ -574,7 +672,7 @@
             "h": 11,
             "w": 24,
             "x": 0,
-            "y": 36
+            "y": 3
           },
           "id": 6,
           "options": {
@@ -594,18 +692,17 @@
                 "uid": "PBFA97CFB590B2093"
               },
               "exemplar": true,
-              "expr": "social_twitter_sentiment{queryString!=\"\", queryString=~\"$queryString\"}",
+              "expr": "social_twitter_sentiment",
               "interval": "",
               "legendFormat": "",
               "refId": "A"
             }
           ],
-          "title": "social_twitter_sentiment{{$queryString}}",
+          "title": "social_twitter_sentiment",
           "type": "timeseries"
         }
       ],
-      "repeat": "queryString",
-      "title": "Twitter{{$queryString}}",
+      "title": "Others",
       "type": "row"
     }
   ],
@@ -619,10 +716,10 @@
         "current": {
           "selected": false,
           "text": [
-            "All"
+            "#o11y2022"
           ],
           "value": [
-            "$__all"
+            "#o11y2022"
           ]
         },
         "definition": "label_values(queryString)",
@@ -652,6 +749,6 @@
   "timezone": "",
   "title": "o11y2022Dashboard",
   "uid": "MAc3Yf-nk",
-  "version": 31,
+  "version": 36,
   "weekStart": ""
 }
