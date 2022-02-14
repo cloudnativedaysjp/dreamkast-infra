@@ -23,6 +23,7 @@ spec:
   endpoints:
   - path: /metrics
     port: http-port
+    interval: "10m"
   namespaceSelector:
     matchNames:
     - dreamkast-staging
