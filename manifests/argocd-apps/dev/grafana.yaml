@@ -87,7 +87,7 @@ spec:
               revision: 1
             o11y2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/763374fa6c81e478a568a20d745483244c5fdc89/dashboards/o11y2022-main.json  
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/cf425608c0d2976551013c566dbc0a998919bc98/dashboards/o11y2022-main.json  
             Persistent Volume Usage:
               datasource: Prometheus
               gnetId: 13646
