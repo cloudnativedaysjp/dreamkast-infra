@@ -5,7 +5,6 @@ metadata:
   namespace: monitoring
 spec:
   interval: 3m
-  targets:
-    staticConfig:
-      static:
-      - https://staging.dev.cloudnativedays.jp/metrics
+  prober:
+    path: /metrics
+    url: https://staging.dev.cloudnativedays.jp
