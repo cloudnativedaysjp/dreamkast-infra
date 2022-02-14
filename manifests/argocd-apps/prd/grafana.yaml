@@ -92,6 +92,10 @@ spec:
               datasource: Prometheus
               gnetId: 13646
               revision: 2
+            AWS Billing:
+              datasource: CloudWatch
+              gnetId: 139
+              revision: 16
             Contour-HTTProxy:
               json: |
                 {
