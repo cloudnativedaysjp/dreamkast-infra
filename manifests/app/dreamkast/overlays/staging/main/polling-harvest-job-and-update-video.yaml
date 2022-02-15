@@ -1,10 +1,11 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: post-to-cicd2021-registration-status
+  name: polling-harvest-job-and-update-video
 spec:
-  # Execute every 10:00 JST but this configure is written by UTC
-  schedule: "0 1 * * *"
+  schedule: "*/3 * * * *"
+  startingDeadlineSeconds: 120
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       template:
@@ -15,29 +16,36 @@ spec:
               command:
                 - /bin/sh
                 - -c
-                - bundle exec rake util:post_number_of_registrants_to_slack
+                - bundle exec rake util:polling_harvest_job_and_update_video
               env:
+                - name: RAILS_ENV
+                  value: "production"
+                - name: MYSQL_HOST
+                  value: "dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
+                - name: MYSQL_DATABASE
+                  value: "dreamkast"
+                - name: REDIS_URL
+                  value: "redis://dreamkast-redis:6379"
+                - name: SENTRY_DSN
+                  value: "https://82e52bc9814f478a917a9f4b2a190202@o414348.ingest.sentry.io/5303654"
+                - name: S3_BUCKET
+                  value: "dreamkast-stg-bucket"
+                - name: S3_REGION
+                  value: ap-northeast-1
+                - name: AWS_REGION
+                  value: ap-northeast-1
+                - name: SQS_MAIL_QUEUE_URL
+                  value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-stgMailQueue.fifo"
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:
                       name: dreamkast-secret
-                      key: SLACK_WEBHOOK_URL
-                - name: CONFERENCE_ABBR
-                  value: "o11y2022"
-                - name: RAILS_ENV
-                  value: "production"
-                - name: MYSQL_HOST
-                  value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
-                - name: MYSQL_DATABASE
-                  value: "dreamkast"
-                - name: REDIS_URL
-                  value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
-                - name: SENTRY_DSN
-                  value: "https://443f0535beb64cd8b2e995d001e0903b@o414348.ingest.sentry.io/5350644"
-                - name: S3_BUCKET
-                  value: "dreamkast-prd-bucket"
-                - name: S3_REGION
-                  value: ap-northeast-1
+                      key: SLACK_WEBHOOK_URL_FOR_HARVEST_JOB_NOTIFICATION
+                - name: SLACK_CHANNEL
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: SLACK_CHANNEL_FOR_HARVEST_JOB_NOTIFICATION
                 - name: DREAMKAST_NAMESPACE
                   valueFrom:
                     fieldRef:
