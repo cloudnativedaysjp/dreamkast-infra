@@ -4,14 +4,6 @@ metadata:
   name: dreamkast-metrics
   namespace: monitoring
 spec:
-  endpoints:
-  - path: /metrics
-    port: http-port
-    interval: "3m"
   namespaceSelector:
     matchNames:
-    - dreamkast
-  selector:
-    matchLabels:
-      app: dreamkast
-      tier: dreamkast
+    - dreamkast-staging
