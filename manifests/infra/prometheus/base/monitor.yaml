@@ -184,6 +184,7 @@ spec:
   - port: web
     scheme: http
     path: /actuator/prometheus
+    interval: "3m"
   namespaceSelector:
     matchNames:
       - monitoring
