@@ -5,6 +5,7 @@ resources:
 - ingress.yaml
 - hpa.yaml
 - cronjob.yaml
+- polling-harvest-job-and-update-video.yaml
 - ../../../base/
 - viewer-count.yaml
 - deployment-fifo-worker.yaml
