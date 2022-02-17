@@ -1,17 +1,11 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/hashicorp/uptimerobot" {
-  version = "0.5.1"
-  hashes = [
-    "h1:R+vJkL82Tj2il7M2xl6vUxezIy3CMkHPcq+ecKstRwA=",
-  ]
-}
-
 provider "registry.terraform.io/louy/uptimerobot" {
   version     = "0.5.1"
   constraints = "0.5.1"
   hashes = [
+    "h1:Oc5L04pt+5NJ8n47K7tVHbqFmuobW/x5zaF5sPGCQwE=",
     "h1:XebnsSZUZpqhW4nK+a7Yw+pQLRhs3021ZuHiAVIYAJk=",
     "zh:0cab4092125cf524a2e5caf74a4e90f230734b20bbceb20e51ffb82f2fcc90fc",
     "zh:130d9d9ddb2f9070d7846066d424d785a624472a25b413382bf6e80ad4754158",
