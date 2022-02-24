@@ -43,6 +43,7 @@ spec:
                 folder:
                 type: file
                 disableDeletion: false
+                allowUiUpdates: true
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/default
