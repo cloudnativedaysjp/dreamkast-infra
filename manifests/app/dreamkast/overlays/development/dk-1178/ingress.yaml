@@ -6,7 +6,7 @@ metadata:
     app: dreamkast
 spec:
   virtualhost:
-    fqdn: dreamkast-dk-1164.dev.cloudnativedays.jp
+    fqdn: dreamkast-dk-1178.dev.cloudnativedays.jp
     tls:
       secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:

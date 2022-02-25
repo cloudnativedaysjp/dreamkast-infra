@@ -8,14 +8,14 @@ terraform {
   }
   required_providers {
     uptimerobot = {
-      source = "louy/uptimerobot"
+      source  = "louy/uptimerobot"
       version = "0.5.1"
     }
   }
 }
 
 provider "uptimerobot" {
-  api_key = "${var.uptimerobot_api_key}"
+  api_key = var.uptimerobot_api_key
 }
 
 data "uptimerobot_account" "account" {}
