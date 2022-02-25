@@ -43,6 +43,7 @@ spec:
                 folder:
                 type: file
                 disableDeletion: true
+                allowUiUpdates: true
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/default
@@ -51,6 +52,7 @@ spec:
                 folder: 'private'
                 type: file
                 disableDeletion: true
+                allowUiUpdates: true
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/private
@@ -59,6 +61,7 @@ spec:
                 folder: 'public'
                 type: file
                 disableDeletion: true
+                allowUiUpdates: true
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/public
