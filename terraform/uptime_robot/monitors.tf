@@ -64,3 +64,25 @@ resource "uptimerobot_monitor" "grafana" {
     ]
   }
 }
+
+resource "uptimerobot_monitor" "nextcloud" {
+  friendly_name = "Nextcloud"
+  type          = "http"
+  url           = "https://nextcloud.cloudnativedays.jp"
+
+  alert_contact {
+    id = uptimerobot_alert_contact.slack.id
+  }
+
+  alert_contact {
+    id = data.uptimerobot_alert_contact.default_alert_contact.id
+  }
+
+  interval = 60
+
+  lifecycle {
+    ignore_changes = [
+      alert_contact
+    ]
+  }
+}
