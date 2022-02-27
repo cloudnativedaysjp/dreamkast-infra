@@ -70,6 +70,9 @@ spec:
             o11y2022 proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-cfp.json
+            o11y2022 main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-main.json
           private:
             Amazon RDS:
               gnetId: 11264
@@ -88,9 +91,6 @@ spec:
               datasource: Loki
               gnetId: 12611
               revision: 1
-            o11y2022 main:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-main.json
             Persistent Volume Usage:
               datasource: Prometheus
               gnetId: 13646
