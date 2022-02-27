@@ -69,7 +69,7 @@ spec:
           public:
             o11y2022 proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/763374fa6c81e478a568a20d745483244c5fdc89/dashboards/o11y2022-cfp.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-cfp.json
           private:
             Amazon RDS:
               gnetId: 11264
@@ -90,7 +90,7 @@ spec:
               revision: 1
             o11y2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/cf425608c0d2976551013c566dbc0a998919bc98/dashboards/o11y2022-main.json  
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-main.json
             Persistent Volume Usage:
               datasource: Prometheus
               gnetId: 13646
@@ -101,9 +101,9 @@ spec:
               revision: 16
             Contour-HTTProxy:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/48af40799e166126799fc86fa34be9db879629d2/dashboards/Contour-HTTProxy.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/fd5ec445ad41b900765e1bd69ab7f59d7060aa4c/dashboards/Kubernetes-Pod.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Kubernetes-Pod.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
