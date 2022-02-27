@@ -35,9 +35,26 @@ resource "sakuracloud_disk" "nextcloud_data" {
   }
 }
 
+resource "sakuracloud_disk" "nextcloud_backup" {
+  name      = "nextcloud-backup"
+  plan      = "hdd"
+  connector = "virtio"
+  size      = 2048
+
+  lifecycle {
+    ignore_changes = [
+      source_archive_id,
+    ]
+  }
+}
+
 resource "sakuracloud_server" "nextcloud" {
-  name        = "nextcloud"
-  disks       = [sakuracloud_disk.nextcloud_boot.id, sakuracloud_disk.nextcloud_data.id]
+  name = "nextcloud"
+  disks = [
+    sakuracloud_disk.nextcloud_boot.id,
+    sakuracloud_disk.nextcloud_data.id,
+    sakuracloud_disk.nextcloud_backup.id
+  ]
   core        = 2
   memory      = 4
   description = "Nextcloud server"
