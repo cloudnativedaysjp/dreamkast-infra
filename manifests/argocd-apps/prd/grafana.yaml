@@ -44,6 +44,7 @@ spec:
                 type: file
                 disableDeletion: true
                 editable: false
+                allowUiUpdates: false
                 options:
                   path: /var/lib/grafana/dashboards/default
               - name: private
@@ -51,6 +52,7 @@ spec:
                 folder: 'private'
                 type: file
                 disableDeletion: true
+                allowUiUpdates: false
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/private
@@ -59,6 +61,7 @@ spec:
                 folder: 'public'
                 type: file
                 disableDeletion: true
+                allowUiUpdates: false
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/public
@@ -98,9 +101,9 @@ spec:
               revision: 16
             Contour-HTTProxy:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Contour-HTTProxy.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e456fe647f9ee56db0ce452a19a3cd68e3fdccd1/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Kubernetes-Pod.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e456fe647f9ee56db0ce452a19a3cd68e3fdccd1/dashboards/Kubernetes-Pod.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
