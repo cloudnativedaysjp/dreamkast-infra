@@ -150,7 +150,9 @@ spec:
     requests:
       memory: 400Mi
   ruleNamespaceSelector: {}
-  ruleSelector: {}
+  ruleSelector: 
+    matchLabels:
+      role: alert-rules
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
