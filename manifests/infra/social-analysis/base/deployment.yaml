@@ -52,11 +52,11 @@ spec:
         - name: SENTIMENT_FILE 
           value: "/work-dir/data.trim"
         - name: TWITTER_QUERY
-          value: "#o11y2022"
+          value: "#o11y2022,#o11y2022_A,#o11y2022_B,#o11y2022_C,#o11y2022_P_A,#o11y2022_P_B"
         - name: TWITTER_ENABLED
           value: "true"
         - name: SLACK_ENABLED
-          value: "true"
+          value: "false"
         - name: twitter4j.oauth.consumerKey
           valueFrom:
             secretKeyRef:

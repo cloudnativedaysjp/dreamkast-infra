@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mysql-o11y
+  name: social-analysis
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: monitoring
   source:
-    path: manifests/infra/mysql-o11y/overlays/development
+    path: manifests/infra/social-analysis/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:

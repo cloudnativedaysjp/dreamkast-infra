@@ -70,19 +70,19 @@ spec:
         livenessProbe:
           httpGet:
             port: 3001
-            path: /cndt2021/ui/
+            path: /o11y2022/ui/
           failureThreshold: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 3001
-            path: /cndt2021/ui/
+            path: /o11y2022/ui/
           failureThreshold: 5
           periodSeconds: 5
         startupProbe:
           httpGet:
             port: 3001
-            path: /cndt2021/ui/
+            path: /o11y2022/ui/
           failureThreshold: 30
           periodSeconds: 10
         resources:

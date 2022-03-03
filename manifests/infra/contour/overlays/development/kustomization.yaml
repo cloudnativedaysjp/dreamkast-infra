@@ -1,6 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-- contour.yaml
+# In case you want to update contour in a specific environment, you can also use this static resource
+# resources:
+# - https://projectcontour.io/quickstart/v1.20.1/contour.yaml
+bases:
+- ../../base
 patchesStrategicMerge:
 - ./lb-internet-facing.yaml

@@ -6,7 +6,7 @@ metadata:
     app: dreamkast
 spec:
   virtualhost:
-    fqdn: dreamkast-dk-1103.dev.cloudnativedays.jp
+    fqdn: dreamkast-dk-1187.dev.cloudnativedays.jp
     tls:
       secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:
@@ -22,7 +22,7 @@ spec:
       - name: dreamkast
         port: 80
     - conditions: #TODO: Need to resolve this hardcoded routing
-      - prefix: /cndt2021/ui
+      - prefix: /o11y2022/ui
       services:
       - name: dreamkast-ui
         port: 3001

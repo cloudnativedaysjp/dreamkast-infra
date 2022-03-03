@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql-o11y
-  namespace: monitoring
   labels:
     app: mysql-o11y
 spec:
@@ -35,16 +34,14 @@ spec:
           valueFrom:
             secretKeyRef:
               name: mysql-secret
+              key: root_password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
               key: password
         - name: MYSQL_DATABASE
           value: dreamkast
         ports:
         - containerPort: 3306
           name: mysql
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: mysql-pv-claim

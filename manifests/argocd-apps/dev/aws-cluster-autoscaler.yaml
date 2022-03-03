@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: aws-ebs-csi-driver
+  name: aws-cluster-autoscaler
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
@@ -12,17 +12,20 @@ spec:
     server: https://kubernetes.default.svc
   project: infra
   source:
-    chart: aws-ebs-csi-driver
-    repoURL: https://kubernetes-sigs.github.io/aws-ebs-csi-driver
-    targetRevision: 2.6.3
+    chart: cluster-autoscaler
+    repoURL: https://kubernetes.github.io/autoscaler
+    targetRevision: 9.13.0
     helm:
+      releaseName: aws-cluster-autoscaler
       parameters:
-      - name: controller.region
+      - name: autoDiscovery.clusterName
+        value: dreamkast-dev-cluster
+      - name: awsRegion
         value: ap-northeast-1
-      - name: controller.serviceAccount.create
+      - name: rbac.serviceAccount.create
         value: "false"
-      - name: controller.serviceAccount.name
-        value: ebs-csi-controller-sa
+      - name: rbac.serviceAccount.name
+        value: cluster-autoscaler
   syncPolicy:
     automated:
       prune: true

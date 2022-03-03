@@ -1,6 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dreamkast-dk-1081
+namespace: dreamkast-dk-1178
 bases:
 - ../../../base
 resources:
@@ -10,9 +10,10 @@ resources:
 - externalsecret.yaml
 - ingress.yaml
 - viewer-count.yaml
+- polling-harvest-job-and-update-video.yaml
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 84f8b8223d4e27b9261feeba97b7caacd5f48c70
+  newTag: 0871d817ddfbfd7f6c2d1b054a971594307307ab

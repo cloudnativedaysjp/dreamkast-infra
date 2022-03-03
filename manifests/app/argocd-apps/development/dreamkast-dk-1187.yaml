@@ -2,20 +2,20 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    dreamkast.cloudnativedays.jp/app-commit-hash: 687f88b5d4ff97cbc8307b8c1a36669021392187
+    dreamkast.cloudnativedays.jp/app-commit-hash: 5e8db978a2feab4427156ea4392656234411fe8d
     dreamkast.cloudnativedays.jp/app-organization: cloudnativedaysjp
-    dreamkast.cloudnativedays.jp/app-repository: dreamkast-ui
+    dreamkast.cloudnativedays.jp/app-repository: dreamkast
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: dreamkast-development-ui-198
+  name: dreamkast-development-dk-1187
   namespace: argocd
 spec:
   destination:
-    namespace: dreamkast-ui-198
+    namespace: dreamkast-dk-1187
     server: https://kubernetes.default.svc
   project: app
   source:
-    path: manifests/app/dreamkast/overlays/development/ui-198
+    path: manifests/app/dreamkast/overlays/development/dk-1187
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra
     targetRevision: main
   syncPolicy:

@@ -8,11 +8,12 @@ resources:
 - ../../../base/
 - viewer-count.yaml
 - deployment-fifo-worker.yaml
+- polling-harvest-job-and-update-video.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 namespace: dreamkast-staging
 images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 8b884daae70b6ae6f34ac3f4c4f89d08850c4ee7
+  newTag: 6469cd6e3b64e13f437131803473f77e00414355
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 5eabc8967b2c9c28961998a0c0940211afdcf4ca
+  newTag: 1598e512e2f779b6d8843c054d3080a7ab1ec5c2

@@ -29,9 +29,9 @@ spec:
               readOnly: true
           env:
           - name: CONF_ID
-            value: "2"
+            value: "5"
           - name: MYSQL_HOST
-            value: "mysql"
+            value: "mysql-o11y.monitoring.svc.cluster.local"
           - name: MYSQL_PORT
             value: "3306"
           - name: MYSQL_USER

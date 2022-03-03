@@ -173,3 +173,39 @@ spec:
   selector:
     matchLabels:
       app: telegraf
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: social-analysis
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: web
+    scheme: http
+    path: /actuator/prometheus
+    interval: "3m"
+  namespaceSelector:
+    matchNames:
+      - monitoring
+  selector:
+    matchLabels:
+      app: social-analysis
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: dreamkast-metrics
+  namespace: monitoring
+spec:
+  endpoints:
+  - path: /metrics
+    port: http-port
+    interval: "3m"
+  namespaceSelector:
+    matchNames:
+    - dreamkast
+  selector:
+    matchLabels:
+      app: dreamkast
+      tier: dreamkast
