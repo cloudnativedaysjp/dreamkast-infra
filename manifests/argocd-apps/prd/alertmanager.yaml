@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: alertmanager
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    chart: alertmanager
+    repoURL: https://prometheus-community.github.io/helm-charts
+    targetRevision: 0.15.0
+    helm:
+      parameters:
+        - name: config.global.slack_api_url
+          value: https://hooks.slack.com/services/testurl
+      values: |
+        config:
+          receivers:
+            - name: default-receiver
+              slack_configs:
+                - send_resolved: true
+                  channel: "general"
+                  title: '{{ if eq .Status "firing" }}:flushed:{{ else }}:sunglasses:{{ end }} [{{ .Status | toUpper }}] {{ .CommonAnnotations.summary }} (catchall)'
+                  text: "{{ range .Alerts }}*Priority*: `{{ .Labels.severity | toUpper }}`\nInstance: {{ .Labels.instance }}\n{{ .Annotations.description }}\n{{ end }}"
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
