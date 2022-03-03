@@ -1,0 +1,20 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  virtualhost:
+    fqdn: prometheus.dev.cloudnativedays.jp
+    tls:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+    authorization:
+      extensionRef:
+        name: prometheus-htpasswd
+        namespace: projectcontour-auth
+  routes:
+    - conditions:
+      - prefix: /-/healthy
+      services:
+        - name: prometheus-k8s
+          port: 9090
