@@ -14,11 +14,21 @@ spec:
   source:
     chart: loki-stack
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 2.4.1
+    targetRevision: 2.6.1
     helm:
       parameters:
       - name: loki.persistence.enabled
         value: "true"
+      values: |
+        loki:
+            config:      
+              ruler:
+                storage:
+                  type: local
+                  local:
+                    directory: /rules
+                rule_path: /tmp/scratch/
+                alertmanager_url: http://alertmanager:9093
   syncPolicy:
     automated:
       prune: true
