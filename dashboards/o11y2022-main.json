@@ -22,7 +22,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "iteration": 1644920207907,
+  "id": 37,
+  "iteration": 1646307682999,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -40,18 +41,13 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "loki",
-        "uid": "P8E80F9AEF21F6940"
-      },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisLabel": "requests",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
@@ -96,12 +92,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 10,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 14
       },
-      "id": 22,
+      "id": 40,
       "options": {
         "legend": {
           "calcs": [],
@@ -115,14 +111,101 @@
       "targets": [
         {
           "datasource": {
-            "type": "loki",
-            "uid": "P8E80F9AEF21F6940"
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          "expr": "sum(sum(count_over_time({job=\"projectcontour/envoy\"} |= \"GET /o11y2022 HTTP\" |= \"200\" [1d])) by (pod))",
+          "exemplar": true,
+          "expr": "sum(dreamkast_viewer_count)",
+          "interval": "",
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "title": "Dreamkast Total Access(/o11y2022)",
+      "title": "視聴者数",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 42,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": true,
+          "expr": "sum(dreamkast_chat_count)",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "累積チャット数",
       "type": "timeseries"
     },
     {
@@ -181,7 +264,7 @@
         "h": 13,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 35
       },
       "id": 38,
       "options": {
@@ -216,7 +299,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 48
       },
       "id": 26,
       "panels": [
@@ -259,8 +342,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -343,8 +425,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -452,8 +533,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -536,8 +616,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -592,7 +671,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 28
+        "y": 49
       },
       "id": 34,
       "panels": [
@@ -752,7 +831,7 @@
   "timepicker": {},
   "timezone": "",
   "title": "o11y2022Dashboard",
-  "uid": "",
-  "version": 39,
+  "uid": "vOrg0eBnk",
+  "version": 1,
   "weekStart": ""
 }
