@@ -18,3 +18,8 @@ spec:
       services:
         - name: prometheus-k8s
           port: 9090
+    - conditions:
+      - prefix: /api/v1/write
+      services:
+        - name: prometheus-k8s
+          port: 9090
