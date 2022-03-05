@@ -2,7 +2,7 @@ apiVersion: projectcontour.io/v1alpha1
 kind: ExtensionService
 metadata:
   name: prometheus-basic-auth-password
-  namespace: projectcontour-auth
+  namespace: projectcontour
 spec:
   protocol: h2
   services:

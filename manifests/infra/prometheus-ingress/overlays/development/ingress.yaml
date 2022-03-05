@@ -11,7 +11,7 @@ spec:
     authorization:
       extensionRef:
         name: prometheus-basic-auth-password
-        namespace: projectcontour-auth
+        namespace: projectcontour
   routes:
     - conditions:
       - prefix: /-/healthy
