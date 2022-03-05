@@ -1,10 +1,10 @@
 apiVersion: projectcontour.io/v1alpha1
 kind: ExtensionService
 metadata:
-  name: prometheus-htpasswd
+  name: prometheus-basic-auth-password
   namespace: projectcontour-auth
 spec:
   protocol: h2
   services:
-  - name: prometheus-htpasswd
+  - name: prometheus-auth-server
     port: 9443

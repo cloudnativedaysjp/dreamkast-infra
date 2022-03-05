@@ -10,7 +10,7 @@ spec:
       secretName: cert-manager/wildcard-cloudnativedays-jp
     authorization:
       extensionRef:
-        name: prometheus-htpasswd
+        name: prometheus-basic-auth-password
         namespace: projectcontour-auth
   routes:
     - conditions:
