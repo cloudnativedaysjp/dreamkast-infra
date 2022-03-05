@@ -1,5 +1,5 @@
 # Create a monitor
-resource "uptimerobot_monitor" "dreamkast-by-terraform" {
+resource "uptimerobot_monitor" "dreamkast" {
   friendly_name = "Dreamkast"
   type          = "http"
   url           = "https://event.cloudnativedays.jp"
@@ -21,7 +21,12 @@ resource "uptimerobot_monitor" "dreamkast-by-terraform" {
   }
 }
 
-resource "uptimerobot_monitor" "website-by-terraform" {
+moved {
+  from = uptimerobot_monitor.dreamkast-by-terraform
+  to   = uptimerobot_monitor.dreamkast
+}
+
+resource "uptimerobot_monitor" "website" {
   friendly_name = "Website"
   type          = "http"
   url           = "https://cloudnativedays.jp"
@@ -41,6 +46,11 @@ resource "uptimerobot_monitor" "website-by-terraform" {
       alert_contact
     ]
   }
+}
+
+moved {
+  from = uptimerobot_monitor.website-by-terraform
+  to   = uptimerobot_monitor.website
 }
 
 resource "uptimerobot_monitor" "grafana" {

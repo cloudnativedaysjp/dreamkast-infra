@@ -3,8 +3,8 @@ resource "uptimerobot_status_page" "cnd" {
   custom_domain = "status.cloudnativedays.jp"
   sort          = "a-z"
   monitors = [
-    uptimerobot_monitor.dreamkast-by-terraform.id,
-    uptimerobot_monitor.website-by-terraform.id,
+    uptimerobot_monitor.dreamkast.id,
+    uptimerobot_monitor.website.id,
     uptimerobot_monitor.grafana.id,
     uptimerobot_monitor.prometheus.id,
   ]
