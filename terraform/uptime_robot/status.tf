@@ -6,5 +6,6 @@ resource "uptimerobot_status_page" "cnd" {
     uptimerobot_monitor.dreamkast-by-terraform.id,
     uptimerobot_monitor.website-by-terraform.id,
     uptimerobot_monitor.grafana.id,
+    uptimerobot_monitor.prometheus.id,
   ]
 }
