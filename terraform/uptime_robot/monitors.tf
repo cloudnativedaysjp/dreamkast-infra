@@ -86,3 +86,28 @@ resource "uptimerobot_monitor" "nextcloud" {
     ]
   }
 }
+
+resource "uptimerobot_monitor" "prometheus" {
+  friendly_name = "Prometheus"
+  type          = "http"
+  url           = "https://prometheus.cloudnativedays.jp/-/healthy"
+  http_auth_type = "basic"
+  http_username = "prometheus"
+  http_password = var.prometheus_password
+
+  alert_contact {
+    id = uptimerobot_alert_contact.slack.id
+  }
+
+  alert_contact {
+    id = data.uptimerobot_alert_contact.default_alert_contact.id
+  }
+
+  interval = 60
+
+  lifecycle {
+    ignore_changes = [
+      alert_contact
+    ]
+  }
+}
