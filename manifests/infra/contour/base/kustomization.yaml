@@ -3,3 +3,5 @@ kind: Kustomization
 namespace: projectcontour
 resources:
 - https://projectcontour.io/quickstart/v1.20.1/contour.yaml
+- auth-server.yaml
+- cluster-issuer.yaml
