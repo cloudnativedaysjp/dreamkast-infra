@@ -125,7 +125,7 @@ metadata:
 spec:
   alerting:
     alertmanagers:
-    - apiVersion: v2
+    - apiVersion: v1
       name: alertmanager-main
       namespace: monitoring
       port: web
