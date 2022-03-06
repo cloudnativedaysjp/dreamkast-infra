@@ -18,7 +18,7 @@ metadata:
     alertmanagerConfig: k8s
 spec:
   route:
-    groupBy: ['job']
+    groupBy: ['alertname']
     groupWait: 30s
     groupInterval: 5m
     repeatInterval: 12h
@@ -29,6 +29,7 @@ spec:
     - apiURL:
         name: slack-cloudnativedays
         key: dreamkast-monitoring_webhook_url
+    - channel: "dreamkast-monitoring"
 ---
 apiVersion: 'kubernetes-client.io/v1'
 kind: ExternalSecret
