@@ -19,17 +19,16 @@ spec:
       values: |
         provisionDataStore:
           cassandra: false
-          elasticsearch: true
-          kafka: false
+        allInOne:
+          enabled: true
         storage:
-          type: elasticsearch
-        elasticsearch:
-          replicas: 1
-          extraEnvs:
-            - name: discovery.type
-              value: single-node
-            - name: cluster.initial_master_nodes
-              value: null
+          type: none
+        agent:
+          enabled: false
+        collector:
+          enabled: false
+        query:
+          enabled: false
   syncPolicy:
     automated:
       prune: true
