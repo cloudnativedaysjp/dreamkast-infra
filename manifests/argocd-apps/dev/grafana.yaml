@@ -33,7 +33,7 @@ spec:
                 defaultRegion: ap-northeast-1
             - name: Jaeger
               type: jaeger
-              url: http://jaeger-tracing-query:80
+              url: http://jaeger-tracing-query:16686
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
