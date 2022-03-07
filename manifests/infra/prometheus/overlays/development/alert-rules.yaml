@@ -7,10 +7,22 @@ metadata:
   name: prometheus-alert-rules
 spec:
   groups:
-  - name: ./example.rules
+  - name: ./twitter.rules
     rules:
-    - alert: ExampleAlert
-      expr: vector(1)
+    - alert: TweetCountNotMatch
+      expr: count(count(social_twitter_favorites) by (tweetId)) == count(count(social_twitter_retweets) by (tweetId)) == count(count(social_twitter_sentiment) by (tweetId))
+      for: 5m
       labels:
-        namespace: monitoring
-
+        severity: warn
+      annotations:
+        summary: "Tweet count is not matching"
+        description: "Count of retweets/favorites/sentiment is not matching" 
+    - alert: TweetNotCommingIn
+      expr: count(social_twitter_retweets) or On() vector(-1)
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Tweet is not comming in"
+        description: "Tweet data is missing"
+ 
