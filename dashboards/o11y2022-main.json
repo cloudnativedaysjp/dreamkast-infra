@@ -566,32 +566,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "social_twitter_favorites{endpoint=\"web\", instance=\"10.100.149.244:8080\", job=\"social-analysis\", namespace=\"monitoring\", pod=\"social-analysis-deployment-7788c74fbc-v8qh2\", queryString=\"#o11y2022\", screenName=\"cloudnativedays\", service=\"social-analysis\", tweetId=\"1496681398555471884\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 17,
@@ -760,32 +735,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "social_twitter_sentiment{endpoint=\"web\", instance=\"10.100.238.28:8080\", job=\"social-analysis\", namespace=\"monitoring\", pod=\"social-analysis-deployment-78bd47ffd6-tnsln\", queryString=\"#o11y2022\", screenName=\"cloudnativedays\", service=\"social-analysis\", tweetId=\"1488346450631458816\"}"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 11,
