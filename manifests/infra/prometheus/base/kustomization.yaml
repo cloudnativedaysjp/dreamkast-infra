@@ -5,3 +5,5 @@ resources:
 - prometheus.yaml
 - node-exporter.yaml
 - monitor.yaml
+- alertmanager.yaml
+- alert-rules.yaml

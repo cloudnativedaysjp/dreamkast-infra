@@ -31,18 +31,6 @@ spec:
         key: dreamkast-monitoring_webhook_url
       channel: "dreamkast-monitoring"
 ---
-apiVersion: 'kubernetes-client.io/v1'
-kind: ExternalSecret
-metadata:
-  name: slack-cloudnativedays
-  namespace: monitoring
-spec:
-  backendType: secretsManager
-  data:
-  - key: dreamkast/staging-env
-    name: dreamkast-monitoring_webhook_url
-    property: dreamkast-monitoring_webhook_url
----
 apiVersion: v1
 kind: Service
 metadata:
