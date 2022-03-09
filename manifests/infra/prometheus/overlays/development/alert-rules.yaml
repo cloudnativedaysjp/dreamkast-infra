@@ -10,7 +10,10 @@ spec:
   - name: ./twitter.rules
     rules:
     - alert: TweetCountNotMatch
-      expr: count(count(social_twitter_favorites) by (tweetId)) == count(count(social_twitter_retweets) by (tweetId)) == count(count(social_twitter_sentiment) by (tweetId))
+      expr: |
+        count(count by(tweetId) (social_twitter_favorites)) != count(count by(tweetId) (social_twitter_retweets))
+        or
+        count(count by(tweetId) (social_twitter_favorites)) != count(count by(tweetId) (social_twitter_sentiment))
       for: 5m
       labels:
         severity: warn
@@ -18,7 +21,7 @@ spec:
         summary: "Tweet count is not matching"
         description: "Count of retweets/favorites/sentiment is not matching" 
     - alert: TweetNotCommingIn
-      expr: count(social_twitter_retweets) or On() vector(-1) == -1
+      expr: (count(social_twitter_retweets) or On() vector(-1)) == -1
       for: 5m
       labels:
         severity: critical
