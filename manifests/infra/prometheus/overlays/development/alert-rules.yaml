@@ -18,7 +18,7 @@ spec:
         summary: "Tweet count is not matching"
         description: "Count of retweets/favorites/sentiment is not matching" 
     - alert: TweetNotCommingIn
-      expr: count(social_twitter_retweets) or On() vector(-1)
+      expr: count(social_twitter_retweets) or On() vector(-1) == -1
       for: 5m
       labels:
         severity: critical
