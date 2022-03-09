@@ -29,7 +29,7 @@ spec:
     - apiURL:
         name: slack-cloudnativedays
         key: dreamkast-monitoring_webhook_url
-    - channel: "dreamkast-monitoring"
+      channel: "dreamkast-monitoring"
 ---
 apiVersion: 'kubernetes-client.io/v1'
 kind: ExternalSecret
