@@ -72,7 +72,7 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e456fe647f9ee56db0ce452a19a3cd68e3fdccd1/dashboards/o11y2022-cfp.json
             o11y2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/0250971bac3f1b9778691e196c02c954cc22d126/dashboards/o11y2022-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/bf551b311abb008bf34dda1f31e454ba7bf37879/dashboards/o11y2022-main.json
           private:
             Amazon RDS:
               gnetId: 11264
