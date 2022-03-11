@@ -134,7 +134,7 @@
           "exemplar": true,
           "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "o11y2022視聴者数",
           "refId": "A"
         }
       ],
@@ -277,7 +277,7 @@
           "exemplar": true,
           "expr": "avg(sum(dreamkast_chat_count) by(instance))",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "累積チャット数",
           "refId": "A"
         }
       ],
@@ -594,7 +594,7 @@
           "exemplar": true,
           "expr": "topk(1, social_twitter_favorites{queryString!=\"\", queryString=~\"$queryString\", screenName=\"cloudnativedays\"}) by (tweetId)",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "tweetId={{tweetId}}",
           "refId": "A"
         }
       ],
@@ -678,7 +678,7 @@
           "exemplar": true,
           "expr": "social_twitter_retweets{queryString!=\"\", queryString=~\"$queryString\"}",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "tweetId={{tweetId}}",
           "refId": "A"
         }
       ],
@@ -763,7 +763,7 @@
           "exemplar": true,
           "expr": "max(social_twitter_sentiment) by (tweetId) AND max(social_twitter_favorites{queryString=\"$queryString\"}) by (tweetId)",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "tweetId={{tweetId}}",
           "refId": "A"
         }
       ],
