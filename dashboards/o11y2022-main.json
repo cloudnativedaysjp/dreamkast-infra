@@ -132,7 +132,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(dreamkast_viewer_count)",
+          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -191,7 +191,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(dreamkast_viewer_count)",
+          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -275,7 +275,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(dreamkast_chat_count)",
+          "expr": "avg(sum(dreamkast_chat_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -333,7 +333,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "sum(dreamkast_chat_count)",
+          "expr": "avg(sum(dreamkast_chat_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
