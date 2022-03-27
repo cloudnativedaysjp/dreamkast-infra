@@ -103,6 +103,12 @@ resource "sakuracloud_server" "nextcloud2" {
 
   user_data = templatefile("./template/cloud-init.yaml", {
     vm_password = random_password.password.result,
-    hostname    = each.value.hostname
+    hostname    = "nextcloud2"
   })
+
+  lifecycle {
+    ignore_changes = [
+      user_data,
+    ]
+  }
 }
