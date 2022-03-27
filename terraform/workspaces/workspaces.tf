@@ -73,3 +73,24 @@ resource "tfe_team_access" "uptime_robot" {
   team_id      = data.tfe_team.cloudnativedays.id
   workspace_id = tfe_workspace.uptime_robot.id
 }
+
+resource "tfe_workspace" "broadcast_switcher" {
+  name                = "broadcast_switcher"
+  organization        = data.tfe_organization.org.name
+  auto_apply          = false
+  queue_all_runs      = false
+  speculative_enabled = false
+  working_directory   = "terraform/broadcast-switcher"
+  execution_mode = "remote"
+  vcs_repo {
+    identifier         = "cloudnativedaysjp/dreamkast-infra"
+    ingress_submodules = false
+    oauth_token_id     = var.oauth_token_id
+  }
+}
+
+resource "tfe_team_access" "broadcast_switcher" {
+  access       = "admin"
+  team_id      = data.tfe_team.cloudnativedays.id
+  workspace_id = tfe_workspace.broadcast_switcher.id
+}
