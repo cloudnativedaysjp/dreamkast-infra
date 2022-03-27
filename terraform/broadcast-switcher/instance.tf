@@ -48,4 +48,10 @@ resource "sakuracloud_server" "switcher" {
     vnc_password = var.vnc_password,
     hostname    = each.value.hostname
   })
+
+  lifecycle {
+    ignore_changes = [
+      user_data,
+    ]
+  }
 }
