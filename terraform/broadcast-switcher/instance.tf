@@ -42,6 +42,10 @@ resource "sakuracloud_server" "switcher" {
   network_interface {
     upstream = "shared"
   }
+  
+  network_interface {
+    upstream    = sakuracloud_switch.switcher.id
+  }
 
   user_data = templatefile("./template/cloud-init.yaml", {
     vm_password = var.vm_password,
