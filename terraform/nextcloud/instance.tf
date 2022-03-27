@@ -99,6 +99,7 @@ resource "sakuracloud_server" "nextcloud2" {
 
   network_interface {
     upstream = "shared"
+    packet_filter_id = sakuracloud_packet_filter.nextcloud.id
   }
 
   user_data = templatefile("./template/cloud-init.yaml", {

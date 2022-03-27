@@ -40,17 +40,18 @@ resource "sakuracloud_server" "switcher" {
   tags        = ["app=switcher", "stage=production"]
 
   network_interface {
-    upstream = "shared"
+    upstream         = "shared"
+    packet_filter_id = sakuracloud_packet_filter.switcher.id
   }
-  
+
   network_interface {
-    upstream    = sakuracloud_switch.switcher.id
+    upstream = sakuracloud_switch.switcher.id
   }
 
   user_data = templatefile("./template/cloud-init.yaml", {
-    vm_password = var.vm_password,
+    vm_password  = var.vm_password,
     vnc_password = var.vnc_password,
-    hostname    = each.value.hostname
+    hostname     = each.value.hostname
   })
 
   lifecycle {
