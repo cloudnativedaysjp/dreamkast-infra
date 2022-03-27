@@ -92,7 +92,7 @@ resource "sakuracloud_server" "nextcloud2" {
   disks = [
     sakuracloud_disk.nextcloud_boot2.id,
   ]
-  core        = 2
+  core        = 4
   memory      = 4
   description = "New Nextcloud server"
   tags        = ["app=nextcloud", "stage=production"]
