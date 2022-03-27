@@ -27,22 +27,23 @@ resource "sakuracloud_packet_filter_rules" "switcher_rules" {
     destination_port = "443"
   }
 
+
+  expression {
+    protocol    = "tcp"
+    destination_port = "5900"
+  }
+
+  expression {
+    protocol    = "udp"
+    destination_port = "5900"
+  }
+
   expression {
     protocol = "icmp"
   }
 
   expression {
     protocol = "fragment"
-  }
-
-  expression {
-    protocol    = "tcp"
-    source_port = "5900"
-  }
-
-  expression {
-    protocol    = "udp"
-    source_port = "5900"
   }
 
   expression {
