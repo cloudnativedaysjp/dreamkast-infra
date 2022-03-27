@@ -5,7 +5,9 @@ resource "random_password" "password" {
 }
 
 data "sakuracloud_archive" "ubuntu" {
-  os_type = "ubuntu2004"
+  filter {
+    id = "113301413483"
+  }
 }
 
 resource "sakuracloud_disk" "nextcloud_boot" {
@@ -69,4 +71,38 @@ resource "sakuracloud_server" "nextcloud" {
     password    = random_password.password.result
     ssh_key_ids = [for l in sakuracloud_ssh_key.key : l.id]
   }
+}
+
+resource "sakuracloud_disk" "nextcloud_boot2" {
+  name              = "nextcloud-boot2"
+  source_archive_id = data.sakuracloud_archive.ubuntu.id
+  plan              = "ssd"
+  connector         = "virtio"
+  size              = 30
+
+  lifecycle {
+    ignore_changes = [
+      source_archive_id,
+    ]
+  }
+}
+
+resource "sakuracloud_server" "nextcloud2" {
+  name = "nextcloud2"
+  disks = [
+    sakuracloud_disk.nextcloud_boot2.id,
+  ]
+  core        = 2
+  memory      = 4
+  description = "New Nextcloud server"
+  tags        = ["app=nextcloud", "stage=production"]
+
+  network_interface {
+    upstream = "shared"
+  }
+
+  user_data = templatefile("./template/cloud-init.yaml", {
+    vm_password = random_password.password.result,
+    hostname    = each.value.hostname
+  })
 }
