@@ -1,0 +1,40 @@
+#cloud-config
+fqdn: ${hostname} 
+chpasswd:
+    list: |
+      ubuntu:${vm_password}
+    expire: false
+users:
+  - default 
+  - name: ubuntu
+    gecos: Local
+    lock_passwd: false
+    groups: sudo, users, admin
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh_import_id:
+    - gh:jacopen
+    - gh:TakumaNakagame
+    - gh:capsmalt
+    - gh:Gaku-Kunimi
+    - gh:ryojsb
+system_info: 
+  default_user:
+    name: default-user
+    lock_passwd: false
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+ssh_pwauth: yes
+random_seed:
+    file: /dev/urandom
+    command: ["pollinate", "-r", "-s", "https://entropy.ubuntu.com"]
+    command_required: true
+package_upgrade: true
+packages:
+  - curl
+  - vim
+  - git
+  - unzip
+  - x11vnc
+runcmd:
+  - sudo x11vnc -storepasswd ${vnc_password} /etc/.vncpasswd  
+  - curl -sSL https://raw.githubusercontent.com/cloudnativedaysjp/broadcast/main/switcher/setup.sh | sh -
