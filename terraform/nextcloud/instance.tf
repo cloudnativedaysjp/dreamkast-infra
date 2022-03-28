@@ -78,7 +78,7 @@ resource "sakuracloud_disk" "nextcloud_boot2" {
   source_archive_id = data.sakuracloud_archive.ubuntu.id
   plan              = "ssd"
   connector         = "virtio"
-  size              = 40
+  size              = 1024
 
   lifecycle {
     ignore_changes = [
