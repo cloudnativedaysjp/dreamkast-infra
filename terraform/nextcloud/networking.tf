@@ -22,6 +22,11 @@ resource "sakuracloud_packet_filter_rules" "nextcloud_rules" {
   }
 
   expression {
+    protocol         = "udp"
+    destination_port = "68"
+  }
+
+  expression {
     protocol = "icmp"
   }
 

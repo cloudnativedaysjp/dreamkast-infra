@@ -60,7 +60,7 @@ resource "sakuracloud_server" "nextcloud" {
   core        = 2
   memory      = 4
   description = "Nextcloud server"
-  tags        = ["app=nextcloud", "stage=production"]
+  tags        = ["app=nextcloud", "stage=production", "starred"]
 
   network_interface {
     upstream = "shared"
@@ -95,7 +95,7 @@ resource "sakuracloud_server" "nextcloud2" {
   core        = 4
   memory      = 4
   description = "New Nextcloud server"
-  tags        = ["app=nextcloud", "stage=production"]
+  tags        = ["app=nextcloud", "stage=production", "starred"]
 
   network_interface {
     upstream = "shared"

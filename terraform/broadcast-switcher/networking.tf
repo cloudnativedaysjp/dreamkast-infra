@@ -37,6 +37,11 @@ resource "sakuracloud_packet_filter_rules" "switcher_rules" {
     protocol    = "udp"
     destination_port = "5900"
   }
+  
+  expression {
+    protocol         = "udp"
+    destination_port = "68"
+  }
 
   expression {
     protocol = "icmp"
