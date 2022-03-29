@@ -5,6 +5,7 @@ resources:
 - ../../base
 - service-monitor.yaml
 - slack-secrets.yaml
+- ./kube-state-metrics/
 patchesStrategicMerge:
 - prometheus-crd.yaml
 - service-monitor-dk.yaml
