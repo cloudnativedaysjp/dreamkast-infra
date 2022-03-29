@@ -1,0 +1,42 @@
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ReviewAppManager
+metadata:
+  name: dreamkast-dk
+  namespace: reviewapp-operator-system
+spec:
+  appRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudnativedaysjp
+    repository: dreamkast
+    gitSecretRef:
+      name: git-creds
+      key: token
+    ignoreLabels: ["reviewapps/ignore"]
+    ignoreTitleExp: '^\[dreamkast-releasebot\]'
+  appRepoConfig:
+    message: |
+      Review app
+
+      https://dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
+  infraRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudnativedaysjp
+    repository: dreamkast-infra
+    branch: main
+    gitSecretRef:
+      name: git-creds
+      key: token
+  infraRepoConfig:
+    manifests:
+      templates:
+        - namespace: reviewapp-operator-system
+          name: dreamkast
+      dirpath: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+    argocdApp:
+      template:
+        namespace: reviewapp-operator-system
+        name: dreamkast
+      filepath: "manifests/app/argocd-apps/development/dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.yaml"
+  variables:
+    - AppRepositoryAlias=dk

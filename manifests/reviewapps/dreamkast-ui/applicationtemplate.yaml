@@ -1,0 +1,28 @@
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ApplicationTemplate
+metadata:
+  name: dreamkast-ui
+  namespace: reviewapp-operator-system
+spec:
+  stable: &application |
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: "dreamkast-development-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+    spec:
+      destination:
+        namespace: "dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+        server: https://kubernetes.default.svc
+      project: app
+      source:
+        repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra
+        path: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+  candidate: *application

@@ -79,6 +79,21 @@ metadata:
 spec:
   template:
     spec:
+      automountServiceAccountToken: true # required by reviewappctl
+      volumes:
+      - name: custom-tools
+        emptyDir: {}
+      initContainers:
+      - name: download-tools
+        image: alpine:3.8
+        command: [sh, -c]
+        args:
+        - wget -q https://github.com/cloudnativedaysjp/reviewapp-operator/releases/download/v0.0.9/reviewappctl-linux-amd64 &&
+          mv reviewappctl-linux-amd64 /custom-tools/reviewappctl &&
+          chmod 0755 /custom-tools/reviewappctl
+        volumeMounts:
+        - mountPath: /custom-tools
+          name: custom-tools
       containers:
       - name: argocd-repo-server
         resources:
@@ -88,3 +103,7 @@ spec:
           requests:
             cpu: 700m
             memory: 1024Mi
+        volumeMounts:
+          - mountPath: /usr/local/bin/reviewappctl
+            name: custom-tools
+            subPath: reviewappctl
