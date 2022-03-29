@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: reviewapp-operator-alert
+spec:
+  groups:
+  - name: reviewapp_operator
+    rules:
+    - alert: ReviewAppIsDown
+      expr: irate(kube_pod_container_status_restarts_total{exported_pod=~"^reviewapp-operator-controller-manager-.*$"}[1m]) >= 3
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "reviewapp-operator is down"
+        description: "Maybe, empty RA Object was stayed in cluster. Please delete empty RA Object."
