@@ -78,7 +78,7 @@ resource "uptimerobot_monitor" "grafana" {
 resource "uptimerobot_monitor" "nextcloud" {
   friendly_name = "Nextcloud"
   type          = "http"
-  url           = "https://nextcloud.cloudnativedays.jp"
+  url           = "https://nextcloud2.cloudnativedays.jp"
 
   alert_contact {
     id = uptimerobot_alert_contact.slack.id
