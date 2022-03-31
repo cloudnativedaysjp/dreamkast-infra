@@ -1,24 +1,18 @@
-data "sakuracloud_archive" "ubuntu" {
-  filter {
-    id = "113301413483"
-  }
-}
-
 locals {
-  switchers = [
+  instances = [
     {
-      hostname = "switcher01"
+      hostname = "nginx01"
     }
   ]
 }
 
-resource "sakuracloud_disk" "switcher_boot" {
-  for_each          = { for i in local.switchers : i.hostname => i }
+resource "sakuracloud_disk" "instances_boot" {
+  for_each          = { for i in local.instances : i.hostname => i }
   name              = "${each.value.hostname}-boot"
   source_archive_id = data.sakuracloud_archive.ubuntu.id
   plan              = "ssd"
   connector         = "virtio"
-  size              = 100
+  size              = 20
 
   lifecycle {
     ignore_changes = [
@@ -27,17 +21,16 @@ resource "sakuracloud_disk" "switcher_boot" {
   }
 }
 
-resource "sakuracloud_server" "switcher" {
-  for_each = { for i in local.switchers : i.hostname => i }
+resource "sakuracloud_server" "instances" {
+  for_each = { for i in local.instances : i.hostname => i }
   name     = each.value.hostname
   disks = [
-    sakuracloud_disk.switcher_boot[each.key].id
+    sakuracloud_disk.instances_boot[each.key].id
   ]
-  core        = 4
-  memory      = 56
-  gpu         = 1
-  description = "Switcher server"
-  tags        = ["app=switcher", "stage=production"]
+  core        = 2
+  memory      = 4
+  description = "Generic insntaces"
+  tags        = ["app=instance", "stage=production"]
 
   network_interface {
     upstream         = "shared"
@@ -48,9 +41,8 @@ resource "sakuracloud_server" "switcher" {
     upstream = sakuracloud_switch.switcher.id
   }
 
-  user_data = templatefile("./template/cloud-init.yaml", {
+  user_data = templatefile("./template/gui-cloud-init.yaml", {
     vm_password  = var.vm_password,
-    vnc_password = var.vnc_password,
     hostname     = each.value.hostname
   })
 
