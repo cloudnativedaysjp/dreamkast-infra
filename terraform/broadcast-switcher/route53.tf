@@ -20,3 +20,12 @@ resource "aws_route53_record" "instances" {
   ttl      = "300"
   records  = [sakuracloud_server.instances[each.key].ip_address]
 }
+
+resource "aws_route53_record" "windows" {
+  for_each = { for i in local.windows : i.hostname => i }
+  zone_id  = data.aws_route53_zone.cloudnativedays.zone_id
+  name     = "${each.key}.cloudnativedays.jp"
+  type     = "A"
+  ttl      = "300"
+  records  = [sakuracloud_server.windows[each.key].ip_address]
+}
