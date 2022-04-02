@@ -27,8 +27,8 @@ resource "sakuracloud_server" "instances" {
   disks = [
     sakuracloud_disk.instances_boot[each.key].id
   ]
-  core        = 2
-  memory      = 4
+  core        = 8
+  memory      = 16
   description = "Generic insntaces"
   tags        = ["app=instance", "stage=production"]
 
