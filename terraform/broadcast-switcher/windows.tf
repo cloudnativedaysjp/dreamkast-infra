@@ -9,6 +9,12 @@ locals {
   windows = [
     {
       hostname = "windows01",
+    },
+    {
+      hostname = "windows02",
+    },
+    {
+      hostname = "windows03",
     }
   ]
 }
