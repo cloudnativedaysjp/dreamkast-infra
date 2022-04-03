@@ -33,7 +33,7 @@ resource "sakuracloud_server" "instances" {
   tags        = ["app=instance", "stage=production"]
 
   network_interface {
-    upstream         = "shared"
+    upstream         = sakuracloud_internet.global.id
     packet_filter_id = sakuracloud_packet_filter.switcher.id
   }
 

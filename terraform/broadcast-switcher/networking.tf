@@ -3,6 +3,17 @@ resource "sakuracloud_switch" "switcher" {
   description = "switcher"
   tags        = ["switcher", "production"]
 }
+resource "sakuracloud_internet" "global" {
+  name = "global"
+
+  netmask     = 28
+  band_width  = 250
+  enable_ipv6 = false
+
+  description = "global"
+  tags        = ["global", "production"]
+}
+
 
 resource "sakuracloud_packet_filter" "switcher" {
   name        = "switcher"
