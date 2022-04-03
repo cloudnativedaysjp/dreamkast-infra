@@ -16,4 +16,4 @@ images:
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
   newTag: f756cb3f4f9ab2da328cbbe22316a59b32d3e89a
 - name: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 06f84e9632fbf60f19c166740c3f7af5405bc00e
+  newTag: ae7a5746936cc20b7858f38dc8f12ea0ecb1595f
