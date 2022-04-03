@@ -51,7 +51,12 @@ resource "sakuracloud_packet_filter_rules" "switcher_rules" {
 
   expression {
     protocol    = "udp"
-    destination_port = "10000"
+    destination_port = "10000-11000"
+  }
+
+  expression {
+    protocol    = "tcp"
+    destination_port = "10000-11000"
   }
 
   expression {
