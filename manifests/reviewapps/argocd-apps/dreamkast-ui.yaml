@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: reviewapps-dreamkast-ui
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
+spec:
+  project: reviewapps
+  source:
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    path: manifests/reviewapps/dreamkast-ui
+    targetRevision: main
+    plugin:
+      name: reviewappctl
+      env:
+        - name: MT_NAME
+          value: dreamkast-ui
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: reviewapp-operator-system
+  syncPolicy:
+    automated:
+      prune: true

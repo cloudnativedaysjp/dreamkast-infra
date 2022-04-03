@@ -22,3 +22,28 @@ data:
     - profile
     - email
     - 'https://cloudnativedays.jp/claims/groups'
+  configManagementPlugins: |
+    - name: reviewappctl
+      init:
+        command: ["sh", "-euxc"]
+        args:
+        - ls .mt-stable/* |
+            grep -v kustomization.yaml |
+            grep -v patch-delete.yaml |
+            xargs -I{} reviewappctl manifests-templating --name portal --namespace reviewapp-operator-system -f manifests_template.yaml --is-stable {};
+          ls .mt-stable/* |
+            egrep '(kustomization.yaml|patch-delete.yaml)' |
+            xargs -I{} reviewappctl manifests-templating --name portal --namespace reviewapp-operator-system -f manifests_template.yaml --is-stable --validate=false {};
+          ls .mt-candidate/* |
+            grep -v kustomization.yaml |
+            grep -v patch-delete.yaml |
+            xargs -I{} reviewappctl manifests-templating --name portal --namespace reviewapp-operator-system -f manifests_template.yaml --is-candidate {};
+          ls .mt-candidate/* |
+            egrep '(kustomization.yaml|patch-delete.yaml)' |
+            xargs -I{} reviewappctl manifests-templating --name portal --namespace reviewapp-operator-system -f manifests_template.yaml --is-candidate --validate=false {};
+      generate:
+        command: ["sh", "-euxc"]
+        args:
+        - ls *.yaml | xargs -I{} sh -c 'cat {}; echo ---';
+          rm -f manifests_template.yaml;
+      lockRepo: true

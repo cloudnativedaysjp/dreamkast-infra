@@ -26,10 +26,10 @@ spec:
   destination:
     namespace: reviewapp-operator-system
     server: https://kubernetes.default.svc
-  project: cd
+  project: reviewapps
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    path: manifests/reviewapps
+    path: manifests/reviewapps/argocd-apps
     targetRevision: main
   syncPolicy:
     automated:
