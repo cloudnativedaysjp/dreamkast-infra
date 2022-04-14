@@ -12,7 +12,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.19.2
+    targetRevision: 6.26.1
     helm:
       values: |
         datasources:
@@ -122,7 +122,7 @@ spec:
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
       parameters:
       - name: image.tag
-        value: "8.3.3"
+        value: "8.4.6"
       - name: persistence.enabled
         value: "true"
       - name: persistence.type
