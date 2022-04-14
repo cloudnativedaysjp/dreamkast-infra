@@ -12,7 +12,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.19.2
+    targetRevision: 6.26.1
     helm:
       values: |
         datasources:
@@ -43,8 +43,8 @@ spec:
                 folder:
                 type: file
                 disableDeletion: true
+                allowUiUpdates: true
                 editable: false
-                allowUiUpdates: false
                 options:
                   path: /var/lib/grafana/dashboards/default
               - name: private
@@ -108,6 +108,9 @@ spec:
         grafana.ini:
           server:
             root_url: https://grafana.cloudnativedays.jp
+          auth:
+            disable_login_form: true
+            oauth_auto_login: true
           auth.generic_oauth:
             enabled: true
             allow_sign_up: true
@@ -124,7 +127,7 @@ spec:
           - grafana-piechart-panel
       parameters:
       - name: image.tag
-        value: "8.3.3"
+        value: "8.4.6"
       - name: persistence.enabled
         value: "true"
       - name: persistence.type

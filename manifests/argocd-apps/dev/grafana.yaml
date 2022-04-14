@@ -108,7 +108,7 @@ spec:
         grafana.ini:
           server:
             root_url: https://grafana.dev.cloudnativedays.jp
-          auto:
+          auth:
             disable_login_form: true
             oauth_auto_login: true
           auth.generic_oauth:
