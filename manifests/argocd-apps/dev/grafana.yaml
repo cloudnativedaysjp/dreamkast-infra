@@ -120,6 +120,8 @@ spec:
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+        plugins:
+          - grafana-piechart-panel
       parameters:
       - name: image.tag
         value: "8.3.3"
