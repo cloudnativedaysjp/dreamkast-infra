@@ -23,6 +23,8 @@ spec:
           - --target-repositories=https://github.com/cloudnativedaysjp/dreamkast-ui
           - --target-repositories=https://github.com/cloudnativedaysjp/website
           - --target-repositories=https://github.com/cloudnativedaysjp/reviewapp-operator
+          - --target-repositories=https://github.com/cloudopsdays/dreamkast_codt2022
+          - --target-repositories=https://github.com/cloudopsdays/dreamkast-ui_codt2022
           - --base-branch=main
           - --enable-auto-merge=false
         env:
