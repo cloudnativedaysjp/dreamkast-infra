@@ -139,6 +139,16 @@ Resources:
                   - "ivs:*"
                 Resource: "*"
           PolicyName: "ivs-full-access"
+        - PolicyDocument:
+            Statement:
+              - Effect: "Allow"
+                Action:
+                  - "secretsmanager:GetResourcePolicy"
+                  - "secretsmanager:GetSecretValue"
+                  - "secretsmanager:DescribeSecret"
+                  - "secretsmanager:ListSecretVersionIds"
+                Resource: "*"
+          PolicyName: "secrets-manager-read-only"
       Path: /
       Tags:
         - Key: Name
