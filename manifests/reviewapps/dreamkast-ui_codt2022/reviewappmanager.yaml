@@ -1,0 +1,43 @@
+---
+apiVersion: dreamkast.cloudnativedays.jp/v1alpha1
+kind: ReviewAppManager
+metadata:
+  name: dreamkast-ui-codt2022
+  namespace: reviewapp-operator-system
+spec:
+  appRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudopsdays
+    repository: dreamkast-ui_codt2022
+    gitSecretRef:
+      name: git-creds
+      key: token
+    ignoreLabels: ["reviewapps/ignore"]
+    ignoreTitleExp: '^\[dreamkast-releasebot\]'
+  appRepoConfig:
+    message: |
+      Review app
+
+      https://dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
+  infraRepoTarget:
+    username: showks-containerdaysjp
+    organization: cloudopsdays
+    repository: dreamkast-infra_codt2022
+    branch: main
+    gitSecretRef:
+      name: git-creds
+      key: token
+  infraRepoConfig:
+    manifests:
+      templates:
+        - namespace: reviewapp-operator-system
+          name: dreamkast-ui-codt2022
+      dirpath: "manifests/app/dreamkast/overlays/development/{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}"
+    argocdApp:
+      template:
+        namespace: reviewapp-operator-system
+        name: dreamkast-ui-codt2022
+      filepath: "manifests/app/argocd-apps/development/dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.yaml"
+  variables:
+    - AppRepositoryAlias=ui-codt2022
+    - ReplacedImageName=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
