@@ -12,7 +12,7 @@ spec:
         spec:
           containers:
             - name: dreamkast
-              image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+              image: 632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
               command:
                 - /bin/sh
                 - -c
@@ -31,7 +31,7 @@ spec:
                 - name: S3_REGION
                   value: ap-northeast-1
                 - name: SQS_FIFO_QUEUE_URL
-                  value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/devFifoQueue.fifo"
+                  value: "https://sqs.ap-northeast-1.amazonaws.com/632965872029/devFifoQueue.fifo"
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:
