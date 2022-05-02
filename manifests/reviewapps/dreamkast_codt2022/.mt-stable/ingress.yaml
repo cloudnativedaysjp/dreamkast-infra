@@ -6,9 +6,9 @@ metadata:
     app: dreamkast
 spec:
   virtualhost:
-    fqdn: dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
+    fqdn: dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.event.cloudopsdays.com
     tls:
-      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+      secretName: cert-manager/event-cloudopsdays-com
   routes:
     - conditions:
       - prefix: /
