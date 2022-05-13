@@ -14,7 +14,7 @@ spec:
   source:
     chart: loki-stack
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 2.4.1
+    targetRevision: 2.6.4
     helm:
       parameters:
       - name: loki.persistence.enabled
