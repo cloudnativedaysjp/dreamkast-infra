@@ -9,8 +9,8 @@ spec:
   - name: reviewapp_operator
     rules:
     - alert: ReviewAppIsDown
-      expr: irate(kube_pod_container_status_restarts_total{exported_pod=~"^reviewapp-operator-controller-manager-.*$"}[1m]) >= 3
-      for: 1m
+      expr: rate(kube_pod_container_status_restarts_total{exported_pod=~"^reviewapp-operator-controller-manager-.*$"}[6m]) > 0
+      for: 12m # pod's crashLoopBackOff was occurred for 6 minutes (12m-6m)
       labels:
         severity: critical
       annotations:
