@@ -23,7 +23,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: 632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: public.ecr.aws/q5p7z1m4/dreamkast-ecs:main
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
         args:
@@ -75,7 +75,7 @@ spec:
               key: REVIEW_APP
       containers:
       - name: dreamkast
-        image: 632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: public.ecr.aws/q5p7z1m4/dreamkast-ecs:main
         imagePullPolicy: Always
         ports:
           - containerPort: 3000

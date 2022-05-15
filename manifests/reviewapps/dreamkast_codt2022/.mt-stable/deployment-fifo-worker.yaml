@@ -23,7 +23,7 @@ spec:
     spec:
       initContainers:
       - name: initsqs
-        image: 632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: public.ecr.aws/q5p7z1m4/dreamkast-ecs:main
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
         args:
@@ -125,7 +125,7 @@ spec:
             secretKeyRef:
               key: REVIEW_APP
               name: dreamkast-secret
-        image: 632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: public.ecr.aws/q5p7z1m4/dreamkast-ecs:main
         imagePullPolicy: Always
         lifecycle:
           preStop:
