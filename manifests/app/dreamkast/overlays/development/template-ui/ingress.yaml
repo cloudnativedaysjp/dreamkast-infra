@@ -26,8 +26,4 @@ spec:
       services:
       - name: dreamkast-ui
         port: 3001
-    - conditions: #TODO: KUSODASA
-      - prefix: /codt2022/ui
-      services:
-      - name: dreamkast-ui
-        port: 3001
+
