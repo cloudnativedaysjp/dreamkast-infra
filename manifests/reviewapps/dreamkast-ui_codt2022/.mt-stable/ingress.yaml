@@ -26,3 +26,8 @@ spec:
       services:
       - name: dreamkast-ui
         port: 3001
+    - conditions: #TODO: Need to resolve this hardcoded routing
+      - prefix: /_next
+      services:
+      - name: dreamkast-ui
+        port: 3001
