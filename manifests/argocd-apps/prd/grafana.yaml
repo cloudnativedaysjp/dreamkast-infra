@@ -73,6 +73,9 @@ spec:
             o11y2022 main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
+            cnsec2022 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/4ea02f766f64bec9eeddb59fc4ae885cb673379f/dashboards/cnsec2022-cfp.json
           private:
             Amazon RDS:
               gnetId: 11264
@@ -126,17 +129,17 @@ spec:
         plugins:
           - grafana-piechart-panel
       parameters:
-      - name: image.tag
-        value: "8.4.6"
-      - name: persistence.enabled
-        value: "true"
-      - name: persistence.type
-        value: statefulset
+        - name: image.tag
+          value: "8.4.6"
+        - name: persistence.enabled
+          value: "true"
+        - name: persistence.type
+          value: statefulset
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -156,4 +159,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
