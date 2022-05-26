@@ -18,3 +18,11 @@ resource "aws_route53_record" "nextcloud2" {
   ttl     = "300"
   records = [sakuracloud_server.nextcloud2.ip_address]
 }
+
+resource "aws_route53_record" "sentry" {
+  zone_id = data.aws_route53_zone.cloudnativedays.zone_id
+  name    = "sentry.cloudnativedays.jp"
+  type    = "A"
+  ttl     = "300"
+  records = [sakuracloud_server.sentry.ip_address]
+}

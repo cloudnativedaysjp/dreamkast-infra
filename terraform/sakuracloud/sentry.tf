@@ -26,14 +26,8 @@ resource "sakuracloud_server" "sentry" {
     upstream = "shared"
   }
 
-  disk_edit_parameter {
-    hostname    = "nextcloud"
-    password    = random_password.password.result
-    ssh_key_ids = [for l in sakuracloud_ssh_key.key : l.id]
-  }
-
   user_data = templatefile("./template/cloud-init.yaml", {
-    vm_password  = var.vm_password,
-    hostname     = each.value.hostname
+    vm_password  = random_password.password.result,
+    hostname     = "sentry"
   })
 }
