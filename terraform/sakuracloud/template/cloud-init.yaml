@@ -18,6 +18,7 @@ users:
     - gh:capsmalt
     - gh:Gaku-Kunimi
     - gh:ryojsb
+    - gh:inductor
 system_info: 
   default_user:
     name: default-user

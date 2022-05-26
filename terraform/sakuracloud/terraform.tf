@@ -3,7 +3,7 @@ terraform {
     hostname     = "app.terraform.io"
     organization = "kusama"
     workspaces {
-      name = "nextcloud"
+      name = "sakuracloud"
     }
   }
   required_providers {
