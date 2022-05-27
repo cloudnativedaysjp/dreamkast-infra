@@ -13,12 +13,12 @@ resource "sakuracloud_disk" "sentry_boot" {
 }
 
 resource "sakuracloud_server" "sentry" {
-  name = "nextcloud"
+  name = "sentry"
   disks = [
     sakuracloud_disk.sentry_boot.id,
   ]
-  core        = 2
-  memory      = 4
+  core        = 4
+  memory      = 8
   description = "Sentry server"
   tags        = ["app=sentry", "stage=production", "starred"]
 
