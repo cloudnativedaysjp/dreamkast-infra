@@ -18,6 +18,8 @@ users:
     - gh:capsmalt
     - gh:Gaku-Kunimi
     - gh:ryojsb
+    - gh:tanayan299
+    - gh:onarada
 system_info: 
   default_user:
     name: default-user
