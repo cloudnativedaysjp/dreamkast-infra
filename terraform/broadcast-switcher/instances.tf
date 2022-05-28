@@ -5,6 +5,9 @@ locals {
     },
     {
       hostname = "nginx02"
+    },
+    {
+      hostname = "switcher03"
     }
   ]
 }
