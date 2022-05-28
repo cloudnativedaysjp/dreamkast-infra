@@ -8,7 +8,7 @@ locals {
 
 data "sakuracloud_archive" "ubuntu22" {
   filter {
-    id = "113400971366"
+    id = "113301413483"
   }
 }
 
