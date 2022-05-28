@@ -8,6 +8,9 @@ locals {
   switchers = [
     {
       hostname = "switcher01"
+    },
+    {
+      hostname = "switcher02"
     }
   ]
 }
