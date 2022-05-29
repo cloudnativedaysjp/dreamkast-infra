@@ -7,6 +7,9 @@ locals {
       hostname = "nginx02"
     },
     {
+      hostname = "nginx03"
+    },
+    {
       hostname = "switcher03"
     }
   ]
