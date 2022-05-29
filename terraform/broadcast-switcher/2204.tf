@@ -1,14 +1,14 @@
 locals {
   instances22 = [
     {
-      hostname = "test2"
+      hostname = "test-22"
     }
   ]
 }
 
 data "sakuracloud_archive" "ubuntu22" {
   filter {
-    id = "113301413483"
+    id = "113400974476"
   }
 }
 

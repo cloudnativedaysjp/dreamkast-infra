@@ -8,9 +8,6 @@ locals {
     },
     {
       hostname = "nginx03"
-    },
-    {
-      hostname = "switcher03"
     }
   ]
 }
@@ -61,3 +58,4 @@ resource "sakuracloud_server" "instances" {
     ]
   }
 }
+
