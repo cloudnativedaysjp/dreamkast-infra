@@ -22,6 +22,8 @@ spec:
       services:
       - name: dreamkast
         port: 80
+      loadBalancerPolicy:
+        strategy: Cookie
     - conditions:
       - prefix: /o11y2022/ui
       services:
