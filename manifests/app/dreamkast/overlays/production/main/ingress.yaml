@@ -16,6 +16,8 @@ spec:
       services:
       - name: dreamkast
         port: 80
+      loadBalancerPolicy:
+        strategy: Cookie
     - conditions:
       - prefix: /cable
       enableWebsockets: true
