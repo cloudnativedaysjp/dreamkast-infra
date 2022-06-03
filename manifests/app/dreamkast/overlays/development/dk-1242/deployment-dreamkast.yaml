@@ -6,6 +6,7 @@ metadata:
     tier: dreamkast
   name: dreamkast
 spec:
+  replicas: 4
   selector:
     matchLabels:
       app: dreamkast
