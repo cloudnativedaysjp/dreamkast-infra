@@ -53,7 +53,7 @@ spec:
               uid: dreamkast_jaeger
               jsonData:
                 tracesToLogs:
-                  datasourceUid: 'loki'
+                  datasourceUid: 'Loki'
                   tags: ['job', 'instance', 'pod', 'namespace']
                   mappedTags: [{ key: 'service.name', value: 'service' }]
                   mapTagNamesEnabled: false
