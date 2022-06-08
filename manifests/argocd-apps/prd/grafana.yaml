@@ -152,6 +152,13 @@ spec:
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+          security:
+            cookie_secure: true
+            cookie_samesite: true
+            strict_transport_security: true
+            x_content_type_options: true
+            x_xss_protection: true
+            content_security_policy: true
         plugins:
           - grafana-piechart-panel
       parameters:
