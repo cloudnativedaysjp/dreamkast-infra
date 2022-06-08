@@ -14,7 +14,7 @@ spec:
   source:
     chart: jaeger
     repoURL: https://jaegertracing.github.io/helm-charts
-    targetRevision: 0.56.5
+    targetRevision: 0.56.6
     helm:
       values: |
         provisionDataStore:
