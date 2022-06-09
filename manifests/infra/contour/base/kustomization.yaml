@@ -5,4 +5,5 @@ resources:
 - https://projectcontour.io/quickstart/v1.21.0/contour.yaml
 - auth-server.yaml
 - cluster-issuer.yaml
+patchesStrategicMerge:
 - contour-configmap.yaml
