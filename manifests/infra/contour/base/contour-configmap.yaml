@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: contour
+  namespace: projectcontour
+data:
+  contour.yaml: |
+    policy:
+      response-headers:
+        set:
+          Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
