@@ -24,6 +24,10 @@ spec:
         port: 80
       loadBalancerPolicy:
         strategy: Cookie
+      cookieRewritePolicies:
+      - name: X-Contour-Session-Affinity
+        sameSite: Lax
+        secure: true
     - conditions:
       - prefix: /o11y2022/ui
       services:
@@ -34,4 +38,8 @@ spec:
       services:
       - name: dreamkast-ui
         port: 3001
+      cookieRewritePolicies:
+      - name: X-Contour-Session-Affinity
+        sameSite: Lax
+        secure: true
 
