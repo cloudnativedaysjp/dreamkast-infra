@@ -25,7 +25,7 @@ spec:
       loadBalancerPolicy:
         strategy: Cookie
       cookieRewritePolicies:
-      - name: X-Contour-Session-Affinity
+      - name: Set-Cookie
         sameSite: Lax
         secure: true
     - conditions:
@@ -39,7 +39,7 @@ spec:
       - name: dreamkast-ui
         port: 3001
       cookieRewritePolicies:
-      - name: X-Contour-Session-Affinity
+      - name: Set-Cookie
         sameSite: Lax
         secure: true
 
