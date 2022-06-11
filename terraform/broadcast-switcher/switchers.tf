@@ -3,6 +3,11 @@ data "sakuracloud_archive" "ubuntu" {
     id = "113301413483"
   }
 }
+data "sakuracloud_archive" "ubuntu2204" {
+  filter {
+    id = "113400863432"
+  }
+}
 
 locals {
   switchers = [
