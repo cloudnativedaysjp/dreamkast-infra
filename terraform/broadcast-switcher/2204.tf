@@ -28,7 +28,7 @@ resource "sakuracloud_server" "instances2204" {
     sakuracloud_disk.instances2204_boot[each.key].id
   ]
   core        = 2
-  memory      = 8
+  memory      = 4
   description = "Generic insntaces"
   tags        = ["app=instance", "stage=production"]
 
@@ -40,7 +40,10 @@ resource "sakuracloud_server" "instances2204" {
   disk_edit_parameter {
     hostname        = each.value.hostname
     password        = var.vm_password
-    disable_pw_auth = true
+    disable_pw_auth = false
+    note {
+      id = sakuracloud_note.install.id
+    }
   }
 }
 
