@@ -16,6 +16,9 @@ spec:
       services:
       - name: dreamkast
         port: 80
+      cookieRewritePolicies:
+      - name: _session_id
+        secure: true
     - conditions:
       - prefix: /cable
       enableWebsockets: true
@@ -25,21 +28,22 @@ spec:
       loadBalancerPolicy:
         strategy: Cookie
       cookieRewritePolicies:
-      - name: X-Contour-Session-Affinity
-        sameSite: Lax
+      - name: _session_id
         secure: true
     - conditions:
       - prefix: /o11y2022/ui
       services:
       - name: dreamkast-ui
         port: 3001
+      cookieRewritePolicies:
+      - name: _session_id
+        secure: true
     - conditions:
       - prefix: /_next
       services:
       - name: dreamkast-ui
         port: 3001
       cookieRewritePolicies:
-      - name: X-Contour-Session-Affinity
-        sameSite: Lax
+      - name: _session_id
         secure: true
 
