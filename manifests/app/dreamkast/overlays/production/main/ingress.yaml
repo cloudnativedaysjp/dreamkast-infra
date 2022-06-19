@@ -21,6 +21,8 @@ spec:
       cookieRewritePolicies:
       - name: _session_id
         secure: true
+      - name: X-Contour-Session-Affinity
+        secure: true
     - conditions:
       - prefix: /cable
       enableWebsockets: true
@@ -30,6 +32,8 @@ spec:
       cookieRewritePolicies:
       - name: _session_id
         secure: true
+      - name: X-Contour-Session-Affinity
+        secure: true
     - conditions:
       - prefix: /o11y2022/ui
       services:
@@ -38,6 +42,8 @@ spec:
       cookieRewritePolicies:
       - name: _session_id
         secure: true
+      - name: X-Contour-Session-Affinity
+        secure: true
     - conditions:
       - prefix: /_next
       services:
@@ -45,4 +51,6 @@ spec:
         port: 3001
       cookieRewritePolicies:
       - name: _session_id
+        secure: true
+      - name: X-Contour-Session-Affinity
         secure: true
