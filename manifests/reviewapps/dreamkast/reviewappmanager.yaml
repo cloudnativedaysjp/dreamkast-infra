@@ -6,7 +6,7 @@ metadata:
   namespace: reviewapp-operator-system
 spec:
   appRepoTarget:
-    username: showks-containerdaysjp
+    username: dreamkast-cloudnativedays
     organization: cloudnativedaysjp
     repository: dreamkast
     gitSecretRef:
@@ -20,7 +20,7 @@ spec:
 
       https://dreamkast-{{.Variables.AppRepositoryAlias}}-{{.AppRepo.PrNumber}}.dev.cloudnativedays.jp
   infraRepoTarget:
-    username: showks-containerdaysjp
+    username: dreamkast-cloudnativedays
     organization: cloudnativedaysjp
     repository: dreamkast-infra
     branch: main
