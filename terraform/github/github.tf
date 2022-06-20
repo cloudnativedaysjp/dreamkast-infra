@@ -29,7 +29,7 @@ resource "github_repository" "cndt2021" {
 }
 
 resource "github_membership" "membership_for_admin" {
-  for_each = toset(["jacopen", "Fufuhu", "inductor", "jyoshise", "kojiha", "kyohmizu", "makocchi-git", "MasayaAoyama", "nabemasat", "ShotaKitazawa", "showks-containerdaysjp", "suzukin", "takaishi", "tsukaman", "zembutsu"])
+  for_each = toset(["jacopen", "Fufuhu", "inductor", "jyoshise", "kojiha", "kyohmizu", "makocchi-git", "MasayaAoyama", "nabemasat", "ShotaKitazawa", "dreamkast-cloudnativedays", "suzukin", "takaishi", "tsukaman", "zembutsu"])
   username = each.key
   role     = "admin"
 }
