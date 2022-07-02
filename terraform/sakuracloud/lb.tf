@@ -14,7 +14,7 @@ resource "sakuracloud_proxylb" "uploader" {
   vip_failover   = true
   sticky_session = true
   gzip           = true
-  proxy_protocol = true
+  proxy_protocol = false
   timeout        = 10
   region         = "is1"
 
