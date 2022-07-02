@@ -19,15 +19,24 @@ resource "sakuracloud_proxylb" "uploader" {
   region         = "is1"
 
   health_check {
-    protocol    = "http"
+    protocol    = "tcp"
     delay_loop  = 10
-    host_header = "uploader.cloudnativedays.jp"
-    path        = "/"
   }
 
   bind_port {
     proxy_mode = "http"
     port       = 80
+    response_header {
+      header = "Cache-Control"
+      value  = "public, max-age=10"
+    }
+  }
+
+  bind_port {
+    proxy_mode = "https"
+    port       = 443
+    ssl_policy        = "TLS-1-2-2019-04"
+    support_http2     = true
     response_header {
       header = "Cache-Control"
       value  = "public, max-age=10"
@@ -42,7 +51,7 @@ resource "sakuracloud_proxylb" "uploader" {
 
   rule {
     host  = "uploader.cloudnativedays.jp"
-    path  = "/"
+    path  = "/*"
     group = "group1"
   }
 
