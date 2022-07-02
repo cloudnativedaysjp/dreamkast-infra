@@ -38,4 +38,3 @@ resource "sakuracloud_server" "uploader" {
     ]
   }
 }
-

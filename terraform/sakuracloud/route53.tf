@@ -40,6 +40,8 @@ resource "aws_route53_record" "uploader" {
   name    = "uploader.cloudnativedays.jp"
   type    = "A"
   ttl     = "300"
-  records = [sakuracloud_server.uploader.ip_address]
+  records = [sakuracloud_proxylb.uploader.vip]
+  depends_on = [
+    sakuracloud_proxylb.uploader
+  ]
 }
-
