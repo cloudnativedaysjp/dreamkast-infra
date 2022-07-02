@@ -2,7 +2,6 @@ resource sakuracloud_proxylb_acme "uploader" {
   proxylb_id        = sakuracloud_proxylb.uploader.id
   accept_tos        = true
   common_name       = "uploader.cloudnativedays.jp"
-  subject_alt_names = ["uploader.cloudnativedays.jp"]
   update_delay_sec  = 120
   depends_on = [
     aws_route53_record.uploader
