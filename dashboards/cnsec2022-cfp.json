@@ -62,9 +62,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -198,9 +196,7 @@
       },
       "id": 3,
       "options": {
-        "displayLabels": [
-          "value"
-        ],
+        "displayLabels": ["value"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
@@ -208,9 +204,7 @@
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -261,18 +255,14 @@
       },
       "id": 4,
       "options": {
-        "displayLabels": [
-          "value"
-        ],
+        "displayLabels": ["value"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom"
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -384,18 +374,14 @@
       },
       "id": 5,
       "options": {
-        "displayLabels": [
-          "value"
-        ],
+        "displayLabels": ["value"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom"
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -469,9 +455,7 @@
       },
       "id": 6,
       "options": {
-        "displayLabels": [
-          "value"
-        ],
+        "displayLabels": ["value"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
@@ -479,9 +463,7 @@
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -544,9 +526,7 @@
       },
       "id": 7,
       "options": {
-        "displayLabels": [
-          "value"
-        ],
+        "displayLabels": ["value"],
         "legend": {
           "displayMode": "list",
           "placement": "bottom",
@@ -554,9 +534,7 @@
         },
         "pieType": "pie",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -629,12 +607,12 @@
   },
   "time": {
     "from": "2022-05-19T15:00:00.000Z",
-    "to": "2022-06-13T15:00:00.000Z"
+    "to": "2022-06-14T15:00:00.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "#cnsec2022 proposal",
   "uid": "V3sHvXXnz",
-  "version": 8,
+  "version": 10,
   "weekStart": ""
 }
