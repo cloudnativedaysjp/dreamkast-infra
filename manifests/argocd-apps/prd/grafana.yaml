@@ -96,15 +96,15 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            o11y2022 proposals:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
-            o11y2022 main:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
+            # o11y2022 proposals:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
+            # o11y2022 main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
             cnsec2022 proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e191858f8b38b38a26f2a55db291053d67f8c1ae/dashboards/cnsec2022-cfp.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
           private:
             Amazon RDS:
               gnetId: 11264
