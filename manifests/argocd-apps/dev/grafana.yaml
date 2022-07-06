@@ -140,7 +140,7 @@ spec:
             Kubernetes-Pod:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Kubernetes-Pod.json
             Falco:
-              url: url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/falco-dashboard.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/falco-dashboard.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
