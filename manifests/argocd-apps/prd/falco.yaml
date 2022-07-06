@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco
+spec:
+  project: monitoring
+  source:
+    repoURL: https://falcosecurity.github.io/charts
+    targetRevision: 1.19.4
+    helm:
+      values: |
+        docker:
+          enabled: false
+        crio:
+          enabled: false
+        timezone: Asia/Tokyo
+        ebpf:
+          enabled: true
+        falco:
+          grpc:
+            enabled: true
+          grpcOutput:
+              enabled: true
+        certs:
+          existingSecret: falco-certs
+    chart: falco
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
