@@ -1,21 +1,8 @@
-data "sakuracloud_archive" "windows" {
-  filter {
-    id = "113301924671"
-  }
-}
-
-
 locals {
   windows = [
-    {
-      hostname = "windows01",
-    },
-    {
-      hostname = "windows02",
-    },
-    {
-      hostname = "windows03",
-    }
+    # {
+    #   hostname = "windows01",
+    # }
   ]
 }
 

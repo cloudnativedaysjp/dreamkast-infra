@@ -1,19 +1,12 @@
-data "sakuracloud_archive" "ubuntu" {
-  filter {
-    id = "113301413483"
-  }
-}
-data "sakuracloud_archive" "ubuntu2204" {
-  filter {
-    id = "113400863432"
-  }
-}
-
 locals {
+  ## NOTE: Please modify this if you want to add a new switcher instance.
   switchers = [
     {
       hostname = "switcher01"
-    }
+    },
+    {
+      hostname = "switcher02"
+    },
   ]
 }
 

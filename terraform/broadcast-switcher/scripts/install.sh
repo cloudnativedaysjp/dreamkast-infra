@@ -7,7 +7,6 @@ if [ ! -e /home/ubuntu/.ssh ]; then
     done
     sudo chown -R ubuntu:ubuntu /home/ubuntu/.ssh
 fi
-sudo systemctl restart ssh
 
 sudo add-apt-repository -y ppa:obsproject/obs-studio
 sudo apt-get update

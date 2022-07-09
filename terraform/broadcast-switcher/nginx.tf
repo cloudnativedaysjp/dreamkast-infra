@@ -1,4 +1,5 @@
 locals {
+  ## NOTE: Please modify this if you want to add a new instance.
   instances = [
     {
       hostname = "nginx01"
@@ -6,9 +7,6 @@ locals {
     {
       hostname = "nginx02"
     },
-    {
-      hostname = "nginx03"
-    }
   ]
 }
 
@@ -58,4 +56,3 @@ resource "sakuracloud_server" "instances" {
     ]
   }
 }
-
