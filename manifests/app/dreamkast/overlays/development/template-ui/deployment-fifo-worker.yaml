@@ -77,7 +77,7 @@ spec:
             secretKeyRef:
               key: REVIEW_APP
               name: dreamkast-secret
-        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: dreamkast-ecs
         imagePullPolicy: Always
         lifecycle:
           preStop:

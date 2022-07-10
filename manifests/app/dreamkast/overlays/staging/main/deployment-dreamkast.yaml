@@ -24,7 +24,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: dreamkast-ecs
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
         args:
@@ -81,7 +81,7 @@ spec:
               key: AUTH0_DOMAIN
       containers:
       - name: dreamkast
-        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: dreamkast-ecs
         ports:
           - containerPort: 3000
         env:
@@ -177,7 +177,7 @@ spec:
         tier: dreamkast-ui
     spec:
       containers:
-      - image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
+      - image: dreamkast-ui
         name: dreamkast-ui
         ports:
         - containerPort: 3001
