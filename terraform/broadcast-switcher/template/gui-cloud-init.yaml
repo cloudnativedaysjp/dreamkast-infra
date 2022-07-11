@@ -45,6 +45,8 @@ packages:
   - ubuntu-desktop
   - net-tools
   - software-properties-common
+  - dstat
+  - iftop
 runcmd:
   - sudo add-apt-repository -y ppa:obsproject/obs-studio
   - sudo apt-get update

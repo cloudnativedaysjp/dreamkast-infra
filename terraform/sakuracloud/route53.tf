@@ -45,3 +45,11 @@ resource "aws_route53_record" "uploader" {
     sakuracloud_proxylb.uploader
   ]
 }
+
+resource "aws_route53_record" "uploader_internal" {
+  zone_id = data.aws_route53_zone.cloudnativedays.zone_id
+  name    = "uploader-internal.cloudnativedays.jp"
+  type    = "A"
+  ttl     = "300"
+  records = [sakuracloud_server.uploader.ip_address]
+}

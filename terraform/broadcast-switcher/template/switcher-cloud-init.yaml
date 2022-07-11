@@ -35,6 +35,10 @@ packages:
   - git
   - unzip
   - x11vnc
+  - vlc
+  - wget
+  - dstat
+  - iftop
 runcmd:
   - sudo x11vnc -storepasswd ${vnc_password} /etc/.vncpasswd  
   - curl -sSL https://raw.githubusercontent.com/cloudnativedaysjp/broadcast/main/switcher/setup.sh | sh -
