@@ -35,7 +35,7 @@ spec:
       - name: X-Contour-Session-Affinity
         secure: true
     - conditions:
-      - prefix: /o11y2022/ui
+      - prefix: /cnsec2022/ui
       services:
       - name: dreamkast-ui
         port: 3001
