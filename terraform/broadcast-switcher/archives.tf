@@ -5,11 +5,11 @@ data "sakuracloud_archive" "ubuntu" {
 }
 data "sakuracloud_archive" "ubuntu2204" {
   filter {
-    id = "113400863432"
+    id = "113401132828"
   }
 }
 data "sakuracloud_archive" "windows" {
   filter {
-    id = "113301924671"
+    id = "113401184142"
   }
 }
