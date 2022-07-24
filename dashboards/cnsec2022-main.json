@@ -133,10 +133,46 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
+          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
-          "legendFormat": "o11y2022視聴者数",
+          "legendFormat": "CNsec2022全視聴者数",
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "avg(sum(dreamkast_track_viewer_count{track_id=\"1\"}) by(instance))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Track A 視聴者数",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "avg(sum(dreamkast_track_viewer_count{track_id=\"2\"}) by(instance))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Track B 視聴者数",
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "exemplar": true,
+          "expr": "avg(sum(dreamkast_track_viewer_count{track_id=\"3\"}) by(instance))",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "Track C 視聴者数",
+          "refId": "D"
         }
       ],
       "title": "CNSec2022視聴者数",
