@@ -228,7 +228,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
+          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
