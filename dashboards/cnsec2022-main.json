@@ -175,7 +175,7 @@
           "refId": "D"
         }
       ],
-      "title": "CNSec2022視聴者数",
+      "title": "CNSec2022全視聴者数",
       "type": "timeseries"
     },
     {
@@ -212,9 +212,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -234,7 +232,7 @@
           "refId": "A"
         }
       ],
-      "title": "CNSec2022視聴者数(最新値)",
+      "title": "CNSec2022全視聴者数(最新値)",
       "type": "stat"
     },
     {
@@ -355,9 +353,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -500,9 +496,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
