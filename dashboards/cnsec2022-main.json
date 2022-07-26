@@ -133,9 +133,9 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
+          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
-          "legendFormat": "o11y2022視聴者数",
+          "legendFormat": "CNsec2022視聴者数",
           "refId": "A"
         }
       ],
@@ -176,9 +176,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -192,7 +190,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_viewer_count) by(instance))",
+          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -319,9 +317,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
@@ -464,9 +460,7 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": ["lastNotNull"],
           "fields": "",
           "values": false
         },
