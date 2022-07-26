@@ -171,9 +171,9 @@ spec:
           - grafana-piechart-panel
       parameters:
         - name: image.tag
-          value: '9.0.4'
+          value: "9.0.4"
         - name: persistence.enabled
-          value: 'true'
+          value: "true"
         - name: persistence.type
           value: statefulset
   syncPolicy:
