@@ -107,7 +107,7 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
             cnsec2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/d0d949e0c0a89857624a098645e9751aa6b1d03f/dashboards/cnsec2022-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/4257030dd068913574b3cabd9fa63feb561260cb/dashboards/cnsec2022-main.json
           private:
             Amazon RDS:
               gnetId: 11264
@@ -171,9 +171,9 @@ spec:
           - grafana-piechart-panel
       parameters:
         - name: image.tag
-          value: "8.4.6"
+          value: '8.4.6'
         - name: persistence.enabled
-          value: "true"
+          value: 'true'
         - name: persistence.type
           value: statefulset
   syncPolicy:
