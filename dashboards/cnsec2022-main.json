@@ -133,7 +133,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
+          "expr": "max(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "CNsec2022視聴者数",
           "refId": "A"
@@ -190,7 +190,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_track_viewer_count) by(instance))",
+          "expr": "max(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -275,7 +275,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_chat_count) by(instance))",
+          "expr": "max(sum(dreamkast_chat_count) by(instance))",
           "interval": "",
           "legendFormat": "累積チャット数",
           "refId": "A"
@@ -331,7 +331,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(sum(dreamkast_chat_count) by(instance))",
+          "expr": "max(sum(dreamkast_chat_count) by(instance))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -417,7 +417,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(dreamkast_registrants_count{conference_id=\"6\"})",
+          "expr": "max(dreamkast_registrants_count{conference_id=\"6\"})",
           "interval": "",
           "legendFormat": "CNSec2022登録者数",
           "refId": "A"
@@ -475,7 +475,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "avg(dreamkast_registrants_count{conference_id=\"6\"})",
+          "expr": "max(dreamkast_registrants_count{conference_id=\"6\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
