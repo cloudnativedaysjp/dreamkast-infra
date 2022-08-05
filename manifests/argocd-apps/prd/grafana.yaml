@@ -107,7 +107,7 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
             cnsec2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/4257030dd068913574b3cabd9fa63feb561260cb/dashboards/cnsec2022-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
           private:
             Amazon RDS:
               gnetId: 11264
