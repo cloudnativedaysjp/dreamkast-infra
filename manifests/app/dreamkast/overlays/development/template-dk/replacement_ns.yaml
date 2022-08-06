@@ -1,0 +1,11 @@
+source:
+  version: v1
+  kind: ConfigMap
+  name: replacement-rules
+  fieldPath: data.ARGOCD_ENV_NAMESPACE
+targets:
+- select:
+    kind: Namespace
+    name: __REPLACEMENT__
+  fieldPaths:
+    - metadata.name

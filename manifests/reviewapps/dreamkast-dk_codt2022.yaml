@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dreamkast-dk-codt2022
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github:
+        owner: cloudnativedaysjp
+        repo: dreamkast-infra
+        tokenRef:
+          secretName: git-creds
+          key: password
+        labels:
+        - reviewapps
+      requeueAfterSeconds: 1800
+  template:
+    metadata:
+      name: 'dreamkast-dk-codt2022-{{number}}'
+      annotations:
+        notifications.argoproj.io/subscribe.on-deployed.github: ""
+        notifications.argoproj.io/subscribe.on-health-degraded.github: ""
+    spec:
+      project: reviewapps
+      source:
+        repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+        targetRevision: main
+        path: manifests/app/dreamkast/overlays/development/template-dk
+        plugin:
+          name: kustomize-with-replacements
+          env:
+            - name: FQDN
+              value: 'dreamkast-dk-codt2022-{{number}}.dev.cloudnativedays.jp'
+            - name: NAMESPACE
+              value: 'dreamkast-dk-codt2022-{{number}}'
+            - name: IMAGES
+              value: >-
+                dreamkast-ecs=public.ecr.aws/q5p7z1m4/dreamkast-ecs:{{head_sha}}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'dreamkast-dk-codt2022-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
