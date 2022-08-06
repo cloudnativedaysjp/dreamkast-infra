@@ -12,3 +12,18 @@ spec:
   - services:
     - name: argocd-server
       port: 80
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: argocd-applicationset-controller
+  namespace: argocd
+spec:
+  virtualhost:
+    fqdn: argocd-appset.dev.cloudnativedays.jp
+    tls:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+  routes:
+  - services:
+    - name: argocd-applicationset-controller
+      port: 7000

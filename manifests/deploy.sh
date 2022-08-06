@@ -32,6 +32,7 @@ function _setup() {
     ### user input ###
     : ${ARGOCD_SECRETKEY:=$(read -sp "input ArgoCD secretKey: " VAR; echo $VAR)}; echo ... 1>&2
     : ${ARGOCD_PASSWORD:=$(read -sp "input ArgoCD password: " VAR; echo $VAR)}; echo ... 1>&2
+    : ${ARGOCD_WEBHOOK_SECRET:=$(read -sp "input ArgoCD Webhook Secret: " VAR; echo $VAR)}; echo ... 1>&2
     : ${CLIENT_SECRET:=$(read -sp "input Auth0 ClientSecret: " VAR; echo $VAR)}; echo ... 1>&2
 
     ### create secret.yaml file
@@ -39,6 +40,7 @@ function _setup() {
     kubectl create secret generic argocd-secret \
       --from-literal=server.secretkey=${ARGOCD_SECRETKEY} \
       --from-literal=admin.password=$(htpasswd -nbBC 10 "" ${ARGOCD_PASSWORD} | tr -d ':\n' | sed 's/$2y/$2a/') \
+      --from-literal=webhook.github.secret=${ARGOCD_WEBHOOK_SECRET} \
       --from-literal=oidc.auth0.clientSecret=${CLIENT_SECRET} \
       --dry-run=client -o yaml >> ${MANIFEST_OVERLAY_DIR}/secret-argocd.yaml
   fi

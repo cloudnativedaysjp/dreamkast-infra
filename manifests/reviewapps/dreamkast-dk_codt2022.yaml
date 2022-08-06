@@ -7,8 +7,8 @@ spec:
   generators:
   - pullRequest:
       github:
-        owner: cloudnativedaysjp
-        repo: dreamkast-infra
+        owner: cloudopsdays
+        repo: dreamkast_codt2022
         tokenRef:
           secretName: git-creds
           key: password

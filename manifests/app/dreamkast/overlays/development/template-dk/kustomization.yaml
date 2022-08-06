@@ -23,5 +23,5 @@ configMapGenerator:
   - .env
   name: replacement-rules
 replacements:
-- path: replacement_ns.yaml
-- path: replacement_ingress-hostname.yaml
+- path: .replacement_ns.yaml
+- path: .replacement_ingress-hostname.yaml

@@ -8,7 +8,7 @@ spec:
   - pullRequest:
       github:
         owner: cloudnativedaysjp
-        repo: dreamkast-infra
+        repo: dreamkast-ui
         tokenRef:
           secretName: git-creds
           key: password
