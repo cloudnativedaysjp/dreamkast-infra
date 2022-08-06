@@ -24,3 +24,11 @@ configMapGenerator:
 replacements:
 - path: .replacement_ns.yaml
 - path: .replacement_ingress-hostname.yaml
+
+images:
+- name: dreamkast-ecs
+  newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
+  newTag: latest
+- name: dreamkast-ui
+  newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
+  newTag: latest
