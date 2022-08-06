@@ -36,7 +36,8 @@ spec:
               value: 'dreamkast-dk-{{number}}'
             - name: IMAGES
               value: >-
-                dreamkast-ecs=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:{{head_sha}}
+                dreamkast-ecs=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:{{head_sha}},
+                dreamkast-ui=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:main
       destination:
         server: https://kubernetes.default.svc
         namespace: 'dreamkast-dk-{{number}}'
