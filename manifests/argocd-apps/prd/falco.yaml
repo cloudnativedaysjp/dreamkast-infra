@@ -6,16 +6,16 @@ spec:
   project: monitoring
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 2.0.10
+    targetRevision: 1.19.4
     helm:
       values: |
-        driver:
-          kind: ebpf
+        ebpf:
+          enabled: true
         falco:
           grpc:
             enabled: true
-          grpc_output:
-            enabled: true
+          grpcOutput:
+              enabled: true
         certs:
           existingSecret: falco-certs
     chart: falco
