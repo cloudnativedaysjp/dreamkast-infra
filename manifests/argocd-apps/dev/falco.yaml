@@ -11,6 +11,10 @@ spec:
       values: |
         driver:
           kind: ebpf
+          loader:
+            initContainer:
+              securityContext:
+                privileged: true
         falco:
           grpc:
             enabled: true
