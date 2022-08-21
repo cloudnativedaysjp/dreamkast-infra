@@ -36,8 +36,8 @@ spec:
               value: 'dreamkast-dk-codt2022-{{number}}'
             - name: IMAGES
               value: >-
-                dreamkast-ecs=632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:{{head_sha}},
-                dreamkast-ui=632965872029.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:main
+                dreamkast-ecs=public.ecr.aws/q5p7z1m4/dreamkast-ecs:{{head_sha}},
+                dreamkast-ui=public.ecr.aws/q5p7z1m4/dreamkast-ui:main
       destination:
         server: https://kubernetes.default.svc
         namespace: 'dreamkast-dk-codt2022-{{number}}'
