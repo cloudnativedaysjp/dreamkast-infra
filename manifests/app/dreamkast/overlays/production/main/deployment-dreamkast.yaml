@@ -146,6 +146,11 @@ spec:
             secretKeyRef:
               name: dreamkast-secret
               key: AUTH0_DOMAIN
+        - name: NEWRELIC_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: newrelic-secret
+              key: NEWRELIC_LICENSE_KEY
         livenessProbe:
           httpGet:
             port: 3000
