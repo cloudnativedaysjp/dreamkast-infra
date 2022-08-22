@@ -149,7 +149,7 @@ spec:
         - name: NEWRELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
-              name: newrelic-secret
+              name: dreamkast-secret
               key: NEWRELIC_LICENSE_KEY
         livenessProbe:
           httpGet:
