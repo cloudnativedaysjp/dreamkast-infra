@@ -7,4 +7,5 @@ data:
   policy.default: role:readonly
   policy.csv: |
     g, dreamkast-core, role:admin
+    g, observability-core, role:admin
   scopes: '[https://cloudnativedays.jp/claims/groups, email]' 
