@@ -2,17 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dreamkast-releasebot
+  name: chatbot
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: dreamkast-releasebot
+    namespace: chatbot
     server: https://kubernetes.default.svc
   project: cd
   source:
-    path: manifests/app/dreamkast-releasebot/overlays/production
+    path: manifests/app/chatbot
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
