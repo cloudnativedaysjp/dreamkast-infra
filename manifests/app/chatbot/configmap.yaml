@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chatbot
+data:
+  config.yaml: |
+    debug: false
+    slack:
+      botToken: ${SLACK_BOT_TOKEN}
+      appToken: ${SLACK_APP_TOKEN}
+    github:
+      username: dreamkast-cloudnativedays
+      accessToken: ${GITHUB_TOKEN}
+    release:
+      targets:
+      - url: https://github.com/cloudnativedaysjp/dreamkast
+        baseBranch: main
+      - url: https://github.com/cloudnativedaysjp/dreamkast-ui
+        baseBranch: main
+      - url: https://github.com/cloudnativedaysjp/website
+        baseBranch: main
+      - url: https://github.com/cloudopsdays/dreamkast_codt2022
+        baseBranch: main
+      - url: https://github.com/cloudopsdays/dreamkast-ui_codt2022
+        baseBranch: main
