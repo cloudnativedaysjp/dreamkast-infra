@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: chatbot
 resources:
 - deployment.yaml
+- configmap.yaml
 - secret.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/chatbot
