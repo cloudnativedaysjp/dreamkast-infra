@@ -15,7 +15,6 @@ resources:
 - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/a9054030d7768c78ea65d74f70bb1f60350002e8/manifests/node-exporter-clusterRoleBinding.yaml
 - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/a9054030d7768c78ea65d74f70bb1f60350002e8/manifests/node-exporter-daemonset.yaml
 - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/a9054030d7768c78ea65d74f70bb1f60350002e8/manifests/node-exporter-service.yaml
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/a9054030d7768c78ea65d74f70bb1f60350002e8/manifests/node-exporter-serviceMonitor.yaml
 - monitor.yaml
 - alertmanager.yaml
 - alert-rules.yaml
