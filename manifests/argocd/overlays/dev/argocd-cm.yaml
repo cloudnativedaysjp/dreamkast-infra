@@ -27,8 +27,9 @@ data:
       init:
         command: ["bash", "-euxc"]
         args:
-        - export IFS=",";
-          for image in ${ARGOCD_ENV_IMAGES}; do
+        - images=$(echo ${ARGOCD_ENV_IMAGES} | sed -e 's/ //g');
+          export IFS=",";
+          for image in $images; do
             kustomize edit set image $image;
           done;
           kustomize edit set namespace $ARGOCD_ENV_NAMESPACE;
