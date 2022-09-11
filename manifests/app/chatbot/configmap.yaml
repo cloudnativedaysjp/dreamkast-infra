@@ -20,7 +20,5 @@ data:
         baseBranch: main
       - url: https://github.com/cloudnativedaysjp/website
         baseBranch: main
-      - url: https://github.com/cloudopsdays/dreamkast_codt2022
-        baseBranch: main
-      - url: https://github.com/cloudopsdays/dreamkast-ui_codt2022
+      - url: https://github.com/cloudnativedaysjp/chatbot
         baseBranch: main
