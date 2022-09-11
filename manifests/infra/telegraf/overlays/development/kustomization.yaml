@@ -7,3 +7,4 @@ resources:
 
 patchesStrategicMerge:
 - patch-telegraf-deployment.yaml
+- patch-configmap.yaml
