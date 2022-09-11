@@ -7,4 +7,4 @@ resources:
 - secret.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/chatbot
-  newTag: f34fa9594d7fffcca90eeafaefa62214044aa12c
+  newTag: e3b8dcb6a8b32b2df557759670238fc2c4593480
