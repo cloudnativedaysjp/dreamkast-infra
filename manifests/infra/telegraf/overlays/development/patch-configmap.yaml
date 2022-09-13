@@ -97,9 +97,9 @@ data:
         measurement = "dreamkast_talks"
         tag_columns_include = [ "title", "talk_difficulty" ]
       [[inputs.sql.query]]
-        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE p.label in ('presentation_method', 'assumed_visitor','execution_phase','whether_it_can_be_published','session_time','language') AND p.conference_id='${CONF_ID}'"
+        query="SELECT t.id AS talk_id,p.label,p.params FROM proposal_items p LEFT JOIN talks t ON p.talk_id = t.id  WHERE p.label in ('presentation_method','assumed_visitor','execution_phase','whether_it_can_be_published','session_time','language') AND p.conference_id='${CONF_ID}'"
         measurement = "dreamkast_proposal_items"
-        tag_columns_include = [ "labels", "params" ]
+        tag_columns_include = [ "talk_id", "labels", "params" ]
   
     [[inputs.github]]
       ## prevent rate limit, query per 30min
