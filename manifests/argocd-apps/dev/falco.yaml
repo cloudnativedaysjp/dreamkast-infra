@@ -24,11 +24,9 @@ spec:
           json_include_output_property: true
           http_output:
             enabled: true
-            url: "http://falco-sidekick-falcosidekick:2801"
+            url: "http://falcosidekick:2801"
         certs:
           existingSecret: falco-certs
-        falcosidekick:
-          enabled: true
     chart: falco
   destination:
     server: https://kubernetes.default.svc
