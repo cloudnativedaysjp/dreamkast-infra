@@ -24,7 +24,7 @@ spec:
           json_include_output_property: true
           http_output:
             enabled: true
-            url: "http://falcosidekick:2801"
+            url: "http://falco-sidekick-falcosidekick:2801"
         certs:
           existingSecret: falco-certs
     chart: falco
