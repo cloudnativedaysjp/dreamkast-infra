@@ -109,6 +109,9 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/Kubernetes-Pod.json
             Falco:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/2ac295664c31e3096a142b237e95881436c4e2d4/dashboards/falco-dashboard.json
+            cndt2022 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/684ada3225f562c0f682944201bd19648588e384/dashboards/cndt2022-cfp.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
