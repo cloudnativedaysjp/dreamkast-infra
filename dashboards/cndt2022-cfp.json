@@ -25,7 +25,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 49,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -854,6 +853,5 @@
   "timezone": "",
   "title": "#cndt2022 proposal",
   "uid": "d1GFV5M4k",
-  "version": 16,
   "weekStart": ""
 }
