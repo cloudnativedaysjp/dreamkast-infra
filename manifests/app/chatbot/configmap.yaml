@@ -22,3 +22,5 @@ data:
         baseBranch: main
       - url: https://github.com/cloudnativedaysjp/chatbot
         baseBranch: main
+      - url: https://github.com/cloudnativedaysjp/dreamkast-functions
+        baseBranch: main
