@@ -2,17 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: chatbot
+  name: seaman
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: chatbot
+    namespace: seaman
     server: https://kubernetes.default.svc
   project: cd
   source:
-    path: manifests/app/chatbot
+    path: manifests/app/seaman
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
