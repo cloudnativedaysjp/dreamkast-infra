@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: chatbot
+  name: seaman
 data:
   config.yaml: |
     debug: false
@@ -20,7 +20,7 @@ data:
         baseBranch: main
       - url: https://github.com/cloudnativedaysjp/website
         baseBranch: main
-      - url: https://github.com/cloudnativedaysjp/chatbot
+      - url: https://github.com/cloudnativedaysjp/seaman
         baseBranch: main
       - url: https://github.com/cloudnativedaysjp/dreamkast-functions
         baseBranch: main
