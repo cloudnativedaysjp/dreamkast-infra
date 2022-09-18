@@ -1,10 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: chatbot
+namespace: seaman
 resources:
 - deployment.yaml
 - configmap.yaml
 - secret.yaml
 images:
-- name: public.ecr.aws/f5j9d0q5/chatbot
+- name: public.ecr.aws/f5j9d0q5/seaman
   newTag: e3b8dcb6a8b32b2df557759670238fc2c4593480

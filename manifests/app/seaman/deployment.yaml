@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: chatbot
-  name: chatbot
+    app: seaman
+  name: seaman
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chatbot
+      app: seaman
   template:
     metadata:
       labels:
-        app: chatbot
+        app: seaman
     spec:
       containers:
-      - image: public.ecr.aws/f5j9d0q5/chatbot
-        name: chatbot
+      - image: public.ecr.aws/f5j9d0q5/seaman
+        name: seaman
         args:
         - --config=/mnt/config/config.yaml
         volumeMounts:
@@ -24,7 +24,7 @@ spec:
           mountPath: /mnt/config
         envFrom:
         - secretRef:
-            name: chatbot
+            name: seaman
         resources:
           requests:
             memory: "64Mi"
@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: chatbot
+          name: seaman
