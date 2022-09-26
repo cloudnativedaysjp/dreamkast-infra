@@ -70,15 +70,18 @@ spec:
             # o11y2022 main:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
-            cnsec2022 proposals:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
-            cnsec2022 main:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
+            # cnsec2022 proposals:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
+            # cnsec2022 main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
             cndt2022 proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1c9a39cf3eb36070f72b8aa1d1a4b1859f99f39a/dashboards/cndt2022-cfp.json
+            ArgoCD:
+              gnetId: 14584
+              revision: 1              
           private:
             Amazon RDS:
               gnetId: 11264
