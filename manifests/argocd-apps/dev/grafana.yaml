@@ -79,6 +79,9 @@ spec:
             cndt2022 proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-cfp.json
+            ArgoCD:
+              gnetId: 14584
+              revision: 1
           private:
             Amazon RDS:
               gnetId: 11264
