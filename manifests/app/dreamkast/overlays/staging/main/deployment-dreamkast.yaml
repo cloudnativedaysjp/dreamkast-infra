@@ -29,7 +29,7 @@ spec:
         command: ["/bin/bash", "-c"]
         args:
         - bundle exec rails db:migrate;
-          bundle exec rails db:seed_fu;
+          bundle exec rails db:seed;
         env:
         - name: RAILS_ENV
           value: "production"
