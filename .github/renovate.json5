@@ -1,0 +1,44 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+  ],
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all minor, or patch dependencies on Docker",
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "all dependencies on GitHub Actions",
+    },
+    {
+      "matchManagers": ["terraform"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all minor, or patch dependencies on Terraform",
+    },
+    {
+      "matchManagers": ["argocd"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "all minor, or patch dependencies on ArgoCD",
+    },
+
+  ],
+  "enabledManagers": [
+    "dockerfile",
+    "docker-compose",
+    "github-actions",
+    "kustomize",
+    "terraform",
+    "argocd",
+    "html",
+  ],
+  "argocd": {
+    "fileMatch": [
+      "^manifests/application-.*\.yaml$",
+      "^.*argocd-apps/.*\.yaml$", // argocd-app ディレクトリ以下の .yaml ファイルすべて
+    ]
+  },
+}
