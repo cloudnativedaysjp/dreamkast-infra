@@ -12,6 +12,7 @@ resources:
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-dreamkast-ui.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
