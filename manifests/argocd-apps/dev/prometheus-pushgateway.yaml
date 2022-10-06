@@ -19,6 +19,7 @@ spec:
       values: |
         serviceMonitor:
           enabled: true
+          interval: 5s
         ingress:
           enabled: true
           hosts:
