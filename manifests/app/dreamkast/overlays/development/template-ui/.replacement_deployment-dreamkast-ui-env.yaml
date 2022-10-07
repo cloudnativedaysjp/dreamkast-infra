@@ -1,0 +1,11 @@
+source:
+  version: v1
+  kind: ConfigMap
+  name: replacement-rules
+  fieldPath: data.ARGOCD_ENV_BASE_URL
+targets:
+- select:
+    kind: Deployment
+    name: dreamkast-ui
+  fieldPaths:
+    - spec.template.spec.containers.[name=dreamkast-ui].env.[name=NEXT_PUBLIC_API_BASE_URL].value

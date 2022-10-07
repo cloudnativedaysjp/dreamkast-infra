@@ -11,6 +11,7 @@ resources:
 - polling-harvest-job-and-update-video.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-dreamkast-ui.yaml
 namespace: dreamkast-staging
 images:
 - name: dreamkast-ecs

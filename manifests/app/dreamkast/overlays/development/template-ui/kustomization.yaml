@@ -12,6 +12,7 @@ resources:
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+- deployment-dreamkast-ui.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
@@ -24,6 +25,7 @@ configMapGenerator:
 replacements:
 - path: .replacement_ns.yaml
 - path: .replacement_ingress-hostname.yaml
+- path: .replacement_deployment-dreamkast-ui-env.yaml
 
 images:
 - name: dreamkast-ecs
