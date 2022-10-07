@@ -7,4 +7,4 @@ resources:
 - secret.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/seaman
-  newTag: 41ce046138e01b736b32523d9ef6012f84108b87
+  newTag: af06487d959396183190839a408fd52237a84c88
