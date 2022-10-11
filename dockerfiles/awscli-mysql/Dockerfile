@@ -1,4 +1,4 @@
-FROM mysql:8.0.23
+FROM mysql:8.0.31
 RUN apt-get update && apt-get install -y python3 curl unzip vim
 RUN sed -i '1s/^/openssl_conf = default_conf\n/' /usr/lib/ssl/openssl.cnf
 RUN echo "[ default_conf ] \n\
