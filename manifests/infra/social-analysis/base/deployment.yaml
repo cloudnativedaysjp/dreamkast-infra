@@ -17,7 +17,7 @@ spec:
         emptyDir: {}
       initContainers:
       - name: jpn-dictionary
-        image: busybox
+        image: alpine
         command:
         - wget
         - "-O"
