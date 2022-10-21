@@ -12,7 +12,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.26.1
+    targetRevision: 6.42.2
     helm:
       values: |
         datasources:
@@ -31,9 +31,6 @@ spec:
               jsonData:
                 authType: default
                 defaultRegion: ap-northeast-1
-            - name: Jaeger
-              type: jaeger
-              url: http://jaeger-tracing-query:16686
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -67,12 +64,27 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            o11y2022 proposals:
+            # o11y2022 proposals:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
+            # o11y2022 main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
+            # cnsec2022 proposals:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
+            # cnsec2022 main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
+            cndt2022 proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
-            o11y2022 main:
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1c9a39cf3eb36070f72b8aa1d1a4b1859f99f39a/dashboards/cndt2022-cfp.json
+            cndt2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/35618615e3e06ed44a4e908dc1d4cbf233911da3/dashboards/cndt2022-main.json
+            ArgoCD:
+              gnetId: 14584
+              revision: 1              
           private:
             Amazon RDS:
               gnetId: 11264
@@ -104,6 +116,11 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/Kubernetes-Pod.json
+            Falco:
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/2ac295664c31e3096a142b237e95881436c4e2d4/dashboards/falco-dashboard.json
+            Github:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/f1706b5c796f37259cf6b3020b23203a3fa15e7e/dashboards/github.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
@@ -123,20 +140,27 @@ spec:
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+          security:
+            cookie_secure: true
+            cookie_samesite: true
+            strict_transport_security: true
+            x_content_type_options: true
+            x_xss_protection: true
+            content_security_policy: true
         plugins:
           - grafana-piechart-panel
       parameters:
-      - name: image.tag
-        value: "8.4.6"
-      - name: persistence.enabled
-        value: "true"
-      - name: persistence.type
-        value: statefulset
+        - name: image.tag
+          value: "9.0.4"
+        - name: persistence.enabled
+          value: "true"
+        - name: persistence.type
+          value: statefulset
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -156,4 +180,4 @@ spec:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

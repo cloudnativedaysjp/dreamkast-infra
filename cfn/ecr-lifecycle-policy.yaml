@@ -62,19 +62,6 @@ Resources:
                 "action":{
                   "type":"expire"
                 }
-              },
-              {
-                "rulePriority":5,
-                "description":"明示的なtag以外の制御",
-                "selection":{
-                  "tagStatus":"any",
-                  "countType":"sinceImagePushed",
-                  "countUnit":"days",
-                  "countNumber":30
-                },
-                "action":{
-                  "type":"expire"
-                }
               }
             ]
           }

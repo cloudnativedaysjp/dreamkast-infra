@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco
+spec:
+  project: monitoring
+  source:
+    repoURL: https://falcosecurity.github.io/charts
+    targetRevision: 2.0.18
+    helm:
+      values: |
+        driver:
+          kind: ebpf
+          loader:
+            initContainer:
+              securityContext:
+                privileged: true
+        falco:
+          grpc:
+            enabled: true
+          grpc_output:
+            enabled: true
+          json_output: true
+          json_include_output_property: true
+          http_output:
+            enabled: true
+            url: "http://falco-sidekick-falcosidekick:2801"
+        certs:
+          existingSecret: falco-certs
+    chart: falco
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

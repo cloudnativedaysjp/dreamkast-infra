@@ -14,7 +14,7 @@ spec:
   source:
     chart: cluster-autoscaler
     repoURL: https://kubernetes.github.io/autoscaler
-    targetRevision: 9.13.0
+    targetRevision: 9.21.0
     helm:
       releaseName: aws-cluster-autoscaler
       parameters:
@@ -26,6 +26,14 @@ spec:
         value: "false"
       - name: rbac.serviceAccount.name
         value: cluster-autoscaler
+      - name: resources.limits.cpu
+        value: 100m
+      - name: resources.limits.memory
+        value: 300Mi
+      - name: resources.requests.cpu
+        value: 100m
+      - name: resources.requests.memory
+        value: 300Mi
   syncPolicy:
     automated:
       prune: true

@@ -12,7 +12,7 @@ spec:
   source:
     chart: grafana
     repoURL: https://grafana.github.io/helm-charts
-    targetRevision: 6.26.1
+    targetRevision: 6.42.2
     helm:
       values: |
         datasources:
@@ -31,9 +31,6 @@ spec:
               jsonData:
                 authType: default
                 defaultRegion: ap-northeast-1
-            - name: Jaeger
-              type: jaeger
-              url: http://jaeger-tracing-query:16686
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -76,6 +73,18 @@ spec:
             cnsec2022 proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnsec2022-cfp.json
+            cnsec2022 main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnsec2022-main.json
+            cndt2022 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-cfp.json
+            cndt2022 main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-main.json
+            ArgoCD:
+              gnetId: 14584
+              revision: 1
           private:
             Amazon RDS:
               gnetId: 11264
@@ -107,6 +116,11 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Kubernetes-Pod.json
+            Falco:
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/falco-dashboard.json
+            Github:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/github.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
@@ -126,11 +140,18 @@ spec:
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
             role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+          security:
+            cookie_secure: true
+            cookie_samesite: true
+            strict_transport_security: true
+            x_content_type_options: true
+            x_xss_protection: true
+            content_security_policy: true
         plugins:
           - grafana-piechart-panel
       parameters:
         - name: image.tag
-          value: "8.4.6"
+          value: "9.0.4"
         - name: persistence.enabled
           value: "true"
         - name: persistence.type

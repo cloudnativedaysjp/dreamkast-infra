@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: seaman
+  name: seaman
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: seaman
+  template:
+    metadata:
+      labels:
+        app: seaman
+    spec:
+      containers:
+      - image: public.ecr.aws/f5j9d0q5/seaman
+        name: seaman
+        args:
+        - --config=/mnt/config/config.yaml
+        volumeMounts:
+        - name: config
+          mountPath: /mnt/config
+        envFrom:
+        - secretRef:
+            name: seaman
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+      volumes:
+      - name: config
+        configMap:
+          name: seaman

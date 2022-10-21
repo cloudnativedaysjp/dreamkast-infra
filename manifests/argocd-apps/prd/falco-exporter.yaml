@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco-exporter
+spec:
+  project: monitoring
+  source:
+    repoURL: https://falcosecurity.github.io/charts
+    targetRevision: 0.8.2
+    chart: falco-exporter
+    helm:
+      values: |
+        serviceMonitor:
+          enabled: true
+          additionalLabels:
+            release: prometheus
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true

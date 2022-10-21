@@ -23,12 +23,12 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: dreamkast-ecs
         imagePullPolicy: Always
         command: ["/bin/bash", "-c"]
         args:
         - bundle exec rails db:migrate;
-          bundle exec rails db:seed_fu;
+          bundle exec rails db:seed;
         env:
         - name: RAILS_ENV
           value: "production"
@@ -75,7 +75,7 @@ spec:
               key: REVIEW_APP
       containers:
       - name: dreamkast
-        image: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:main
+        image: dreamkast-ecs
         imagePullPolicy: Always
         ports:
           - containerPort: 3000
@@ -96,6 +96,8 @@ spec:
           value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-devFifoQueue.fifo"
         - name: AWS_REGION
           value: ap-northeast-1
+        - name: DREAMKAST_API_ADDR
+          value: "https://api.dev.cloudnativedays.jp"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:
