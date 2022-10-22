@@ -124,4 +124,5 @@ resource "uptimerobot_monitor" "prometheus" {
 
 output "prom" {
   value = var.prometheus_password
+  sensitive = true
 }
