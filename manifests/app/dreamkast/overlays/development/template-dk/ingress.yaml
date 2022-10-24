@@ -22,7 +22,7 @@ spec:
       - name: dreamkast
         port: 80
     - conditions: #TODO: Need to resolve this hardcoded routing
-      - prefix: /cnsec2022/ui
+      - prefix: /cndt2022/ui
       services:
       - name: dreamkast-ui
         port: 3001
