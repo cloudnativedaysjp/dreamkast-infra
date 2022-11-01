@@ -149,6 +149,7 @@ spec:
             content_security_policy: true
         plugins:
           - grafana-piechart-panel
+          - magnesium-wordcloud-panel
       parameters:
         - name: image.tag
           value: "9.0.4"
