@@ -13,7 +13,7 @@ spec:
   project: monitoring
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
-    targetRevision: 1.20.0
+    targetRevision: 1.20.1
     chart: prometheus-pushgateway
     helm:
       values: |
