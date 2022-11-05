@@ -33,7 +33,7 @@ spec:
   project: infra
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    path: manifests/infra/keda-external-sclaers/overlays/development
+    path: manifests/infra/keda-external-scalers/overlays/development
     targetRevision: main
   syncPolicy:
     automated:
