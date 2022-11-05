@@ -9,7 +9,7 @@ spec:
       - name: dreamkast-ui
         env:
         - name: NEXT_PUBLIC_API_BASE_URL
-          value: https://staging.dev.cloudnativedays.jp
+          value: https://api.stg.cloudnativedays.jp
         - name: NEXT_PUBLIC_AUTH0_DOMAIN
           valueFrom:
             secretKeyRef:
