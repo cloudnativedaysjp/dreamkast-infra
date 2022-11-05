@@ -30,8 +30,6 @@ spec:
         plugin:
           name: kustomize-with-replacements
           env:
-            - name: BASE_URL
-              value: 'https://dreamkast-ui-{{number}}.dev.cloudnativedays.jp'
             - name: FQDN
               value: 'dreamkast-ui-{{number}}.dev.cloudnativedays.jp'
             - name: NAMESPACE
