@@ -20,7 +20,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: DK_ENDPOINT_URL
-          value: "https://staging.dev.cloudnativedays.jp/api"
+          value: "https://staging.dev.cloudnativedays.jp/"
         livenessProbe:
           tcpSocket:
             port: 6000
