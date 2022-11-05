@@ -5,5 +5,4 @@ resources:
 - ./dreamkast-external-scaler.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/dreamkast-external-scaler
-  newTag: main
-
+  newTag: v1.0.0
