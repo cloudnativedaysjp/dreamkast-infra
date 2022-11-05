@@ -15,10 +15,6 @@ spec:
     chart: keda
     repoURL: https://kedacore.github.io/charts
     targetRevision: 2.8.1
-    helm:
-      parameters:
-      - name: loki.persistence.enabled
-        value: "true"
   syncPolicy:
     automated:
       prune: true
