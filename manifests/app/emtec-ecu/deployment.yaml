@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: emtec-ecu
+  name: emtec-ecu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emtec-ecu
+  template:
+    metadata:
+      labels:
+        app: emtec-ecu
+    spec:
+      containers:
+      - image: public.ecr.aws/f5j9d0q5/emtec-ecu
+        name: emtec-ecu
+        args:
+        - --config=/mnt/config/config.yaml
+        volumeMounts:
+        - name: config
+          mountPath: /mnt/config
+        envFrom:
+        - secretRef:
+            name: emtec-ecu
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+      volumes:
+      - name: config
+        configMap:
+          name: emtec-ecu
+---
+#

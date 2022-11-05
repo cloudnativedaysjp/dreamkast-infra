@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: emtec-ecu
+data:
+  config.yaml: |
+    wsProxy:
+      bindAddr: :20080
+    dreamkast:
+      eventAbbr: cndt2022
+      endpointUrl: https://event.cloudnativedays.jp/api
+    tracks:
+      - dkTrackId: 32
+        obs:
+          host: TODO
+          password: ${SWITCHER01_PASSWORD}
+        slack:
+          botToken: ${SLACK_BOT_TOKEN}
+          channelId: https://cloudnativedays.slack.com/archives/C042WCH6D0A  # demoevent-track-a
+    redis:
+      host: redis:6389
+    watcher:
+      obsWatcher:
+        syncPeriodSeconds: 5
+        startPreparationPeriodSeconds: 30
+      dkWatcher:
+        syncPeriodSeconds: 30
+        howManyMinutesBeforeNotification: 5
+---
+apiVersion: 'kubernetes-client.io/v1'
+kind: ExternalSecret
+metadata:
+  name: seaman
+spec:
+  backendType: secretsManager
+  data:
+    - key: emtec-ecu
+      name: SWITCHER01_PASSWORD
+      property: SWITCHER01_PASSWORD
+    - key: emtec-ecu
+      name: SLACK_BOT_TOKEN
+      property: SLACK_BOT_TOKEN
