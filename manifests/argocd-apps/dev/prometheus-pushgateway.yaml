@@ -24,6 +24,10 @@ spec:
           enabled: true
           hosts:
             - pushgateway.dev.cloudnativedays.jp
+          tls:
+            - secretName: cert-manager/wildcard-cloudnativedays-jp
+              hosts:
+                - pushgateway.dev.cloudnativedays.jp
         persistentVolume:
           enabled: true
   syncPolicy:
