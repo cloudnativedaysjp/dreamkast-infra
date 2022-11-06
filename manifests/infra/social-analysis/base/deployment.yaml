@@ -27,7 +27,7 @@ spec:
         - name: workdir
           mountPath: "/work-dir"
       containers:
-      - image: ghcr.io/cloudnativedaysjp/social-analysis:0.0.2-snapshot
+      - image: ghcr.io/cloudnativedaysjp/social-analysis:1.0.0
         name: social-analysis
         imagePullPolicy: Always
         readinessProbe:
