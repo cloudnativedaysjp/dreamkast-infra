@@ -25,7 +25,7 @@ spec:
           hosts:
             - pushgateway.dev.cloudnativedays.jp
           tls:
-            - secretName: cert-manager/wildcard-cloudnativedays-jp
+            - secretName: cert-manager/wildcard-dev-cloudnativedays-jp
               hosts:
                 - pushgateway.dev.cloudnativedays.jp
         persistentVolume:
