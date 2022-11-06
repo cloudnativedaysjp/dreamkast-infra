@@ -20,14 +20,6 @@ spec:
         serviceMonitor:
           enabled: true
           interval: 5s
-        ingress:
-          enabled: true
-          hosts:
-            - pushgateway.dev.cloudnativedays.jp
-          tls:
-            - secretName: cert-manager/wildcard-dev-cloudnativedays-jp
-              hosts:
-                - pushgateway.dev.cloudnativedays.jp
         persistentVolume:
           enabled: true
   syncPolicy:
