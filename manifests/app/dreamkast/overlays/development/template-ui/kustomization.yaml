@@ -11,7 +11,7 @@ resources:
 - viewer-count.yaml
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
-- deployment-dreamkast.yaml
+- delete-patches.yaml
 - deployment-dreamkast-ui.yaml
 
 patches:

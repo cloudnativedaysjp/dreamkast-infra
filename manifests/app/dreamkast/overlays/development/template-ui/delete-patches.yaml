@@ -1,0 +1,24 @@
+---
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast
+---
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast-fifo-worker
+---
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast-mysql
+---
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast-redis
