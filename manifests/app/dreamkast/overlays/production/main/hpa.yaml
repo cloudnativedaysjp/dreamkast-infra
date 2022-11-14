@@ -1,5 +1,6 @@
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
 metadata:
   name: dreamkast
 spec:
@@ -7,25 +8,30 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: dreamkast
-  minReplicas: 2
-  maxReplicas: 5
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 2400
-      policies:
-      - type: Pods
-        value: 1
-        periodSeconds: 60
+  pollingInterval:  30
+  minReplicaCount:  2
+  maxReplicaCount:  30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 2400
+          policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "50"
+  - type: external
+    metadata:
+      scalerAddress: dreamkast-external-scaler.keda.svc:6000
+      minReplicas: "10"
 ---
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
 metadata:
   name: dreamkast-ui
 spec:
@@ -33,19 +39,25 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: dreamkast-ui
-  minReplicas: 1
-  maxReplicas: 1
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 2400
-      policies:
-      - type: Pods
-        value: 1
-        periodSeconds: 60
+  pollingInterval:  30
+  minReplicaCount:  1
+  maxReplicaCount:  30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 2400
+          policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "50"
+  - type: external
+    metadata:
+      scalerAddress: dreamkast-external-scaler.keda.svc:6000
+      minReplicas: "10"
+
