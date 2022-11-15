@@ -83,6 +83,9 @@ spec:
             cndt2022 main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-main.json
+            cndt2022 onsite:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-onsite.json
             ArgoCD:
               gnetId: 14584
               revision: 1
@@ -153,9 +156,9 @@ spec:
           - magnesium-wordcloud-panel
       parameters:
         - name: image.tag
-          value: "9.0.4"
+          value: '9.0.4'
         - name: persistence.enabled
-          value: "true"
+          value: 'true'
         - name: persistence.type
           value: statefulset
   syncPolicy:
