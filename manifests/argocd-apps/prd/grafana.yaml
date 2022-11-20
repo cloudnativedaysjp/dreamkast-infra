@@ -81,7 +81,10 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1c9a39cf3eb36070f72b8aa1d1a4b1859f99f39a/dashboards/cndt2022-cfp.json
             cndt2022 main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/35618615e3e06ed44a4e908dc1d4cbf233911da3/dashboards/cndt2022-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/34060aef5e8ae482a7ddd23752688f63e898495f/dashboards/cndt2022-main.json
+            cndt2022 onsite:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/34060aef5e8ae482a7ddd23752688f63e898495f/dashboards/cndt2022-onsite.json
             ArgoCD:
               gnetId: 14584
               revision: 1              
@@ -151,9 +154,9 @@ spec:
           - grafana-piechart-panel
       parameters:
         - name: image.tag
-          value: "9.0.4"
+          value: '9.0.4'
         - name: persistence.enabled
-          value: "true"
+          value: 'true'
         - name: persistence.type
           value: statefulset
   syncPolicy:
