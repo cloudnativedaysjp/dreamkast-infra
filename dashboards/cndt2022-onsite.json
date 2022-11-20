@@ -42,7 +42,7 @@
       },
       "id": 8,
       "options": {
-        "content": "# Onsiteダッシュボードの使い方\n\n`オンサイト関連のメトリクス`を表示するダッシュボードです。\nCNDT2022からハイブリット開催ということで実験的にTrack Aの会場にカメラやセンサを設置して会場の人数やCO2濃度を取得しました。\n今回の実験を受けて次回から全会議室の情報を取得するなど更新していきたいと考えています。\n\n現在表示しているメトリクスは下記の通りです。\n\n- 人数: ※設置場所によって書き換える\n- CO2濃度: CO2センサによって出力されたCO2濃度を表示しています。",
+        "content": "# Onsiteダッシュボードの使い方\n\n`オンサイト関連のメトリクス`を表示するダッシュボードです。\nCNDT2022からハイブリット開催ということで実験的に会場のRoom1にカメラやセンサを設置して会場の人数やCO2濃度を取得しました。\n今回の実験を受けて次回から全会議室の情報を取得するなど更新していきたいと考えています。\n\n現在表示しているメトリクスは下記の通りです。\n\n- 人数: 2台のカメラから画像認識によって検出された人数を表示しています\n- CO2濃度: CO2センサによって出力されたCO2濃度を表示しています。",
         "mode": "markdown"
       },
       "pluginVersion": "9.0.4",
@@ -87,7 +87,7 @@
               "mode": "off"
             }
           },
-          "displayName": "people_count",
+          "displayName": "聴講者数",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -126,13 +126,13 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "builder",
-          "expr": "people_count",
+          "expr": "sum(people_count)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "オンサイト人数 @ Track A",
+      "title": "オンサイト人数 @ Room1",
       "type": "timeseries"
     },
     {
@@ -166,14 +166,18 @@
       },
       "id": 12,
       "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true
+        "textMode": "auto"
       },
       "pluginVersion": "9.0.4",
       "targets": [
@@ -183,14 +187,14 @@
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "builder",
-          "expr": "people_count",
+          "expr": "sum(people_count)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "オンサイト人数 @ Track A",
-      "type": "gauge"
+      "title": "オンサイト人数 @ Room1",
+      "type": "stat"
     },
     {
       "datasource": {
@@ -232,7 +236,7 @@
               "mode": "off"
             }
           },
-          "displayName": "co2_conce",
+          "displayName": "CO2濃度",
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -279,7 +283,7 @@
           "refId": "A"
         }
       ],
-      "title": "CO2濃度 @Track A",
+      "title": "CO2濃度 @Room1",
       "type": "timeseries"
     },
     {
@@ -323,7 +327,9 @@
       "options": {
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -345,11 +351,12 @@
           "refId": "A"
         }
       ],
-      "title": "CO2濃度 @Track A",
+      "title": "CO2濃度 @Room1",
       "transparent": true,
       "type": "gauge"
     }
   ],
+  "refresh": "1m",
   "schemaVersion": 36,
   "style": "dark",
   "tags": [],
@@ -357,13 +364,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "CNDT2022 Onsite Dashboard (experimental)",
+  "title": "CNDT2022 Onsite Dashboard",
   "uid": "pQyLdgd4z",
-  "version": 2,
+  "version": 7,
   "weekStart": ""
 }
