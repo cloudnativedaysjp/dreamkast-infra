@@ -579,8 +579,8 @@
             "enableTooltip": true,
             "fontFamily": "arial",
             "fontSizes": [
-              15,
-              80
+              25,
+              90
             ],
             "padding": 1,
             "rotationAngles": [
@@ -1099,6 +1099,6 @@
     "timezone": "",
     "title": "CNDT2022 Dashboard",
     "uid": "wCHX5FS4k",
-    "version": 10,
+    "version": 14,
     "weekStart": ""
   }
