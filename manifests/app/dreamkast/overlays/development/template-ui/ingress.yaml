@@ -10,17 +10,6 @@ spec:
     tls:
       secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:
-    - conditions:
-      - prefix: /
-      services:
-      - name: dreamkast
-        port: 80
-    - conditions:
-      - prefix: /cable
-      enableWebsockets: true
-      services:
-      - name: dreamkast
-        port: 80
     - conditions: #TODO: Need to resolve this hardcoded routing
       - prefix: /cndt2022/ui
       services:
