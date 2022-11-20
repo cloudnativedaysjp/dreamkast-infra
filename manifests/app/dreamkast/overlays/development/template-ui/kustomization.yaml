@@ -6,6 +6,7 @@ resources:
 - deployment-dreamkast-ui.yaml
 - externalsecret.yaml
 - ingress.yaml
+- service.yaml
 
 patches:
 - path: .patch_deployment-strategy.yaml
