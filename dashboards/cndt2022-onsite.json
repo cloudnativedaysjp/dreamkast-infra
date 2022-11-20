@@ -132,7 +132,7 @@
           "refId": "A"
         }
       ],
-      "title": "オンサイト人数 @ Room1",
+      "title": "オンサイト人数 @Room1",
       "type": "timeseries"
     },
     {
@@ -193,7 +193,7 @@
           "refId": "A"
         }
       ],
-      "title": "オンサイト人数 @ Room1",
+      "title": "オンサイト人数 @Room1",
       "type": "stat"
     },
     {
@@ -371,6 +371,6 @@
   "timezone": "",
   "title": "CNDT2022 Onsite Dashboard",
   "uid": "pQyLdgd4z",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }
