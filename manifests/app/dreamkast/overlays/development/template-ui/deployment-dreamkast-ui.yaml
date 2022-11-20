@@ -46,6 +46,8 @@ spec:
             secretKeyRef:
               name: dreamkast-ui-secret
               key: NEXT_PUBLIC_AUTH0_AUDIENCE
+        - name: NEXT_PUBLIC_BASE_PATH
+          value: /cndt2022/ui
         - name: NEXT_PUBLIC_EVENT_SALT
           valueFrom:
             secretKeyRef:
