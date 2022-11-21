@@ -125,6 +125,9 @@ spec:
             Github:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/github.json
+            CNDT2022 Onsite Monitor:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-onsite-monitor.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
