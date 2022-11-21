@@ -78,7 +78,7 @@ spec:
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
             cndt2022 proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1c9a39cf3eb36070f72b8aa1d1a4b1859f99f39a/dashboards/cndt2022-cfp.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5cd3c419fdeb6d4f4c2099999e74441fa9eb97e2/dashboards/cndt2022-cfp.json
             cndt2022 main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/c7e4d9e1fd3e624da1ed33682d90dab1da6eee80/dashboards/cndt2022-main.json
