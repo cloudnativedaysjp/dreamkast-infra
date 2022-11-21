@@ -846,8 +846,8 @@
     "list": []
   },
   "time": {
-    "from": "2022-09-15T15:00:00.000Z",
-    "to": "2022-10-10T15:00:00.000Z"
+    "from": "now-5m",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
