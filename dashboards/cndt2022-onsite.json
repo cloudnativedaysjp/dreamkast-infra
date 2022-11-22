@@ -279,7 +279,7 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "expr": "co2_conce",
+          "expr": "sum by(job) (co2_conce)",
           "refId": "A"
         }
       ],
@@ -344,8 +344,8 @@
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "editorMode": "builder",
-          "expr": "co2_conce",
+          "editorMode": "code",
+          "expr": "sum by(job) (co2_conce)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -371,6 +371,5 @@
   "timezone": "",
   "title": "CNDT2022 Onsite Dashboard",
   "uid": "pQyLdgd4z",
-  "version": 10,
   "weekStart": ""
 }
