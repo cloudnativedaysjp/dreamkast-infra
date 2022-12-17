@@ -9,6 +9,3 @@ resources:
 - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v0.12.1/manifests/install.yaml
 - ns.yaml
 - projects.yaml
-patches:
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/argoproj/argo-cd/v2.5.5/notifications_catalog/install.yaml
