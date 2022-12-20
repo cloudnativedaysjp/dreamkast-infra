@@ -6,3 +6,4 @@ patches:
 - ./argocd-rbac-cm.yaml
 - ./delete-secret.yaml
 - ./pods.yaml
+- ./notifications-cm.yaml
