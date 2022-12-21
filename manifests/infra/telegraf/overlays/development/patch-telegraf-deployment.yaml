@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telegraf-deployment
+spec:
+  template:
+    spec:
+      containers:
+      - name: telegraf
+        env:
+        - name: CONF_ID
+          value: "8"
