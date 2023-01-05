@@ -86,6 +86,9 @@ spec:
             cndt2022 onsite:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-onsite.json
+            cicd2023 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cicd2023-cfp.json
             ArgoCD:
               gnetId: 14584
               revision: 1
