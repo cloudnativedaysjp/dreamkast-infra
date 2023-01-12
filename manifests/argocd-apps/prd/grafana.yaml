@@ -79,6 +79,9 @@ spec:
             # cndt2022 proposals:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/41361f60af672597f2f8af79bfaf403206198d5c/dashboards/cndt2022-cfp.json
+            cicd2023 proposals:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/a79f1cab75e71659d1db653f5ef4d80ae2f55119/dashboards/cicd2023-cfp.json            
             cndt2022 main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/c7e4d9e1fd3e624da1ed33682d90dab1da6eee80/dashboards/cndt2022-main.json
