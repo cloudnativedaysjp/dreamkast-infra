@@ -242,7 +242,7 @@
             },
             "editorMode": "code",
             "exemplar": true,
-            "expr": "count (dreamkast_talks_id) by (talk_difficulty)",
+            "expr": "count by(talk_difficulty) (dreamkast_talks_id{talk_difficulty=~\"上級者|中級者|初級者\"})",
             "instant": false,
             "interval": "",
             "legendFormat": "{{talk_difficulty}}",
@@ -830,6 +830,6 @@
     "timezone": "",
     "title": "#cicd2023 proposal",
     "uid": "e5K5RCcVz",
-    "version": 5,
+    "version": 7,
     "weekStart": ""
   }
