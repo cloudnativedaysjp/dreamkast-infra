@@ -17,11 +17,6 @@ spec:
                 - -c
                 - bundle exec rake util:post_number_of_registrants_to_slack
               env:
-                - name: SLACK_WEBHOOK_URL
-                  valueFrom:
-                    secretKeyRef:
-                      name: dreamkast-secret
-                      key: SLACK_WEBHOOK_URL
                 - name: CONFERENCE_ABBR
                   value: "o11y2022"
                 - name: RAILS_ENV
@@ -72,4 +67,9 @@ spec:
                     secretKeyRef:
                       name: dreamkast-secret
                       key: AUTH0_DOMAIN
+                - name: SLACK_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: dreamkast-secret
+                      key: SLACK_TOKEN
           restartPolicy: OnFailure
