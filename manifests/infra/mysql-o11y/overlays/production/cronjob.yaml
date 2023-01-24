@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
           - name: mysql
-            image: mysql:8.0
+            image: mysql@sha256:cfddf275c8b1ae1583c0f6afb4899d4dbe14111a6462699559a1f4dc8f4d5f6e
             command: ["/bin/bash", "-c"]
             args:
             - |
