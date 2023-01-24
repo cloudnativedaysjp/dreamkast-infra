@@ -6,7 +6,7 @@ spec:
   project: monitoring
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 2.4.6
+    targetRevision: 2.4.7
     helm:
       values: |
         driver:
