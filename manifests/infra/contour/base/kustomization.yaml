@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: projectcontour
 resources:
 # renovate: type=remote-file
-- https://projectcontour.io/quickstart/v1.22.1/contour.yaml
+- https://projectcontour.io/quickstart/v1.24.1/contour.yaml
 - auth-server.yaml
 - cluster-issuer.yaml
 # renovate: type=remote-file
