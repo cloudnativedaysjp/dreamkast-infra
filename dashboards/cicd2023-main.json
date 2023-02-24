@@ -440,30 +440,7 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": ["CNDT2022登録者数"],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -493,7 +470,7 @@
           "exemplar": true,
           "expr": "max(dreamkast_registrants_count{conference_id=\"7\"})",
           "interval": "",
-          "legendFormat": "CI/CD023登録者数",
+          "legendFormat": "CI/CD2023登録者数",
           "range": true,
           "refId": "A"
         }
