@@ -18,5 +18,5 @@ images:
   newTag: 84ff8712ed582994434c1dc04abec52236ac83cd
 - name: dreamkast-ui
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 4f162411166b6de73fa9c62a45ac419bbe012a24
+  newTag: 2a574e3123eafa6dc879ed078738550d1705df14
 namespace: dreamkast
