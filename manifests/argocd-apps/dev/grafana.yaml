@@ -65,30 +65,33 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            o11y2022 proposals:
+            o11y2022-proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-cfp.json
-            o11y2022 main:
+            o11y2022-main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/o11y2022-main.json
-            cnsec2022 proposals:
+            cnsec2022-proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnsec2022-cfp.json
-            cnsec2022 main:
+            cnsec2022-main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnsec2022-main.json
-            cndt2022 proposals:
+            cndt2022-proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-cfp.json
-            cndt2022 main:
+            cndt2022-main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-main.json
-            cndt2022 onsite:
+            cndt2022-onsite:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-onsite.json
-            cicd2023 proposals:
+            cicd2023-proposals:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cicd2023-cfp.json
+            cicd2023-main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cicd2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
