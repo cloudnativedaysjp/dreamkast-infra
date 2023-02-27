@@ -64,33 +64,36 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            # o11y2022 proposals:
+            # o11y2022-proposals:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
-            # o11y2022 main:
+            # o11y2022-main:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
-            # cnsec2022 proposals:
+            # cnsec2022-proposals:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
-            # cnsec2022 main:
+            # cnsec2022-main:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
-            # cndt2022 proposals:
+            # cndt2022-proposals:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/41361f60af672597f2f8af79bfaf403206198d5c/dashboards/cndt2022-cfp.json
-            cicd2023 proposals:
+            # cndt2022-main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/c7e4d9e1fd3e624da1ed33682d90dab1da6eee80/dashboards/cndt2022-main.json
+            # cndt2022-onsite:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/0e02ad9ba590bbcfc7723fc4f1c30169d2b6ff85/dashboards/cndt2022-onsite.json
+            cicd2023-proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/2616f0142590ff790f0931bde4873ed71739a848/dashboards/cicd2023-cfp.json            
-            cndt2022 main:
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/2616f0142590ff790f0931bde4873ed71739a848/dashboards/cicd2023-cfp.json
+            cicd2023-main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/c7e4d9e1fd3e624da1ed33682d90dab1da6eee80/dashboards/cndt2022-main.json
-            cndt2022 onsite:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/0e02ad9ba590bbcfc7723fc4f1c30169d2b6ff85/dashboards/cndt2022-onsite.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/430db36df566ffe1231436e0b87bcf2abbf67618/dashboards/cicd2023-main.json
             ArgoCD:
               gnetId: 14584
-              revision: 1              
+              revision: 1
           private:
             Amazon RDS:
               gnetId: 11264
@@ -161,9 +164,9 @@ spec:
           - magnesium-wordcloud-panel
       parameters:
         - name: image.tag
-          value: '9.0.4'
+          value: "9.0.4"
         - name: persistence.enabled
-          value: 'true'
+          value: "true"
         - name: persistence.type
           value: statefulset
   syncPolicy:
