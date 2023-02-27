@@ -30,3 +30,8 @@ spec:
             secretKeyRef:
               name: dreamkast-ui-secret
               key: NEXT_PUBLIC_EVENT_SALT
+        - name: SENTRY_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: dreamkast-ui-secret
+              key: SENTRY_AUTH_TOKEN
