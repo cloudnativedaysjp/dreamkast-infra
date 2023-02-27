@@ -52,7 +52,7 @@ spec:
         - name: SENTIMENT_FILE 
           value: "/work-dir/data.trim"
         - name: TWITTER_QUERY
-          value: "#CNDT2022,#CNDT2022_A,#CNDT2022_B,#CNDT2022_C,#CNDT2022_D,#CNDT2022_E,#CNDT2022_F"
+          value: "#CICD2023"
         - name: TWITTER_ENABLED
           value: "true"
         - name: SLACK_ENABLED
