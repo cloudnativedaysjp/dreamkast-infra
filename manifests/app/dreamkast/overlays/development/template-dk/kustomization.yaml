@@ -13,6 +13,8 @@ resources:
 - deployment-fifo-worker.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
+# NOTE: remove following patch to delete dk-ui if integration test with dk-ui needed
+- delete-dreamkast-ui.yaml
 
 patches:
 - path: .patch_deployment-strategy.yaml
