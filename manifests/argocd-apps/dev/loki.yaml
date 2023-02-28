@@ -17,10 +17,14 @@ spec:
     targetRevision: 2.9.9
     helm:
       parameters:
-      - name: loki.persistence.enabled
-        value: "true"
+        - name: loki.persistence.enabled
+          value: "true"
+        - name: config.table_manager.retention_deletes_enabled
+          value: "true"
+        - name: config.table_manager.retention_period
+          value: 168h # 1Week
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
