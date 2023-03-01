@@ -468,7 +468,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "max(dreamkast_registrants_count{conference_id=\"7\"})",
+          "expr": "max(dreamkast_registrants_count{conference_id=\"8\"})",
           "interval": "",
           "legendFormat": "CI/CD2023登録者数",
           "range": true,
@@ -663,8 +663,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -808,8 +807,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -897,8 +895,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -987,8 +984,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1103,6 +1099,6 @@
   "timezone": "",
   "title": "CI/CD2023 Dashboard",
   "uid": "dgDG9SJVz",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
