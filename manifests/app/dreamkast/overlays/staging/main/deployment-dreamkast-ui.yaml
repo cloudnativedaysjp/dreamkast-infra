@@ -11,7 +11,7 @@ spec:
         - name: NEXT_PUBLIC_API_BASE_URL
           value: https://api.stg.cloudnativedays.jp
         - name: NEXT_PUBLIC_DK_URL
-          value: https://stating.dev.cloudnativedays.jp
+          value: https://staging.dev.cloudnativedays.jp
         - name: NEXT_PUBLIC_AUTH0_DOMAIN
           valueFrom:
             secretKeyRef:
