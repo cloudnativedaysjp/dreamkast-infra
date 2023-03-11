@@ -12,12 +12,12 @@ spec:
   source:
     path: manifests/app/argocd-apps/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: dreamkast_us
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -32,9 +32,9 @@ spec:
   source:
     path: manifests/app/argocd-apps/development
     repoURL: https://github.com/cloudopsdays/dreamkast-infra_codt2022.git
-    targetRevision: main
+    targetRevision: dreamkast_us
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
