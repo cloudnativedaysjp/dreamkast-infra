@@ -18,24 +18,24 @@ spec:
     helm:
       releaseName: aws-cluster-autoscaler
       parameters:
-      - name: autoDiscovery.clusterName
-        value: dreamkast-dev-cluster
-      - name: awsRegion
-        value: ap-northeast-1
-      - name: rbac.serviceAccount.create
-        value: "false"
-      - name: rbac.serviceAccount.name
-        value: cluster-autoscaler
-      - name: resources.limits.cpu
-        value: 100m
-      - name: resources.limits.memory
-        value: 300Mi
-      - name: resources.requests.cpu
-        value: 100m
-      - name: resources.requests.memory
-        value: 300Mi
+        - name: autoDiscovery.clusterName
+          value: dk-us-dev-cluster
+        - name: awsRegion
+          value: us-west-2
+        - name: rbac.serviceAccount.create
+          value: "false"
+        - name: rbac.serviceAccount.name
+          value: cluster-autoscaler
+        - name: resources.limits.cpu
+          value: 100m
+        - name: resources.limits.memory
+          value: 300Mi
+        - name: resources.requests.cpu
+          value: 100m
+        - name: resources.requests.memory
+          value: 300Mi
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
