@@ -6,7 +6,7 @@ spec:
   project: monitoring
   source:
     repoURL: https://falcosecurity.github.io/charts
-    targetRevision: 0.6.0
+    targetRevision: 0.6.1
     helm:
       values: |
         webui:

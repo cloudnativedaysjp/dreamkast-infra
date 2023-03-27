@@ -7,7 +7,7 @@ resources:
 - auth-server.yaml
 - cluster-issuer.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.24.1/examples/gateway/00-crds.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.24.2/examples/gateway/00-crds.yaml
 - gatewayclass.yaml
 patchesStrategicMerge:
 - contour-configmap.yaml
