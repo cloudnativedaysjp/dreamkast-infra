@@ -520,34 +520,6 @@
       ],
       "title": "Outbound network traffic per Pod",
       "type": "timeseries"
-    },
-    {
-      "datasource": "Loki",
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 24
-      },
-      "id": 11,
-      "options": {
-        "dedupStrategy": "none",
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "targets": [
-        {
-          "expr": "{namespace=\"$namespace\", pod=~\"$pod\"}",
-          "refId": "A"
-        }
-      ],
-      "title": "Logs",
-      "type": "logs"
     }
   ],
   "schemaVersion": 30,
@@ -621,4 +593,3 @@
   "uid": "",
   "version": 2
 }
-
