@@ -23,9 +23,6 @@ spec:
               type: prometheus
               url: http://prometheus-k8s:9090
               isDefault: true
-            - name: Loki
-              type: loki
-              url: http://loki:3100
             - name: CloudWatch
               type: cloudwatch
               jsonData:
@@ -108,10 +105,6 @@ spec:
             Kubernetes Cluster (Prometheus):
               gnetId: 6417
               revision: 1
-            Logging Dashboard via Loki:
-              datasource: Loki
-              gnetId: 12611
-              revision: 1
             Persistent Volume Usage:
               datasource: Prometheus
               gnetId: 13646
@@ -164,9 +157,9 @@ spec:
           - magnesium-wordcloud-panel
       parameters:
         - name: image.tag
-          value: '9.0.4'
+          value: "9.0.4"
         - name: persistence.enabled
-          value: 'true'
+          value: "true"
         - name: persistence.type
           value: statefulset
   syncPolicy:
