@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: dk-weaver
+  namespace: argocd
+spec:
+  generators:
+  - pullRequest:
+      github:
+        owner: cloudnativedaysjp
+        repo: dreamkast-weaver
+        tokenRef:
+          secretName: git-creds
+          key: password
+        labels:
+        - reviewapps
+      requeueAfterSeconds: 1800
+  template:
+    metadata:
+      name: 'dk-weaver-{{number}}'
+      annotations:
+        notifications.argoproj.io/subscribe.on-deployed.github: ""
+        notifications.argoproj.io/subscribe.on-health-degraded.github: ""
+        github.repoURL: https://github.com/cloudnativedaysjp/dreamkast-weaver
+        github.revision: {{head_sha}}
+    spec:
+      project: reviewapps
+      source:
+        repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+        targetRevision: feat/dk-weaver
+        path: manifests/app/dreamkast-weaver/overlays/development
+        plugin:
+          name: kustomize-with-replacements
+          env:
+            - name: FQDN
+              value: 'dk-weaver-{{number}}.dev.cloudnativedays.jp'
+            - name: NAMESPACE
+              value: 'dk-weaver-{{number}}'
+            - name: IMAGES
+              value: >-
+                dreamkast-weaver/initdb=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver/initdb:{{head_sha}},
+                dreamkast-weaver/sereve=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver/serve:main
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: 'dk-weaver-{{number}}'
+      syncPolicy:
+        automated:
+          prune: true
