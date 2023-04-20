@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     path: manifests/reviewapps
-    targetRevision: main
+    targetRevision: feat/dk-weaver
   syncPolicy:
     automated:
       prune: true
