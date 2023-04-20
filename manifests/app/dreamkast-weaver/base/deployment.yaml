@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dk-weaver
+    tier: dk-weaver
+  name: dk-weaver
+spec:
+  selector:
+    matchLabels:
+      app: dk-weaver
+      tier: dk-weaver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dk-weaver
+        tier: dk-weaver
+    spec:
+      containers:
+      - name: dk-weaver
+        image: dk-weaver/serve
+        ports:
+          - containerPort: 3000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "800m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","300"]

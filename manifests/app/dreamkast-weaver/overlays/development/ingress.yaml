@@ -1,0 +1,17 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: dk-weaver
+  labels:
+    app: dk-weaver
+spec:
+  virtualhost:
+    fqdn: __REPLACEMENT__
+    tls:
+      secretName: cert-manager/wildcard-dev-cloudnativedays-jp
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+      - name: dk-weaver
+        port: 8080

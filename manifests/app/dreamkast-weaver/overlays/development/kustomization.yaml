@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ../../base
+- ns.yaml
+- mysql.yaml
+- ingress.yaml
+
+patches:
+- path: .patch_deployment-strategy.yaml
+  target:
+    kind: Deployment
+- path: deployment-dk-weaver.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    kustomize.generated.resource: "true"
+configMapGenerator:
+- envs:
+  - .env
+  name: replacement-rules
+replacements:
+- path: .replacement_ns.yaml
+- path: .replacement_ingress-hostname.yaml
+
+images:
+- name: dreamkast-weaver/initdb
+  newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver/initdb
+  newTag: latest
+- name: dreamkast-weaver/sereve
+  newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver/serve
+  newTag: latest

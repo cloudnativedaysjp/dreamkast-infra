@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dk-weaver
+    tier: dk-weaver
+  name: dk-weaver
+spec:
+  selector:
+    matchLabels:
+      app: dk-weaver
+      tier: dk-weaver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dk-weaver
+        tier: dk-weaver
+    spec:
+      initContainers:
+      - name: initdb
+        image: dk-weaber/initdb
+        imagePullPolicy: Always
+        env:
+        - name: DB_ENDPOINT
+          value: "dk-weaver-mysql"
+        - name: dk-weaver_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+      containers:
+      - name: dk-weaver
+        image: dk-weaver/server
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8080
+        env:
+        - name: MYSQL_HOST
+          value: "dk-weaver-mysql"
+        - name: AWS_REGION
+          value: ap-northeast-1
+        - name: dk-weaver_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        livenessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            port: 3000
+            path: /
+          failureThreshold: 30
+          periodSeconds: 10
