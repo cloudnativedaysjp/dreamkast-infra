@@ -32,7 +32,7 @@ spec:
   source:
     path: manifests/app/argocd-apps/development
     repoURL: https://github.com/cloudopsdays/dreamkast-infra_codt2022.git
-    targetRevision: dreamkast_us
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
