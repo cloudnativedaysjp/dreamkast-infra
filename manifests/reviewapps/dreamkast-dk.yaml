@@ -22,7 +22,7 @@ spec:
         notifications.argoproj.io/subscribe.on-deployed.github: ""
         notifications.argoproj.io/subscribe.on-health-degraded.github: ""
         github.repoURL: https://github.com/cloudnativedaysjp/dreamkast
-        github.revision: {{head_sha}}
+        github.revision: '{{head_sha}}'
     spec:
       project: reviewapps
       source:
@@ -38,11 +38,8 @@ spec:
               value: 'dreamkast-dk-{{number}}'
             - name: IMAGES
               value: >-
-                dreamkast-ecs=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:{{head_sha}},
-                dreamkast-ui=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:main
+                dreamkast-ecs=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:latest,
+                dreamkast-ui=607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui:latest
       destination:
         server: https://kubernetes.default.svc
         namespace: 'dreamkast-dk-{{number}}'
-      syncPolicy:
-        automated:
-          prune: true
