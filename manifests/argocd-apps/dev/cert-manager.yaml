@@ -38,7 +38,7 @@ spec:
   source:
     path: manifests/infra/cert-manager/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: dreamkast_us
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

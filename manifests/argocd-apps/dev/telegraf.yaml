@@ -14,7 +14,7 @@ spec:
   source:
     path: manifests/infra/telegraf/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: dreamkast_us
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
