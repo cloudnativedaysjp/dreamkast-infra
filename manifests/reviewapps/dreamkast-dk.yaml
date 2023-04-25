@@ -22,7 +22,7 @@ spec:
         notifications.argoproj.io/subscribe.on-deployed.github: ""
         notifications.argoproj.io/subscribe.on-health-degraded.github: ""
         github.repoURL: https://github.com/cloudnativedaysjp/dreamkast
-        github.revision: { { head_sha } }
+        github.revision: "{{head_sha}}"
     spec:
       project: reviewapps
       source:
