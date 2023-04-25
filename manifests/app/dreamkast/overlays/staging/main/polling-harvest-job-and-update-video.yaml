@@ -21,7 +21,7 @@ spec:
                 - name: RAILS_ENV
                   value: "production"
                 - name: MYSQL_HOST
-                  value: "dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
+                  value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
                 - name: MYSQL_DATABASE
                   value: "dreamkast"
                 - name: REDIS_URL
@@ -29,13 +29,13 @@ spec:
                 - name: SENTRY_DSN
                   value: "https://82e52bc9814f478a917a9f4b2a190202@o414348.ingest.sentry.io/5303654"
                 - name: S3_BUCKET
-                  value: "dreamkast-stg-bucket"
+                  value: "dk-us-stg-bucket"
                 - name: S3_REGION
-                  value: ap-northeast-1
+                  value: us-west-2
                 - name: AWS_REGION
-                  value: ap-northeast-1
+                  value: us-west-2
                 - name: SQS_MAIL_QUEUE_URL
-                  value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-stgMailQueue.fifo"
+                  value: "https://sqs.us-west-2.amazonaws.com/607167088920/dk-us-stg-fifo-queue.fifo"
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:

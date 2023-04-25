@@ -17,13 +17,13 @@ spec:
     targetRevision: "v1.11.0"
     helm:
       parameters:
-      - name: installCRDs
-        value: "true"
+        - name: installCRDs
+          value: "true"
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -38,9 +38,9 @@ spec:
   source:
     path: manifests/infra/cert-manager/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: dreamkast_us
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

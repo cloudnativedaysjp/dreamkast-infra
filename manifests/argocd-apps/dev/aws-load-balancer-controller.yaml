@@ -18,14 +18,14 @@ spec:
     helm:
       releaseName: aws-load-balancer-controller
       parameters:
-      - name: clusterName
-        value: dreamkast-dev-cluster
-      - name: serviceAccount.create
-        value: "false"
-      - name: serviceAccount.name
-        value: aws-load-balancer-controller
+        - name: clusterName
+          value: dk-us-dev-cluster
+        - name: serviceAccount.create
+          value: "false"
+        - name: serviceAccount.name
+          value: aws-load-balancer-controller
   syncPolicy:
     automated:
       prune: true
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

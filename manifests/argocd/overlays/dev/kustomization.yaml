@@ -1,10 +1,10 @@
-bases:
-- ../../base
-- ./projects.yaml
-patches:
-- ./service.yaml
-- ./argocd-cm.yaml
-- ./argocd-rbac-cm.yaml
-- ./delete-secret.yaml
-- ./pods.yaml
-- ./notifications-cm.yaml
+resources:
+  - ../../base
+  - ./projects.yaml
+patchesStrategicMerge:
+  - ./service.yaml
+  - ./argocd-cm.yaml
+  - ./argocd-rbac-cm.yaml
+  - ./delete-secret.yaml
+  - ./pods.yaml
+  - ./notifications-cm.yaml

@@ -9,45 +9,45 @@ spec:
       template:
         spec:
           containers:
-          - name: mysql
-            image: mysql@sha256:cfddf275c8b1ae1583c0f6afb4899d4dbe14111a6462699559a1f4dc8f4d5f6e
-            command: ["/bin/bash", "-c"]
-            args:
-            - |
-              mysqldump --single-transaction \
-              --quick \
-              --set-charset \
-              --no-tablespaces \
-              --set-gtid-purged=OFF \
-              -u $RDS_USER -p"$RDS_PASSWORD" -h $RDS_HOST dreamkast \
-              conference_days conferences proposal_item_configs proposal_items \
-              proposals talk_categories talk_difficulties talk_times talks talks_speakers \
-              tracks \
-              > $HOME/rds.dump; \
-              mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" -h $MYSQL_HOST dreamkast < $HOME/rds.dump
-            env:
-            - name: RDS_HOST
-              value: dreamkast-dev-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
-            - name: RDS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: password
-            - name: RDS_USER
-              valueFrom:
-                secretKeyRef:
-                  name: rds-secret
-                  key: username
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: password
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-secret
-                  key: username
-            - name: MYSQL_HOST
-              value: mysql-o11y
+            - name: mysql
+              image: mysql@sha256:cfddf275c8b1ae1583c0f6afb4899d4dbe14111a6462699559a1f4dc8f4d5f6e
+              command: ["/bin/bash", "-c"]
+              args:
+                - |
+                  mysqldump --single-transaction \
+                  --quick \
+                  --set-charset \
+                  --no-tablespaces \
+                  --set-gtid-purged=OFF \
+                  -u $RDS_USER -p"$RDS_PASSWORD" -h $RDS_HOST dreamkast \
+                  conference_days conferences proposal_item_configs proposal_items \
+                  proposals talk_categories talk_difficulties talk_times talks talks_speakers \
+                  tracks \
+                  > $HOME/rds.dump; \
+                  mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" -h $MYSQL_HOST dreamkast < $HOME/rds.dump
+              env:
+                - name: RDS_HOST
+                  value: dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com
+                - name: RDS_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: rds-secret
+                      key: password
+                - name: RDS_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: rds-secret
+                      key: username
+                - name: MYSQL_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-secret
+                      key: password
+                - name: MYSQL_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: mysql-secret
+                      key: username
+                - name: MYSQL_HOST
+                  value: mysql-o11y
           restartPolicy: OnFailure
