@@ -27,7 +27,7 @@ spec:
       project: reviewapps
       source:
         repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-        targetRevision: dreamkast_us
+        targetRevision: main
         path: manifests/app/dreamkast/overlays/development/template-dk
         plugin:
           name: kustomize-with-replacements
