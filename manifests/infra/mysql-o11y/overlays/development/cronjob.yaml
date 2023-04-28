@@ -10,7 +10,7 @@ spec:
         spec:
           containers:
             - name: mysql
-              image: mysql:8.0
+              image: mysql:8.0.33
               command: ["/bin/bash", "-c"]
               args:
                 - |
