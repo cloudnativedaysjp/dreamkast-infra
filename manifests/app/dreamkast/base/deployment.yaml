@@ -125,13 +125,16 @@ spec:
         tier: dreamkast-weaver
     spec:
       initContainers:
-      - name: initdb
-        image: dreamkast-weaver-initdb
+      - name: dkw-dbmigrate
+        image: dreamkast-weaver
         imagePullPolicy: Always
+        command: ["/dkw","dbmigrate"]
       containers:
-      - image: dreamkast-weaver-serve
+      - image: dreamkast-weaver
         imagePullPolicy: Always
-        name: serve
+        name: dkw-serve
+        command: ["/dkw","serve"]
+        args: ["port=8080"]
         ports:
         - containerPort: 8080
         livenessProbe:

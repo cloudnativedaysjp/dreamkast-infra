@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       initContainers:
-      - name: initdb
+      - name: dkw-dbmigrate
         env:
         - name: DB_ENDPOINT
           value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
@@ -23,7 +23,7 @@ spec:
               name: db-secret
               key: password
       containers:
-      - name: serve
+      - name: dkw-serve
         env:
         - name: DB_ENDPOINT
           value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
