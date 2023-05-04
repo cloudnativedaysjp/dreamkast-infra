@@ -16,8 +16,7 @@ spec:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:
-    # TODO: uncomment
-    # automated:
-    #   prune: true
+    automated:
+      prune: true
     syncOptions:
     - CreateNamespace=true
