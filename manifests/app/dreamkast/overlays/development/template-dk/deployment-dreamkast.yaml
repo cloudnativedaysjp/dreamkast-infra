@@ -98,6 +98,8 @@ spec:
               value: us-west-2
             - name: DREAMKAST_API_ADDR
               value: "https://api.dev.cloudnativedays.jp"
+            - name: DREAMKAST_WEAVER_ADDR
+              value: "https://tmp.dev.cloudnativedays.jp"
             - name: DREAMKAST_NAMESPACE
               valueFrom:
                 fieldRef:
