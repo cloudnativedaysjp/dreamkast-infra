@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast-weaver
+spec:
+  template:
+    spec:
+      initContainers:
+      - name: dkw-dbmigrate
+        env:
+        - name: DB_ENDPOINT
+          value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password
+      containers:
+      - name: dkw-serve
+        env:
+        - name: DB_ENDPOINT
+          value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password

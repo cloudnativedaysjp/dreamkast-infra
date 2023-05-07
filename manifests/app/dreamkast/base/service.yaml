@@ -32,3 +32,21 @@ spec:
     app: dreamkast
     tier: dreamkast-ui
   type: NodePort
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dreamkast
+    tier: dreamkast-weaver
+  name: dreamkast-weaver
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: dreamkast
+    tier: dreamkast-weaver
+  type: ClusterIP

@@ -99,3 +99,70 @@ spec:
           preStop:
             exec:
               command: ["/bin/sleep","300"]
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dreamkast
+    tier: dreamkast-weaver
+  name: dreamkast-weaver
+spec:
+  selector:
+    matchLabels:
+      app: dreamkast
+      tier: dreamkast-weaver
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dreamkast
+        tier: dreamkast-weaver
+    spec:
+      initContainers:
+      - name: dkw-dbmigrate
+        image: dreamkast-weaver
+        imagePullPolicy: Always
+        command: ["/dkw","dbmigrate"]
+      containers:
+      - image: dreamkast-weaver
+        imagePullPolicy: Always
+        name: dkw-serve
+        command: ["/dkw","serve"]
+        args: ["port=8080"]
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /
+          failureThreshold: 5
+          periodSeconds: 10
+        startupProbe:
+          httpGet:
+            port: 8080
+            path: /
+          failureThreshold: 30
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sleep","300"]
