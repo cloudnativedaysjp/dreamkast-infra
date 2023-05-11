@@ -19,11 +19,6 @@
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all minor, or patch dependencies on Terraform",
     },
-    {
-      "matchManagers": ["argocd", "regex"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all minor, or patch dependencies on Manifests",
-    },
   ],
   "enabledManagers": [
     "dockerfile",
