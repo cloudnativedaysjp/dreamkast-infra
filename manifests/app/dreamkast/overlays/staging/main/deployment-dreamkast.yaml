@@ -105,6 +105,9 @@ spec:
               value: "https://sqs.us-west-2.amazonaws.com/607167088920/dk-us-stg-fifo-queue.fifo"
             - name: DREAMKAST_API_ADDR
               value: "https://api.stg.cloudnativedays.jp"
+            # TODO: Delete DREAMKAST_WEAVER_ADDR
+            - name: DREAMKAST_WEAVER_ADDR
+              value: "https://dkw.dev.cloudnativedays.jp"
             - name: DREAMKAST_UI_BASE_URL
               value: "*"
             - name: DREAMKAST_NAMESPACE

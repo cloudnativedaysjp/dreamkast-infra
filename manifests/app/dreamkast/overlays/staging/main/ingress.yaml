@@ -58,7 +58,7 @@ metadata:
 spec:
   virtualhost:
     # TODO: replace api.dev.cloudnativedays.jp
-    fqdn: tmp.dev.cloudnativedays.jp
+    fqdn: dkw.dev.cloudnativedays.jp
     tls:
       secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:
