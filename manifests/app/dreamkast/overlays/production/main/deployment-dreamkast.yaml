@@ -114,6 +114,9 @@ spec:
           value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prdFifoQueue.fifo"
         - name: DREAMKAST_API_ADDR
           value: "https://api.cloudnativedays.jp"
+        # TODO: Delete DREAMKAST_WEAVER_ADDR
+        - name: DREAMKAST_WEAVER_ADDR
+          value: "https://dkw.cloudnativedays.jp"
         - name: DREAMKAST_NAMESPACE
           valueFrom:
             fieldRef:
