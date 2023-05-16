@@ -90,7 +90,7 @@ spec:
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/18484d73b91f4a8ac0d4983c6491fbf8128a84ab/dashboards/cicd2023-main.json
             cndf2023-proposals:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5922bbe587fee03c435dfd8a01eb4c2eafb2b50b/dashboards/cndf2023-cfp.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ebe21aa5101527ccae2fdb8c021f5d9235143431/dashboards/cndf2023-cfp.json
             ArgoCD:
               gnetId: 14584
               revision: 1
