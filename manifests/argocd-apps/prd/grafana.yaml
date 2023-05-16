@@ -54,8 +54,8 @@ spec:
                 orgId: 1
                 folder: 'public'
                 type: file
-                disableDeletion: true
-                allowUiUpdates: false
+                disableDeletion: false
+                allowUiUpdates: true
                 editable: false
                 options:
                   path: /var/lib/grafana/dashboards/public
