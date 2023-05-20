@@ -2,12 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: projectcontour
 resources:
-# renovate: type=remote-file
-- https://projectcontour.io/quickstart/v1.24.1/contour.yaml
 - auth-server.yaml
 - cluster-issuer.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.24.2/examples/gateway/00-crds.yaml
 - gatewayclass.yaml
 patchesStrategicMerge:
 - contour-configmap.yaml
