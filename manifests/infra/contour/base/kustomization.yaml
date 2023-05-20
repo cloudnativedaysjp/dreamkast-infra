@@ -4,6 +4,5 @@ namespace: projectcontour
 resources:
 - auth-server.yaml
 - cluster-issuer.yaml
-- gatewayclass.yaml
 patchesStrategicMerge:
 - contour-configmap.yaml
