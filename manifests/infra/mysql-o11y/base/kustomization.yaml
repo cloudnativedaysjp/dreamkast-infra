@@ -3,3 +3,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+images:
+- name: mysql
+  newName: public.ecr.aws/docker/library/mysql
+  newTag: "8.0.33"

@@ -5,3 +5,7 @@ resources:
 - configmap.yaml
 - service.yaml
 - deployment.yaml
+images:
+- name: telegraf
+  newName: public.ecr.aws/docker/library/telegraf
+  newTag: "1.26.2"

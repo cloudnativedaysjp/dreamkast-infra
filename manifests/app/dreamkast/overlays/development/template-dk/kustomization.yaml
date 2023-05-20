@@ -40,3 +40,9 @@ images:
 - name: dreamkast-ui
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
   newTag: main
+- name: mysql
+  newName: public.ecr.aws/docker/library/mysql
+  newTag: "8.0.33"
+- name: redis
+  newName: public.ecr.aws/docker/library/redis
+  newTag: "6.0.5"
