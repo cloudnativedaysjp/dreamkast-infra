@@ -36,7 +36,7 @@ spec:
             - name: REDIS_URL
               value: "redis://dreamkast-redis:6379"
             - name: SENTRY_DSN
-              value: "https://82e52bc9814f478a917a9f4b2a190202@o414348.ingest.sentry.io/5303654"
+              value: "https://07f87d11da2c44189d03593537edb291@sentry.cloudnativedays.jp/2"
             - name: S3_BUCKET
               value: "dk-us-stg-bucket"
             - name: S3_REGION
