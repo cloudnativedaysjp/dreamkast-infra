@@ -32,3 +32,7 @@ spec:
             secretKeyRef:
               name: dreamkast-ui-secret
               key: NEXT_PUBLIC_EVENT_SALT
+        - name: SENTRY_ENVIRONMENT
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
