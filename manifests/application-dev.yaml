@@ -11,7 +11,7 @@ spec:
   project: app
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    path: manifests/argocd-apps/dev/
+    path: manifests/argocd-apps/development/
     targetRevision: main
   syncPolicy:
     automated:
