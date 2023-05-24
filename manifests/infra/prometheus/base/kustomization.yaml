@@ -2,30 +2,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: monitoring
 resources:
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.59.0/bundle.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/prometheus-serviceAccount.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/prometheus-clusterRole.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/prometheus-clusterRoleBinding.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/prometheus-prometheus.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/prometheus-service.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-serviceMonitor.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-serviceAccount.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-clusterRole.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-clusterRoleBinding.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-daemonset.yaml
-# renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-service.yaml
 - prometheus-clusterrole.yaml # 本当は同じようにリモートから取得したいが、ClusterRoleがないのでしょうがなく手元で管理している
 - monitor.yaml
 - alertmanager.yaml

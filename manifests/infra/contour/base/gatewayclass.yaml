@@ -1,7 +1,0 @@
-# https://github.com/projectcontour/contour/blob/v1.24.1/examples/gateway/03-gatewayclass.yaml
-kind: GatewayClass
-apiVersion: gateway.networking.k8s.io/v1beta1
-metadata:
-  name: contour
-spec:
-  controllerName: projectcontour.io/projectcontour/contour
