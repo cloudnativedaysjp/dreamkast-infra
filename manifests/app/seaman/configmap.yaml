@@ -26,3 +26,5 @@ data:
         baseBranch: main
       - url: https://github.com/cloudnativedaysjp/emtec-ecu
         baseBranch: main
+      - url: https://github.com/cloudnativedaysjp/dreamkast-weaver
+        baseBranch: main
