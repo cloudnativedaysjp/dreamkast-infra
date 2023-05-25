@@ -45,4 +45,4 @@ images:
   newTag: "8.0.33"
 - name: redis
   newName: public.ecr.aws/docker/library/redis
-  newTag: "6.0.5"
+  newTag: "6.0"
