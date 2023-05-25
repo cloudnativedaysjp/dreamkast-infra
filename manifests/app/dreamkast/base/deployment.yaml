@@ -129,11 +129,21 @@ spec:
         image: dreamkast-weaver
         imagePullPolicy: Always
         command: ["/dkw","dbmigrate"]
+        env:
+          - name: DREAMKAST_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
       containers:
       - image: dreamkast-weaver
         imagePullPolicy: Always
         name: dkw-serve
         command: ["/dkw","serve"]
+        env:
+          - name: DREAMKAST_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
         args: ["port=8080"]
         ports:
         - containerPort: 8080
