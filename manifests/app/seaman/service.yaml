@@ -5,7 +5,7 @@ metadata:
   name: seaman
 spec:
   ports:
-    - port: 8000
+    - port: 8080
       targetPort: 8080
       protocol: TCP
   selector:
