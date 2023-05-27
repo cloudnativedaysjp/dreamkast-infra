@@ -19,6 +19,8 @@ spec:
         name: seaman
         args:
         - --config=/mnt/config/config.yaml
+        ports:
+        - containerPort: 8080
         volumeMounts:
         - name: config
           mountPath: /mnt/config
