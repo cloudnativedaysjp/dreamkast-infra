@@ -12,6 +12,9 @@ data:
     github:
       username: dreamkast-cloudnativedays
       accessToken: ${GITHUB_TOKEN}
+    githubWebhook:
+      bindAddr: :8080
+      secret: ${GITHUB_WEBHOOK_SECRET}
     release:
       targets:
       - url: https://github.com/cloudnativedaysjp/dreamkast
