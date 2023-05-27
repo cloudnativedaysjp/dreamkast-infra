@@ -5,6 +5,8 @@ resources:
 - deployment.yaml
 - configmap.yaml
 - secret.yaml
+- service.yaml
+- ingress.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/seaman
   newTag: 1.0.0
