@@ -10,8 +10,6 @@ spec:
     chart: falco-exporter
     helm:
       values: |
-        image:
-          registry: public.ecr.aws
         serviceMonitor:
           enabled: true
           additionalLabels:
