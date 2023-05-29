@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ../../base
 # renovate: type=projectcontour/contour
-- https://projectcontour.io/quickstart/v1.24.1/contour.yaml
+- https://projectcontour.io/quickstart/v1.25.0/contour.yaml
 patchesStrategicMerge:
 - ./contour-configmap.yaml
 - ./lb-internet-facing.yaml
