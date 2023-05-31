@@ -12,6 +12,7 @@ spec:
       values: |
         image:
           registry: public.ecr.aws
+          repository: f5j9d0q5/falcosecurity/falco-exporter
         serviceMonitor:
           enabled: true
           additionalLabels:
