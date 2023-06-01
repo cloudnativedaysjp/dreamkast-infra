@@ -14,6 +14,7 @@ patchesStrategicMerge:
 - deployment-dreamkast.yaml
 # NOTE: remove following patch to delete dk-ui if integration test with dk-ui needed
 - delete-dreamkast-ui.yaml
+# NOTE: remove following patch to delete dk-weaver if integration test with dk-weaver needed
 - delete-dreamkast-weaver.yaml
 
 patches:
