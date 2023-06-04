@@ -19,6 +19,12 @@ spec:
       cookieRewritePolicies:
       - name: _session_id
         secure: true
+      healthCheckPolicy:
+        path: /
+        intervalSeconds: 5
+        timeoutSeconds: 1
+        unhealthyThresholdCount: 3
+        healthyThresholdCount: 5
     - conditions:
       - prefix: /cable
       enableWebsockets: true
