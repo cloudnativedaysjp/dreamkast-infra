@@ -28,6 +28,8 @@ spec:
                   value: "redis://dreamkast-redis:6379"
                 - name: SENTRY_DSN
                   value: "https://0d4c2684ad8348bf9c6364619f8fd63a@sentry.cloudnativedays.jp/3"
+                - name: OTEL_SERVICE_NAME
+                  value: "dreamkast-harvest-job"
                 - name: S3_BUCKET
                   value: "dreamkast-prd-bucket"
                 - name: S3_REGION
