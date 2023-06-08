@@ -9,4 +9,4 @@ resources:
 - ingress.yaml
 images:
 - name: public.ecr.aws/f5j9d0q5/seaman
-  newTag: 1.0.3
+  newTag: 1.0.4
