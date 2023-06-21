@@ -37,7 +37,7 @@ spec:
       - name: _session_id
         secure: true
     - conditions:
-      - prefix: /cicd2023/ui
+      - prefix: /cndf2023/ui
       services:
       - name: dreamkast-ui
         port: 3001

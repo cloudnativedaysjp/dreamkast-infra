@@ -49,7 +49,7 @@ spec:
               name: dreamkast-ui-secret
               key: NEXT_PUBLIC_AUTH0_AUDIENCE
         - name: NEXT_PUBLIC_BASE_PATH
-          value: /cicd2023/ui
+          value: /cndf2023/ui
         - name: NEXT_PUBLIC_EVENT_SALT
           valueFrom:
             secretKeyRef:
@@ -59,19 +59,19 @@ spec:
         livenessProbe:
           httpGet:
             port: 3001
-            path: /cicd2023/ui/
+            path: /cndf2023/ui/
           failureThreshold: 5
           periodSeconds: 5
         readinessProbe:
           httpGet:
             port: 3001
-            path: /cicd2023/ui/
+            path: /cndf2023/ui/
           failureThreshold: 5
           periodSeconds: 5
         startupProbe:
           httpGet:
             port: 3001
-            path: /cicd2023/ui/
+            path: /cndf2023/ui/
           failureThreshold: 30
           periodSeconds: 10
         resources:
