@@ -159,6 +159,7 @@ spec:
         plugins:
           - grafana-piechart-panel
           - magnesium-wordcloud-panel
+          - blackcowmoo-googleanalytics-datasource
       parameters:
         - name: image.tag
           value: "9.0.4"
