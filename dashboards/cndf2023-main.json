@@ -168,7 +168,7 @@
           "exemplar": true,
           "expr": "max(sum(dreamkast_track_viewer_count) by(instance))",
           "interval": "",
-          "legendFormat": "CI/CD2023視聴者数",
+          "legendFormat": "CNDF2023視聴者数",
           "range": true,
           "refId": "A"
         }
@@ -470,7 +470,7 @@
           "exemplar": true,
           "expr": "max(dreamkast_registrants_count{conference_id=\"8\"})",
           "interval": "",
-          "legendFormat": "CI/CD2023登録者数",
+          "legendFormat": "CNDF2023登録者数",
           "range": true,
           "refId": "A"
         }
@@ -584,6 +584,6 @@
   "timezone": "",
   "title": "CNDF2023 Dashboard",
   "uid": "ADCHHXXVk",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
