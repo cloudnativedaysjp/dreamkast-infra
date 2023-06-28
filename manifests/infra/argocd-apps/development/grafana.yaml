@@ -175,7 +175,7 @@ spec:
     syncOptions:
       - CreateNamespace=true
 ---
-apiVersion: "kubernetes-client.io/v1"
+apiVersion: 'kubernetes-client.io/v1'
 kind: ExternalSecret
 metadata:
   name: grafana-secret
