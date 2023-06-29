@@ -214,7 +214,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -363,7 +365,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -468,7 +472,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "max(dreamkast_registrants_count{conference_id=\"8\"})",
+          "expr": "max(dreamkast_registrants_count{conference_id=\"9\"})",
           "interval": "",
           "legendFormat": "CNDF2023登録者数",
           "range": true,
@@ -516,7 +520,9 @@
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -531,7 +537,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "max(dreamkast_registrants_count{conference_id=\"8\"})",
+          "expr": "max(dreamkast_registrants_count{conference_id=\"9\"})",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -550,8 +556,12 @@
       {
         "current": {
           "selected": true,
-          "text": ["All"],
-          "value": ["$__all"]
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
         },
         "datasource": {
           "type": "prometheus",
@@ -584,6 +594,6 @@
   "timezone": "",
   "title": "CNDF2023 Dashboard",
   "uid": "ADCHHXXVk",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
