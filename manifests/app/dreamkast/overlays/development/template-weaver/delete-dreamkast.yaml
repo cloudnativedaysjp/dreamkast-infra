@@ -1,0 +1,17 @@
+$patch: delete
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dreamkast
+---
+$patch: delete
+apiVersion: v1
+kind: Service
+metadata:
+  name: dreamkast
+---
+$patch: delete
+apiVersion: kubernetes-client.io/v1
+kind: ExternalSecret
+metadata:
+  name: rails-app-secret
