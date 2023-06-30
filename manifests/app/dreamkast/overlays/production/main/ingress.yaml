@@ -75,6 +75,3 @@ spec:
       services:
       - name: dreamkast-weaver
         port: 8080
-      cookieRewritePolicies:
-      - name: _session_id
-        secure: true
