@@ -21,7 +21,7 @@ spec:
   source:
     path: manifests/app/dreamkast/overlays/staging/main
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: dev_vks-rebuild
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
