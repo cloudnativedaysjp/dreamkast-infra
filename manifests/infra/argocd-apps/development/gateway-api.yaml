@@ -14,7 +14,7 @@ spec:
   source:
     path: manifests/infra/gateway-api/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: dev_vks-rebuild
   syncPolicy:
     automated:
       prune: true

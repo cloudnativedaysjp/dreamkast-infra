@@ -51,7 +51,7 @@ spec:
   source:
     path: manifests/infra/falco/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: dev_vks-rebuild
   syncPolicy:
     automated:
       prune: true

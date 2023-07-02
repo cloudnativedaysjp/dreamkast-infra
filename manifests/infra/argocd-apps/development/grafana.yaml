@@ -189,7 +189,7 @@ spec:
   source:
     path: manifests/infra/grafana/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: dev_vks-rebuild
   syncPolicy:
     automated:
       prune: true
