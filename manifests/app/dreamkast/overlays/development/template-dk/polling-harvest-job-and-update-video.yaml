@@ -27,11 +27,11 @@ spec:
                 - name: SENTRY_DSN
                   value: "https://0d4c2684ad8348bf9c6364619f8fd63a@sentry.cloudnativedays.jp/3"
                 - name: S3_BUCKET
-                  value: "dk-us-dev-bucket"
+                  value: "dreamkast-dev-bucket"
                 - name: S3_REGION
                   value: us-west-2
                 - name: SQS_FIFO_QUEUE_URL
-                  value: "https://sqs.us-west-2.amazonaws.com/607167088920/dk-us-dev-fifo-queue.fifo"
+                  value: "https://sqs.us-west-2.amazonaws.com/607167088920/dreamkast-dev-fifo-queue.fifo"
                 - name: SLACK_WEBHOOK_URL
                   valueFrom:
                     secretKeyRef:
