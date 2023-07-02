@@ -9,7 +9,7 @@ spec:
       - name: dkw-dbmigrate
         env:
         - name: DB_ENDPOINT
-          value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
+          value: "dreamkast-stg-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
         - name: DB_PORT
           value: "3306"
         - name: DB_USER
@@ -26,7 +26,7 @@ spec:
       - name: dkw-serve
         env:
         - name: DB_ENDPOINT
-          value: "dk-us-dev-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
+          value: "dreamkast-stg-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com"
         - name: DB_PORT
           value: "3306"
         - name: DB_USER

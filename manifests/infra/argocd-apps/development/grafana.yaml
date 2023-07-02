@@ -176,17 +176,22 @@ spec:
     syncOptions:
       - CreateNamespace=true
 ---
-apiVersion: 'kubernetes-client.io/v1'
-kind: ExternalSecret
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: grafana-secret
-  namespace: monitoring
+  name: grafana-configs
+  namespace: argocd
 spec:
-  backendType: secretsManager
-  data:
-    - key: GrafanaAuth0
-      name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
-      property: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
-    - key: GrafanaAuth0
-      name: GF_AUTH_GENERIC_OAUTH_CLIENT_ID
-      property: GF_AUTH_GENERIC_OAUTH_CLIENT_ID
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    path: manifests/infra/grafana/overlays/development
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: dev_vks-rebuild
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true

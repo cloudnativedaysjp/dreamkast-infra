@@ -50,12 +50,5 @@
         ],
       "datasourceTemplate": "github-tags"
     },
-    { // type=projectcontour/contour
-      "fileMatch": ["(^|/)kustomization\.ya?ml$"],
-      "matchStrings": [
-          "# renovate: type=(?<depName>[^/]+\\/[^/]+) *\\s *- https:\\/\\/projectcontour\\.io\\/quickstart\\/(?<currentValue>[^/]+)\\/.+"
-        ],
-      "datasourceTemplate": "github-tags"
-    },
   ]
 }

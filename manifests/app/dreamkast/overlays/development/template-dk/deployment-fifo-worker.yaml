@@ -38,7 +38,7 @@ spec:
             - name: SENTRY_DSN
               value: "https://07f87d11da2c44189d03593537edb291@sentry.cloudnativedays.jp/2"
             - name: S3_BUCKET
-              value: "dk-us-dev-bucket"
+              value: "dreamkast-dev-bucket"
             - name: S3_REGION
               value: us-west-2
             - name: DREAMKAST_NAMESPACE
@@ -89,11 +89,11 @@ spec:
             - name: SENTRY_DSN
               value: https://07f87d11da2c44189d03593537edb291@sentry.cloudnativedays.jp/2
             - name: S3_BUCKET
-              value: dk-us-dev-bucket
+              value: dreamkast-dev-bucket
             - name: S3_REGION
               value: us-west-2
             - name: SQS_FIFO_QUEUE_URL
-              value: "https://sqs.us-west-2.amazonaws.com/607167088920/dk-us-dev-fifo-queue.fifo"
+              value: "https://sqs.us-west-2.amazonaws.com/607167088920/dreamkast-dev-fifo-queue.fifo"
             - name: DREAMKAST_NAMESPACE
               valueFrom:
                 fieldRef:

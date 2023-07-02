@@ -2,8 +2,27 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../../base
-# renovate: type=projectcontour/contour
-- https://projectcontour.io/quickstart/v1.25.0/contour.yaml
-patchesStrategicMerge:
-- ./contour-configmap.yaml
-- ./lb-internet-facing.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/00-common.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/01-contour-config.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/01-crds.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-job-certgen.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-rbac.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-role-contour.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-service-contour.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-service-envoy.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/03-contour.yaml
+# renovate: type=remote-file
+- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/03-envoy.yaml
+patches:
+- path: ./contour-configmap.yaml
+- path: ./lb-internet-facing.yaml
+- path: ./ns-support-readiness-gate.yaml

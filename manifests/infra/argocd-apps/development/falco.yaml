@@ -38,20 +38,22 @@ spec:
     syncOptions:
       - CreateNamespace=true
 ---
-apiVersion: 'kubernetes-client.io/v1'
-kind: ExternalSecret
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: falco-certs
-  namespace: monitoring
+  name: falco-configs
+  namespace: argocd
 spec:
-  backendType: secretsManager
-  data:
-    - key: observability/falco-certs/dev
-      name: ca.crt
-      property: ca.crt
-    - key: observability/falco-certs/dev
-      name: server.key
-      property: server.key
-    - key: observability/falco-certs/dev
-      name: server.crt
-      property: server.crt
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    path: manifests/infra/falco/overlays/development
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: dev_vks-rebuild
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
