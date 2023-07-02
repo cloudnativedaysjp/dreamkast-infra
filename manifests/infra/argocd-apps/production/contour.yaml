@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: argocd
+    namespace: projectcontour
     server: https://kubernetes.default.svc
   project: infra
   source:
