@@ -151,7 +151,7 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDF2023-Admin') && 'Admin'
           security:
             cookie_secure: true
             cookie_samesite: true
