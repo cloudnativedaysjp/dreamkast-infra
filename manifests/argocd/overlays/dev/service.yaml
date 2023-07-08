@@ -4,3 +4,4 @@ metadata:
   labels:
     projectcontour.io/upstream-protocol.h2c: "443"
   name: argocd-server
+  namespace: argocd
