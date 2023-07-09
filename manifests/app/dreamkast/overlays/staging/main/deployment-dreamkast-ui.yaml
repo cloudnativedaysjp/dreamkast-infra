@@ -12,6 +12,8 @@ spec:
           value: https://api.stg.cloudnativedays.jp
         - name: NEXT_PUBLIC_DK_URL
           value: https://staging.dev.cloudnativedays.jp
+        - name: NEXT_PUBLIC_WEAVER_URL
+          value: "https://dkw.dev.cloudnativedays.jp"
         - name: NEXT_PUBLIC_AUTH0_DOMAIN
           valueFrom:
             secretKeyRef:
