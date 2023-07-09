@@ -12,6 +12,8 @@ spec:
           value: https://api.cloudnativedays.jp
         - name: NEXT_PUBLIC_DK_URL
           value: https://event.cloudnativedays.jp
+        - name: NEXT_PUBLIC_WEAVER_URL
+          value: "https://dkw.cloudnativedays.jp"
         - name: NEXT_PUBLIC_AUTH0_DOMAIN
           valueFrom:
             secretKeyRef:
