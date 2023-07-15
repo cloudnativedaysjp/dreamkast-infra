@@ -22,4 +22,4 @@ data:
     - profile
     - email
     - 'https://cloudnativedays.jp/claims/groups'
-  admin.enabled: "false"
+  admin.enabled: "true"
