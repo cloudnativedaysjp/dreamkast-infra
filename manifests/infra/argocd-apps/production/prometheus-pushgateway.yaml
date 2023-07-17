@@ -23,7 +23,7 @@ spec:
         persistentVolume:
           enabled: true
   syncPolicy:
-    automated:
-      prune: true
+    #automated:
+    #  prune: true
     syncOptions:
     - CreateNamespace=true
