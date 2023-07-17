@@ -1,0 +1,43 @@
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshotContent
+metadata:
+  name: prometheus-pushgateway
+spec:
+  volumeSnapshotRef:
+    kind: VolumeSnapshot
+    name: prometheus-pushgateway
+    namespace: monitoring
+  source:
+    snapshotHandle: snap-0c26d27a68f00b6d7
+  driver: ebs.csi.aws.com
+  deletionPolicy: Delete
+  volumeSnapshotClassName: ebs-csi-aws
+---
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeSnapshot
+metadata:
+  name: prometheus-pushgateway
+  namespace: monitoring
+spec:
+  volumeSnapshotClassName: ebs-csi-aws
+  source:
+    volumeSnapshotContentName: prometheus-pushgateway
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prometheus-pushgateway
+  namespace: monitoring
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  storageClassName: ebs-sc
+  dataSource:
+    name: prometheus-pushgateway
+    kind: VolumeSnapshot
+    apiGroup: snapshot.storage.k8s.io
+
