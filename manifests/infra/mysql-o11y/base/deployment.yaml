@@ -52,16 +52,3 @@ spec:
       - name: mysql-data
         persistentVolumeClaim:
           claimName: mysql-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-data
-  labels:
-    app: mysql-o11y
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi

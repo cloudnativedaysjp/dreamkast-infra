@@ -4,4 +4,5 @@ namespace: monitoring
 resources:
 - secret.yaml
 - cronjob.yaml
+- pvc.yaml
 - ../../base/
