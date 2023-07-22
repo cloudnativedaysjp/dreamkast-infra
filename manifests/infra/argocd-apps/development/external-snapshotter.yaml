@@ -1,19 +1,18 @@
+---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: dreamkast-production-main
+  name: external-snapshotter
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io # cascade deletion on this App deletion
 spec:
   destination:
-    namespace: dreamkast
+    namespace: argocd
     server: https://kubernetes.default.svc
-  project: app
+  project: infra
   source:
-    path: manifests/app/dreamkast/overlays/production/main
+    path: manifests/infra/external-snapshotter/overlays/development
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: prod_eks-rebuild
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true

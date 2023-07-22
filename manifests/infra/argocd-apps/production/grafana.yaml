@@ -177,7 +177,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: grafana-ingress
+  name: grafana-configs
   namespace: argocd
 spec:
   destination:
@@ -185,7 +185,7 @@ spec:
     server: https://kubernetes.default.svc
   project: monitoring
   source:
-    path: manifests/infra/grafana-ingress/overlays/production
+    path: manifests/infra/grafana/overlays/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     targetRevision: main
   syncPolicy:

@@ -12,7 +12,7 @@ spec:
   source:
     path: manifests/infra/argocd-apps/production
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: main
+    targetRevision: prod_eks-rebuild
   syncPolicy:
     automated:
       prune: true

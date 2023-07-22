@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: argocd-notifications-cm
+  namespace: argocd
 data:
   template.app-created: |
     message: Application {{.app.metadata.name}} has been created.

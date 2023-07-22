@@ -34,15 +34,15 @@ spec:
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
+          value: "dreamkast-prod-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
         - name: MYSQL_DATABASE
           value: "dreamkast"
         - name: REDIS_URL
-          value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
+          value: "redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
           value: "https://72560514dcb2438f963e2994f506a6ef@sentry.cloudnativedays.jp/2"
         - name: S3_BUCKET
-          value: "dreamkast-prd-bucket"
+          value: "dreamkast-prod-bucket"
         - name: S3_REGION
           value: ap-northeast-1
         - name: SQS_FIFO_QUEUE_URL
@@ -97,23 +97,23 @@ spec:
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST
-          value: "dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
+          value: "dreamkast-prod-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com"
         - name: MYSQL_DATABASE
           value: "dreamkast"
         - name: REDIS_URL
-          value: "redis://drr7wdanp39n8i1.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
+          value: "redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
           value: "https://72560514dcb2438f963e2994f506a6ef@sentry.cloudnativedays.jp/2"
         - name: OTEL_SERVICE_NAME
           value: "dreamkast"
         - name: S3_BUCKET
-          value: "dreamkast-prd-bucket"
+          value: "dreamkast-prod-bucket"
         - name: S3_REGION
           value: ap-northeast-1
         - name: AWS_REGION
           value: ap-northeast-1
         - name: SQS_FIFO_QUEUE_URL
-          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prdFifoQueue.fifo"
+          value: "https://sqs.ap-northeast-1.amazonaws.com/607167088920/dreamkast-prod-fifo-queue.fifo"
         - name: DREAMKAST_API_ADDR
           value: "https://api.cloudnativedays.jp"
         # TODO: Delete DREAMKAST_WEAVER_ADDR
