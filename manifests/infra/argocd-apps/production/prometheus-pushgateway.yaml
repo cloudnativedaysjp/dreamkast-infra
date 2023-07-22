@@ -22,6 +22,7 @@ spec:
           interval: 5s
         persistentVolume:
           enabled: true
+          existingClaim: "prometheus-pushgateway"
   syncPolicy:
     automated:
       prune: true
