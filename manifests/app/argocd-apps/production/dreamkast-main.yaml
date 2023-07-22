@@ -13,7 +13,7 @@ spec:
   source:
     path: manifests/app/dreamkast/overlays/production/main
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
-    targetRevision: prod_eks-rebuild
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
