@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
     path: manifests/argocd/overlays/prd
-    targetRevision: prod_eks-rebuild
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
