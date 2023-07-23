@@ -61,7 +61,7 @@ spec:
         value: 40Mi
       # sidecar:snapshotter configs
       - name: sidecars.snapshotter.forceEnable
-        value: false
+        value: "false"
       - name: sidecars.snapshotter.resources.limits.cpu
         value: 50m
       - name: sidecars.snapshotter.resources.limits.memory
