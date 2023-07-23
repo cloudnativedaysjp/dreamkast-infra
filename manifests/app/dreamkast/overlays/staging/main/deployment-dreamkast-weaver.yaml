@@ -39,3 +39,9 @@ spec:
             secretKeyRef:
               name: db-secret
               key: password
+        - name: DREAMKAST_ADDR
+          value: https://staging.dev.cloudnativedays.jp
+        - name: AWS_REGION # IVS REGION
+          value: us-east-1
+        - name: PROM_PUSHGATEWAY_ENDPOINT
+          value: prometheus-pushgateway.monitoring.svc.cluster.local:9091
