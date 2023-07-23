@@ -40,7 +40,7 @@ spec:
               name: db-secret
               key: password
         - name: DREAMKAST_ADDR
-          value: https://staging.dev.cloudnativedays.jp
+          value: dreamkast.dreamkast-staging.svc.cluster.local:80
         - name: AWS_REGION # IVS REGION
           value: us-east-1
         - name: PROM_PUSHGATEWAY_ENDPOINT
