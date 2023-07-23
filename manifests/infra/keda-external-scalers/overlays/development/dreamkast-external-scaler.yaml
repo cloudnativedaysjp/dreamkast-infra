@@ -36,6 +36,13 @@ spec:
             port: 6000
           failureThreshold: 30
           periodSeconds: 10
+        resources:
+          limits:
+            cpu: 50m
+            memory: 50Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
 ---
 apiVersion: v1
 kind: Service

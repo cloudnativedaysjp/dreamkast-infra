@@ -24,6 +24,14 @@ spec:
           value: "false"
         - name: serviceAccount.name
           value: aws-load-balancer-controller
+        - name: resources.limits.cpu
+          value: 100m
+        - name: resources.limits.memory
+          value: 128Mi
+        - name: resources.requests.cpu
+          value: 100m
+        - name: resources.requests.memory
+          value: 128Mi
   syncPolicy:
     automated:
       prune: true

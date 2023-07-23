@@ -14,6 +14,13 @@ spec:
           enabled: true
           additionalLabels:
             release: prometheus
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
   destination:
     namespace: monitoring
     server: https://kubernetes.default.svc

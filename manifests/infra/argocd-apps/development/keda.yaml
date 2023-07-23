@@ -15,6 +15,16 @@ spec:
     chart: keda
     repoURL: https://kedacore.github.io/charts
     targetRevision: 2.10.2
+    helm:
+      parameters:
+        - name: resources.operator.limits.cpu
+          value: 100m
+        - name: resources.operator.limits.memory
+          value: 100Mi
+        - name: resources.operator.requests.cpu
+          value: 100m
+        - name: resources.operator.requests.memory
+          value: 100Mi
   syncPolicy:
     automated:
       prune: true
