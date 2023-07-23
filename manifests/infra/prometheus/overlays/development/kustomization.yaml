@@ -29,4 +29,5 @@ resources:
 - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.11.0/manifests/nodeExporter-service.yaml
 patchesStrategicMerge:
 - prometheus-crd.yaml
+- prometheus.yaml
 - service-monitor-dk.yaml

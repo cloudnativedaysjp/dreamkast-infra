@@ -8,6 +8,13 @@ spec:
   alertmanagerConfigSelector:
     matchLabels:
       alertmanagerConfig: k8s
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
 ---
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: AlertmanagerConfig

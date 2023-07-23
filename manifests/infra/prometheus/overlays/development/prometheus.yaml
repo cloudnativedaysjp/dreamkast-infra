@@ -4,14 +4,14 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
-  replicas: 2
-  retention: 120d
+  replicas: 1
+  retention: 14d
   storage:
     volumeClaimTemplate:
       spec:
         resources:
           requests:
-            storage: 150Gi
+            storage: 15Gi
   resources:
     requests:
       cpu: 200m

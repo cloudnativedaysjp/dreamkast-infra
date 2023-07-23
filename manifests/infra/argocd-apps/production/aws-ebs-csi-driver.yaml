@@ -17,12 +17,77 @@ spec:
     targetRevision: 2.21.0
     helm:
       parameters:
+      # controller configs
       - name: controller.region
         value: ap-northeast-1
       - name: controller.serviceAccount.create
         value: "false"
       - name: controller.serviceAccount.name
         value: ebs-csi-controller-sa
+      - name: controller.resources.limits.cpu
+        value: 50m
+      - name: controller.resources.limits.memory
+        value: 100Mi
+      - name: controller.resources.requests.cpu
+        value: 10m
+      - name: controller.resources.requests.memory
+        value: 40Mi
+      # node configs
+      - name: node.resources.limits.cpu
+        value: 50m
+      - name: node.resources.limits.memory
+        value: 100Mi
+      - name: node.resources.requests.cpu
+        value: 10m
+      - name: node.resources.requests.memory
+        value: 40Mi
+      # sidecar:provisioner configs
+      - name: sidecars.provisioner.resources.limits.cpu
+        value: 50m
+      - name: sidecars.provisioner.resources.limits.memory
+        value: 100Mi
+      - name: sidecars.provisioner.resources.requests.cpu
+        value: 10m
+      - name: sidecars.provisioner.resources.requests.memory
+        value: 40Mi
+      # sidecar:attacher configs
+      - name: sidecars.attacher.resources.limits.cpu
+        value: 50m
+      - name: sidecars.attacher.resources.limits.memory
+        value: 100Mi
+      - name: sidecars.attacher.resources.requests.cpu
+        value: 10m
+      - name: sidecars.attacher.resources.requests.memory
+        value: 40Mi
+      # sidecar:snapshotter configs
+      - name: sidecars.snapshotter.forceEnable
+        value: false
+      - name: sidecars.snapshotter.resources.limits.cpu
+        value: 50m
+      - name: sidecars.snapshotter.resources.limits.memory
+        value: 100Mi
+      - name: sidecars.snapshotter.resources.requests.cpu
+        value: 10m
+      - name: sidecars.snapshotter.resources.requests.memory
+        value: 40Mi
+      # sidecar:resizer configs
+      - name: sidecars.resizer.resources.limits.cpu
+        value: 50m
+      - name: sidecars.resizer.resources.limits.memory
+        value: 100Mi
+      - name: sidecars.resizer.resources.requests.cpu
+        value: 10m
+      - name: sidecars.resizer.resources.requests.memory
+        value: 40Mi
+      # sidecar:livenessProbe configs
+      - name: sidecars.livenessProbe.resources.limits.cpu
+        value: 10m
+      - name: sidecars.livenessProbe.resources.limits.memory
+        value: 40Mi
+      - name: sidecars.livenessProbe.resources.requests.cpu
+        value: 10m
+      - name: sidecars.livenessProbe.resources.requests.memory
+        value: 40Mi
   syncPolicy:
     automated:
       prune: true
