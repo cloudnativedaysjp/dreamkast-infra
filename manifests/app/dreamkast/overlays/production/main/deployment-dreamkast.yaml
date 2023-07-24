@@ -94,6 +94,8 @@ spec:
             memory: "2048Mi"
             cpu: "1500m"
         env:
+        - name: DREAMKAST_ENV
+          value: "production"
         - name: RAILS_ENV
           value: "production"
         - name: MYSQL_HOST

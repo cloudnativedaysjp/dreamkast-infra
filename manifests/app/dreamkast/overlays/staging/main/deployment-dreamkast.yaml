@@ -85,6 +85,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
+            - name: DREAMKAST_ENV
+              value: "staging"
             - name: RAILS_ENV
               value: "production"
             - name: MYSQL_HOST

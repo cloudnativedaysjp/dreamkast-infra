@@ -80,6 +80,8 @@ spec:
           ports:
             - containerPort: 3000
           env:
+            - name: DREAMKAST_ENV
+              value: "review_app"
             - name: RAILS_ENV
               value: "production"
             - name: MYSQL_HOST
