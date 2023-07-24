@@ -27,3 +27,9 @@ spec:
           value: "root"
         - name: DB_PASSWORD
           value: "password"
+        - name: DREAMKAST_ADDR
+          value: dreamkast.dreamkast-staging.svc.cluster.local:80
+        - name: AWS_REGION # IVS REGION
+          value: us-east-1
+        - name: PROM_PUSHGATEWAY_ENDPOINT
+          value: prometheus-pushgateway.monitoring.svc.cluster.local:9091
