@@ -166,7 +166,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "max(sum(dreamkast_track_viewer_count) by(instance))",
+          "expr": "sum(dkw_dkui_viewer_count)",
           "interval": "",
           "legendFormat": "CNDF2023視聴者数",
           "range": true,
@@ -230,7 +230,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "max(sum(dreamkast_track_viewer_count) by(instance))",
+          "expr": "sum(dkw_dkui_viewer_count)",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
