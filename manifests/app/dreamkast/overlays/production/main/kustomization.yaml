@@ -15,7 +15,7 @@ patchesStrategicMerge:
 images:
 - name: dreamkast-ecs
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: a09a73b81e74f8d3f23620f0829c24da5b273bd9
+  newTag: 871e777593861803d630bc299ff6056a0f053d29
 - name: dreamkast-ui
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
   newTag: adb605249451d7f5655c63d230fdd357b167c6a2
