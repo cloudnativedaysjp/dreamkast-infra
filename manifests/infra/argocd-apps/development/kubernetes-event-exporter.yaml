@@ -1,0 +1,76 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-event-exporter
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: kubernetes-event-exporter
+    repoURL: registry-1.docker.io/bitnamicharts
+    targetRevision: "2.4.8"
+    helm:
+      values: |
+        extraEnvVarsSecret: kubernetes-event-exporter-secret
+        config:
+          logLevel: info
+          logFormat: pretty
+          receivers:
+            - name: slack
+              webhook:
+                endpoint: ${SLACK_WEBHOOK_ENDPOINT}
+                layout:
+                  attachments:
+                    - color: "#D00000"
+                      blocks:
+                        - type: "section"
+                          text:
+                            type: "mrkdwn"
+                            text: "*Message:*\n {{ `{{ .Message }}` }}"
+                        - type: "section"
+                          text:
+                            type: "mrkdwn"
+                            text: "*FirstTimestamp:*\n {{ `{{ .FirstTimestamp }}` }}"        
+                          fields:
+                            - type: "mrkdwn"
+                              text: "*Namespace:*\n {{ `{{ .Namespace }}` }}"
+                            - type: "mrkdwn"
+                              text: "*Reason:*\n {{ `{{ .Reason }}` }}"        
+                            - type: "mrkdwn"
+                              text: "*Kind:*\n {{ `{{ .InvolvedObject.Kind }}` }}"
+                            - type: "mrkdwn"
+                              text: "*Object:*\n {{ `{{ .InvolvedObject.Name }}` }}"   
+          route:
+            routes:
+              - match:
+                  - receiver: slack
+                    reason: "OOMKilled"
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-event-exporter-secret
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    path: manifests/infra/kubernetes-event-exporter/base
+    repoURL: https://github.com/cloudnativedaysjp/dreamkast-infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
