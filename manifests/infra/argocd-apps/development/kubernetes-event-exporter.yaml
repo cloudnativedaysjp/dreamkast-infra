@@ -30,20 +30,20 @@ spec:
                         - type: "section"
                           text:
                             type: "mrkdwn"
-                            text: "*Message:*\n {{ `{{ .Message }}` }}"
+                            text: "*Message:*\n {{ .Message }}"
                         - type: "section"
                           text:
                             type: "mrkdwn"
-                            text: "*FirstTimestamp:*\n {{ `{{ .FirstTimestamp }}` }}"        
+                            text: "*FirstTimestamp:*\n {{ .FirstTimestamp }}"        
                           fields:
                             - type: "mrkdwn"
-                              text: "*Namespace:*\n {{ `{{ .Namespace }}` }}"
+                              text: "*Namespace:*\n {{ .Namespace }}"
                             - type: "mrkdwn"
-                              text: "*Reason:*\n {{ `{{ .Reason }}` }}"        
+                              text: "*Reason:*\n {{ .Reason }}"        
                             - type: "mrkdwn"
-                              text: "*Kind:*\n {{ `{{ .InvolvedObject.Kind }}` }}"
+                              text: "*Kind:*\n {{ .InvolvedObject.Kind }}"
                             - type: "mrkdwn"
-                              text: "*Object:*\n {{ `{{ .InvolvedObject.Name }}` }}"   
+                              text: "*Object:*\n {{ .InvolvedObject.Name }}"   
           route:
             routes:
               - match:
