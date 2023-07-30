@@ -17,7 +17,7 @@ spec:
       values: |
         extraEnvVarsSecret: kubernetes-event-exporter-secret
         config:
-          logLevel: debug
+          logLevel: info
           logFormat: pretty
           receivers:
             - name: slack
