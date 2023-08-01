@@ -8,6 +8,7 @@ resources:
 - polling-harvest-job-and-update-video.yaml
 - ../../../base/
 - deployment-fifo-worker.yaml
+- viewer-count.yaml
 patchesStrategicMerge:
 - deployment-dreamkast.yaml
 - deployment-dreamkast-ui.yaml

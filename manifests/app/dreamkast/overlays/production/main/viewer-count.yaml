@@ -1,0 +1,24 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: viewer-count
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  failedJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffFimit: 3
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: counter
+            image: curlimages/curl:8.2.1
+            args: ["curl",
+              "-X", "POST",
+              "-H", "Content-Type: application/json",
+              "--data", '{ "query": "mutation{saveViewerCount( input:{  confName: cndf2023 })}"}',
+              "https://dkw.cloudnativedays.jp/query"]
