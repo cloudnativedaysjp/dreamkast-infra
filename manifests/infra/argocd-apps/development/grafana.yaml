@@ -136,6 +136,15 @@ spec:
             CNDT2022 Onsite Monitor:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2022-onsite-monitor.json
+            Kafka (Sentry):
+              datasource: Prometheus-Sakura
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-kafka.json
+            Redis (Sentry):
+              datasource: Prometheus-Sakura
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-redis.json
+            PostgreSQL (Sentry):
+              datasource: Prometheus-Sakura
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-postgresql.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
