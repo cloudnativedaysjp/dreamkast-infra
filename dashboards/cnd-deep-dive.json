@@ -1,0 +1,1059 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 28,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "content": "# CloudNativeDays Deep Dive\n\nこのダッシュボードは、CloudNativeDaysの[公式サイト](https://cloudnativedays.jp/)のアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.0.4",
+      "title": "このダッシュボードについて",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "description": "https://cloudnativedays.jp にアクセスされた方の",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "(not set)|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "country"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "Active Users - CloudNativeDays",
+          "selectedDimensions": [
+            {
+              "description": "The country from which the user activity originated.",
+              "label": "Country",
+              "value": "country"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/263654842"
+        }
+      ],
+      "title": "サイトアクセス数 (国別)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "(not set)|Japan|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "city",
+            "country"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "hide": false,
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "A",
+          "selectedDimensions": [
+            {
+              "description": "The city from which the user activity originated.",
+              "label": "City",
+              "value": "city"
+            },
+            {
+              "description": "The country from which the user activity originated.",
+              "label": "Country",
+              "value": "country"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/363617797"
+        }
+      ],
+      "title": "サイトアクセス数 (都市別)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "percent"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "desktop|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Desktop"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mobile|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Mobile"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tablet|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Tablet"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "deviceCategory"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "A",
+          "selectedDimensions": [
+            {
+              "description": "The type of device: Desktop, Tablet, or Mobile.",
+              "label": "Device category",
+              "value": "deviceCategory"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/363617797"
+        }
+      ],
+      "title": "使用しているデバイス",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "percent"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "(not set)|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 31
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "mobileDeviceBranding"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "A",
+          "selectedDimensions": [
+            {
+              "description": "Manufacturer or branded name (examples: Samsung, HTC, Verizon, T-Mobile).",
+              "label": "Device brand",
+              "value": "mobileDeviceBranding"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/363617797"
+        }
+      ],
+      "title": "使用しているデバイスブランド",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "percent"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Chrome|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Chrome"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Safari|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Safari"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Edge|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Edge"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Firefox|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "FireFox"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Android Webview|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Android Webview"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Safari (in-app)|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Safari (in-app)"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Internet Explorer|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Internet Explorer"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "(not set)|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Unknown"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 40
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "browser"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "A",
+          "selectedDimensions": [
+            {
+              "description": "The browsers used to view your website.",
+              "label": "Browser",
+              "value": "browser"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/363617797"
+        }
+      ],
+      "title": "使用しているブラウザ",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "blackcowmoo-googleanalytics-datasource",
+        "uid": "dB_nKVqVz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 100,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "percent"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Windows|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Windows"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Android|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Android"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Linux|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Linux"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Macintosh|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "macOS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "iOS|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "iOS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Chrome OS|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Chrome OS"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "(not set)|activeUsers"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Unknown"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 40
+      },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "accountId": "accounts/190739600",
+          "cacheDurationSeconds": 300,
+          "datasource": {
+            "type": "blackcowmoo-googleanalytics-datasource",
+            "uid": "dB_nKVqVz"
+          },
+          "dimensions": [
+            "operatingSystem"
+          ],
+          "displayName": {},
+          "filtersExpression": "",
+          "metrics": [
+            "activeUsers"
+          ],
+          "refId": "A",
+          "selectedDimensions": [
+            {
+              "description": "The operating systems used by visitors to your app or website. Includes desktop and mobile operating systems such as Windows and Android.",
+              "label": "Operating system",
+              "value": "operatingSystem"
+            }
+          ],
+          "selectedMetrics": [
+            {
+              "description": "The number of distinct users who visited your site or app.",
+              "label": "Active users",
+              "value": "activeUsers"
+            }
+          ],
+          "selectedTimeDimensions": {
+            "description": "The date of the event, formatted as YYYYMMDD.",
+            "label": "Date",
+            "value": "date"
+          },
+          "timeDimension": "date",
+          "timezone": "Asia/Tokyo",
+          "version": "v4",
+          "webPropertyId": "properties/363617797"
+        }
+      ],
+      "title": "使用しているOS",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "CloudNativeDays Deep Dive",
+  "uid": "I5GV5V34k",
+  "version": 16,
+  "weekStart": ""
+}
