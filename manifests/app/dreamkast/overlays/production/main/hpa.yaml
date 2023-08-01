@@ -60,4 +60,34 @@ spec:
     metadata:
       scalerAddress: dreamkast-external-scaler.keda.svc:6000
       minReplicas: "10"
-
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: dreamkast-weaver
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: dreamkast-weaver
+  pollingInterval:  30
+  minReplicaCount:  1
+  maxReplicaCount:  30
+  advanced:
+    horizontalPodAutoscalerConfig:
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 2400
+          policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 60
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "50"
+  - type: external
+    metadata:
+      scalerAddress: dreamkast-external-scaler.keda.svc:6000
+      minReplicas: "10"
