@@ -99,10 +99,10 @@ spec:
               revision: 1
             cnd-deep-dive:
               datasource: Google Analytics
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e0999073c4319bafebaec9b97c8011e51181c6d6/dashboards/cnd-deep-dive.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/cnd-deep-dive.json
             dk-deep-dive:
               datasource: Google Analytics
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e0999073c4319bafebaec9b97c8011e51181c6d6/dashboards/dk-deep-dive.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
               gnetId: 11264
@@ -156,7 +156,7 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'O11Y2022-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDF2023-Admin') && 'Admin'
           security:
             cookie_secure: true
             cookie_samesite: true
