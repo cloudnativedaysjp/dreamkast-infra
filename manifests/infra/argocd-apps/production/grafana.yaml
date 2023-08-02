@@ -97,6 +97,12 @@ spec:
             ArgoCD:
               gnetId: 14584
               revision: 1
+            cnd-deep-dive:
+              datasource: Google Analytics
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e0999073c4319bafebaec9b97c8011e51181c6d6/dashboards/cnd-deep-dive.json
+            dk-deep-dive:
+              datasource: Google Analytics
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e0999073c4319bafebaec9b97c8011e51181c6d6/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
               gnetId: 11264
