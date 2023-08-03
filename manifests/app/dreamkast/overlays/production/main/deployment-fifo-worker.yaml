@@ -37,7 +37,7 @@ spec:
         - name: REDIS_URL
           value: "redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
-          value: "https://8ac6512ecc288ab9cb631227cbf0918c@sentry.cloudnativedays.jp/2"
+          value: "https://8ac6512ecc288ab9cb631227cbf0918c@sentry2.cloudnativedays.jp/2"
         - name: OTEL_SERVICE_NAME
           value: "dreamkast-fifo-worker"
         - name: S3_BUCKET
