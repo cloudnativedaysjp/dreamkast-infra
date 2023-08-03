@@ -88,8 +88,8 @@ spec:
           - containerPort: 3000
         resources:
           requests:
-            memory: "2048Mi"
-            cpu: "1500m"
+            memory: "1024Mi"
+            cpu: "500m"
           limits:
             memory: "2048Mi"
             cpu: "1500m"
@@ -203,8 +203,8 @@ spec:
         - containerPort: 3001
         resources:
           requests:
-            memory: "2048Mi"
-            cpu: "1500m"
+            memory: "1024Mi"
+            cpu: "500m"
           limits:
             memory: "2048Mi"
             cpu: "1500m"
