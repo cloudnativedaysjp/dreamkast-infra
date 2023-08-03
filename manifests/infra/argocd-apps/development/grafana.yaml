@@ -31,7 +31,7 @@ spec:
                 customMetricsNamespaces: DreamKastFunctions
             - name: Prometheus-Sakura
               type: prometheus
-              url: http://sentry.cloudnativedays.jp:9090
+              url: http://sentry2.cloudnativedays.jp:9090
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
