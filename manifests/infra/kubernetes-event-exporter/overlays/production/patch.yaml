@@ -1,0 +1,6 @@
+- op: add
+  path: /spec/data
+  value:
+    - key: prd/kubernetes-event-exporter-secret
+      name: SLACK_WEBHOOK_ENDPOINT
+      property: SLACK_WEBHOOK_ENDPOINT
