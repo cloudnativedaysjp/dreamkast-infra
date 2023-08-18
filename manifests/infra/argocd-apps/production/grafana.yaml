@@ -143,13 +143,16 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/d1b811629c120e5039f9158cc608f549a4212ef8/dashboards/cndt2022-onsite-monitor.json
             Kafka (Sentry):
               datasource: Prometheus-Sakura
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1b7cb4e7aef35043b23caaa1a2a9b1f239580479/dashboards/sentry-kafka.json
+              gnetId: 7589
+              revision: 5
             Redis (Sentry):
               datasource: Prometheus-Sakura
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1b7cb4e7aef35043b23caaa1a2a9b1f239580479/dashboards/sentry-redis.json
+              gnetId: 14091
+              revision: 1
             PostgreSQL (Sentry):
               datasource: Prometheus-Sakura
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/1b7cb4e7aef35043b23caaa1a2a9b1f239580479/dashboards/sentry-postgresql.json
+              gnetId: 9628
+              revision: 7
         envFromSecret: grafana-secret
         grafana.ini:
           server:
