@@ -28,7 +28,6 @@ spec:
               jsonData:
                 authType: default
                 defaultRegion: ap-northeast-1
-                customMetricsNamespaces: DreamKastFunctions
             - name: Prometheus-Sakura
               type: prometheus
               url: http://sentry.cloudnativedays.jp:9090
