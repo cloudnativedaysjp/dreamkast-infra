@@ -133,8 +133,8 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Contour-HTTProxy.json
             Kubernetes-Pod:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/Kubernetes-Pod.json
-            Falco:
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/falco-dashboard.json
+            # Falco:
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/falco-dashboard.json
             Github:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/github.json
