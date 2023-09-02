@@ -183,6 +183,7 @@ spec:
           - grafana-piechart-panel
           - magnesium-wordcloud-panel
           - blackcowmoo-googleanalytics-datasource
+          - grafana-bigquery-datasource
       parameters:
         - name: image.tag
           value: "9.0.4"
