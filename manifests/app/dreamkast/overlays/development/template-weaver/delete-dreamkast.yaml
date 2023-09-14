@@ -11,7 +11,7 @@ metadata:
   name: dreamkast
 ---
 $patch: delete
-apiVersion: kubernetes-client.io/v1
+apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: rails-app-secret
