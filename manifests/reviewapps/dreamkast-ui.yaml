@@ -30,7 +30,7 @@ spec:
         targetRevision: main
         path: manifests/app/dreamkast/overlays/development/template-ui
         plugin:
-          name: kustomize-with-replacements
+          name: kustomize-with-replacements-v1.0
           env:
             - name: FQDN
               value: "dreamkast-ui-{{number}}.dev.cloudnativedays.jp"
