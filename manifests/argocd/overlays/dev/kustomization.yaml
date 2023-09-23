@@ -10,3 +10,9 @@ patchesStrategicMerge:
 - ./delete-secret.yaml
 - ./pods.yaml
 - ./notifications-cm.yaml
+
+configMapGenerator:
+- name: plugin-config
+  namespace: argocd
+  files:
+  - config/kustomize-with-replacements.yaml

@@ -85,6 +85,24 @@ spec:
   template:
     spec:
       containers:
+      - name: kustomize-with-replacements
+        command: [/var/run/argocd/argocd-cmp-server]
+        image: registry.k8s.io/kustomize/kustomize:v4.5.7
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+            name: plugin-config
+            subPath: kustomize-with-replacements.yaml
+          # Starting with v2.4, do NOT mount the same tmp volume as the repo-server container.
+          # The filesystem separation helps mitigate path traversal attacks.
+          - mountPath: /tmp
+            name: cmp-tmp
       - name: argocd-repo-server
         resources:
           limits:
@@ -93,3 +111,9 @@ spec:
           requests:
             cpu: 700m
             memory: 1024Mi
+      volumes:
+      - name: plugin-config
+        configMap:
+          name: plugin-config
+      - emptyDir: {}
+        name: cmp-tmp
