@@ -25,7 +25,7 @@ spec:
                 - name: REDIS_URL
                   value: "redis://dreamkast-redis:6379"
                 - name: SENTRY_DSN
-                  value: "https://0f0e1ff1726d3b80d7d00d2c5e45d204@sentry.cloudnativedays.jp/4"
+                  value: "https://cdd4569f021178e062a66a5aa914d177@sentry.cloudnativedays.jp/4"
                 - name: S3_BUCKET
                   value: "dreamkast-dev-bucket"
                 - name: S3_REGION
