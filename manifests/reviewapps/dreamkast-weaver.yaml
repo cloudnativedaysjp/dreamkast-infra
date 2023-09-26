@@ -30,7 +30,7 @@ spec:
         targetRevision: main
         path: manifests/app/dreamkast/overlays/development/template-weaver
         plugin:
-          name: kustomize-with-replacements
+          name: kustomize-with-replacements-v1.0
           env:
             - name: FQDN
               value: "dreamkast-weaver-{{number}}.dev.cloudnativedays.jp"

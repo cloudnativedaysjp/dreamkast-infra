@@ -1,0 +1,19 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  # The name of the plugin must be unique within a given Argo CD instance.
+  name: kustomize-with-replacements
+spec:
+  version: v1.0
+  init:
+    command: ["sh", "-euxc"]
+    args:
+    - images=$(echo ${ARGOCD_ENV_IMAGES} | sed -e 's/ //g');
+      export IFS=",";
+      for image in $images; do
+        kustomize edit set image $image;
+      done;
+      kustomize edit set namespace $ARGOCD_ENV_NAMESPACE;
+  generate:
+    command: ["kustomize", "build"]
