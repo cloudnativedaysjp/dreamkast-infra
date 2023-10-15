@@ -12,7 +12,7 @@ spec:
   source:
     chart: kubernetes-event-exporter
     repoURL: registry-1.docker.io/bitnamicharts
-    targetRevision: "2.7.2"
+    targetRevision: "2.7.5"
     helm:
       values: |
         extraEnvVarsSecret: kubernetes-event-exporter-secret
