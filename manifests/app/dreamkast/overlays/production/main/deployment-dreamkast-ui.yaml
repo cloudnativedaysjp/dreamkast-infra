@@ -9,7 +9,7 @@ spec:
       - name: dreamkast-ui
         env:
         - name: NEXT_PUBLIC_API_BASE_URL
-          value: https://api.cloudnativedays.jp
+          value: https://event.cloudnativedays.jp
         - name: NEXT_PUBLIC_DK_URL
           value: https://event.cloudnativedays.jp
         - name: NEXT_PUBLIC_WEAVER_URL
