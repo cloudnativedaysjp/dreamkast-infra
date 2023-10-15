@@ -11,7 +11,7 @@ spec:
       secretName: cert-manager/wildcard-dev-cloudnativedays-jp
   routes:
     - conditions: #TODO: Need to resolve this hardcoded routing
-      - prefix: /cndf2023/ui
+      - prefix: /cndt2023/ui
       services:
       - name: dreamkast-ui
         port: 3001
