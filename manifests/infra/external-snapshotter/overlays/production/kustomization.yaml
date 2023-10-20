@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: kube-system
 resources:
 # renovate: type=remote-directory
-- https://github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=v6.3.0
+- https://github.com/kubernetes-csi/external-snapshotter/client/config/crd?ref=v6.3.1
 
 # MEMO: external-snapshotter controller is contained in aws-ebs-csi-driver
