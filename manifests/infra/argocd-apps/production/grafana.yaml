@@ -31,6 +31,9 @@ spec:
             - name: Prometheus-Sakura
               type: prometheus
               url: http://sentry.cloudnativedays.jp:9090
+            - name: Loki
+              type: loki
+              url: https://loki.cloudnativedays.jp
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -151,6 +154,10 @@ spec:
               datasource: Prometheus-Sakura
               gnetId: 9628
               revision: 7
+            Loki:
+              datasource: Loki
+              gnetId: 16966
+              revision: 1
         envFromSecret: grafana-secret
         grafana.ini:
           server:
