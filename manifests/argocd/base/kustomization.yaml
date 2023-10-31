@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 resources:
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.5/manifests/install.yaml
+- https://raw.githubusercontent.com/argoproj/argo-cd/v2.8.6/manifests/install.yaml
 # renovate: type=remote-file
 - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v0.12.2/manifests/install.yaml
 - ns.yaml
