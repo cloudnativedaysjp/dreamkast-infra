@@ -100,6 +100,9 @@ spec:
             cndf2023-main:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndf2023-main.json
+            cndt2023-main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cndt2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
