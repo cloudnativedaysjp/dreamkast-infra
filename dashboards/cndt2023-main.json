@@ -434,8 +434,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -498,8 +497,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -594,6 +592,6 @@
   "timezone": "",
   "title": "CNDT2023 Dashboard",
   "uid": "swMEdO4Ik",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
