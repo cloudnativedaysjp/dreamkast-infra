@@ -161,6 +161,10 @@ spec:
               datasource: Loki
               gnetId: 16966
               revision: 1
+            Node Exporter Full:
+              datasource: Prometheus-Sakura
+              gnetId: 12486
+              revision: 2
         envFromSecret: grafana-secret
         grafana.ini:
           server:
