@@ -94,12 +94,15 @@ spec:
             # cicd2023-main:
             #   datasource: Prometheus
             #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/18484d73b91f4a8ac0d4983c6491fbf8128a84ab/dashboards/cicd2023-main.json
-            cndf2023-proposals:
+            # cndf2023-proposals:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5f749f5aec4305ea500a16d8b21a1108f23a5ff2/dashboards/cndf2023-cfp.json
+            # cndf2023-main:
+            #   datasource: Prometheus
+            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/9dfdd888a3f2b572be20adce56b42429383df963/dashboards/cndf2023-main.json
+            cndt2023-main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5f749f5aec4305ea500a16d8b21a1108f23a5ff2/dashboards/cndf2023-cfp.json
-            cndf2023-main:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/9dfdd888a3f2b572be20adce56b42429383df963/dashboards/cndf2023-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/913c3f49be64384f4ed8ba68d012622de781cef8/dashboards/cndt2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
