@@ -465,7 +465,7 @@
       },
       "id": 10,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -523,13 +523,13 @@
     "list": []
   },
   "time": {
-    "from": "now-60d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "CloudNativeDays Deep Dive",
   "uid": "I5GV5V34k",
-  "version": 19,
+  "version": 20,
   "weekStart": ""
 }

@@ -546,7 +546,7 @@
       },
       "id": 10,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -604,13 +604,13 @@
     "list": []
   },
   "time": {
-    "from": "now-60d",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Dreamkast Deep Dive",
   "uid": "u5sXIaqVk",
-  "version": 13,
+  "version": 14,
   "weekStart": ""
 }
