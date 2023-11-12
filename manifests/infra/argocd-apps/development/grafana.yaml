@@ -165,6 +165,9 @@ spec:
               datasource: Prometheus-Sakura
               gnetId: 12486
               revision: 2
+            Sentry Overview:
+              datasource: Prometheus-Sakura
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-overview.json
         envFromSecret: grafana-secret
         grafana.ini:
           server:
