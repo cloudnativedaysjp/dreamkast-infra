@@ -40,7 +40,7 @@ spec:
         - name: REDIS_URL
           value: "redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
-          value: "https://fde520b3ffdfc1bb08d59b785cae540f@sentry.cloudnativedays.jp/3"
+          value: "https://3d30c4f656287004afe9f3a9a1e0523e@sentry.cloudnativedays.jp/3"
         - name: S3_BUCKET
           value: "dreamkast-prod-bucket"
         - name: S3_REGION
@@ -103,7 +103,7 @@ spec:
         - name: REDIS_URL
           value: "redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379"
         - name: SENTRY_DSN
-          value: "https://fde520b3ffdfc1bb08d59b785cae540f@sentry.cloudnativedays.jp/3"
+          value: "https://3d30c4f656287004afe9f3a9a1e0523e@sentry.cloudnativedays.jp/3"
         - name: OTEL_SERVICE_NAME
           value: "dreamkast"
         - name: S3_BUCKET
