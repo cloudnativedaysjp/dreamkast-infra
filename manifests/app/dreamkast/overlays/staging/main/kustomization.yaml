@@ -23,4 +23,4 @@ images:
   newTag: ae5a40aadef5699d05b254c4678246bf85dd029b
 - name: dreamkast-weaver
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver
-  newTag: d6dec45b3c0b3c9cd28a00188acd9ae78ffc1be1
+  newTag: 60ab0f17c466537a074bc3f51584859840508f55
