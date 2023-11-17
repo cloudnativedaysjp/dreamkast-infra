@@ -1188,8 +1188,8 @@
                 "uid": "wKlzftkIz"
             },
             "gridPos": {
-                "h": 9,
-                "w": 12,
+                "h": 10,
+                "w": 24,
                 "x": 0,
                 "y": 33
             },
@@ -1217,43 +1217,6 @@
                 }
             ],
             "title": "[Live Logs] self-hosted-sentry",
-            "type": "logs"
-        },
-        {
-            "datasource": {
-                "type": "loki",
-                "uid": "wKlzftkIz"
-            },
-            "gridPos": {
-                "h": 9,
-                "w": 12,
-                "x": 12,
-                "y": 33
-            },
-            "id": 3,
-            "options": {
-                "dedupStrategy": "none",
-                "enableLogDetails": true,
-                "prettifyLogMessage": false,
-                "showCommonLabels": false,
-                "showLabels": false,
-                "showTime": false,
-                "sortOrder": "Descending",
-                "wrapLogMessage": false
-            },
-            "targets": [
-                {
-                    "datasource": {
-                        "type": "loki",
-                        "uid": "wKlzftkIz"
-                    },
-                    "editorMode": "builder",
-                    "expr": "{compose_project=\"sentry-self-hosted-redis\"} |= ``",
-                    "queryType": "range",
-                    "refId": "A"
-                }
-            ],
-            "title": "[Live Logs] sentry-self-hosted-redis",
             "type": "logs"
         }
     ],
@@ -1294,6 +1257,6 @@
     "timezone": "",
     "title": "Sentry Monitoring Overview",
     "uid": "2Gt-uXVIk",
-    "version": 13,
+    "version": 15,
     "weekStart": ""
 }
