@@ -34,6 +34,16 @@ spec:
             - name: Loki
               type: loki
               url: https://loki.cloudnativedays.jp
+            - name: BigQuery-DS
+              type: grafana-bigquery-datasource
+              editable: true
+              enabled: true
+              jsonData:
+                authenticationType: jwt
+                clientEmail: grafana-bigquery-integration@cloudnativedays-o11y.iam.gserviceaccount.com
+                defaultProject: cloudnativedays-o11y
+                tokenUri: https://oauth2.googleapis.com/token
+                privateKeyPath: '/etc/secrets/bigquery.pem'
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -67,50 +77,17 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            # o11y2022-proposals:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-cfp.json
-            # o11y2022-main:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/01d27ac125fc2edcc6db9f8ab6f0e62149cf9952/dashboards/o11y2022-main.json
-            # cnsec2022-proposals:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5b182de9a1071626932d3aa7325933a0bb3c6408/dashboards/cnsec2022-cfp.json
-            # cnsec2022-main:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/ef58b28e7eff12d9ffdf827abbf38218342b761b/dashboards/cnsec2022-main.json
-            # cndt2022-proposals:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/41361f60af672597f2f8af79bfaf403206198d5c/dashboards/cndt2022-cfp.json
-            # cndt2022-main:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/c7e4d9e1fd3e624da1ed33682d90dab1da6eee80/dashboards/cndt2022-main.json
-            # cndt2022-onsite:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/0e02ad9ba590bbcfc7723fc4f1c30169d2b6ff85/dashboards/cndt2022-onsite.json
-            # cicd2023-proposals:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/2616f0142590ff790f0931bde4873ed71739a848/dashboards/cicd2023-cfp.json
-            # cicd2023-main:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/18484d73b91f4a8ac0d4983c6491fbf8128a84ab/dashboards/cicd2023-main.json
-            # cndf2023-proposals:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/5f749f5aec4305ea500a16d8b21a1108f23a5ff2/dashboards/cndf2023-cfp.json
-            # cndf2023-main:
-            #   datasource: Prometheus
-            #   url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/9dfdd888a3f2b572be20adce56b42429383df963/dashboards/cndf2023-main.json
             cndt2023-main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/913c3f49be64384f4ed8ba68d012622de781cef8/dashboards/cndt2023-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3c63a83c7bbef716cdac0a688c3530348e56db6a/dashboards/cndt2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
             cnd-deep-dive:
-              datasource: Google Analytics
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/cnd-deep-dive.json
+              datasource: BigQuery-DS
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3c63a83c7bbef716cdac0a688c3530348e56db6a/dashboards/cnd-deep-dive.json
             dk-deep-dive:
-              datasource: Google Analytics
+              datasource: BigQuery-DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
@@ -169,6 +146,11 @@ spec:
               datasource: Prometheus-Sakura
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/a9195bbb690db77a28d5b2afa9bbb9dcfebce338/dashboards/sentry-overview.json
         envFromSecret: grafana-secret
+        extraSecretMounts:
+          - name: bigquery-secret
+            mountPath: /etc/secrets
+            secretName: bigquery-secret
+            readOnly: true
         grafana.ini:
           server:
             root_url: https://grafana.cloudnativedays.jp
@@ -186,7 +168,7 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDF2023-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2023-Admin') && 'Admin'
           security:
             cookie_secure: true
             cookie_samesite: true
@@ -196,8 +178,6 @@ spec:
             content_security_policy: true
         plugins:
           - grafana-piechart-panel
-          - magnesium-wordcloud-panel
-          - blackcowmoo-googleanalytics-datasource
           - grafana-bigquery-datasource
       parameters:
         - name: image.tag
