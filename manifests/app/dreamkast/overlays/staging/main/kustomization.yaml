@@ -17,7 +17,7 @@ namespace: dreamkast-staging
 images:
 - name: dreamkast-ecs
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs
-  newTag: 1784bfa5be91c588d06ebfc15654155910144a68
+  newTag: a10b1978e23e48a1aa497a8cd15234f695575555
 - name: dreamkast-ui
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
   newTag: ae5a40aadef5699d05b254c4678246bf85dd029b
