@@ -34,6 +34,16 @@ spec:
             - name: Loki
               type: loki
               url: https://loki.cloudnativedays.jp
+            - name: BigQuery DS
+              type: grafana-bigquery-datasource
+              editable: true
+              enabled: true
+              jsonData:
+                authenticationType: jwt
+                clientEmail: grafana-bigquery-integration@cloudnativedays-o11y.iam.gserviceaccount.com
+                defaultProject: cloudnativedays-o11y
+                tokenUri: https://oauth2.googleapis.com/token
+                privateKeyPath: '/etc/secrets/bigquery.pem'
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
@@ -165,7 +175,15 @@ spec:
               datasource: Prometheus-Sakura
               gnetId: 12486
               revision: 2
+            Sentry Overview:
+              datasource: Prometheus-Sakura
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-overview.json
         envFromSecret: grafana-secret
+        extraSecretMounts:
+          - name: bigquery-secret
+            mountPath: /etc/secrets
+            secretName: bigquery-secret
+            readOnly: true
         grafana.ini:
           server:
             root_url: https://grafana.dev.cloudnativedays.jp

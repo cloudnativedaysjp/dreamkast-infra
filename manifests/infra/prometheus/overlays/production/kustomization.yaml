@@ -4,7 +4,7 @@ resources:
 - ../../base
 - slack-secrets.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.68.0/bundle.yaml
+- https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.69.1/bundle.yaml
 # renovate: type=remote-file
 - https://raw.githubusercontent.com/prometheus-operator/kube-prometheus/v0.13.0/manifests/prometheus-serviceAccount.yaml
 # renovate: type=remote-file
