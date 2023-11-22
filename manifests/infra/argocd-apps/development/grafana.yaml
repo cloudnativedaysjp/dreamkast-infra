@@ -117,10 +117,10 @@ spec:
               gnetId: 14584
               revision: 1
             cnd-deep-dive:
-              datasource: Google BigQuery
+              datasource: BigQuery DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnd-deep-dive.json
             dk-deep-dive:
-              datasource: Google BigQuery
+              datasource: BigQuery DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
