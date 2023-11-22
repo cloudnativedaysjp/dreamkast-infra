@@ -42,7 +42,7 @@
       },
       "id": 4,
       "options": {
-        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、Dreamkastのアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
+        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、Dreamkastのアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう！！\n\n",
         "mode": "markdown"
       },
       "pluginVersion": "9.0.4",
@@ -51,45 +51,13 @@
     },
     {
       "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
+        "type": "grafana-bigquery-datasource",
+        "uid": "__-x2bzIz"
       },
-      "description": "https://cloudnativedays.jp にアクセスされた方の",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
           },
           "mappings": [],
           "thresholds": {
@@ -109,105 +77,175 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
+        "h": 12,
         "w": 24,
         "x": 0,
         "y": 5
       },
-      "id": 2,
+      "id": 14,
       "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
         },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
+        "textMode": "auto"
       },
       "pluginVersion": "9.0.4",
       "targets": [
         {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
           "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
+            "type": "grafana-bigquery-datasource",
+            "uid": "__-x2bzIz"
           },
-          "dimensions": [
-            "country"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "metrics": [
-            "activeUsers"
-          ],
-          "refId": "Active Users - Dreamkast",
-          "selectedDimensions": [
-            {
-              "description": "The country from which the user activity originated.",
-              "label": "Country",
-              "value": "country"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
+          "editorMode": "code",
+          "format": 1,
+          "location": "US",
+          "project": "cloudnativedays-o11y",
+          "rawQuery": true,
+          "rawSql": "select\n    nullif(geo.country,'') as country, -- 国を指定。空白の場合はnullに置き換える\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_263654842.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    geo.country is not null -- countryがnullでないデータを選択\ngroup by\n    country -- 都道府県でグルーピング\norder by\n    users desc -- ユーザー降順で並び替え",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "サイトアクセス数 (国別)",
-      "type": "timeseries"
+      "type": "stat"
     },
     {
       "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
+        "type": "grafana-bigquery-datasource",
+        "uid": "__-x2bzIz"
       },
+      "description": "https://cloudnativedays.jp が全国でどれだけ見られているのかを都道府県別にグラフ化しています",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 16,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 2,
+      "links": [],
+      "options": {
+        "displayLabels": [
+          "name",
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right"
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "none",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-bigquery-datasource",
+            "uid": "__-x2bzIz"
+          },
+          "editorMode": "code",
+          "format": 1,
+          "hide": false,
+          "location": "US",
+          "project": "cloudnativedays-o11y",
+          "rawQuery": true,
+          "rawSql": "select\n    nullif(geo.region,'') as region, -- 地域（都道府県）を指定。空白の場合はnullに置き換える\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_263654842.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    geo.country = 'Japan' -- 国が日本のみを指定\n    and geo.region is not null -- regionがnullでないデータを選択\ngroup by\n    region -- 都道府県でグルーピング\norder by\n    users desc -- ユーザー降順で並び替え",
+          "refId": "都道府県別PV数",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "サイトアクセス数 (都道府県)",
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-bigquery-datasource",
+        "uid": "__-x2bzIz"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 80,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 6,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
             }
           },
           "mappings": [],
@@ -217,10 +255,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -228,661 +262,92 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 13,
-        "w": 24,
-        "x": 0,
-        "y": 18
-      },
-      "id": 14,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.0.4",
-      "targets": [
-        {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
-          },
-          "dimensions": [
-            "city",
-            "country"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "hide": false,
-          "metrics": [
-            "activeUsers"
-          ],
-          "refId": "A",
-          "selectedDimensions": [
-            {
-              "description": "The city from which the user activity originated.",
-              "label": "City",
-              "value": "city"
-            },
-            {
-              "description": "The country from which the user activity originated.",
-              "label": "Country",
-              "value": "country"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
-        }
-      ],
-      "title": "サイトアクセス数 (都市別)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "hue",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "percent"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "desktop|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Desktop"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "mobile|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Mobile"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "tablet|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Tablet"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 31
+        "x": 12,
+        "y": 17
       },
       "id": 6,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "users",
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
-          "displayMode": "list",
+          "displayMode": "hidden",
           "placement": "bottom"
         },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "text": {},
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "9.0.4",
       "targets": [
         {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
           "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
+            "type": "grafana-bigquery-datasource",
+            "uid": "__-x2bzIz"
           },
-          "dimensions": [
-            "deviceCategory"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "metrics": [
-            "activeUsers"
-          ],
+          "editorMode": "code",
+          "format": 1,
+          "location": "US",
+          "project": "cloudnativedays-o11y",
+          "rawQuery": true,
+          "rawSql": "select\n    device.category as device_category,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_263654842.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.category is not null\ngroup by \n    device_category\norder by\n    users desc -- ユーザー降順で並び替え",
           "refId": "A",
-          "selectedDimensions": [
-            {
-              "description": "The type of device: Desktop, Tablet, or Mobile.",
-              "label": "Device category",
-              "value": "deviceCategory"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "使用しているデバイス",
-      "type": "timeseries"
+      "type": "barchart"
     },
     {
       "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
+        "type": "grafana-bigquery-datasource",
+        "uid": "__-x2bzIz"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "hue",
+            "fillOpacity": 80,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
             "lineWidth": 1,
-            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "percent"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 31
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
-          },
-          "dimensions": [
-            "mobileDeviceBranding"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "metrics": [
-            "activeUsers"
-          ],
-          "refId": "A",
-          "selectedDimensions": [
-            {
-              "description": "Manufacturer or branded name (examples: Samsung, HTC, Verizon, T-Mobile).",
-              "label": "Device brand",
-              "value": "mobileDeviceBranding"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
-        }
-      ],
-      "title": "使用しているデバイスブランド",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "hue",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "percent"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Chrome|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Chrome"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Safari|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Safari"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Edge|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Edge"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Firefox|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "FireFox"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Android Webview|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Android Webview"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Amazon Silk|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Amazon Silk"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Internet Explorer|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Internet Explorer"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Android Browser|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Android Browser"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Maxthon|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Maxthon"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Safari (in-app)|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Safari (in-app)"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Opera|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Opera"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Samsung Internet|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Samsung Internet"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Mozilla Compatible Agent|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Mozilla Compatible Agent"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 40
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
-          },
-          "dimensions": [
-            "browser"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "metrics": [
-            "activeUsers"
-          ],
-          "refId": "A",
-          "selectedDimensions": [
-            {
-              "description": "The browsers used to view your website.",
-              "label": "Browser",
-              "value": "browser"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
-        }
-      ],
-      "title": "使用しているブラウザ",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "blackcowmoo-googleanalytics-datasource",
-        "uid": "dB_nKVqVz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "bars",
-            "fillOpacity": 100,
-            "gradientMode": "hue",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "percent"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
             }
           },
           "mappings": [],
@@ -988,68 +453,147 @@
         ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 40
+        "y": 25
       },
       "id": 12,
       "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "colorByField": "users",
+        "groupWidth": 0.7,
         "legend": {
           "calcs": [],
-          "displayMode": "list",
+          "displayMode": "hidden",
           "placement": "bottom"
         },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
         "tooltip": {
           "mode": "single",
           "sort": "none"
-        }
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
       },
       "pluginVersion": "9.0.4",
       "targets": [
         {
-          "accountId": "accounts/190739600",
-          "cacheDurationSeconds": 300,
           "datasource": {
-            "type": "blackcowmoo-googleanalytics-datasource",
-            "uid": "dB_nKVqVz"
+            "type": "grafana-bigquery-datasource",
+            "uid": "__-x2bzIz"
           },
-          "dimensions": [
-            "operatingSystem"
-          ],
-          "displayName": {},
-          "filtersExpression": "",
-          "metrics": [
-            "activeUsers"
-          ],
+          "editorMode": "code",
+          "format": 1,
+          "location": "US",
+          "project": "cloudnativedays-o11y",
+          "rawQuery": true,
+          "rawSql": "select\n    ifnull(device.operating_system, '') as OS,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_263654842.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.operating_system is not null \ngroup by \n    OS\norder by\n    users desc -- ユーザー降順で並び替え",
           "refId": "A",
-          "selectedDimensions": [
-            {
-              "description": "The operating systems used by visitors to your app or website. Includes desktop and mobile operating systems such as Windows and Android.",
-              "label": "Operating system",
-              "value": "operatingSystem"
-            }
-          ],
-          "selectedMetrics": [
-            {
-              "description": "The number of distinct users who visited your site or app.",
-              "label": "Active users",
-              "value": "activeUsers"
-            }
-          ],
-          "selectedTimeDimensions": {
-            "description": "The date of the event, formatted as YYYYMMDD.",
-            "label": "Date",
-            "value": "date"
-          },
-          "timeDimension": "date",
-          "timezone": "Asia/Tokyo",
-          "version": "v4",
-          "webPropertyId": "properties/263654842"
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
         }
       ],
       "title": "使用しているOS",
-      "type": "timeseries"
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-bigquery-datasource",
+        "uid": "__-x2bzIz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 10,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.0.4",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-bigquery-datasource",
+            "uid": "__-x2bzIz"
+          },
+          "editorMode": "code",
+          "format": 1,
+          "location": "US",
+          "project": "cloudnativedays-o11y",
+          "rawQuery": true,
+          "rawSql": "select\n    ifnull(device.web_info.browser, '') as browsers,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_263654842.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.web_info.browser is not null\ngroup by \n    browsers\norder by\n    users desc -- ユーザー降順で並び替え",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "使用しているブラウザ",
+      "type": "stat"
     }
   ],
   "refresh": false,
@@ -1067,6 +611,6 @@
   "timezone": "",
   "title": "Dreamkast Deep Dive",
   "uid": "u5sXIaqVk",
-  "version": 5,
+  "version": 14,
   "weekStart": ""
 }

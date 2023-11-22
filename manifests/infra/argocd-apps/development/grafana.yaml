@@ -117,10 +117,10 @@ spec:
               gnetId: 14584
               revision: 1
             cnd-deep-dive:
-              datasource: Google Analytics
+              datasource: BigQuery DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnd-deep-dive.json
             dk-deep-dive:
-              datasource: Google Analytics
+              datasource: BigQuery DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
@@ -201,7 +201,7 @@ spec:
             token_url: https://dreamkast.us.auth0.com/oauth/token
             api_url: https://dreamkast.us.auth0.com/userinfo
             role_attribute_strict: false
-            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDF2023-Admin') && 'Admin'
+            role_attribute_path: contains("https://cloudnativedays.jp/roles", 'CNDT2023-Admin') && 'Admin'
           security:
             cookie_secure: true
             cookie_samesite: true
@@ -211,8 +211,6 @@ spec:
             content_security_policy: true
         plugins:
           - grafana-piechart-panel
-          - magnesium-wordcloud-panel
-          - blackcowmoo-googleanalytics-datasource
           - grafana-bigquery-datasource
       parameters:
         - name: image.tag
