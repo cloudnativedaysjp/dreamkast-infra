@@ -42,7 +42,7 @@
             },
             "id": 31,
             "options": {
-                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.dev.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&var-DS_PROMETHEUS=default&var-job=sentry-node&var-node=node-exporter%3A9100&var-diskdevices=%5Ba-z%5D%2B%7Cnvme%5B0-9%5D%2Bn%5B0-9%5D%2B&from=1699492458285&to=1699503258285)\n- Kafka -> [Kafka Exporter Overview](https://grafana.dev.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1&from=1699416954496&to=1699503354496)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.dev.cloudnativedays.jp/d/bRd48yKMdd/redis-exporter-quickstart-and-dashboard?orgId=1&var-instance=192.168.0.201%3A9121&var-datasource=Prometheus-Sakura&from=1699460194377&to=1699503394377)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.dev.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s&from=1699481841830&to=1699503441830)\n",
+                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.dev.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=15s)\n- Kafka -> [Kafka Exporter Overview](https://grafana.dev.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.dev.cloudnativedays.jp/d/2Gt-uXVIk/sentry-monitoring-overview?orgId=1&refresh=1m)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.dev.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s)\n",
                 "mode": "markdown"
             },
             "pluginVersion": "9.0.4",
@@ -1257,6 +1257,6 @@
     "timezone": "",
     "title": "Sentry Monitoring Overview",
     "uid": "2Gt-uXVIk",
-    "version": 15,
+    "version": 16,
     "weekStart": ""
 }
