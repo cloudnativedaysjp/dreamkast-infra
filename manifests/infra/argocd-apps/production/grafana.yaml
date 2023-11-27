@@ -79,15 +79,15 @@ spec:
           public:
             cndt2023-main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/913c3f49be64384f4ed8ba68d012622de781cef8/dashboards/cndt2023-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3c63a83c7bbef716cdac0a688c3530348e56db6a/dashboards/cndt2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
             cnd-deep-dive:
-              datasource: Google Analytics
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/cnd-deep-dive.json
+              datasource: BigQuery-DS
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3c63a83c7bbef716cdac0a688c3530348e56db6a/dashboards/cnd-deep-dive.json
             dk-deep-dive:
-              datasource: Google Analytics
+              datasource: BigQuery-DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/dk-deep-dive.json
           private:
             Amazon RDS:
