@@ -42,7 +42,7 @@
       },
       "id": 4,
       "options": {
-        "content": "# CloudNativeDays Deep Dive\n\nこのダッシュボードは、CloudNativeDaysの[公式サイト](https://cloudnativedays.jp/)のアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう！！\n\n",
+        "content": "# CloudNativeDays Deep Dive\n\nこのダッシュボードは、CloudNativeDaysの[公式サイト](https://cloudnativedays.jp/)の過去60日間のアクセス情報を可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう!!\n\n",
         "mode": "markdown"
       },
       "pluginVersion": "9.0.4",
@@ -52,7 +52,7 @@
     {
       "datasource": {
         "type": "grafana-bigquery-datasource",
-        "uid": "__-x2bzIz"
+        "uid": "P8BF30D76B7C0FE9F"
       },
       "description": "https://cloudnativedays.jp にアクセスされた方を国別に表示しています。",
       "fieldConfig": {
@@ -61,6 +61,7 @@
             "mode": "palette-classic"
           },
           "mappings": [],
+          "noValue": "Unknown",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -96,6 +97,7 @@
           "fields": "",
           "values": true
         },
+        "text": {},
         "textMode": "auto"
       },
       "pluginVersion": "9.0.4",
@@ -103,14 +105,14 @@
         {
           "datasource": {
             "type": "grafana-bigquery-datasource",
-            "uid": "__-x2bzIz"
+            "uid": "P8BF30D76B7C0FE9F"
           },
           "editorMode": "code",
           "format": 1,
           "location": "US",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
-          "rawSql": "select\n    nullif(geo.country,'') as country, -- 国を指定。空白の場合はnullに置き換える\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_363617797.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    geo.country is not null -- countryがnullでないデータを選択\ngroup by\n    country -- 都道府県でグルーピング\norder by\n    users desc -- ユーザー降順で並び替え",
+          "rawSql": "select nullif(geo.country,'') as country, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where geo.country is not null group by country order by users desc",
           "refId": "A",
           "sql": {
             "columns": [
@@ -137,7 +139,7 @@
     {
       "datasource": {
         "type": "grafana-bigquery-datasource",
-        "uid": "__-x2bzIz"
+        "uid": "P8BF30D76B7C0FE9F"
       },
       "fieldConfig": {
         "defaults": {
@@ -151,7 +153,8 @@
               "viz": false
             }
           },
-          "mappings": []
+          "mappings": [],
+          "noValue": "Unknown"
         },
         "overrides": []
       },
@@ -168,9 +171,11 @@
           "value"
         ],
         "legend": {
-          "displayMode": "list",
+          "displayMode": "table",
           "placement": "right",
-          "values": []
+          "values": [
+            "value"
+          ]
         },
         "pieType": "pie",
         "reduceOptions": {
@@ -190,14 +195,14 @@
         {
           "datasource": {
             "type": "grafana-bigquery-datasource",
-            "uid": "__-x2bzIz"
+            "uid": "P8BF30D76B7C0FE9F"
           },
           "editorMode": "code",
           "format": 1,
           "location": "US",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
-          "rawSql": "select\n    nullif(geo.region,'') as region, -- 地域（都道府県）を指定。空白の場合はnullに置き換える\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_363617797.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    geo.country = 'Japan' -- 国が日本のみを指定\n    and geo.region is not null -- regionがnullでないデータを選択\ngroup by\n    region -- 都道府県でグルーピング\norder by\n    users desc -- ユーザー降順で並び替え",
+          "rawSql": "select nullif(geo.region,'') as region, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where geo.country = 'Japan' and geo.region is not null group by region order by users desc",
           "refId": "A",
           "sql": {
             "columns": [
@@ -224,7 +229,7 @@
     {
       "datasource": {
         "type": "grafana-bigquery-datasource",
-        "uid": "__-x2bzIz"
+        "uid": "P8BF30D76B7C0FE9F"
       },
       "fieldConfig": {
         "defaults": {
@@ -234,8 +239,8 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 80,
-            "gradientMode": "none",
+            "fillOpacity": 90,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -268,7 +273,7 @@
       "id": 6,
       "options": {
         "barRadius": 0,
-        "barWidth": 0.97,
+        "barWidth": 0.99,
         "colorByField": "users",
         "groupWidth": 0.7,
         "legend": {
@@ -293,14 +298,14 @@
         {
           "datasource": {
             "type": "grafana-bigquery-datasource",
-            "uid": "__-x2bzIz"
+            "uid": "P8BF30D76B7C0FE9F"
           },
           "editorMode": "code",
           "format": 1,
           "location": "US",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
-          "rawSql": "select\n    device.category as device_category,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_363617797.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.category is not null\ngroup by \n    device_category\norder by\n    users desc -- ユーザー降順で並び替え",
+          "rawSql": "select device.category as device_category, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.category is not null group by device_category order by users desc",
           "refId": "A",
           "sql": {
             "columns": [
@@ -327,7 +332,7 @@
     {
       "datasource": {
         "type": "grafana-bigquery-datasource",
-        "uid": "__-x2bzIz"
+        "uid": "P8BF30D76B7C0FE9F"
       },
       "fieldConfig": {
         "defaults": {
@@ -399,14 +404,14 @@
         {
           "datasource": {
             "type": "grafana-bigquery-datasource",
-            "uid": "__-x2bzIz"
+            "uid": "P8BF30D76B7C0FE9F"
           },
           "editorMode": "code",
           "format": 1,
           "location": "US",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
-          "rawSql": "select\n    ifnull(device.operating_system, '') as OS,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_363617797.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.operating_system is not null \ngroup by \n    OS\norder by\n    users desc -- ユーザー降順で並び替え",
+          "rawSql": "select ifnull(device.operating_system, '') as OS, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.operating_system is not null group by OS order by users desc",
           "refId": "A",
           "sql": {
             "columns": [
@@ -433,7 +438,7 @@
     {
       "datasource": {
         "type": "grafana-bigquery-datasource",
-        "uid": "__-x2bzIz"
+        "uid": "P8BF30D76B7C0FE9F"
       },
       "fieldConfig": {
         "defaults": {
@@ -441,12 +446,12 @@
             "mode": "palette-classic"
           },
           "mappings": [],
+          "noValue": "Unknown",
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -483,14 +488,14 @@
         {
           "datasource": {
             "type": "grafana-bigquery-datasource",
-            "uid": "__-x2bzIz"
+            "uid": "P8BF30D76B7C0FE9F"
           },
           "editorMode": "code",
           "format": 1,
           "location": "US",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
-          "rawSql": "select\n    ifnull(device.web_info.browser, '') as browsers,\n    count(distinct user_pseudo_id) as users\nfrom\n    `cloudnativedays-o11y.analytics_363617797.events_*` -- データの選択範囲。ここでは全期間とし、whereの部分で日付を指定する\nwhere\n    device.web_info.browser is not null\ngroup by \n    browsers\norder by\n    users desc -- ユーザー降順で並び替え",
+          "rawSql": "select ifnull(device.web_info.browser, '') as browsers, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_363617797.events_*` where device.web_info.browser is not null group by browsers order by users desc",
           "refId": "A",
           "sql": {
             "columns": [
@@ -523,13 +528,13 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-60d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "CloudNativeDays Deep Dive",
   "uid": "I5GV5V34k",
-  "version": 20,
+  "version": 26,
   "weekStart": ""
 }
