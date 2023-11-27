@@ -34,7 +34,7 @@ spec:
             - name: Loki
               type: loki
               url: https://loki.cloudnativedays.jp
-            - name: BigQuery DS
+            - name: BigQuery-DS
               type: grafana-bigquery-datasource
               editable: true
               enabled: true
