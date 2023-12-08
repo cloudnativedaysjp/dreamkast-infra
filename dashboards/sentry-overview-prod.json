@@ -25,7 +25,7 @@
     "editable": true,
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
-    "id": 57,
+    "id": 37,
     "links": [],
     "liveNow": false,
     "panels": [
@@ -42,7 +42,7 @@
             },
             "id": 31,
             "options": {
-                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.dev.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=15s)\n- Kafka -> [Kafka Exporter Overview](https://grafana.dev.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.dev.cloudnativedays.jp/d/bRd48yKMdd/redis-exporter-quickstart-and-dashboard?orgId=1)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.dev.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s)\n",
+                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m)\n- Kafka -> [Kafka Exporter Overview](https://grafana.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.cloudnativedays.jp/d/bRd48yKMdd/redis-exporter-quickstart-and-dashboard?orgId=1)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s)\n",
                 "mode": "markdown"
             },
             "pluginVersion": "9.0.4",
@@ -1185,7 +1185,7 @@
         {
             "datasource": {
                 "type": "loki",
-                "uid": "wKlzftkIz"
+                "uid": "P8E80F9AEF21F6940"
             },
             "gridPos": {
                 "h": 10,
@@ -1208,10 +1208,9 @@
                 {
                     "datasource": {
                         "type": "loki",
-                        "uid": "wKlzftkIz"
+                        "uid": "P8E80F9AEF21F6940"
                     },
-                    "editorMode": "builder",
-                    "expr": "{compose_project=\"sentry-self-hosted\"} |= ``",
+                    "expr": "{compose_project=\"sentry-self-hosted\"}",
                     "queryType": "range",
                     "refId": "A"
                 }
@@ -1257,6 +1256,6 @@
     "timezone": "",
     "title": "Sentry Monitoring Overview",
     "uid": "2Gt-uXVIk",
-    "version": 18,
+    "version": 1,
     "weekStart": ""
 }

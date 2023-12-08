@@ -144,7 +144,7 @@ spec:
               revision: 2
             Sentry Overview:
               datasource: Prometheus-Sakura
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/a9195bbb690db77a28d5b2afa9bbb9dcfebce338/dashboards/sentry-overview.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/sentry-overview-prod.json
         envFromSecret: grafana-secret
         extraSecretMounts:
           - name: bigquery-secret
