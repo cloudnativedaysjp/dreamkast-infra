@@ -4,7 +4,8 @@ resources:
 - secret.yaml
 - ingress.yaml
 - hpa.yaml
-- cronjob.yaml
+- cronjob-check_media_live_channel.yaml
+- cronjob-post_number_of_registrants_to_slack.yaml
 - polling-harvest-job-and-update-video.yaml
 - ../../../base/
 - deployment-fifo-worker.yaml
