@@ -42,7 +42,7 @@
             },
             "id": 31,
             "options": {
-                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.dev.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=15s)\n- Kafka -> [Kafka Exporter Overview](https://grafana.dev.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.dev.cloudnativedays.jp/d/2Gt-uXVIk/sentry-monitoring-overview?orgId=1&refresh=1m)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.dev.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s)\n",
+                "content": "# Sentry Monitoring Overview Dashboard\n\nSentry とその関連リソースを監視するためのダッシュボードです。概要情報のみ掲載しているため、より詳細な情報を参照したい場合は個別のダッシュボードを参照してください。\n\n- Node の CPU/Memory/Disk 使用率 -> [Node Exporter Full](https://grafana.dev.cloudnativedays.jp/d/rYdddlPWj/node-exporter-full?orgId=1&refresh=15s)\n- Kafka -> [Kafka Exporter Overview](https://grafana.dev.cloudnativedays.jp/d/jwPKIsniz/kafka-exporter-overview?orgId=1)\n- Redis -> [Redis Exporter Quickstart and Dashboard](https://grafana.dev.cloudnativedays.jp/d/bRd48yKMdd/redis-exporter-quickstart-and-dashboard?orgId=1)\n- PostgreSQL -> [PostgreSQL Database](https://grafana.dev.cloudnativedays.jp/d/000000039/postgresql-database?orgId=1&refresh=10s)\n",
                 "mode": "markdown"
             },
             "pluginVersion": "9.0.4",
@@ -135,7 +135,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode=\"system\",instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode=\"system\",instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "interval": "10s",
                     "intervalFactor": 2,
@@ -148,7 +148,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='user',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='user',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "User - Normal processes executing in user mode",
@@ -160,7 +160,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='nice',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='nice',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Nice - Niced processes executing in user mode",
@@ -172,7 +172,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='idle',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Idle - Waiting for something to happen",
@@ -184,7 +184,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='iowait',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='iowait',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Iowait - Waiting for I/O to complete",
@@ -196,7 +196,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='irq',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='irq',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Irq - Servicing interrupts",
@@ -208,7 +208,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='softirq',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='softirq',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Softirq - Servicing softirqs",
@@ -220,7 +220,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='steal',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='steal',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Steal - Time spent in other operating systems when running in a virtualized environment",
@@ -232,7 +232,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='guest',instance=\"node-exporter:9100\",job=\"sentry-node\"}[5m])) * 100",
+                    "expr": "sum by (mode)(irate(node_cpu_seconds_total{mode='guest',instance=\"192.168.0.200:9100\",job=\"sentry-node\"}[5m])) * 100",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "Guest - Time spent running a virtual CPU for a guest operating system",
@@ -361,7 +361,7 @@
                         "uid": "P2B7F12D1559A9969"
                     },
                     "editorMode": "code",
-                    "expr": "node_memory_MemTotal_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_MemFree_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_Buffers_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_Cached_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_Slab_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_PageTables_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_SwapCached_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_MemTotal_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_MemFree_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_Buffers_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_Cached_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_Slab_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_PageTables_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_SwapCached_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -388,7 +388,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_SwapCached_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_SwapCached_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "SwapCache - Memory that keeps track of pages that have been fetched from swap but not yet been modified",
@@ -400,7 +400,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_Slab_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_Slab_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -413,7 +413,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_Cached_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_Cached_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -426,7 +426,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_Buffers_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_Buffers_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -439,7 +439,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_MemFree_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_MemFree_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -452,7 +452,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "(node_memory_SwapTotal_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"} - node_memory_SwapFree_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"})",
+                    "expr": "(node_memory_SwapTotal_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"} - node_memory_SwapFree_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"})",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -465,7 +465,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_memory_HardwareCorrupted_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\"}",
+                    "expr": "node_memory_HardwareCorrupted_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\"}",
                     "format": "time_series",
                     "hide": false,
                     "intervalFactor": 2,
@@ -570,7 +570,7 @@
                         "type": "prometheus",
                         "uid": "P2B7F12D1559A9969"
                     },
-                    "expr": "node_filesystem_size_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\",device!~'rootfs'} - node_filesystem_avail_bytes{instance=\"node-exporter:9100\",job=\"sentry-node\",device!~'rootfs'}",
+                    "expr": "node_filesystem_size_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\",device!~'rootfs'} - node_filesystem_avail_bytes{instance=\"192.168.0.200:9100\",job=\"sentry-node\",device!~'rootfs'}",
                     "format": "time_series",
                     "intervalFactor": 2,
                     "legendFormat": "{{mountpoint}}",
