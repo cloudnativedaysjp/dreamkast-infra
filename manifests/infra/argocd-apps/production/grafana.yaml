@@ -30,7 +30,12 @@ spec:
                 defaultRegion: ap-northeast-1
             - name: Prometheus-Sakura
               type: prometheus
-              url: http://sentry.cloudnativedays.jp:9090
+              url: http://prometheus.sakura.cloudnativedays.jp:9090
+              access: proxy
+              basicAuth: true
+              basicAuthUser: ${BASIC_AUTHN_USERNAME}
+              secureJsonData:
+                basicAuthPassword: ${BASIC_AUTHN_PASSWORD}
             - name: Loki
               type: loki
               url: https://loki.cloudnativedays.jp
