@@ -7,4 +7,3 @@ spec:
   namespaceSelector:
     matchNames:
     - dreamkast-staging
-    - dreamkast-dk-2064
