@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: check_media_live_channel
+  name: check-media-live-channel
 spec:
   # Execute every 10:00 JST but this configure is written by UTC
   schedule: "0 1 * * *"
