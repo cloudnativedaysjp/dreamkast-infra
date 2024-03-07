@@ -49,7 +49,7 @@ spec:
         name: mysql
         args:
         - --character-set-server=utf8mb4
-        - --collation-server=utf8mb4_unicode_ci
+        - --collation-server=utf8mb4_0900_ai_ci
         - --default-authentication-plugin=mysql_native_password
         env:
         - name: MYSQL_USER
