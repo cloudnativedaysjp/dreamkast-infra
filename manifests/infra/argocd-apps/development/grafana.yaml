@@ -91,6 +91,9 @@ spec:
             dk-deep-dive:
               datasource: BigQuery-DS
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/dk-deep-dive.json
+            cnds2024-cfp:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/main/dashboards/cnds2024-cfp.json
           private:
             Amazon RDS:
               gnetId: 11264
