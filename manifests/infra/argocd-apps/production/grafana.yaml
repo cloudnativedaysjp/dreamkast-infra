@@ -96,7 +96,7 @@ spec:
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/e05118e0c53fb9766d6b544443f1f725480b4fac/dashboards/dk-deep-dive.json
             cnds2024-cfp:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/9655e776a152946f8434cf97432bab3f95546a26/dashboards/cnds2024-cfp.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/04df52ac2784db0e000e6196e34c8cb7d0dd9933/dashboards/cnds2024-cfp.json
           private:
             Amazon RDS:
               gnetId: 11264
