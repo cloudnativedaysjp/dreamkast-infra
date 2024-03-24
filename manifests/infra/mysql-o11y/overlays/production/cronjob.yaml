@@ -27,7 +27,7 @@ spec:
               mysql -u $MYSQL_USER -p"$MYSQL_PASSWORD" -h $MYSQL_HOST dreamkast < $HOME/rds.dump
             env:
             - name: RDS_HOST
-              value: dreamkast-prd-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
+              value: dreamkast-prod-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com
             - name: RDS_PASSWORD
               valueFrom:
                 secretKeyRef:
