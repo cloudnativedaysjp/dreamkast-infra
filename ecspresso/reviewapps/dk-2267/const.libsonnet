@@ -31,9 +31,8 @@
     }
   },
   "secretManager": {
-    "dk": "dreamkast/development-env-SID4P1",
+    "dk": "dreamkast/reviewapp-env-yGJKrj",
     "railsApp": "dreamkast/rails-app-secret-SqidNC",
-    "rds": "dreamkast-stg-rds-secret-0dsVhM"
   },
   "sentry": {
     "dsn": "TODO"

@@ -16,9 +16,8 @@
     'subnet-0d95068828df7cc3e',  // dreamkast-dev-vpc-private-us-west-2c
   ],
   secretManager: {
-    dk: 'dreamkast/development-env-SID4P1',
+    dk: 'dreamkast/reviewapp-env-yGJKrj'
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
-    rds: 'dreamkast-stg-rds-secret-0dsVhM',
   },
   s3: {
     dreamkast: {

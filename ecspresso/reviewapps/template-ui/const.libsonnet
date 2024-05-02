@@ -25,8 +25,8 @@
   //
   // Endpoints
   //
-  // TODO: update the following
   externalEndpoints: {
+    // TODO: update the following
     dk: 'https://development.dev.cloudnativedays.jp',
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
