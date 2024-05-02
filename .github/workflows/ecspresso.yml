@@ -21,9 +21,6 @@ jobs:
       - name: Install ecspresso
         uses: kayac/ecspresso@v2
 
-      - name: Install jsonnet
-        uses: zendesk/setup-jsonnet@v1
-
       - name: run ecspresso
         working-directory: ecspresso
         run: |
