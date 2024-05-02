@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -x
+#!/usr/bin/env bash
 
 cd "$(dirname $0)"
 
@@ -25,4 +25,4 @@ case $REPOSITORY_NAME in
 esac
 
 [ ! -d ${PR_NAME} ] && cp -a $TEMPLATE_DIR $PR_NAME
-$PR_NAME/initialize.sh
+bash -x $PR_NAME/initialize.sh

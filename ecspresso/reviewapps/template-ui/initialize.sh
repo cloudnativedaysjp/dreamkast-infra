@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -x
+#!/usr/bin/env bash
 
 cd $(dirname $0)
 
@@ -37,7 +37,7 @@ LISTENER_RULE_ARN=$(aws elbv2 create-rule --listener-arn ${LISTENER_ARN} \
   | jq -r ".Rules[] | select(.Priority == \"${LISTENER_RULE_PRIORITY}\") | .RuleArn")
 
 # replace variables in each ecspresso.yml
-find . -name ecspresso.yml | xargs -I{} sed -i -e 's/__PR_NAME_/'${PR_NAME}'/g' {}
+find . -name ecspresso.yml | xargs -I{} sed -i -e 's/__PR_NAME__/'${PR_NAME}'/g' {}
 
 # replace variables in const.libsonnet
 cat << _EOL_ | jsonnet - > ./const.libsonnet.tmp
