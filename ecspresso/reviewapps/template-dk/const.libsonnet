@@ -16,7 +16,7 @@
     'subnet-0d95068828df7cc3e',  // dreamkast-dev-vpc-private-us-west-2c
   ],
   secretManager: {
-    dk: 'dreamkast/staging-env-SID4P1',
+    dk: 'dreamkast/development-env-SID4P1',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
   },
@@ -49,7 +49,7 @@
   },
   internalEndpoints: {
     rdb: 'mysql-%s.development.local' % [$.PR_NAME],
-    redis: 'redis://redis-%s.staging.local' % [$.PR_NAME],
+    redis: 'redis://redis-%s.development.local' % [$.PR_NAME],
   },
 
   //

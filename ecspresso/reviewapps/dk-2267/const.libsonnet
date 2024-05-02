@@ -11,7 +11,7 @@
   },
   "internalEndpoints": {
     "rdb": "mysql-dk-2267.development.local",
-    "redis": "redis://redis-dk-2267.staging.local"
+    "redis": "redis://redis-dk-2267.development.local"
   },
   "privateSubnetIDs": [
     "subnet-05d0a81dafd9409f9",
@@ -31,7 +31,7 @@
     }
   },
   "secretManager": {
-    "dk": "dreamkast/staging-env-SID4P1",
+    "dk": "dreamkast/development-env-SID4P1",
     "railsApp": "dreamkast/rails-app-secret-SqidNC",
     "rds": "dreamkast-stg-rds-secret-0dsVhM"
   },

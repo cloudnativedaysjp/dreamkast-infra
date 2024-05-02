@@ -16,7 +16,7 @@
     'subnet-0d95068828df7cc3e',  // dreamkast-dev-vpc-private-us-west-2c
   ],
   secretManager: {
-    dkUi: 'dreamkast-ui/staging-env-3nBcuB',
+    dkUi: 'dreamkast-ui/development-env-3nBcuB',
   },
   targetGroupArn: {
     dkUi: error 'you must replace this value',
@@ -27,7 +27,7 @@
   //
   // TODO: update the following
   externalEndpoints: {
-    dk: 'https://staging.dev.cloudnativedays.jp',
+    dk: 'https://development.dev.cloudnativedays.jp',
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
   internalEndpoints: {

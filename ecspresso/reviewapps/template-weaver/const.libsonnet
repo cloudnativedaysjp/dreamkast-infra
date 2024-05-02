@@ -31,7 +31,7 @@
   externalEndpoints: {
   },
   internalEndpoints: {
-    dk: 'http://dreamkast.staging.local:3000',
+    dk: 'http://dreamkast.development.local:3000',
     rdb: 'mysql-%s.development.local' % [self.PR_NAME],
   },
 
