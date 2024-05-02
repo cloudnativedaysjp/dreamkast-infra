@@ -23,6 +23,7 @@ if [ ! -f "cleanup.sh" ]; then
 # create TargetGroup
 TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
   --name "dreamkast-dev-${PR_NAME}-dreamkast" \
+  --target-type ip \
   --protocol HTTP \
   --port 3000 \
   --vpc-id ${VPC_ID} \
@@ -65,7 +66,7 @@ const + {
     mysql: "${SERVICE_ID_MYSQL}",
     redis: "${SERVICE_ID_REDIS}",
   },
-  imageTags: {
+  imageTags: const.imageTags + {
     dreamkast_ecs: "${IMAGE_TAG}",
   },
 }
@@ -76,6 +77,8 @@ mv const.libsonnet.tmp const.libsonnet
 cat << _EOF_ > ./cleanup.sh
 #!/usr/bin/env bash
 
+cd \$(dirname \$0)
+find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate
 aws servicediscovery delete-service --id ${SERVICE_ID_MYSQL}
 aws servicediscovery delete-service --id ${SERVICE_ID_REDIS}
 aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}

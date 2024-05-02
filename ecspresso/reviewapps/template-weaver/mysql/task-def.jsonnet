@@ -1,7 +1,7 @@
-local redis = import '../../../base/redis.libsonnet';
+local mysql = import '../../../base/mysql.libsonnet';
 local const = import '../const.libsonnet';
 
-redis.taskDef(
+mysql.taskDef(
   family='dreamkast-stg-%s-mysql' % [const.PR_NAME],
   taskRoleName='dreamkast-dev-ecs-mysql',
   imageTag=const.imageTags.mysql,
