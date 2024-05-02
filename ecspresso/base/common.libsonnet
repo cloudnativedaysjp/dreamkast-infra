@@ -31,7 +31,7 @@ local const = import './const.libsonnet';
     placementConstraints: [],
     placementStrategy: [],
     platformVersion: 'LATEST',
-    propagateTags: "NONE",
+    propagateTags: 'NONE',
     schedulingStrategy: 'REPLICA',
     serviceRegistries: if serviceDiscoveryID != '' then [
       {

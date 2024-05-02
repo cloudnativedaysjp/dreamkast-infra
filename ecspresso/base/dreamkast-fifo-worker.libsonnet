@@ -30,6 +30,7 @@ local const = import './const.libsonnet';
     rdsSecretManagerName,
     dreamkastSecretManagerName,
     enableLogging=false,
+    reviewapp=false,
   ):: {
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],

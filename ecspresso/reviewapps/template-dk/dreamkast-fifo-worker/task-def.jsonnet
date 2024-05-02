@@ -22,4 +22,5 @@ dreamkast_fifo_worker.taskDef(
   dreamkastSecretManagerName=const.secretManager.dk,
 
   enableLogging=true,
+  reviewapp=true,
 )

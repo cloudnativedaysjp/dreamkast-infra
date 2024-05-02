@@ -13,4 +13,5 @@ dreamkast_ui.taskDef(
   dkUiSecretManagerName=const.secretManager.dkUi,
 
   enableLogging=true,
+  reviewapp=true,
 )

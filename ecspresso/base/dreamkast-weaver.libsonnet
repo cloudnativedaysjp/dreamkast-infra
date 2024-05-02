@@ -34,6 +34,7 @@ local const = import './const.libsonnet';
     rdbInternalEndpoint,
     rdsSecretManagerName,
     enableLogging=false,
+    reviewapp=false,
   ):: {
     local root = self,
     //

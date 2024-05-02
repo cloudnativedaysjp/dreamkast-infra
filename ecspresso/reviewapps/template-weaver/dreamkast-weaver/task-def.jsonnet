@@ -13,4 +13,5 @@ dreamkast_weaver.taskDef(
   rdsSecretManagerName=const.secretManager.rds,
 
   enableLogging=true,
+  reviewapp=true,
 )

@@ -8,5 +8,5 @@ mysql.taskDef(
 
   region=const.region,
 
-  enableLogging=false,
+  enableLogging=true,
 )

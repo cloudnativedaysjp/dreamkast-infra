@@ -34,13 +34,31 @@ local const = import './const.libsonnet';
     volumes: [],
     containerDefinitions: [
       {
-        name: 'redis',
+        name: 'mysql',
         image: '%s.dkr.ecr.%s.amazonaws.com/ecr-public/docker/library/mysql:%s' % [const.accountID, region, imageTag],
         command: [],
         entryPoint: [],
         essential: true,
         cpu: 256,
         memoryReservation: 512,
+        environment: [
+          {
+            name: 'MYSQL_USER',
+            value: 'user',
+          },
+          {
+            name: 'MYSQL_PASSWORD',
+            value: 'password',
+          },
+          {
+            name: 'MYSQL_ROOT_PASSWORD',
+            value: 'password',
+          },
+          {
+            name: 'MYSQL_DATABASE',
+            value: 'dreamkast',
+          },
+        ],
         portMappings: [
           {
             containerPort: 3306,

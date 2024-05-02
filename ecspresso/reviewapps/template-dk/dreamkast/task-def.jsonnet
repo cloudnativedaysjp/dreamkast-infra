@@ -23,5 +23,6 @@ dreamkast.taskDef(
   rdsSecretManagerName=const.secretManager.rds,
   dreamkastSecretManagerName=const.secretManager.dk,
 
-  enableLogging=true,
+  onableLogging=true,
+  reviewapp=true,
 )

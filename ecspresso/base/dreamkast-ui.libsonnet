@@ -34,6 +34,7 @@ local const = import './const.libsonnet';
     dkWeaverEndpoint,
     dkUiSecretManagerName,
     enableLogging=false,
+    reviewapp=true,
   ):: {
     local root = self,
 

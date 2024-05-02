@@ -24,4 +24,5 @@ dreamkast.taskDef(
   dreamkastSecretManagerName=const.secretManager.dk,
 
   enableLogging=true,
+  reviewapp=true,
 )
