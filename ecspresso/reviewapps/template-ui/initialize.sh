@@ -28,6 +28,7 @@ TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
   --port 3000 \
   --vpc-id ${VPC_ID} \
   --ip-address-type ipv4 \
+  --health-check-path /cndt2023/ui/ \
   | jq -r ".TargetGroups[0].TargetGroupArn")
 
 # create ALB ListenerRule
