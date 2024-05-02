@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $(dirname $0 && pwd)
+cd "$(dirname $0)"
 
 REPOSITORY_NAME=${REPOSITORY_NAME:?"REPOSITORY_NAME must be specified"}
 PR_NUMBER=${PR_NUMBER:?"PR_NUMBER must be specified"}

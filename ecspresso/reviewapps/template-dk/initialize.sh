@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd $(dirname $0 && pwd)
+cd $(dirname $0)
 
 # required the following commands:
 # * aws
