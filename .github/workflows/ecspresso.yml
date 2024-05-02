@@ -4,6 +4,9 @@ on:
   push:
     branches: ["main"]
 
+# this workflow should be processed by FIFO
+concurrency: ecspresso
+
 jobs:
   ecspresso:
     runs-on: "ubuntu-latest"
