@@ -103,15 +103,6 @@ local const = import './const.libsonnet';
             valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, railsAppSecretManagerName],
             name: 'RAILS_MASTER_KEY',
           },
-          // from rds-secret Secret
-          {
-            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:username::' % [region, const.accountID, rdsSecretManagerName],
-            name: 'MYSQL_USER',
-          },
-          {
-            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:password::' % [region, const.accountID, rdsSecretManagerName],
-            name: 'MYSQL_PASSWORD',
-          },
           // from dreamkast Secret
           {
             valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:AUTH0_CLIENT_ID::' % [region, const.accountID, dreamkastSecretManagerName],
@@ -125,7 +116,18 @@ local const = import './const.libsonnet';
             valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:AUTH0_DOMAIN::' % [region, const.accountID, dreamkastSecretManagerName],
             name: 'AUTH0_DOMAIN',
           },
-        ],
+        ] + if reviewapp == false then [
+          // from rds-secret Secret
+          {
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:username::' % [region, const.accountID, rdsSecretManagerName],
+            name: 'MYSQL_USER',
+          },
+          {
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:password::' % [region, const.accountID, rdsSecretManagerName],
+            name: 'MYSQL_PASSWORD',
+          },
+        ] else [],
+
         portMappings: [],
         links: [],
         mountPoints: [],
