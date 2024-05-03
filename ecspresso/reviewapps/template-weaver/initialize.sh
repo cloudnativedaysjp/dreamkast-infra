@@ -6,6 +6,7 @@ cd $(dirname $0)
 # * aws
 # * jq
 # * jsonnet
+# * jsonnetfmt
 
 # variables
 PR_NAME=${PR_NAME:?"PR_NAME must be specified"}
@@ -86,3 +87,5 @@ jsonnet const.libsonnet \
 mv const.libsonnet.tmp const.libsonnet
 
 fi
+
+jsonnetfmt -i const.libsonnet
