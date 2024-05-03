@@ -22,7 +22,7 @@ SERVICE_DISCOVERY_NAMESPACE="ns-53ijjrlltqf5r2gm"
 if [ ! -f "cleanup.sh" ]; then
 # create TargetGroup
 TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
-  --name "dreamkast-dev-${PR_NAME}-dreamkast" \
+  --name "dev-${PR_NAME}" \
   --target-type ip \
   --protocol HTTP \
   --port 3000 \
