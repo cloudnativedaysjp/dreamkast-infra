@@ -66,8 +66,17 @@ local const = import './const.libsonnet';
           else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
           else family,
         },
-      ],
-      secrets: [
+      ] + if reviewapp == true then [
+        {
+          name: 'DB_USER',
+          value: 'root',
+        },
+        {
+          name: 'DB_PASSWORD',
+          value: 'password',
+        },
+      ] else [],
+      secrets: if reviewapp == false then [
         // from rds-secret Secret
         {
           valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:username::' % [region, const.accountID, rdsSecretManagerName],
@@ -77,7 +86,7 @@ local const = import './const.libsonnet';
           valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:password::' % [region, const.accountID, rdsSecretManagerName],
           name: 'DB_PASSWORD',
         },
-      ],
+      ] else [],
 
       portMappings: [],
       links: [],
