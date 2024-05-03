@@ -20,7 +20,7 @@
    ],
    "region": "us-west-2",
    "secretManager": {
-      "dkUi": "dreamkast-ui/development-env-3nBcuB"
+      "dkUi": "dreamkast-ui/reviewapp-env-Cytidj",
    },
    "targetGroupArn": {
       "dkUi": "arn:aws:elasticloadbalancing:us-west-2:607167088920:targetgroup/dreamkast-dev-ui-491-dreamkast/df1f0c11e38654cd"

@@ -32,7 +32,7 @@
   },
   internalEndpoints: {
     dk: 'http://dreamkast.development.local:3000',
-    rdb: 'mysql-%s.development.local' % [self.PR_NAME],
+    rdb: 'mysql-%s.development.local' % [$.PR_NAME],
   },
 
   //
