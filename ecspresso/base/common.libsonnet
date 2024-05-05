@@ -23,7 +23,7 @@ local const = import './const.libsonnet';
     loadBalancers: [],
     networkConfiguration: {
       awsvpcConfiguration: {
-        assignPublicIp: 'ENABLED',
+        assignPublicIp: 'DISABLED',
         securityGroups: [securityGroupID],
         subnets: subnetIDs,
       },

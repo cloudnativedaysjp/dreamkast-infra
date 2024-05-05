@@ -13,6 +13,11 @@
     rdb: 'mysql-dk-2267.development.local',
     redis: 'redis://redis-dk-2267.development.local',
   },
+  privateSubnetIDs: [
+    'subnet-05d0a81dafd9409f9',
+    'subnet-042770b2f29661e8e',
+    'subnet-0d95068828df7cc3e',
+  ],
   publicSubnetIDs: [
     'subnet-00709135a42bf907e',
     'subnet-0d07831c8fc073511',

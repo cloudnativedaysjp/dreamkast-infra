@@ -3,7 +3,7 @@ local const = import '../const.libsonnet';
 
 dreamkast_ui.serviceDef(
   region=const.region,
-  subnetIDs=const.publicSubnetIDs,
+  subnetIDs=const.privateSubnetIDs,
   securityGroupID='sg-026faf401f03b7bd4',  // dreamkast-dev-ecs-dreamkast-ui
   targetGroupArn=const.targetGroupArn.dkUi,
 )
