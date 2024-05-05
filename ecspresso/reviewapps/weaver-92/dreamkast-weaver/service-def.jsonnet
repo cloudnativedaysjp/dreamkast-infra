@@ -3,7 +3,7 @@ local const = import '../const.libsonnet';
 
 dreamkast_weaver.serviceDef(
   region=const.region,
-  subnetIDs=const.privateSubnetIDs,
+  subnetIDs=const.publicSubnetIDs,
   securityGroupID='sg-0af84e950ec9eb4f4',  // dreamkast-dev-ecs-dreamkast-weaver
   targetGroupArn=const.targetGroupArn.dkWeaver,
 )
