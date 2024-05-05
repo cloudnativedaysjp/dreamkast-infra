@@ -8,11 +8,6 @@
     dreamkast_ui: '5d74cce52dcfae4520efeca5b9802b3757e66e4f',
   },
   internalEndpoints: {},
-  privateSubnetIDs: [
-    'subnet-05d0a81dafd9409f9',
-    'subnet-042770b2f29661e8e',
-    'subnet-0d95068828df7cc3e',
-  ],
   publicSubnetIDs: [
     'subnet-00709135a42bf907e',
     'subnet-0d07831c8fc073511',
