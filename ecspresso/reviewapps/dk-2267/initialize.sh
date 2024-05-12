@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e -opipefail
 cd $(dirname $0)
 
 # required the following commands:
@@ -77,8 +77,9 @@ mv const.libsonnet.tmp const.libsonnet
 # create cleanup.sh
 cat << _EOF_ > ./cleanup.sh
 #!/usr/bin/env bash
-
+set -e -opipefail
 cd \$(dirname \$0)
+
 find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate
 sleep 10 # wait for ECS Services to be deleted
 aws servicediscovery delete-service --id ${SERVICE_ID_MYSQL}

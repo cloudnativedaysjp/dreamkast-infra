@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e -opipefail
 cd $(dirname $0)
 
 # required the following commands:
@@ -61,8 +61,9 @@ mv const.libsonnet.tmp const.libsonnet
 # create cleanup.sh
 cat << _EOF_ > ./cleanup.sh
 #!/usr/bin/env bash
-
+set -e -opipefail
 cd \$(dirname \$0)
+
 find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate
 aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}
 aws elbv2 delete-target-group --target-group-arn ${TARGET_GROUP_ARN}
