@@ -19,7 +19,7 @@ images:
   newTag: 9b47032b0e0a8538c7bc7e0d326c0b2872f8aff4
 - name: dreamkast-ui
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ui
-  newTag: 802ff6cf98404654795d4d7240fafa03769f7e6f
+  newTag: 0fdb7eaa9779ca56c680ea5f2a60c32616a91291
 - name: dreamkast-weaver
   newName: 607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-weaver
   newTag: 61e6bb66efd9ff0620070663bff6223aa92f511a
