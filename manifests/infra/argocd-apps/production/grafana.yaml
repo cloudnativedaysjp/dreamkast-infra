@@ -82,9 +82,6 @@ spec:
                   path: /var/lib/grafana/dashboards/public
         dashboards:
           public:
-            cndt2023-main:
-              datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3c63a83c7bbef716cdac0a688c3530348e56db6a/dashboards/cndt2023-main.json
             ArgoCD:
               gnetId: 14584
               revision: 1
@@ -97,6 +94,9 @@ spec:
             cnds2024-cfp:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/b94ba06584284f85da0535f17ef9f5d400f8024d/dashboards/cnds2024-cfp.json
+            cnds2024-main:
+              datasource: Prometheus
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/3599287e8cf615c623b111463a50c0db40e55198/dashboards/cnds2024-main.json
           private:
             Amazon RDS:
               gnetId: 11264
