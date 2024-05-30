@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mackerel-agent-config
+data:
+  mackerel.yaml: |
+    roles:
+      - dreamkast-prod:backend
+    plugin:
+      metrics: {}
+    readinessProbe:
+      http:
+        path: /ops/heartbeat
+        port: 5000

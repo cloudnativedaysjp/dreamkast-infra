@@ -21,6 +21,10 @@ spec:
         app: dreamkast
         tier: dreamkast
     spec:
+      volumes:
+      - name: mackerel-agent-config
+        configMap:
+          name: mackerel-agent-config
       containers:
       - name: dreamkast
         image: dreamkast-ecs
@@ -37,6 +41,41 @@ spec:
           preStop:
             exec:
               command: ["/bin/sleep","300"]
+      - name: mackerel-container-agent
+        image: mackerel/mackerel-container-agent:plugins
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 50m
+            memory: 54Mi
+          limits:
+            cpu: 100m
+            memory: 128Mi
+        env:
+          - name: MACKEREL_AGENT_CONFIG
+            value: /etc/mackerel/mackerel.yaml
+          - name: MACKEREL_CONTAINER_PLATFORM
+            value: kubernetes
+          - name: MACKEREL_KUBERNETES_KUBELET_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: MACKEREL_KUBERNETES_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MACKEREL_KUBERNETES_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+        envFrom:
+          - secretRef:
+              name: martian-imperial-year-table
+        volumeMounts:
+          - name: mackerel-agent-config
+            mountPath: /etc/mackerel
+            readOnly: true
+
 ---
 apiVersion: apps/v1
 kind: Deployment
