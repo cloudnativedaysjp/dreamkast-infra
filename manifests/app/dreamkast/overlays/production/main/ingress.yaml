@@ -16,9 +16,6 @@ spec:
       services:
       - name: dreamkast
         port: 80
-      ipDenyPolicy:
-      - cidr: 43.206.241.194/32
-        source: Remote
       loadBalancerPolicy:
         strategy: Cookie
       cookieRewritePolicies:
