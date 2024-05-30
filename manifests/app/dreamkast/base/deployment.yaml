@@ -70,7 +70,7 @@ spec:
                 fieldPath: metadata.name
         envFrom:
           - secretRef:
-              name: martian-imperial-year-table
+              name: mackerel-api-key
         volumeMounts:
           - name: mackerel-agent-config
             mountPath: /etc/mackerel
