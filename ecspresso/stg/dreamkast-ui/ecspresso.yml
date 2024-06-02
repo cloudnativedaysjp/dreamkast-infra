@@ -3,4 +3,4 @@ cluster: dreamkast-stg
 service: dreamkast-ui
 service_definition: service-def.jsonnet
 task_definition: task-def.jsonnet
-timeout: 5m
+timeout: 10m

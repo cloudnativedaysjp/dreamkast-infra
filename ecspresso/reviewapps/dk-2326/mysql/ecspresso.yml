@@ -3,4 +3,4 @@ cluster: dreamkast-dev
 service: dk-2326-mysql
 service_definition: service-def.jsonnet
 task_definition: task-def.jsonnet
-timeout: 5m
+timeout: 10m

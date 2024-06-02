@@ -3,4 +3,4 @@ cluster: dreamkast-stg
 service: redis
 service_definition: service-def.jsonnet
 task_definition: task-def.jsonnet
-timeout: 5m
+timeout: 10m
