@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 28,
+  "id": 41,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -337,7 +337,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
             "axisLabel": "",
@@ -451,7 +451,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -535,6 +536,6 @@
   "timezone": "",
   "title": "CloudNativeDays Deep Dive",
   "uid": "I5GV5V34k",
-  "version": 26,
+  "version": 3,
   "weekStart": ""
 }

@@ -25,7 +25,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 29,
+  "id": 46,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -42,7 +42,7 @@
       },
       "id": 4,
       "options": {
-        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、CNDTのオンラインカンファレンスのイベントプラットフォームであるDreamkastの過去60日間のアクセス情報を可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう!!\n\n",
+        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、CloudNative Daysの配信プラットフォームであるDreamkastの過去60日間のアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
         "mode": "markdown"
       },
       "pluginVersion": "9.0.4",
@@ -54,6 +54,7 @@
         "type": "grafana-bigquery-datasource",
         "uid": "P8BF30D76B7C0FE9F"
       },
+      "description": "https://event.cloudnativedays.jp/cnds2024 にアクセスされた方を国別に表示しています。",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -78,16 +79,16 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
+        "h": 13,
         "w": 24,
         "x": 0,
         "y": 5
       },
-      "id": 14,
+      "id": 2,
       "options": {
         "colorMode": "background",
         "graphMode": "area",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
@@ -107,7 +108,7 @@
           },
           "editorMode": "code",
           "format": 1,
-          "location": "US",
+          "location": "",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
           "rawSql": "select nullif(geo.country,'') as country, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_263654842.events_*` where geo.country is not null group by country order by users desc",
@@ -139,7 +140,6 @@
         "type": "grafana-bigquery-datasource",
         "uid": "P8BF30D76B7C0FE9F"
       },
-      "description": "https://cloudnativedays.jp が全国でどれだけ見られているのかを都道府県別にグラフ化しています",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -152,8 +152,7 @@
               "viz": false
             }
           },
-          "mappings": [],
-          "noValue": "Unknown"
+          "mappings": []
         },
         "overrides": [
           {
@@ -186,14 +185,13 @@
         "h": 16,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 18
       },
-      "id": 2,
-      "links": [],
+      "id": 14,
       "options": {
         "displayLabels": [
-          "name",
-          "value"
+          "value",
+          "name"
         ],
         "legend": {
           "displayMode": "table",
@@ -224,7 +222,7 @@
           },
           "editorMode": "code",
           "format": 1,
-          "location": "US",
+          "location": "",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
           "rawSql": "select nullif(geo.region,'') as region, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_263654842.events_*` where geo.country = 'Japan' and geo.region is not null group by region order by users desc",
@@ -248,7 +246,7 @@
           }
         }
       ],
-      "title": "サイトアクセス数 (都道府県)",
+      "title": "サイトアクセス数 (都市別)",
       "type": "piechart"
     },
     {
@@ -256,7 +254,6 @@
         "type": "grafana-bigquery-datasource",
         "uid": "P8BF30D76B7C0FE9F"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -265,7 +262,7 @@
           "custom": {
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 80,
+            "fillOpacity": 90,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -284,6 +281,10 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -294,12 +295,12 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 17
+        "y": 18
       },
       "id": 6,
       "options": {
         "barRadius": 0,
-        "barWidth": 0.97,
+        "barWidth": 0.99,
         "colorByField": "users",
         "groupWidth": 0.7,
         "legend": {
@@ -310,9 +311,8 @@
         "orientation": "auto",
         "showValue": "auto",
         "stacking": "none",
-        "text": {},
         "tooltip": {
-          "mode": "single",
+          "mode": "none",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
@@ -327,7 +327,7 @@
           },
           "editorMode": "code",
           "format": 1,
-          "location": "US",
+          "location": "",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
           "rawSql": "select device.category as device_category, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_263654842.events_*` where device.category is not null group by device_category order by users desc",
@@ -362,7 +362,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-GrYlRd"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
             "axisLabel": "",
@@ -384,8 +384,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -394,98 +393,13 @@
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Windows|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Windows"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Android|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Android"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Linux|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Linux"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Macintosh|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "macOS"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "iOS|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "iOS"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Chrome OS|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Chrome OS"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "(not set)|activeUsers"
-            },
-            "properties": [
-              {
-                "id": "displayName",
-                "value": "Unknown"
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 25
+        "y": 26
       },
       "id": 12,
       "options": {
@@ -505,6 +419,7 @@
           "mode": "single",
           "sort": "none"
         },
+        "xField": "OS",
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
@@ -517,7 +432,7 @@
           },
           "editorMode": "code",
           "format": 1,
-          "location": "US",
+          "location": "",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
           "rawSql": "select ifnull(device.operating_system, '') as OS, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_263654842.events_*` where device.operating_system is not null group by OS order by users desc",
@@ -560,8 +475,11 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
               }
             ]
           }
@@ -569,10 +487,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 24,
         "x": 0,
-        "y": 33
+        "y": 34
       },
       "id": 10,
       "options": {
@@ -598,7 +516,7 @@
           },
           "editorMode": "code",
           "format": 1,
-          "location": "US",
+          "location": "",
           "project": "cloudnativedays-o11y",
           "rawQuery": true,
           "rawSql": "select ifnull(device.web_info.browser, '') as browsers, count(distinct user_pseudo_id) as users from `cloudnativedays-o11y.analytics_263654842.events_*` where device.web_info.browser is not null group by browsers order by users desc",
@@ -641,6 +559,6 @@
   "timezone": "",
   "title": "Dreamkast Deep Dive",
   "uid": "u5sXIaqVk",
-  "version": 16,
+  "version": 10,
   "weekStart": ""
 }
