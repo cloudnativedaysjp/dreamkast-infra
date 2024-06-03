@@ -87,16 +87,16 @@ spec:
               revision: 1
             cnd-deep-dive:
               datasource: BigQuery-DS
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/a65e6a1189f66c01edfa72538f2a875ad98db332/dashboards/cnd-deep-dive.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/50fddf3e76a94cd0f96b46173fab902d21a3a039/dashboards/cnd-deep-dive.json
             dk-deep-dive:
               datasource: BigQuery-DS
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/cfb65c904cec8868933bafca7a95f9dcf44d72d0/dashboards/dk-deep-dive.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/50fddf3e76a94cd0f96b46173fab902d21a3a039/dashboards/dk-deep-dive.json
             cnds2024-cfp:
               datasource: Prometheus
               url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/b94ba06584284f85da0535f17ef9f5d400f8024d/dashboards/cnds2024-cfp.json
             cnds2024-main:
               datasource: Prometheus
-              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/a65e6a1189f66c01edfa72538f2a875ad98db332/dashboards/cnds2024-main.json
+              url: https://raw.githubusercontent.com/cloudnativedaysjp/dreamkast-infra/50fddf3e76a94cd0f96b46173fab902d21a3a039/dashboards/cnds2024-main.json
           private:
             Amazon RDS:
               gnetId: 11264
