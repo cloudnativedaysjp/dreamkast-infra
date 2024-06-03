@@ -42,7 +42,7 @@
       },
       "id": 4,
       "options": {
-        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、CloudNative Daysのオフライン配信基盤であるDreamkastのアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
+        "content": "# Dreamkast Deep Dive\n\nこのダッシュボードは、CloudNative Daysの配信プラットフォームであるDreamkastの過去60日間のアクセスを可視化しています。\n\n一体、どのようなユーザな方たちが見られているのかを少し覗いてみましょう,\n\n",
         "mode": "markdown"
       },
       "pluginVersion": "9.0.4",
@@ -552,13 +552,13 @@
     "list": []
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-60d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Dreamkast Deep Dive",
   "uid": "u5sXIaqVk",
-  "version": 8,
+  "version": 10,
   "weekStart": ""
 }
