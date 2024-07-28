@@ -27,6 +27,7 @@ local const = import './const.libsonnet';
       ],
     },
 
+  // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
     taskRoleName,
@@ -128,6 +129,7 @@ local const = import './const.libsonnet';
         },
       ] else [],
 
+      healthCheck: error 'must be overridden',
       portMappings: [],
       links: [],
       mountPoints: [],
@@ -153,6 +155,9 @@ local const = import './const.libsonnet';
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
         cpu: 64,
         memoryReservation: 128,
+        healthCheck: {
+          command: ['CMD-SHELL', 'exit 0'],
+        },
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
@@ -195,6 +200,13 @@ local const = import './const.libsonnet';
             value: '*',
           },
         ],
+        healthCheck: {
+          command: ['CMD-SHELL', 'curl -f http://localhost:3000/ || exit 1'],
+          interval: 30,
+          timeout: 5,
+          retries: 3,
+          startPeriod: 60,
+        },
         portMappings: [{
           containerPort: 3000,
           hostPort: 3000,
