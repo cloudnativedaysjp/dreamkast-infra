@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: '0 15 * * *'  # Runs every day at 3 PM UTC, which is midnight UTC+9
   workflow_dispatch:
-  push:
-    branches:
-      - feat/autoscale # for testing
 
 jobs:
   auto_warm_up:
@@ -23,8 +20,7 @@ jobs:
           script: |
             const response = await fetch('https://event.cloudnativedays.jp/api/v1/events')
             const events = await response.json()
-            let today = new Date().toISOString().split('T')[0]
-            today = '2024-06-15'
+            const today = new Date().toISOString().split('T')[0]
             const isConferenceDay = events.some(event =>
               event.conferenceDays.some(day => day.date === today)
             )
