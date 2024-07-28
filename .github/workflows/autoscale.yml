@@ -44,6 +44,7 @@ jobs:
           cat "$jsonnet_file"
 
       - name: Commit and push changes
+        id: commit_changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
@@ -52,9 +53,24 @@ jobs:
           # Check for changes
           if git diff-index --quiet HEAD --; then
             echo "No changes to commit"
+            echo "::set-output name=changes::false"
           else
             git commit -m "Auto-update replicas for conference day"
             git push origin feat/autoscale
+            echo "::set-output name=changes::true"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger ecspresso.yml workflow
+        if: steps.commit_changes.outputs.changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'trigger-ecspresso'
+            })
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
