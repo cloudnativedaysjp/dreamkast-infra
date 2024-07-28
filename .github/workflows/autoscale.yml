@@ -52,7 +52,7 @@ jobs:
             echo "::set-output name=changes::false"
           else
             git commit -m "Auto-update replicas for conference day"
-            git push origin feat/autoscale
+            git push origin main
             echo "::set-output name=changes::true"
           fi
         env:
