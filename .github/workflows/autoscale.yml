@@ -36,6 +36,7 @@ jobs:
           jsonnet_file="ecspresso/stg/dreamkast/service-def.jsonnet"
 
           if [ "$is_conference_day" == "true" ]; then
+            sed -i '/replicas=[0-9]*/d' "$jsonnet_file"
             sed -i '/dreamkast_dk.serviceDef(/a \ \ replicas=10,' "$jsonnet_file"
           else
             sed -i '/replicas=10,/d' "$jsonnet_file"
