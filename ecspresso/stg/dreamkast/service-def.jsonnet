@@ -3,6 +3,7 @@ local const = import '../const.libsonnet';
 
 dreamkast_dk.serviceDef(
   replicas=10,
+  replicas=10,
   region=const.region,
   subnetIDs=const.publicSubnetIDs,
   securityGroupID='sg-00e734fea020b954d',  // dreamkast-dev-ecs-dreamkast
