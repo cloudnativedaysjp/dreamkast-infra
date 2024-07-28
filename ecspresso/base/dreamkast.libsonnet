@@ -27,7 +27,6 @@ local const = import './const.libsonnet';
       ],
     },
 
-  # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
     taskRoleName,
@@ -128,14 +127,6 @@ local const = import './const.libsonnet';
           name: 'MYSQL_PASSWORD',
         },
       ] else [],
-
-      healthCheck: {
-        command: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"],
-        interval: 30,
-        timeout: 5,
-        retries: 3,
-        startPeriod: 60,
-      },
 
       portMappings: [],
       links: [],
