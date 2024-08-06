@@ -28,7 +28,7 @@ jobs:
 
       - name: Update replicas in service-def.jsonnet
         env:
-          ENVIRONMENT: stg
+          ENVIRONMENT: prod
         run: |
           is_conference_day="${{ steps.is_conference_day.outputs.result }}"
           replicas_files=(
