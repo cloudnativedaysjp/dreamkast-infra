@@ -1,8 +1,11 @@
 local dreamkast_dk = import '../../base/dreamkast.libsonnet';
 local const = import '../const.libsonnet';
 
+local replicas = import './vars/replicas.json';
+
 dreamkast_dk.serviceDef(
   region=const.region,
+  replicas=replicas,
   subnetIDs=const.publicSubnetIDs,
   securityGroupID='sg-00e734fea020b954d',  // dreamkast-dev-ecs-dreamkast
   serviceDiscoveryID=const.serviceDiscovery.dk,
