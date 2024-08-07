@@ -3,25 +3,25 @@ kind: Kustomization
 resources:
 - ../../base
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/00-common.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/00-common.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/01-contour-config.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/01-contour-config.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/01-crds.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/01-crds.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-job-certgen.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/02-job-certgen.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-rbac.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/02-rbac.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-role-contour.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/02-role-contour.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-service-contour.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/02-service-contour.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/02-service-envoy.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/02-service-envoy.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/03-contour.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/03-contour.yaml
 # renovate: type=remote-file
-- https://raw.githubusercontent.com/projectcontour/contour/v1.25.0/examples/contour/03-envoy.yaml
+- https://raw.githubusercontent.com/projectcontour/contour/v1.30.0/examples/contour/03-envoy.yaml
 patches:
 - path: ./contour-configmap.yaml
 - path: ./lb-internet-facing.yaml
