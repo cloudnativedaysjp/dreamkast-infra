@@ -1,0 +1,79 @@
+name: Auto Warm-up ECS Replicas
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs every day at 3 PM UTC, which is midnight UTC+9
+  workflow_dispatch:
+
+jobs:
+  auto_warm_up:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get event schedule
+        id: is_conference_day
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const response = await fetch('https://event.cloudnativedays.jp/api/v1/events')
+            const events = await response.json()
+            const today = new Date().toISOString().split('T')[0]
+            const isConferenceDay = events.some(event =>
+              event.conferenceDays.some(day => day.date === today)
+            )
+            return isConferenceDay
+
+      - name: Update replicas in service-def.jsonnet
+        env:
+          ENVIRONMENT: stg
+        run: |
+          is_conference_day="${{ steps.is_conference_day.outputs.result }}"
+          replicas_files=(
+            "ecspresso/${{ env.ENVIRONMENT }}/dreamkast/vars/replicas.json"
+            "ecspresso/${{ env.ENVIRONMENT }}/dreamkast-ui/vars/replicas.json"
+            "ecspresso/${{ env.ENVIRONMENT }}/dreamkast-weaver/vars/replicas.json"
+          )
+
+          for replicas_file in "${replicas_files[@]}"; do
+            if [ "$is_conference_day" == "true" ]; then
+              replicas=10
+            else
+              replicas=1
+            fi
+            echo "$replicas" > "$replicas_file"
+          done
+
+      - name: Commit and push changes
+        id: commit_changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+
+          # Check for changes
+          if git diff-index --quiet HEAD --; then
+            echo "No changes to commit"
+            echo "::set-output name=changes::false"
+          else
+            git commit -m "Auto-update replicas for conference day"
+            git push origin main
+            echo "::set-output name=changes::true"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger ecspresso.yml workflow
+        if: steps.commit_changes.outputs.changes == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: 'trigger-ecspresso'
+            })
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -3,6 +3,8 @@ name: ecspresso deploy
 on:
   push:
     branches: ["main"]
+  repository_dispatch:
+    types: [trigger-ecspresso]
 
 # this workflow should be processed by FIFO
 concurrency: ecspresso
