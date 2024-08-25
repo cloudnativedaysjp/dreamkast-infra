@@ -33,6 +33,7 @@
     dkUi: 'dreamkast-ui/staging-env-3nBcuB',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
+    mackerel: 'observability/mackerel/api-key-tjOHnb',
   },
   sentry: {
     dsn: 'TODO',

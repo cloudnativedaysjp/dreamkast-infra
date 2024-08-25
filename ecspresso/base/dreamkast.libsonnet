@@ -45,6 +45,7 @@ local const = import './const.libsonnet';
     railsAppSecretManagerName,
     rdsSecretManagerName,
     dreamkastSecretManagerName,
+    mackerelSecretManagerName,
     enableLogging=false,
     reviewapp=false,
   ):: {
@@ -248,6 +249,34 @@ local const = import './const.libsonnet';
             'awslogs-create-group': 'true',
             'awslogs-region': region,
             'awslogs-stream-prefix': 'firelens',
+          },
+        },
+      } else {},
+      root.containerDefinitionCommon {
+        name: 'mackerel-container-agent',
+        image: 'mackerel/mackerel-container-agent:latest',
+        cpu: 0,
+        memoryReservation: 128,
+        environment: [
+          {
+            name: 'MACKEREL_CONTAINER_PLATFORM',
+            value: 'ecs',
+          },
+        ],
+        secrets: [
+          {
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+            name: 'MACKEREL_CONTAINER_PLATFORM',
+          },
+        ],
+      } + if enableLogging then {
+        logConfiguration: {
+          logDriver: 'awslogs',
+          options: {
+            'awslogs-group': family,
+            'awslogs-create-group': 'true',
+            'awslogs-region': region,
+            'awslogs-stream-prefix': 'mackerel-agent',
           },
         },
       } else {},

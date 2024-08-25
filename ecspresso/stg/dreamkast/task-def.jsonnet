@@ -23,6 +23,7 @@ dreamkast.taskDef(
   railsAppSecretManagerName=const.secretManager.railsApp,
   rdsSecretManagerName=const.secretManager.rds,
   dreamkastSecretManagerName=const.secretManager.dk,
+  mackerelSecretManagerName=const.secretManager.mackerel,
 
   enableLogging=true,
 )
