@@ -35,6 +35,7 @@ local const = import './const.libsonnet';
     region,
     dkApiEndpoint,
     dkWeaverEndpoint,
+    lokiEndpoint,
     rdbInternalEndpoint,
     redisInternalEndpoint,
     s3BucketName,
@@ -154,14 +155,22 @@ local const = import './const.libsonnet';
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
         cpu: 64,
         memoryReservation: 128,
+        dependsOn: [
+          {
+            containerName: 'log_router',
+            condition: 'HEALTHY',
+          },
+        ]
       } + if enableLogging then {
         logConfiguration: {
-          logDriver: 'awslogs',
+          logDriver: 'awsfirelens',
           options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'initdb',
+            'RemoveKeys': 'container_id,ecs_task_arn',
+            'LineFormat': 'key_value',
+            'Labels': '{job=\"%s\"}' % [family],
+            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
+            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
+            'Name': 'grafana-loki'
           },
         },
       } else {},
@@ -209,12 +218,36 @@ local const = import './const.libsonnet';
         ],
       } + if enableLogging then {
         logConfiguration: {
+          logDriver: 'awsfirelens',
+          options: {
+            'RemoveKeys': 'container_id,ecs_task_arn',
+            'LineFormat': 'key_value',
+            'Labels': '{job=\"%s\"}' % [family],
+            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
+            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
+            'Name': 'grafana-loki'
+          },
+        },
+      } else {},
+      root.containerDefinitionCommon {
+        name: 'log_router',
+        image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+        cpu: 0,
+        memoryReservation: 50,
+        firelensConfiguration: {
+        　'type': 'fluentbit',
+          'options': {
+            'enable-ecs-log-metadata': 'true'
+          }
+        }
+      } + if enableLogging then {
+        logConfiguration: {
           logDriver: 'awslogs',
           options: {
             'awslogs-group': family,
             'awslogs-create-group': 'true',
             'awslogs-region': region,
-            'awslogs-stream-prefix': 'dreamkast',
+            'awslogs-stream-prefix': 'firelens',
           },
         },
       } else {},

@@ -3,6 +3,7 @@
     dk: 'https://staging.dev.cloudnativedays.jp',
     dkApi: 'https://api.stg.cloudnativedays.jp',
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
+    loki: 'https://stg.loki.cloudnativedays.jp',
   },
   imageTags: {
     dreamkast_ecs: '61c072293671ceddc181bd1b129e4a246c8efe3c',

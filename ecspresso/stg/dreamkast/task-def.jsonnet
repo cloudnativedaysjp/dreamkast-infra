@@ -9,6 +9,7 @@ dreamkast.taskDef(
   region=const.region,
   dkApiEndpoint=const.externalEndpoints.dkApi,
   dkWeaverEndpoint=const.externalEndpoints.dkWeaver,
+  lokiEndpoint=const.externalEndpoints.loki,
   rdbInternalEndpoint=const.internalEndpoints.rdb,
   redisInternalEndpoint=const.internalEndpoints.redis,
 
