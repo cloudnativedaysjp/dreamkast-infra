@@ -235,10 +235,12 @@ local const = import './const.libsonnet';
         image: 'grafana/fluent-bit-plugin-loki:2.9.10',
         cpu: 0,
         memoryReservation: 50,
+        environment: [],
+        secrets: [],
         firelensConfiguration: {
-        　'type': 'fluentbit',
-          'options': {
-            'enable-ecs-log-metadata': 'true'
+          type: 'fluentbit',
+          options: {
+            'enable-ecs-log-metadata': 'true',
           }
         }
       } + if enableLogging then {
