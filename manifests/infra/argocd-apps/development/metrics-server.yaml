@@ -14,7 +14,7 @@ spec:
   source:
     path: manifests/release
     repoURL: https://github.com/kubernetes-sigs/metrics-server.git
-    targetRevision: v0.6.4
+    targetRevision: v0.7.2
   syncPolicy:
     automated:
       prune: true
