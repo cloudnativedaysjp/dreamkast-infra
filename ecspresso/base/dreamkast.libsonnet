@@ -268,7 +268,7 @@ local const = import './const.libsonnet';
         secrets: [
           {
             valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
-            name: 'MACKEREL_CONTAINER_PLATFORM',
+            name: 'MACKEREL_APIKEY',
           },
         ],
       } + if enableLogging then {
