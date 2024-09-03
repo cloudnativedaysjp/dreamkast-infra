@@ -159,7 +159,7 @@ local const = import './const.libsonnet';
         dependsOn: [
           {
             containerName: 'log_router',
-            condition: 'HEALTHY',
+            condition: 'START',
           },
         ]
       } + if enableLogging then {
@@ -234,7 +234,7 @@ local const = import './const.libsonnet';
         name: 'log_router',
         image: 'grafana/fluent-bit-plugin-loki:2.9.10',
         cpu: 0,
-        memoryReservation: 50,
+        memoryReservation: 128,
         environment: [],
         secrets: [],
         firelensConfiguration: {
