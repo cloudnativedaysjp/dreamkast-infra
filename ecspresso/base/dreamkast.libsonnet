@@ -177,8 +177,8 @@ local const = import './const.libsonnet';
       } else {},
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: 448,
-        memoryReservation: 896,
+        cpu: 256,
+        memoryReservation: 512,
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -234,7 +234,7 @@ local const = import './const.libsonnet';
         name: 'log_router',
         image: 'grafana/fluent-bit-plugin-loki:2.9.10',
         cpu: 0,
-        memoryReservation: 128,
+        memoryReservation: 192,
         environment: [],
         secrets: [],
         firelensConfiguration: {
@@ -258,7 +258,7 @@ local const = import './const.libsonnet';
         name: 'mackerel-container-agent',
         image: 'mackerel/mackerel-container-agent:latest',
         cpu: 0,
-        memoryReservation: 128,
+        memoryReservation: 192,
         environment: [
           {
             name: 'MACKEREL_CONTAINER_PLATFORM',
