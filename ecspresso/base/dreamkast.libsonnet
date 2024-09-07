@@ -35,6 +35,7 @@ local const = import './const.libsonnet';
     region,
     dkApiEndpoint,
     dkWeaverEndpoint,
+    lokiEndpoint,
     rdbInternalEndpoint,
     redisInternalEndpoint,
     s3BucketName,
@@ -44,6 +45,7 @@ local const = import './const.libsonnet';
     railsAppSecretManagerName,
     rdsSecretManagerName,
     dreamkastSecretManagerName,
+    mackerelSecretManagerName,
     enableLogging=false,
     reviewapp=false,
   ):: {
@@ -154,21 +156,29 @@ local const = import './const.libsonnet';
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
         cpu: 64,
         memoryReservation: 128,
+        dependsOn: [
+          {
+            containerName: 'log_router',
+            condition: 'START',
+          },
+        ]
       } + if enableLogging then {
         logConfiguration: {
-          logDriver: 'awslogs',
+          logDriver: 'awsfirelens',
           options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'initdb',
+            'RemoveKeys': 'container_id,ecs_task_arn',
+            'LineFormat': 'key_value',
+            'Labels': '{job=\"%s\"}' % [family],
+            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
+            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
+            'Name': 'grafana-loki'
           },
         },
       } else {},
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: 448,
-        memoryReservation: 896,
+        cpu: 256,
+        memoryReservation: 512,
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -209,12 +219,66 @@ local const = import './const.libsonnet';
         ],
       } + if enableLogging then {
         logConfiguration: {
+          logDriver: 'awsfirelens',
+          options: {
+            'RemoveKeys': 'container_id,ecs_task_arn',
+            'LineFormat': 'key_value',
+            'Labels': '{job=\"%s\"}' % [family],
+            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
+            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
+            'Name': 'grafana-loki'
+          },
+        },
+      } else {},
+      root.containerDefinitionCommon {
+        name: 'log_router',
+        image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+        cpu: 0,
+        memoryReservation: 192,
+        environment: [],
+        secrets: [],
+        firelensConfiguration: {
+          type: 'fluentbit',
+          options: {
+            'enable-ecs-log-metadata': 'true',
+          }
+        }
+      } + if enableLogging then {
+        logConfiguration: {
           logDriver: 'awslogs',
           options: {
             'awslogs-group': family,
             'awslogs-create-group': 'true',
             'awslogs-region': region,
-            'awslogs-stream-prefix': 'dreamkast',
+            'awslogs-stream-prefix': 'firelens',
+          },
+        },
+      } else {},
+      root.containerDefinitionCommon {
+        name: 'mackerel-container-agent',
+        image: 'mackerel/mackerel-container-agent:latest',
+        cpu: 0,
+        memoryReservation: 192,
+        environment: [
+          {
+            name: 'MACKEREL_CONTAINER_PLATFORM',
+            value: 'ecs',
+          },
+        ],
+        secrets: [
+          {
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+            name: 'MACKEREL_APIKEY',
+          },
+        ],
+      } + if enableLogging then {
+        logConfiguration: {
+          logDriver: 'awslogs',
+          options: {
+            'awslogs-group': family,
+            'awslogs-create-group': 'true',
+            'awslogs-region': region,
+            'awslogs-stream-prefix': 'mackerel-agent',
           },
         },
       } else {},

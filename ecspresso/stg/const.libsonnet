@@ -3,6 +3,7 @@
     dk: 'https://staging.dev.cloudnativedays.jp',
     dkApi: 'https://api.stg.cloudnativedays.jp',
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
+    loki: 'https://stg.loki.cloudnativedays.jp',
   },
   imageTags: {
     dreamkast_ecs: '224f6dee079bd2e482209a2d6104dbdbdcbfffe9',
@@ -32,6 +33,7 @@
     dkUi: 'dreamkast-ui/staging-env-3nBcuB',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
+    mackerel: 'observability/mackerel/api-key-tjOHnb',
   },
   sentry: {
     dsn: 'TODO',
