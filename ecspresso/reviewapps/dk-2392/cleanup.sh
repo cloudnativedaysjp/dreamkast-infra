@@ -2,7 +2,7 @@
 set -e -o pipefail
 cd $(dirname $0)
 
-find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate
+find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 sleep 10 # wait for ECS Services to be deleted
 aws servicediscovery get-service --id srv-vclgg4yuqvzrdovo &>/dev/null && aws servicediscovery delete-service --id srv-vclgg4yuqvzrdovo
 aws servicediscovery get-service --id srv-ld5c2a5xg6qfihs2 &>/dev/null && aws servicediscovery delete-service --id srv-ld5c2a5xg6qfihs2
