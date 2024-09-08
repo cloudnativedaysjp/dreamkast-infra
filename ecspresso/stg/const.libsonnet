@@ -6,7 +6,7 @@
     loki: 'https://stg.loki.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: '224f6dee079bd2e482209a2d6104dbdbdcbfffe9',
+    dreamkast_ecs: '64a9ccca19b85f95623da0f5157ba4619099f7c1',
     dreamkast_ui: 'ceb2a910bc73737384aabf7c5ae012e03d9c8e38',
     dreamkast_weaver: '3d305a4c1df225429bf0213780b4b9ec351f6065',
     redis: '6.0',
@@ -31,9 +31,9 @@
   secretManager: {
     dk: 'dreamkast/staging-env-SID4P1',
     dkUi: 'dreamkast-ui/staging-env-3nBcuB',
+    mackerel: 'observability/mackerel/api-key-tjOHnb',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
-    mackerel: 'observability/mackerel/api-key-tjOHnb',
   },
   sentry: {
     dsn: 'TODO',
