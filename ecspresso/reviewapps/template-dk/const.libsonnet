@@ -13,6 +13,7 @@
   secretManager: {
     dk: 'dreamkast/reviewapp-env-yGJKrj',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
+    mackerel: 'observability/mackerel/api-key-tjOHnb',
   },
   s3: {
     dreamkast: {
@@ -40,6 +41,7 @@
   externalEndpoints: {
     dkApi: 'https://api.dev.cloudnativedays.jp',  // MEMO: this value may be garbage
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
+    loki: 'https://stg.loki.cloudnativedays.jp',
   },
   internalEndpoints: {
     rdb: 'mysql-%s.development.local' % [$.PR_NAME],
