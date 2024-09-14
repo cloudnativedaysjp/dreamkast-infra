@@ -35,7 +35,6 @@ local const = import './const.libsonnet';
     region,
     dkApiEndpoint,
     dkWeaverEndpoint,
-    lokiEndpoint,
     rdbInternalEndpoint,
     redisInternalEndpoint,
     s3BucketName,
@@ -45,11 +44,16 @@ local const = import './const.libsonnet';
     railsAppSecretManagerName,
     rdsSecretManagerName,
     dreamkastSecretManagerName,
-    mackerelSecretManagerName,
     enableLogging=false,
+    enableLokiLogging=false,
+    lokiEndpoint="",
+    enableMackerelSidecar=true,
+    mackerelSecretManagerName="",
     reviewapp=false,
   ):: {
     local root = self,
+    assert (enableLogging && enableLokiLogging) != true,
+
     //
     // Templates
     //
@@ -150,6 +154,9 @@ local const = import './const.libsonnet';
     requiresCompatibilities: ['FARGATE'],
     volumes: [],
     containerDefinitions: [
+      //
+      // container: dreamkast-initdb
+      //
       root.containerDefinitionCommon {
         name: 'initdb',
         entryPoint: ['/bin/bash', '-c'],
@@ -164,6 +171,17 @@ local const = import './const.libsonnet';
         ]
       } + if enableLogging then {
         logConfiguration: {
+          logDriver: 'awslogs',
+          options: {
+            'awslogs-group': family,
+            'awslogs-create-group': 'true',
+            'awslogs-region': region,
+            'awslogs-stream-prefix': 'dreamkast',
+          },
+        },
+      } else if enableLokiLogging then {
+        assert lokiEndpoint != "",
+        logConfiguration: {
           logDriver: 'awsfirelens',
           options: {
             'RemoveKeys': 'container_id,ecs_task_arn',
@@ -175,6 +193,9 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
+      //
+      // container: dreamkast
+      //
       root.containerDefinitionCommon {
         name: 'dreamkast',
         cpu: 256,
@@ -219,6 +240,17 @@ local const = import './const.libsonnet';
         ],
       } + if enableLogging then {
         logConfiguration: {
+          logDriver: 'awslogs',
+          options: {
+            'awslogs-group': family,
+            'awslogs-create-group': 'true',
+            'awslogs-region': region,
+            'awslogs-stream-prefix': 'dreamkast',
+          },
+        },
+      } else if enableLokiLogging then {
+        assert lokiEndpoint != "",
+        logConfiguration: {
           logDriver: 'awsfirelens',
           options: {
             'RemoveKeys': 'container_id,ecs_task_arn',
@@ -230,6 +262,11 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
+    ] + (if enableLokiLogging then [
+      //
+      // container: fluent-bit-plugin-loki
+      //
+      assert lokiEndpoint != "";
       root.containerDefinitionCommon {
         name: 'log_router',
         image: 'grafana/fluent-bit-plugin-loki:2.9.10',
@@ -254,6 +291,11 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
+    ] else []) + (if enableMackerelSidecar then [
+      //
+      // container: mackerel-container-agent
+      //
+      assert mackerelSecretManagerName != "";
       root.containerDefinitionCommon {
         name: 'mackerel-container-agent',
         image: 'mackerel/mackerel-container-agent:latest',
@@ -282,6 +324,6 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
-    ],
+    ] else []),
   },
 }

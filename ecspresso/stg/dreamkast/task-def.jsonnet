@@ -9,7 +9,6 @@ dreamkast.taskDef(
   region=const.region,
   dkApiEndpoint=const.externalEndpoints.dkApi,
   dkWeaverEndpoint=const.externalEndpoints.dkWeaver,
-  lokiEndpoint=const.externalEndpoints.loki,
   rdbInternalEndpoint=const.internalEndpoints.rdb,
   redisInternalEndpoint=const.internalEndpoints.redis,
 
@@ -23,7 +22,12 @@ dreamkast.taskDef(
   railsAppSecretManagerName=const.secretManager.railsApp,
   rdsSecretManagerName=const.secretManager.rds,
   dreamkastSecretManagerName=const.secretManager.dk,
-  mackerelSecretManagerName=const.secretManager.mackerel,
 
-  enableLogging=true,
+  enableLogging=false,
+
+  enableLokiLogging=true,
+  lokiEndpoint=const.externalEndpoints.loki,
+
+  enableMackerelSidecar=true,
+  mackerelSecretManagerName=const.secretManager.mackerel,
 )
