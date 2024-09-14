@@ -1,0 +1,84 @@
+name: ecspresso preview
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'ecspresso/**'
+
+# this workflow should be processed by FIFO
+concurrency: ecspresso
+
+jobs:
+  ecspresso:
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        environment:
+          - stg
+          #- prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Install ecspresso
+        uses: kayac/ecspresso@v2
+
+      - name: ecspresso preview
+        id: preview
+        working-directory: ecspresso
+        run: |
+          failed=0
+          for config in $(find . -name "ecspresso.yml" | grep -E "^./${{ matrix.environment }}"); do
+            ecspresso --config=$config diff >> preview.stdout.txt 2> preview.stderr.txt
+            [ $? -ne 0 ] && failed=1 && break
+          done
+
+          echo "status=$failed"  >> $GITHUB_OUTPUT
+
+          function no-color {
+            sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"
+          }
+
+          echo "stdout<<EOF" >> $GITHUB_OUTPUT
+          cat preview.stdout.txt | no-color >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          echo "stderr<<EOF" >> $GITHUB_OUTPUT
+          cat preview.stderr.txt | no-color >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: report for preview
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ steps.preview.outputs.status == '0' }}
+        with:
+          header: "preview for ${{ matrix.environment }}"
+          message: |
+            <details>
+            <summary>:white_check_mark: Preview</summary>
+
+            ```
+            ${{ steps.preview.outputs.stdout }}
+            ```
+            </details>
+
+      - name: report error for preview
+        uses: marocchino/sticky-pull-request-comment@v2
+        if: ${{ steps.preview.outputs.status == '1' }}
+        with:
+          header: "preview for ${{ matrix.environment }}"
+          message: |
+            <details>
+            <summary>:fire: Preview failed</summary>
+
+            ```
+            ${{ steps.preview.outputs.stderr }}
+            ```
+            </details>
