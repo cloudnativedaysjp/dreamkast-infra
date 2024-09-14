@@ -269,6 +269,7 @@ local const = import './const.libsonnet';
       assert lokiEndpoint != "";
       root.containerDefinitionCommon {
         name: 'log_router',
+        user: '0',
         image: 'grafana/fluent-bit-plugin-loki:2.9.10',
         cpu: 0,
         memoryReservation: 192,
