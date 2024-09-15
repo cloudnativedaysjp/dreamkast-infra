@@ -9,6 +9,7 @@ on:
 jobs:
   format:
     runs-on: "ubuntu-latest"
+    if: ! startsWith(github.head_ref, 'gitops/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
