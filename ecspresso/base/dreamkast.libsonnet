@@ -103,7 +103,12 @@ local const = import './const.libsonnet';
           else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
           else family,
         },
-      ],
+      ] + if reviewapp == false then [
+        {
+          name: 'REVIEW_APP',
+          value: 'true',
+        },
+      ] else [],
       secrets: [
         // from rails-app-secret Secret
         {
