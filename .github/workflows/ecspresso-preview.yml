@@ -10,7 +10,7 @@ on:
 concurrency: ecspresso
 
 jobs:
-  ecspresso:
+  preview:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
@@ -62,7 +62,7 @@ jobs:
           header: "preview for ${{ matrix.environment }}"
           message: |
             <details>
-            <summary>:white_check_mark: Preview</summary>
+            <summary>:white_check_mark: Preview for ${{ matrix.environment }}</summary>
 
             ```
             ${{ steps.preview.outputs.stdout }}
@@ -76,7 +76,7 @@ jobs:
           header: "preview for ${{ matrix.environment }}"
           message: |
             <details>
-            <summary>:fire: Preview failed</summary>
+            <summary>:fire: Preview failed for ${{ matrix.environment }}</summary>
 
             ```
             ${{ steps.preview.outputs.stderr }}

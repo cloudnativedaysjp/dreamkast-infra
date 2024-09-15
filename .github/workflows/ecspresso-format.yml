@@ -1,0 +1,39 @@
+name: ecspresso preview
+
+on:
+  pull_request:
+    branches: ["main"]
+    paths:
+      - 'ecspresso/**'
+
+jobs:
+  format:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Install Go
+        uses: actions/setup-go@v5
+
+      - name: Install jsonnetfmt
+        run: |
+          go install github.com/google/go-jsonnet/cmd/jsonnetfmt@latest
+
+      - name: jsonnet format
+        working-directory: ecspresso
+        run: |
+          find . -name "*.jsonnet" -or -name "*.libsonnet" | xargs -I{} jsonnetfmt -i {}
+
+      - name: push differneces
+        shell: bash -x {0}
+        run: |
+          if ! git diff --exit-code; then
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add -A
+            git commit -m "execute jsonnetfmt"
+            git push origin HEAD:${{ github.head_ref }}
+          fi

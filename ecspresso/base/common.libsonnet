@@ -1,7 +1,7 @@
 local const = import './const.libsonnet';
 
 {
-  # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/service_definition_parameters.html
+  // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/service_definition_parameters.html
   serviceDef(
     region,
     replicas,

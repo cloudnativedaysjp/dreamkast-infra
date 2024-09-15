@@ -27,7 +27,7 @@ local const = import './const.libsonnet';
       ],
     },
 
-  # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
+  // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
     taskRoleName,
@@ -46,9 +46,9 @@ local const = import './const.libsonnet';
     dreamkastSecretManagerName,
     enableLogging=false,
     enableLokiLogging=false,
-    lokiEndpoint="",
+    lokiEndpoint='',
     enableMackerelSidecar=false,
-    mackerelSecretManagerName="",
+    mackerelSecretManagerName='',
     reviewapp=false,
   ):: {
     local root = self,
@@ -180,16 +180,16 @@ local const = import './const.libsonnet';
           },
         },
       } else if enableLokiLogging then {
-        assert lokiEndpoint != "",
+        assert lokiEndpoint != '',
         logConfiguration: {
           logDriver: 'awsfirelens',
           options: {
-            'RemoveKeys': 'container_id,ecs_task_arn',
-            'LineFormat': 'key_value',
-            'Labels': '{job=\"%s\"}' % [family],
-            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
-            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
-            'Name': 'grafana-loki'
+            RemoveKeys: 'container_id,ecs_task_arn',
+            LineFormat: 'key_value',
+            Labels: '{job="%s"}' % [family],
+            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+            Name: 'grafana-loki',
           },
         },
       } else {},
@@ -249,81 +249,82 @@ local const = import './const.libsonnet';
           },
         },
       } else if enableLokiLogging then {
-        assert lokiEndpoint != "",
+        assert lokiEndpoint != '',
         logConfiguration: {
           logDriver: 'awsfirelens',
           options: {
-            'RemoveKeys': 'container_id,ecs_task_arn',
-            'LineFormat': 'key_value',
-            'Labels': '{job=\"%s\"}' % [family],
-            'LabelKeys': 'container_name,ecs_task_definition,source,ecs_cluster',
-            'Url': '%s/loki/api/v1/push' % [lokiEndpoint],
-            'Name': 'grafana-loki'
+            RemoveKeys: 'container_id,ecs_task_arn',
+            LineFormat: 'key_value',
+            Labels: '{job="%s"}' % [family],
+            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+            Name: 'grafana-loki',
           },
         },
       } else {},
     ] + (if enableLokiLogging then [
-      //
-      // container: fluent-bit-plugin-loki
-      //
-      assert lokiEndpoint != "";
-      root.containerDefinitionCommon {
-        name: 'log_router',
-        image: 'grafana/fluent-bit-plugin-loki:2.9.10',
-        cpu: 0,
-        memoryReservation: 192,
-        environment: [],
-        secrets: [],
-        firelensConfiguration: {
-          type: 'fluentbit',
-          options: {
-            'enable-ecs-log-metadata': 'true',
-          }
-        }
-      } + if enableLogging then {
-        logConfiguration: {
-          logDriver: 'awslogs',
-          options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'firelens',
-          },
-        },
-      } else {},
-    ] else []) + (if enableMackerelSidecar then [
-      //
-      // container: mackerel-container-agent
-      //
-      assert mackerelSecretManagerName != "";
-      root.containerDefinitionCommon {
-        name: 'mackerel-container-agent',
-        image: 'mackerel/mackerel-container-agent:latest',
-        cpu: 0,
-        memoryReservation: 192,
-        environment: [
-          {
-            name: 'MACKEREL_CONTAINER_PLATFORM',
-            value: 'ecs',
-          },
-        ],
-        secrets: [
-          {
-            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
-            name: 'MACKEREL_APIKEY',
-          },
-        ],
-      } + if enableLogging then {
-        logConfiguration: {
-          logDriver: 'awslogs',
-          options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'mackerel-agent',
-          },
-        },
-      } else {},
-    ] else []),
+           //
+           // container: fluent-bit-plugin-loki
+           //
+           assert lokiEndpoint != '';
+           root.containerDefinitionCommon {
+             name: 'log_router',
+             user: '0',
+             image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+             cpu: 0,
+             memoryReservation: 192,
+             environment: [],
+             secrets: [],
+             firelensConfiguration: {
+               type: 'fluentbit',
+               options: {
+                 'enable-ecs-log-metadata': 'true',
+               },
+             },
+           } + if enableLogging then {
+             logConfiguration: {
+               logDriver: 'awslogs',
+               options: {
+                 'awslogs-group': family,
+                 'awslogs-create-group': 'true',
+                 'awslogs-region': region,
+                 'awslogs-stream-prefix': 'firelens',
+               },
+             },
+           } else {},
+         ] else []) + (if enableMackerelSidecar then [
+                         //
+                         // container: mackerel-container-agent
+                         //
+                         assert mackerelSecretManagerName != '';
+                         root.containerDefinitionCommon {
+                           name: 'mackerel-container-agent',
+                           image: 'mackerel/mackerel-container-agent:latest',
+                           cpu: 0,
+                           memoryReservation: 192,
+                           environment: [
+                             {
+                               name: 'MACKEREL_CONTAINER_PLATFORM',
+                               value: 'ecs',
+                             },
+                           ],
+                           secrets: [
+                             {
+                               valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+                               name: 'MACKEREL_APIKEY',
+                             },
+                           ],
+                         } + if enableLogging then {
+                           logConfiguration: {
+                             logDriver: 'awslogs',
+                             options: {
+                               'awslogs-group': family,
+                               'awslogs-create-group': 'true',
+                               'awslogs-region': region,
+                               'awslogs-stream-prefix': 'mackerel-agent',
+                             },
+                           },
+                         } else {},
+                       ] else []),
   },
 }
