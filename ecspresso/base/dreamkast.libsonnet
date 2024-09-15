@@ -103,7 +103,7 @@ local const = import './const.libsonnet';
           else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
           else family,
         },
-      ] + if reviewapp == false then [
+      ] + if reviewapp == true then [
         {
           name: 'REVIEW_APP',
           value: 'true',
