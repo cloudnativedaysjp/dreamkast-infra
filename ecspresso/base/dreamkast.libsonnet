@@ -47,7 +47,7 @@ local const = import './const.libsonnet';
     enableLogging=false,
     enableLokiLogging=false,
     lokiEndpoint="",
-    enableMackerelSidecar=true,
+    enableMackerelSidecar=false,
     mackerelSecretManagerName="",
     reviewapp=false,
   ):: {
