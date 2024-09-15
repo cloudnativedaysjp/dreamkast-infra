@@ -25,7 +25,7 @@ local const = import './const.libsonnet';
       ],
     },
 
-  # https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
+  // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
     taskRoleName,
