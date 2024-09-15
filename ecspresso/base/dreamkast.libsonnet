@@ -163,12 +163,12 @@ local const = import './const.libsonnet';
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
         cpu: 64,
         memoryReservation: 128,
-        dependsOn: [
+        dependsOn: if enableLokiLogging then [
           {
             containerName: 'log_router',
             condition: 'START',
           },
-        ]
+        ] else [],
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
