@@ -63,8 +63,8 @@ local const = import './const.libsonnet';
         },
         {
           name: 'DREAMKAST_NAMESPACE',
-          value: if family == 'dreamkast-prd-ui' then 'dreamkast'
-          else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
+          value: if family == 'dreamkast-prd-weaver' then 'dreamkast'
+          else if family == 'dreamkast-stg-weaver' then 'dreamkast-staging'
           else family,
         },
       ] + if reviewapp == true then [

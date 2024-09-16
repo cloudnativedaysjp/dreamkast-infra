@@ -2,7 +2,7 @@ local dreamkast_weaver = import '../../../base/dreamkast-weaver.libsonnet';
 local const = import '../const.libsonnet';
 
 dreamkast_weaver.taskDef(
-  family='dreamkast-dev-%s-ui' % [const.PR_NAME],
+  family='dreamkast-dev-%s-weaver' % [const.PR_NAME],
   taskRoleName='dreamkast-dev-ecs-dreamkast-weaver',
   imageTag=const.imageTags.dreamkast_weaver,
 
