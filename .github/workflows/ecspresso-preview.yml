@@ -16,7 +16,7 @@ jobs:
       matrix:
         environment:
           - stg
-          #- prod
+          - prod
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -33,7 +33,9 @@ jobs:
 
       - name: ecspresso preview
         id: preview
+        continue-on-error: true
         working-directory: ecspresso
+        shell: bash -x {0}
         run: |
           failed=0
           for config in $(find . -name "ecspresso.yml" | grep -E "^./${{ matrix.environment }}"); do
@@ -82,3 +84,7 @@ jobs:
             ${{ steps.preview.outputs.stderr }}
             ```
             </details>
+
+      - name: raise error
+        if: ${{ steps.preview.outputs.status == '1' }}
+        run: exit 1
