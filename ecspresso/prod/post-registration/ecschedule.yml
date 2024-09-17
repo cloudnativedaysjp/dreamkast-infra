@@ -1,6 +1,6 @@
 region: ap-northeast-1
 cluster: dreamkast-prod
-role: dreamkast-prod-ecs-task-execution-role
+role: dreamkast-prod-ecs-scheduled-task-target-role
 rules:
 - name: post-registration-status
   scheduleExpression: "cron(0 1 * * ? *)"
