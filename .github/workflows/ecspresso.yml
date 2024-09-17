@@ -32,3 +32,36 @@ jobs:
           find . -name "ecspresso.yml" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
+
+  ecschedule:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Install ecspresso
+        uses: kayac/ecspresso@v2
+
+      - name: Install ecschedule
+        uses: Songmu/ecschedule@main
+
+      - name: register taskdef by ecspresso
+        working-directory: ecspresso
+        run: |
+          find . -name "ecspresso.taskdef.yml" | grep -v "reviewapps/template" \
+            | xargs -I{} -P10 bash -c \
+            '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} register'
+
+      - name: ecschedule apply
+        working-directory: ecspresso
+        run: |
+          find . -name "ecschedule.yml" | grep -v "reviewapps/template" \
+            | xargs -I{} -P10 bash -c \
+            'ecschedule apply -conf {} -all'
