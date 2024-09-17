@@ -28,11 +28,11 @@
     },
   },
   secretManager: {
-    dk: 'dreamkast/production-env',
+    dk: 'dreamkast/production-env-DIVwmP',
     dkUi: 'dreamkast-ui/production-env-OEnUAF',
     mackerel: error 'TODO',
-    railsApp: 'dreamkast/rails-app-secret',
-    rds: 'dreamkast-prod-rds-secret',
+    railsApp: 'dreamkast/rails-app-secret-g6fKNJ',
+    rds: 'dreamkast-prod-rds-secret-D2cSKm',
   },
   sentry: {
     dsn: 'https://ec7eb42486bea4e950a48ef1c943510c@sentry.cloudnativedays.jp/2',
