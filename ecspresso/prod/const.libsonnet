@@ -16,9 +16,9 @@
     redis: 'redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379',
   },
   publicSubnetIDs: [
-    'subnet-0def25751622d2c79',
-    'subnet-0a772652fcbd0baaa',
-    'subnet-04ba7895220a7ebc7',
+    'subnet-015fd58d325bd5220',
+    'subnet-0e49e678a0ba4ad88',
+    'subnet-0f77572d3d3153413',
   ],
   region: 'ap-northeast-1',
   s3: {
