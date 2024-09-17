@@ -64,7 +64,7 @@ jobs:
             <details>
             <summary>:white_check_mark: Preview for ${{ matrix.environment }}</summary>
 
-            ```
+            ```diff
             ${{ steps.preview.outputs.stdout }}
             ```
             </details>
@@ -78,7 +78,7 @@ jobs:
             <details>
             <summary>:fire: Preview failed for ${{ matrix.environment }}</summary>
 
-            ```
+            ```diff
             ${{ steps.preview.outputs.stderr }}
             ```
             </details>
