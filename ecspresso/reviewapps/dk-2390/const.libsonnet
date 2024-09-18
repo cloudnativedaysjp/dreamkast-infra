@@ -5,7 +5,7 @@
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: '74e6744b6d0575ea12bd124165f7e7c0d3c31ef8',
+    dreamkast_ecs: '6ebdd4d580fbacbdf2e709f63cae837ceb90300b',
     mysql: '8.0.33',
     redis: '6.0',
   },
