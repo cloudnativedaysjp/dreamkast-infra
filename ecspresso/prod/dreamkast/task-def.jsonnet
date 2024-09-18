@@ -23,11 +23,11 @@ dreamkast.taskDef(
   rdsSecretManagerName=const.secretManager.rds,
   dreamkastSecretManagerName=const.secretManager.dk,
 
-  enableLogging=true,
+  enableLogging=false,
 
-  enableLokiLogging=false,
-  //lokiEndpoint=const.externalEndpoints.loki,
+  enableLokiLogging=true,
+  lokiEndpoint=const.externalEndpoints.loki,
 
-  enableMackerelSidecar=false,
-  //mackerelSecretManagerName=const.secretManager.mackerel,
+  enableMackerelSidecar=true,
+  mackerelSecretManagerName=const.secretManager.mackerel,
 )
