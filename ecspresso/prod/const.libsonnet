@@ -3,7 +3,7 @@
     dk: 'https://event.cloudnativedays.jp',
     dkApi: 'https://api.cloudnativedays.jp',
     dkWeaver: 'https://dkw.cloudnativedays.jp',
-    loki: error 'TODO',
+    loki: 'https://loki.cloudnativedays.jp',
   },
   imageTags: {
     dreamkast_ecs: 'v4.10.0',
@@ -30,7 +30,7 @@
   secretManager: {
     dk: 'dreamkast/production-env-DIVwmP',
     dkUi: 'dreamkast-ui/production-env-OEnUAF',
-    mackerel: error 'TODO',
+    mackerel: 'dreamkast/mackerel-api-key-zz4Oyb',
     railsApp: 'dreamkast/rails-app-secret-g6fKNJ',
     rds: 'dreamkast-prod-rds-secret-D2cSKm',
   },
