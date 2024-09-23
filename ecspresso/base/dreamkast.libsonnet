@@ -170,7 +170,7 @@ local util = import './util.libsonnet';
         name: 'initdb',
         entryPoint: ['/bin/bash', '-c'],
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
-        cpu: cpu,
+        cpu: 0,
         memory: memory,
         dependsOn: if enableLokiLogging then [
           {
