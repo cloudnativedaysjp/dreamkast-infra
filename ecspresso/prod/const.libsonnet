@@ -6,9 +6,9 @@
     loki: 'https://loki.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: 'v4.10.0',
+    dreamkast_ecs: 'v4.11.0',
     dreamkast_ui: 'v2.11.4',
-    dreamkast_weaver: 'a9098f1b97369e39d4220b661e96e031131642a9',  // v0.2.3
+    dreamkast_weaver: 'a9098f1b97369e39d4220b661e96e031131642a9',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
