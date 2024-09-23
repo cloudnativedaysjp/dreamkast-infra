@@ -1,5 +1,6 @@
 local common = import './common.libsonnet';
 local const = import './const.libsonnet';
+local util = import './util.libsonnet';
 
 {
   serviceDef(
@@ -30,6 +31,8 @@ local const = import './const.libsonnet';
   // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
+    cpu=256,
+    memory=512,
     taskRoleName,
     imageTag,
     region,
@@ -65,7 +68,8 @@ local const = import './const.libsonnet';
       command: [],
 
       cpu: error 'must be overridden',
-      memoryReservation: error 'must be overridden',
+      memory: error 'must be overridden',
+      //memoryReservation: error 'must be overridden',
       essential: false,
 
       environment: [
@@ -153,8 +157,8 @@ local const = import './const.libsonnet';
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
     family: family,
-    cpu: '512',
-    memory: '1024',
+    cpu: '%s' % [cpu],
+    memory: '%s' % [memory],
     networkMode: 'awsvpc',
     requiresCompatibilities: ['FARGATE'],
     volumes: [],
@@ -166,8 +170,8 @@ local const = import './const.libsonnet';
         name: 'initdb',
         entryPoint: ['/bin/bash', '-c'],
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
-        cpu: 64,
-        memoryReservation: 128,
+        cpu: cpu,
+        memory: memory,
         dependsOn: if enableLokiLogging then [
           {
             containerName: 'log_router',
@@ -203,8 +207,9 @@ local const = import './const.libsonnet';
       //
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: 256,
-        memoryReservation: 512,
+        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableMackerelSidecar),
+        memory: util.mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableMackerelSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -267,69 +272,75 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
-    ] + (if enableLokiLogging then [
-           //
-           // container: fluent-bit-plugin-loki
-           //
-           assert lokiEndpoint != '';
-           root.containerDefinitionCommon {
-             name: 'log_router',
-             user: '0',
-             image: 'grafana/fluent-bit-plugin-loki:2.9.10',
-             cpu: 0,
-             memoryReservation: 192,
-             environment: [],
-             secrets: [],
-             firelensConfiguration: {
-               type: 'fluentbit',
-               options: {
-                 'enable-ecs-log-metadata': 'true',
-               },
-             },
-           } + if enableLogging then {
-             logConfiguration: {
-               logDriver: 'awslogs',
-               options: {
-                 'awslogs-group': family,
-                 'awslogs-create-group': 'true',
-                 'awslogs-region': region,
-                 'awslogs-stream-prefix': 'firelens',
-               },
-             },
-           } else {},
-         ] else []) + (if enableMackerelSidecar then [
-                         //
-                         // container: mackerel-container-agent
-                         //
-                         assert mackerelSecretManagerName != '';
-                         root.containerDefinitionCommon {
-                           name: 'mackerel-container-agent',
-                           image: 'mackerel/mackerel-container-agent:latest',
-                           cpu: 0,
-                           memoryReservation: 192,
-                           environment: [
-                             {
-                               name: 'MACKEREL_CONTAINER_PLATFORM',
-                               value: 'ecs',
-                             },
-                           ],
-                           secrets: [
-                             {
-                               valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
-                               name: 'MACKEREL_APIKEY',
-                             },
-                           ],
-                         } + if enableLogging then {
-                           logConfiguration: {
-                             logDriver: 'awslogs',
-                             options: {
-                               'awslogs-group': family,
-                               'awslogs-create-group': 'true',
-                               'awslogs-region': region,
-                               'awslogs-stream-prefix': 'mackerel-agent',
-                             },
-                           },
-                         } else {},
-                       ] else []),
+    ] + (
+      if enableLokiLogging then [
+        //
+        // container: fluent-bit-plugin-loki
+        //
+        assert lokiEndpoint != '';
+        root.containerDefinitionCommon {
+          name: 'log_router',
+          user: '0',
+          image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+          cpu: const.fluentBitLokiResources.cpu,
+          memory: const.fluentBitLokiResources.memory,
+          memoryReservation: const.fluentBitLokiResources.memoryReservation,
+          environment: [],
+          secrets: [],
+          firelensConfiguration: {
+            type: 'fluentbit',
+            options: {
+              'enable-ecs-log-metadata': 'true',
+            },
+          },
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'firelens',
+            },
+          },
+        } else {},
+      ] else []
+    ) + (
+      if enableMackerelSidecar then [
+        //
+        // container: mackerel-container-agent
+        //
+        assert mackerelSecretManagerName != '';
+        root.containerDefinitionCommon {
+          name: 'mackerel-container-agent',
+          image: 'mackerel/mackerel-container-agent:latest',
+          cpu: const.mackerelSidecarResources.cpu,
+          memory: const.mackerelSidecarResources.memory,
+          memoryReservation: const.mackerelSidecarResources.memoryReservation,
+          environment: [
+            {
+              name: 'MACKEREL_CONTAINER_PLATFORM',
+              value: 'ecs',
+            },
+          ],
+          secrets: [
+            {
+              valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+              name: 'MACKEREL_APIKEY',
+            },
+          ],
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'mackerel-agent',
+            },
+          },
+        } else {},
+      ] else []
+    ),
   },
 }

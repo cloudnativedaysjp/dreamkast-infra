@@ -20,6 +20,8 @@ local const = import './const.libsonnet';
   // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
+    cpu=256,
+    memory=512,
     taskRoleName,
     imageTag,
     region,
@@ -28,8 +30,8 @@ local const = import './const.libsonnet';
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
     family: family,
-    cpu: '256',
-    memory: '512',
+    cpu: '%s' % [cpu],
+    memory: '%s' % [memory],
     networkMode: 'awsvpc',
     requiresCompatibilities: ['FARGATE'],
     volumes: [],
@@ -40,8 +42,9 @@ local const = import './const.libsonnet';
         command: [],
         entryPoint: [],
         essential: true,
-        cpu: 256,
-        memoryReservation: 512,
+        cpu: cpu,
+        memory: memory,
+        memoryReservation: memory,
         portMappings: [
           {
             containerPort: 6379,

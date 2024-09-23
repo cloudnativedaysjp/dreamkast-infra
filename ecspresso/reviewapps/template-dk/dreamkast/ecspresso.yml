@@ -3,4 +3,4 @@ cluster: dreamkast-dev
 service: __PR_NAME__-dreamkast
 service_definition: service-def.jsonnet
 task_definition: task-def.jsonnet
-timeout: 30m
+timeout: 10m
