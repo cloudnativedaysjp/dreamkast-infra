@@ -31,8 +31,8 @@ local util = import './util.libsonnet';
   // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
     family,
-    cpu=256,
-    memory=512,
+    cpu=512,
+    memory=1024,
     taskRoleName,
     imageTag,
     region,
