@@ -2,7 +2,7 @@
   PR_NAME: 'weaver-97',
   externalEndpoints: {},
   imageTags: {
-    dreamkast_weaver: '6d3ca41e18cc2d9d36baed694350db62f18c1dde',
+    dreamkast_weaver: '18ada4c24a340035582ee87600516f6f0e572c54',
     mysql: '8.0.33',
   },
   internalEndpoints: {
