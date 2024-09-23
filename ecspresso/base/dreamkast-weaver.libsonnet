@@ -114,7 +114,7 @@ local const = import './const.libsonnet';
       root.containerDefinitionCommon {
         name: 'dkw-dbmigrate',
         entryPoint: ['/dkw', 'dbmigrate'],
-        cpu: cpu,
+        cpu: 0,
         memory: memory,
       } + if enableLogging then {
         logConfiguration: {
