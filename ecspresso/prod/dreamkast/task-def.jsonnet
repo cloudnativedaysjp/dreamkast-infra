@@ -3,8 +3,8 @@ local const = import '../const.libsonnet';
 
 dreamkast.taskDef(
   family='dreamkast-prod-dk',
-  cpu=512,
-  memory=1024,
+  cpu=1024,
+  memory=2048,
   taskRoleName='dreamkast-prod-ecs-dreamkast',
   imageTag=const.imageTags.dreamkast_ecs,
 
