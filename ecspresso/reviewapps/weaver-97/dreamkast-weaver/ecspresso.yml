@@ -1,6 +1,0 @@
-region: us-west-2
-cluster: dreamkast-dev
-service: weaver-97-dreamkast-weaver
-service_definition: service-def.jsonnet
-task_definition: task-def.jsonnet
-timeout: 30m
