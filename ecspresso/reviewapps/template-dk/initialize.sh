@@ -86,6 +86,7 @@ aws servicediscovery get-service --id ${SERVICE_ID_MYSQL} &>/dev/null && aws ser
 aws servicediscovery get-service --id ${SERVICE_ID_REDIS} &>/dev/null && aws servicediscovery delete-service --id ${SERVICE_ID_REDIS}
 aws elbv2 describe-rules --rule-arn ${LISTENER_RULE_ARN} &>/dev/null && aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}
 aws elbv2 describe-target-groups --target-group-arn ${TARGET_GROUP_ARN} &>/dev/null && aws elbv2 delete-target-group --target-group-arn ${TARGET_GROUP_ARN}
+:
 _EOF_
 
 else
