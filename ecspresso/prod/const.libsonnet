@@ -8,7 +8,7 @@
   imageTags: {
     dreamkast_ecs: 'v4.11.0',
     dreamkast_ui: 'v2.11.4',
-    dreamkast_weaver: 'a9098f1b97369e39d4220b661e96e031131642a9',
+    dreamkast_weaver: 'v0.3.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
