@@ -1,6 +1,0 @@
-region: us-west-2
-cluster: dreamkast-dev
-service: dk-2416-dreamkast-fifo-worker
-service_definition: service-def.jsonnet
-task_definition: task-def.jsonnet
-timeout: 10m
