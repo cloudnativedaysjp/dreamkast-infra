@@ -9,6 +9,7 @@
     dreamkast_ecs: 'v4.11.1',
     dreamkast_ui: 'v2.11.4',
     dreamkast_weaver: 'v0.3.0',
+    seaman: '1.0.4',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
@@ -33,6 +34,7 @@
     mackerel: 'dreamkast/mackerel-api-key-zz4Oyb',
     railsApp: 'dreamkast/rails-app-secret-g6fKNJ',
     rds: 'dreamkast-prod-rds-secret-D2cSKm',
+    releasebot: 'dreamkast-releasebot-zHsXND',
   },
   sentry: {
     dsn: 'https://ec7eb42486bea4e950a48ef1c943510c@sentry.cloudnativedays.jp/2',

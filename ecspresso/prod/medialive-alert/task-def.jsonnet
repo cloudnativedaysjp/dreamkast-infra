@@ -1,7 +1,7 @@
 local const = import '../const.libsonnet';
-local family = 'dreamkast-prod-post-registration';
+local family = 'dreamkast-prod-medialive-alert';
 local executionRoleName = 'dreamkast-prod-ecs-task-execution-role';
-local roleName = 'dreamkast-prod-ecs-post-registration';
+local roleName = 'dreamkast-prod-ecs-applications-without-using-aws-services';
 
 {
   containerDefinitions: [
