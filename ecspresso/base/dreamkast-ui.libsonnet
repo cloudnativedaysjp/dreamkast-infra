@@ -58,6 +58,7 @@ local const = import './const.libsonnet';
         image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-ui:%s' % [const.accountID, region, imageTag],
         command: [],
         entryPoint: [],
+        restartPolicy: { enabled: true },
         environment: [
           {
             name: 'NEXT_PUBLIC_API_BASE_URL',

@@ -71,6 +71,7 @@ local util = import './util.libsonnet';
       memory: error 'must be overridden',
       //memoryReservation: error 'must be overridden',
       essential: false,
+      restartPolicy: { enabled: true },
 
       environment: [
         {

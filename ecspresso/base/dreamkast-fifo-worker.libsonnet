@@ -53,6 +53,7 @@ local const = import './const.libsonnet';
         memory: memory,
         memoryReservation: memory,
         essential: true,
+        restartPolicy: { enabled: true },
         environment: [
           {
             name: 'RAILS_ENV',

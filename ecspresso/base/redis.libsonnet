@@ -42,6 +42,7 @@ local const = import './const.libsonnet';
         command: [],
         entryPoint: [],
         essential: true,
+        restartPolicy: { enabled: true },
         cpu: cpu,
         memory: memory,
         memoryReservation: memory,
