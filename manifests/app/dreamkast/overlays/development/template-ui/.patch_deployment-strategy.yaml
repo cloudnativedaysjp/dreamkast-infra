@@ -1,9 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: dummy
-spec:
-  # ReviewApp 対象の Pod が必ず更新されるよう strategy に Recreate を指定
-  strategy:
-    rollingUpdate:
-    type: Recreate
