@@ -1,0 +1,26 @@
+debug: false
+slack:
+  botToken: ${SLACK_BOT_TOKEN}
+  appToken: ${SLACK_APP_TOKEN}
+github:
+  username: dreamkast-cloudnativedays
+  accessToken: ${GITHUB_TOKEN}
+githubWebhook:
+  bindAddr: :8080
+  secret: ${GITHUB_WEBHOOK_SECRET}
+release:
+  targets:
+  - url: https://github.com/cloudnativedaysjp/dreamkast
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/dreamkast-ui
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/website
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/seaman
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/dreamkast-functions
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/emtec-ecu
+    baseBranch: main
+  - url: https://github.com/cloudnativedaysjp/dreamkast-weaver
+    baseBranch: main
