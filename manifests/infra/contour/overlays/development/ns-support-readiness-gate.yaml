@@ -1,7 +1,0 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: projectcontour
-  labels:
-    elbv2.k8s.aws/pod-readiness-gate-inject: enabled

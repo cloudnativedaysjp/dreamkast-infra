@@ -14,41 +14,11 @@
       "matchManagers": ["github-actions"],
       "groupName": "all dependencies on GitHub Actions",
     },
-    {
-      "matchManagers": ["terraform"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "all minor, or patch dependencies on Terraform",
-    },
   ],
   "enabledManagers": [
     "dockerfile",
     "docker-compose",
     "github-actions",
-    "terraform",
-    "argocd",
-    "regex",
     "html",
   ],
-  "argocd": {
-    "fileMatch": [
-      "^manifests/application-.*\.yaml$",
-      "^.*argocd-apps/.*\.yaml$", // argocd-app ディレクトリ以下の .yaml ファイルすべて
-    ]
-  },
-  "regexManagers": [
-    { // type=remote-directory
-      "fileMatch": ["(^|/)kustomization\.ya?ml$"],
-      "matchStrings": [
-          "# renovate: type=remote-directory *\\s *- https:\\/\\/github\\.com\\/(?<depName>[^/]+?\\/[^/]*?)\\/.*\\?ref=(?<currentValue>.*)"
-        ],
-      "datasourceTemplate": "github-tags"
-    },
-    { // type=remote-file
-      "fileMatch": ["(^|/)kustomization\.ya?ml$"],
-      "matchStrings": [
-          "# renovate: type=remote-file *\\s *- https:\\/\\/raw\\.githubusercontent\\.com\\/(?<depName>[^/]+\\/[^/]+)\\/(?<currentValue>[^/]+)\\/.+"
-        ],
-      "datasourceTemplate": "github-tags"
-    },
-  ]
 }

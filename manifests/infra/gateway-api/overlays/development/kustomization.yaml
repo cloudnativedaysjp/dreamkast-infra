@@ -1,5 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-# renovate: type=remote-directory
-- https://github.com/kubernetes-sigs/gateway-api.git/config/crd/experimental?ref=v0.7.0
