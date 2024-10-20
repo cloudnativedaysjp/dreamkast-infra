@@ -94,6 +94,7 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
       },
 
       cpu: 256,
+      memory: 512,
       memoryReservation: 512,
     },
   ],

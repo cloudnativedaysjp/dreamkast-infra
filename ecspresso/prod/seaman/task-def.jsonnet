@@ -25,6 +25,8 @@ local roleName = 'dreamkast-prod-ecs-seaman';
           sourceVolume: 'config',
         },
       ],
+      cpu: 0,
+      memory: 512,
     },
     {
       local container = self,
@@ -72,6 +74,7 @@ local roleName = 'dreamkast-prod-ecs-seaman';
 
       cpu: 256,
       memory: 512,
+      memoryReservation: 512,
 
       dependsOn: [
         {
