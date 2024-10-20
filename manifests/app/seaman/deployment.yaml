@@ -5,7 +5,7 @@ metadata:
     app: seaman
   name: seaman
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: seaman
