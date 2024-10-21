@@ -49,6 +49,7 @@ local const = import './const.libsonnet';
       image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-weaver:%s' % [const.accountID, region, imageTag],
       entryPoint: [],
       command: [],
+      restartPolicy: { enabled: true },
 
       cpu: error 'must be overridden',
       memory: error 'must be overridden',
