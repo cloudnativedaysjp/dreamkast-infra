@@ -4,7 +4,7 @@ role: dreamkast-dev-ecs-scheduled-task-target-role
 rules:
 - name: harvestjob
   scheduleExpression: "cron(*/3 * * * ? *)"
-  taskDefinition: dreamkast-stg-post-registration
+  taskDefinition: dreamkast-stg-harvestjob
   launch_type: FARGATE
   platform_version: LATEST
   network_configuration:
