@@ -1,7 +1,7 @@
 local const = import '../const.libsonnet';
 local family = 'dreamkast-prod-medialive-alert';
 local executionRoleName = 'dreamkast-prod-ecs-task-execution-role';
-local roleName = 'dreamkast-prod-ecs-applications-without-using-aws-services';
+local roleName = 'dreamkast-prod-ecs-medialive-alert';
 
 {
   containerDefinitions: [
@@ -9,7 +9,7 @@ local roleName = 'dreamkast-prod-ecs-applications-without-using-aws-services';
       local container = self,
 
       name: 'dreamkast',
-      image: '607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/dreamkast-ecs:%s' % [const.imageTags.dreamkast_ecs],
+      image: '607167088920.dkr.ecr.%s.amazonaws.com/dreamkast-ecs:%s' % [const.region, const.imageTags.dreamkast_ecs],
       essential: true,
       entryPoint: [
         '/bin/bash',
@@ -55,31 +55,31 @@ local roleName = 'dreamkast-prod-ecs-applications-without-using-aws-services';
       secrets: [
         {
           name: 'RAILS_MASTER_KEY',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s' % [const.secretManager.railsApp],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s' % [const.region, const.secretManager.railsApp],
         },
         {
           name: 'AUTH0_CLIENT_ID',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:AUTH0_CLIENT_ID::' % [const.secretManager.dk],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:AUTH0_CLIENT_ID::' % [const.region, const.secretManager.dk],
         },
         {
           name: 'AUTH0_CLIENT_SECRET',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:AUTH0_CLIENT_SECRET::' % [const.secretManager.dk],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:AUTH0_CLIENT_SECRET::' % [const.region, const.secretManager.dk],
         },
         {
           name: 'AUTH0_DOMAIN',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:AUTH0_DOMAIN::' % [const.secretManager.dk],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:AUTH0_DOMAIN::' % [const.region, const.secretManager.dk],
         },
         {
           name: 'SLACK_TOKEN',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:SLACK_TOKEN::' % [const.secretManager.dk],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_TOKEN::' % [const.region, const.secretManager.dk],
         },
         {
           name: 'MYSQL_USER',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:username::' % [const.secretManager.rds],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:username::' % [const.region, const.secretManager.rds],
         },
         {
           name: 'MYSQL_PASSWORD',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:password::' % [const.secretManager.rds],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:password::' % [const.region, const.secretManager.rds],
         },
       ],
 
@@ -88,7 +88,7 @@ local roleName = 'dreamkast-prod-ecs-applications-without-using-aws-services';
         options: {
           'awslogs-create-group': 'true',
           'awslogs-group': family,
-          'awslogs-region': 'ap-northeast-1',
+          'awslogs-region': const.region,
           'awslogs-stream-prefix': container.name,
         },
       },
