@@ -1,0 +1,19 @@
+region: ap-northeast-1
+cluster: dreamkast-stg
+role: dreamkast-dev-ecs-scheduled-task-target-role
+rules:
+- name: harvestjob
+  scheduleExpression: "cron(*/3 * * * ? *)"
+  taskDefinition: dreamkast-stg-post-registration
+  launch_type: FARGATE
+  platform_version: LATEST
+  network_configuration:
+    aws_vpc_configuration:
+      subnets:
+      - 'subnet-00709135a42bf907e'
+      - 'subnet-0d07831c8fc073511'
+      - 'subnet-033491d41490494b6'
+      security_groups:
+      - sg-05592a72e569c245b # dreamkast-dev-ecs-harvestjob
+      assign_public_ip: ENABLED
+
