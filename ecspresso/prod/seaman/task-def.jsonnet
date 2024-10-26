@@ -46,19 +46,19 @@ local roleName = 'dreamkast-prod-ecs-seaman';
       secrets: [
         {
           name: 'GITHUB_TOKEN',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:GITHUB_TOKEN::' % [const.secretManager.releasebot],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:GITHUB_TOKEN::' % [const.region, const.secretManager.releasebot],
         },
         {
           name: 'GITHUB_WEBHOOK_SECRET',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:GITHUB_WEBHOOK_SECRET::' % [const.secretManager.releasebot],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:GITHUB_WEBHOOK_SECRET::' % [const.region, const.secretManager.releasebot],
         },
         {
           name: 'SLACK_BOT_TOKEN',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:SLACK_BOT_TOKEN::' % [const.secretManager.releasebot],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_BOT_TOKEN::' % [const.region, const.secretManager.releasebot],
         },
         {
           name: 'SLACK_APP_TOKEN',
-          valueFrom: 'arn:aws:secretsmanager:ap-northeast-1:607167088920:secret:%s:SLACK_APP_TOKEN::' % [const.secretManager.releasebot],
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_APP_TOKEN::' % [const.region, const.secretManager.releasebot],
         },
       ],
 
@@ -67,7 +67,7 @@ local roleName = 'dreamkast-prod-ecs-seaman';
         options: {
           'awslogs-create-group': 'true',
           'awslogs-group': family,
-          'awslogs-region': 'ap-northeast-1',
+          'awslogs-region': const.region,
           'awslogs-stream-prefix': container.name,
         },
       },
