@@ -1,5 +1,5 @@
 local const = import '../const.libsonnet';
-local family = 'dreamkast-stg-post-registration';
+local family = 'dreamkast-stg-harvestjob';
 local executionRoleName = 'dreamkast-dev-ecs-task-execution-role';
 local roleName = 'dreamkast-dev-ecs-harvestjob';
 
@@ -16,7 +16,7 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
         '-c',
       ],
       command: [
-        'bundle exec rake util:post_number_of_registrants_to_slack',
+        'bundle exec rake util:polling_harvest_job_and_update_video',
       ],
       environment: [
         {
@@ -48,11 +48,23 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
           value: const.region,
         },
         {
+          name: 'SQS_MAIL_QUEUE_URL',
+          value: 'https://sqs.%s.amazonaws.com/607167088920/%s.fifo' % [const.region, const.sqs.fifo],
+        },
+        {
           name: 'DREAMKAST_NAMESPACE',
           value: 'dreamkast-staging',
         },
       ],
       secrets: [
+        {
+          name: 'SLACK_WEBHOOK_URL',
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_CHANNEL_FOR_HARVEST_JOB_NOTIFICATION::' % [const.region, const.secretManager.dk],
+        },
+        {
+          name: 'SLACK_CHANNEL',
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_CHANNEL_FOR_HARVEST_JOB_NOTIFICATION::' % [const.region, const.secretManager.dk],
+        },
         {
           name: 'RAILS_MASTER_KEY',
           valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s' % [const.region, const.secretManager.railsApp],
