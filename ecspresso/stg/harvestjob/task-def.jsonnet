@@ -49,7 +49,7 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
         },
         {
           name: 'SQS_MAIL_QUEUE_URL',
-          value: 'https://sqs.%s.amazonaws.com/607167088920/%s.fifo' & [const.region, const.sqs.fifo],
+          value: 'https://sqs.%s.amazonaws.com/607167088920/%s.fifo' % [const.region, const.sqs.fifo],
         },
         {
           name: 'DREAMKAST_NAMESPACE',
