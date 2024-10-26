@@ -41,7 +41,7 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
         },
         {
           name: 'S3_BUCKET',
-          value: "dreamkast-stg-bucket",
+          value: 'dreamkast-stg-bucket',
         },
         {
           name: 'S3_REGION',
