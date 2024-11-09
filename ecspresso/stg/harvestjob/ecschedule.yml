@@ -10,9 +10,9 @@ rules:
   network_configuration:
     aws_vpc_configuration:
       subnets:
-      - 'subnet-00709135a42bf907e'
-      - 'subnet-0d07831c8fc073511'
-      - 'subnet-033491d41490494b6'
+      - 'subnet-00709135a42bf907e' # dreamkast-dev-vpc-public-us-west-2a
+      - 'subnet-0d07831c8fc073511' # dreamkast-dev-vpc-public-us-west-2b
+      - 'subnet-033491d41490494b6' # dreamkast-dev-vpc-public-us-west-2c
       security_groups:
       - sg-05592a72e569c245b # dreamkast-dev-ecs-harvestjob
       assign_public_ip: ENABLED

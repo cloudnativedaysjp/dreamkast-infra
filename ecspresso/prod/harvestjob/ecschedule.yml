@@ -4,15 +4,15 @@ role: dreamkast-prod-ecs-scheduled-task-target-role
 rules:
 - name: harvestjob
   scheduleExpression: "cron(*/3 * * * ? *)"
-  taskDefinition: dreamkast-prod-post-registration
+  taskDefinition: dreamkast-prod-harvestjob
   launch_type: FARGATE
   platform_version: LATEST
   network_configuration:
     aws_vpc_configuration:
       subnets:
-      - 'subnet-0def25751622d2c79'
-      - 'subnet-0a772652fcbd0baaa'
-      - 'subnet-04ba7895220a7ebc7'
+        - 'subnet-015fd58d325bd5220' # dreamkast-prod-vpc-public-ap-northeast-1a
+        - 'subnet-0e49e678a0ba4ad88' # dreamkast-prod-vpc-public-ap-northeast-1c
+        - 'subnet-0f77572d3d3153413' # dreamkast-prod-vpc-public-ap-northeast-1d
       security_groups:
       - sg-0f10333f7af41d190 # dreamkast-prod-ecs-harvestjob
       assign_public_ip: ENABLED
