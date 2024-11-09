@@ -16,7 +16,7 @@ local roleName = 'dreamkast-prod-ecs-medialive-alert';
         '-c',
       ],
       command: [
-        'bundle exec rake util:post_number_of_registrants_to_slack',
+        'bundle exec rake util:check_media_live_channel',
       ],
       environment: [
         {
