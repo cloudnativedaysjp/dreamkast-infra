@@ -89,14 +89,6 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
           name: 'SLACK_TOKEN',
           valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_TOKEN::' % [const.region, const.secretManager.dk],
         },
-        {
-          name: 'MYSQL_USER',
-          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:username::' % [const.region, const.secretManager.rds],
-        },
-        {
-          name: 'MYSQL_PASSWORD',
-          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:password::' % [const.region, const.secretManager.rds],
-        },
       ],
 
       logConfiguration: {
