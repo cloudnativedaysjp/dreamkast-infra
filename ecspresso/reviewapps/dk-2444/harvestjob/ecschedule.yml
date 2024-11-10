@@ -2,7 +2,7 @@ region: us-west-2
 cluster: dreamkast-dev
 role: dreamkast-dev-ecs-scheduled-task-target-role
 rules:
-- name: dk-2444harvestjob
+- name: dk-2444-harvestjob
   scheduleExpression: "cron(*/3 * * * ? *)"
   taskDefinition: dreamkast-dev-dk-2444-harvestjob
   launch_type: FARGATE
