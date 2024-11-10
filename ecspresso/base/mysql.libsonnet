@@ -15,7 +15,9 @@ local const = import './const.libsonnet';
       subnetIDs,
       securityGroupID,
       serviceDiscoveryID,
-    ),
+    ) + {
+      healthCheckGracePeriodSeconds: 0,
+    },
 
   // https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html
   taskDef(
