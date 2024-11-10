@@ -17,6 +17,7 @@ jobs:
         environment:
           - stg
           - prod
+          - reviewapps
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -38,7 +39,7 @@ jobs:
         shell: bash -x {0}
         run: |
           failed=0
-          for config in $(find . -name "ecspresso.yml" | grep -E "^./${{ matrix.environment }}"); do
+          for config in $(find . -name "ecspresso.yml" | grep -E "^./${{ matrix.environment }}" | grep -v "reviewapps/template" ); do
             ecspresso --config=$config diff >> preview.stdout.txt 2> preview.stderr.txt
             [ $? -ne 0 ] && failed=1 && break
           done
