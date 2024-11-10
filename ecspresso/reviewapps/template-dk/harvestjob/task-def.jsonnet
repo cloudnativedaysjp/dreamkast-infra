@@ -85,10 +85,6 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
           name: 'AUTH0_DOMAIN',
           valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:AUTH0_DOMAIN::' % [const.region, const.secretManager.dk],
         },
-        {
-          name: 'SLACK_TOKEN',
-          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_TOKEN::' % [const.region, const.secretManager.dk],
-        },
       ],
 
       logConfiguration: {
