@@ -105,6 +105,7 @@ local util = import './util.libsonnet';
           name: 'DREAMKAST_NAMESPACE',
           value: if family == 'dreamkast-prd-dk' then 'dreamkast'
           else if family == 'dreamkast-stg-dk' then 'dreamkast-staging'
+          else if reviewapp == true then std.strReplace(family, '-dk', '')
           else family,
         },
       ] + if reviewapp == true then [
