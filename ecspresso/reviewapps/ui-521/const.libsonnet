@@ -5,7 +5,7 @@
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ui: '52d27f1934cb90d849a518d30744c406f8552fb4',
+    dreamkast_ui: 'b835a925532a6526bb6a4d6a707067c176a7634e',
   },
   internalEndpoints: {},
   publicSubnetIDs: [
