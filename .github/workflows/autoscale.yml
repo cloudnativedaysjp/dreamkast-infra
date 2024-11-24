@@ -65,7 +65,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Trigger ecspresso.yml workflow
+      - name: Trigger ecspresso workflow
         if: steps.commit_changes.outputs.changes == 'true'
         uses: actions/github-script@v7
         with:
