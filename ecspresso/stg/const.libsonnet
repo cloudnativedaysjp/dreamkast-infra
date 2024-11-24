@@ -1,9 +1,6 @@
 {
-  region: 'us-west-2',
   cluster: 'dreamkast-stg',
   executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
-  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
-
   externalEndpoints: {
     dk: 'https://staging.dev.cloudnativedays.jp',
     dkApi: 'https://api.stg.cloudnativedays.jp',
@@ -12,7 +9,7 @@
   },
   imageTags: {
     dreamkast_ecs: 'cf4368a88430d4c89678569a5fd16b785e2b18ad',
-    dreamkast_ui: 'be5c65b620f5216f5af50b8604a9555cd93be3bb',
+    dreamkast_ui: '677819295adb7bd0c64e70957269570654d0b43a',
     dreamkast_weaver: '3345e11eefc08d2d3fb6ba822950e4bf68e2fa69',
     redis: '6.0',
   },
@@ -26,6 +23,7 @@
     'subnet-0d07831c8fc073511',
     'subnet-033491d41490494b6',
   ],
+  region: 'us-west-2',
   s3: {
     dreamkast: {
       name: 'dreamkast-stg-bucket',
@@ -49,4 +47,5 @@
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',
   },
+  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
 }
