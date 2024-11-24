@@ -5,6 +5,9 @@ on:
     - cron: '0 15 * * *'  # Runs every day at 3 PM UTC, which is midnight UTC+9
   workflow_dispatch:
 
+env:
+  ENVIRONMENT: prod
+
 jobs:
   auto_warm_up:
     runs-on: ubuntu-latest
@@ -26,9 +29,7 @@ jobs:
             )
             return isConferenceDay
 
-      - name: Update replicas in service-def.jsonnet
-        env:
-          ENVIRONMENT: prod
+      - name: Scale replicas
         run: |
           is_conference_day="${{ steps.is_conference_day.outputs.result }}"
           replicas_files=(
@@ -44,6 +45,22 @@ jobs:
               replicas=1
             fi
             echo "$replicas" > "$replicas_file"
+          done
+
+      - name: Switch disabled flags
+        run: |
+          is_conference_day="${{ steps.is_conference_day.outputs.result }}"
+          disabled_files=(
+            "ecspresso/${{ env.ENVIRONMENT }}/harvestjob/vars/disabled.json"
+          )
+
+          for disabled_file in "${disabled_files[@]}"; do
+            if [ "$is_conference_day" == "true" ]; then
+              res="false"
+            else
+              res="true"
+            fi
+            echo "$res" > "$disabled_file"
           done
 
       - name: Commit and push changes
