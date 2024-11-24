@@ -23,6 +23,7 @@ local const = import './const.libsonnet';
     cpu=256,
     memory=512,
     taskRoleName,
+    executionRoleName,
     imageTag,
     region,
     rdbInternalEndpoint,
@@ -37,7 +38,7 @@ local const = import './const.libsonnet';
     enableLogging=false,
     reviewapp=false,
   ):: {
-    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
+    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
     family: family,
     cpu: '%s' % [cpu],

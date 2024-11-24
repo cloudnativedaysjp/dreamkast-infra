@@ -4,6 +4,7 @@ local const = import '../const.libsonnet';
 dreamkast_ui.taskDef(
   family='dreamkast-prod-ui',
   taskRoleName='dreamkast-prod-ecs-dreamkast-ui',
+  executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_ui,
 
   region=const.region,

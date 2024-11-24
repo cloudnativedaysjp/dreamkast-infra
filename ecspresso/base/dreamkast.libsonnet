@@ -34,6 +34,7 @@ local util = import './util.libsonnet';
     cpu=512,
     memory=1024,
     taskRoleName,
+    executionRoleName,
     imageTag,
     region,
     dkApiEndpoint,
@@ -158,7 +159,7 @@ local util = import './util.libsonnet';
     //
     // Definitions
     //
-    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
+    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
     family: family,
     cpu: '%s' % [cpu],

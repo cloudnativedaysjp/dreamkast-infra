@@ -31,6 +31,7 @@ local const = import './const.libsonnet';
     cpu=256,
     memory=512,
     taskRoleName,
+    executionRoleName,
     imageTag,
     region,
     dkInternalEndpoint,
@@ -102,7 +103,7 @@ local const = import './const.libsonnet';
     //
     // Definitions
     //
-    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, const.executionRoleName],
+    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
     family: family,
     cpu: '%s' % [cpu],

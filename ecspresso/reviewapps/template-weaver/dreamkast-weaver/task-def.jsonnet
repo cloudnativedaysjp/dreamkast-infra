@@ -4,6 +4,7 @@ local const = import '../const.libsonnet';
 dreamkast_weaver.taskDef(
   family='dreamkast-dev-%s-weaver' % [const.PR_NAME],
   taskRoleName='dreamkast-dev-ecs-dreamkast-weaver',
+  executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_weaver,
 
   region=const.region,

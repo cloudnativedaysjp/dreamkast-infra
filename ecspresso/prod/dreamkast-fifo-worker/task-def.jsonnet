@@ -4,6 +4,7 @@ local const = import '../const.libsonnet';
 dreamkast_fifo_worker.taskDef(
   family='dreamkast-prod-fifo-worker',
   taskRoleName='dreamkast-prod-ecs-dreamkast-fifo-worker',
+  executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_ecs,
 
   region=const.region,

@@ -1,6 +1,5 @@
 local const = import '../const.libsonnet';
 local family = 'dreamkast-stg-harvestjob';
-local executionRoleName = 'dreamkast-dev-ecs-task-execution-role';
 local roleName = 'dreamkast-dev-ecs-harvestjob';
 
 {
@@ -113,7 +112,7 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
   family: family,
   cpu: '256',
   memory: '512',
-  executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [executionRoleName],
+  executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [task.executionRoleName],
   taskRoleArn: 'arn:aws:iam::607167088920:role/%s' % [roleName],
   networkMode: 'awsvpc',
   requiresCompatibilities: [

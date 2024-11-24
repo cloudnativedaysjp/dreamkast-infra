@@ -29,7 +29,7 @@ jobs:
       - name: run ecspresso
         working-directory: ecspresso
         run: |
-          find . -name "ecspresso.yml" | grep -v "reviewapps/template" \
+          find . -name "ecspresso.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
 
@@ -55,13 +55,13 @@ jobs:
       - name: register taskdef by ecspresso
         working-directory: ecspresso
         run: |
-          find . -name "ecspresso.taskdef.yml" | grep -v "reviewapps/template" \
+          find . -name "ecspresso.taskdef.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} register'
 
       - name: ecschedule apply
         working-directory: ecspresso
         run: |
-          find . -name "ecschedule.yml" | grep -v "reviewapps/template" \
+          find . -name "ecschedule.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             'ecschedule apply -conf {} -all'

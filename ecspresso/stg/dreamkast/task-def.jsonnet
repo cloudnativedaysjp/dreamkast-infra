@@ -4,6 +4,7 @@ local const = import '../const.libsonnet';
 dreamkast.taskDef(
   family='dreamkast-stg-dk',
   taskRoleName='dreamkast-dev-ecs-dreamkast',
+  executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_ecs,
 
   region=const.region,
