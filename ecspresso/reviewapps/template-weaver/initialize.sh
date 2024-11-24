@@ -45,9 +45,6 @@ SERVICE_ID_MYSQL=$(aws servicediscovery create-service \
   --health-check-custom-config FailureThreshold=1 \
   | jq -r ".Service.Id")
 
-# replace variables in each ecspresso.yml
-find . -name ecspresso.yml | xargs -I{} sed -i -e 's/__PR_NAME__/'${PR_NAME}'/g' {}
-
 # replace variables in const.libsonnet
 cat << _EOL_ | jsonnet - > ./const.libsonnet.tmp
 local const = import './const.libsonnet';
@@ -73,7 +70,7 @@ cat << _EOF_ > ./cleanup.sh
 set -e -o pipefail
 cd \$(dirname \$0)
 
-find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
+find . -name "ecspresso.jsonnet" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 sleep 10 # wait for ECS Services to be deleted
 aws servicediscovery get-service --id ${SERVICE_ID_MYSQL} &>/dev/null && aws servicediscovery delete-service --id ${SERVICE_ID_MYSQL}
 aws elbv2 describe-rules --rule-arn ${LISTENER_RULE_ARN} &>/dev/null && aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}

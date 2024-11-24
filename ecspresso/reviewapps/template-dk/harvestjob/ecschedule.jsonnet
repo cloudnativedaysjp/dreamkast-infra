@@ -5,9 +5,9 @@ local const = import '../const.libsonnet';
   role: const.taskTargetRoleName,
   rules: [
     {
-      name: 'dk-2435-harvestjob',
+      name: '%s-harvestjob' % [const.PR_NAME],
       scheduleExpression: 'cron(*/3 * * * ? *)',
-      taskDefinition: 'dreamkast-dev-dk-2435-harvestjob',
+      taskDefinition: 'dreamkast-dev-%s-harvestjob' % [const.PR_NAME],
       launch_type: 'FARGATE',
       platform_version: 'LATEST',
       network_configuration: {

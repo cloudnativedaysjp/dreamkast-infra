@@ -51,11 +51,6 @@ SERVICE_ID_REDIS=$(aws servicediscovery create-service \
   --health-check-custom-config FailureThreshold=1 \
   | jq -r ".Service.Id")
 
-# replace variables in each ecspresso.yml
-find . -name ecspresso.yml | xargs -I{} sed -i -e 's/__PR_NAME__/'${PR_NAME}'/g' {}
-# replace variables in each ecschedule.yml
-find . -name ecschedule.yml | xargs -I{} sed -i -e 's/__PR_NAME__/'${PR_NAME}'/g' {}
-
 # replace variables in const.libsonnet
 cat << _EOL_ | jsonnet - > ./const.libsonnet.tmp
 local const = import './const.libsonnet';
@@ -82,7 +77,7 @@ cat << _EOF_ > ./cleanup.sh
 set -e -o pipefail
 cd \$(dirname \$0)
 
-find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
+find . -name "ecspresso.jsonnet" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 sleep 10 # wait for ECS Services to be deleted
 aws events delete-rule --name ${PR_NAME}-harvestjob ||:
 aws ecs deregister-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob ||:
