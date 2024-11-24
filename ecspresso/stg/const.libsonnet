@@ -1,4 +1,9 @@
 {
+  region: 'us-west-2',
+  cluster: 'dreamkast-stg',
+  executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
+  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
+
   externalEndpoints: {
     dk: 'https://staging.dev.cloudnativedays.jp',
     dkApi: 'https://api.stg.cloudnativedays.jp',
@@ -21,7 +26,6 @@
     'subnet-0d07831c8fc073511',
     'subnet-033491d41490494b6',
   ],
-  region: 'us-west-2',
   s3: {
     dreamkast: {
       name: 'dreamkast-stg-bucket',

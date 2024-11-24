@@ -1,4 +1,9 @@
 {
+  region: 'ap-northeast-1',
+  cluster: 'dreamkast-prod',
+  executionRoleName: 'dreamkast-prod-ecs-task-execution-role',
+  taskTargetRoleName: 'dreamkast-prod-ecs-scheduled-task-target-role',
+
   externalEndpoints: {
     dk: 'https://event.cloudnativedays.jp',
     dkApi: 'https://api.cloudnativedays.jp',
@@ -21,7 +26,6 @@
     'subnet-0e49e678a0ba4ad88',
     'subnet-0f77572d3d3153413',
   ],
-  region: 'ap-northeast-1',
   s3: {
     dreamkast: {
       name: 'dreamkast-prod-bucket',

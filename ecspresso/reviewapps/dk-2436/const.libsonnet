@@ -1,5 +1,10 @@
 {
   PR_NAME: 'dk-2436',
+  region: 'us-west-2',
+  cluster: 'dreamkast-dev',
+  executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
+  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
+
   externalEndpoints: {
     dkApi: 'https://api.dev.cloudnativedays.jp',
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
@@ -18,7 +23,6 @@
     'subnet-0d07831c8fc073511',
     'subnet-033491d41490494b6',
   ],
-  region: 'us-west-2',
   s3: {
     dreamkast: {
       name: 'dreamkast-dev-bucket',

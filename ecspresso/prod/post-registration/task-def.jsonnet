@@ -1,6 +1,5 @@
 local const = import '../const.libsonnet';
 local family = 'dreamkast-prod-post-registration';
-local executionRoleName = 'dreamkast-prod-ecs-task-execution-role';
 local roleName = 'dreamkast-prod-ecs-post-registration';
 
 {
@@ -101,7 +100,7 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
   family: family,
   cpu: '256',
   memory: '512',
-  executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [executionRoleName],
+  executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [const.executionRoleName],
   taskRoleArn: 'arn:aws:iam::607167088920:role/%s' % [roleName],
   networkMode: 'awsvpc',
   requiresCompatibilities: [

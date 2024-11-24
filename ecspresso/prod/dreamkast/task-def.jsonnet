@@ -6,6 +6,7 @@ dreamkast.taskDef(
   cpu=1024,
   memory=2048,
   taskRoleName='dreamkast-prod-ecs-dreamkast',
+  executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_ecs,
 
   region=const.region,

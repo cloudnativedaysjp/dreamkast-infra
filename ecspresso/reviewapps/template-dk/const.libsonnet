@@ -1,10 +1,13 @@
 {
   PR_NAME: error 'you must replace this value',
+  region: 'us-west-2',
+  cluster: 'dreamkast-dev',
+  executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
+  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
 
   //
   // Platform information
   //
-  region: 'us-west-2',
   publicSubnetIDs: [
     'subnet-00709135a42bf907e',  // dreamkast-dev-vpc-public-us-west-2a
     'subnet-0d07831c8fc073511',  // dreamkast-dev-vpc-public-us-west-2b
