@@ -39,9 +39,6 @@ LISTENER_RULE_ARN=$(aws elbv2 create-rule --listener-arn ${LISTENER_ARN} \
   --actions Type=forward,TargetGroupArn=${TARGET_GROUP_ARN} \
   | jq -r ".Rules[] | select(.Priority == \"${LISTENER_RULE_PRIORITY}\") | .RuleArn")
 
-# replace variables in each ecspresso.yml
-find . -name ecspresso.yml | xargs -I{} sed -i -e 's/__PR_NAME__/'${PR_NAME}'/g' {}
-
 # replace variables in const.libsonnet
 cat << _EOL_ | jsonnet - > ./const.libsonnet.tmp
 local const = import './const.libsonnet';
@@ -64,7 +61,7 @@ cat << _EOF_ > ./cleanup.sh
 set -e -o pipefail
 cd \$(dirname \$0)
 
-find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
+find . -name "ecspresso.jsonnet" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 aws elbv2 describe-rules --rule-arn ${LISTENER_RULE_ARN} &>/dev/null && aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}
 aws elbv2 describe-target-groups --target-group-arn ${TARGET_GROUP_ARN} &>/dev/null && aws elbv2 delete-target-group --target-group-arn ${TARGET_GROUP_ARN}
 :

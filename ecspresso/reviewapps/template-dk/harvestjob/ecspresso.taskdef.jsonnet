@@ -1,6 +1,7 @@
+local const = import '../const.libsonnet';
 {
-  region: 'us-west-2',
-  cluster: 'dreamkast-dev',
+  region: const.region,
+  cluster: const.cluster,
   task_definition: 'task-def.jsonnet',
   timeout: '5m',
 }

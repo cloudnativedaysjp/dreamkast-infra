@@ -2,7 +2,7 @@
 set -e -o pipefail
 cd $(dirname $0)
 
-find . -name "ecspresso.yml" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
+find . -name "ecspresso.jsonnet" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 sleep 10 # wait for ECS Services to be deleted
 aws events delete-rule --name dk-2436-harvestjob ||:
 aws ecs deregister-task-definition --task-definition dreamkast-dev-dk-2436-harvestjob ||:
