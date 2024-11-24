@@ -14,7 +14,7 @@ local const = import '../const.libsonnet';
         aws_vpc_configuration: {
           subnets: const.publicSubnetIDs,
           security_groups: [
-            'sg-0365b63a76a7a9397', // dreamkast-prod-ecs-medialive-alert
+            'sg-0365b63a76a7a9397',  // dreamkast-prod-ecs-medialive-alert
           ],
           assign_public_ip: 'ENABLED',
         },
