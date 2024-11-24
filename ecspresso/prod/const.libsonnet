@@ -1,9 +1,6 @@
 {
-  region: 'ap-northeast-1',
   cluster: 'dreamkast-prod',
   executionRoleName: 'dreamkast-prod-ecs-task-execution-role',
-  taskTargetRoleName: 'dreamkast-prod-ecs-scheduled-task-target-role',
-
   externalEndpoints: {
     dk: 'https://event.cloudnativedays.jp',
     dkApi: 'https://api.cloudnativedays.jp',
@@ -12,7 +9,7 @@
   },
   imageTags: {
     dreamkast_ecs: 'v4.11.10',
-    dreamkast_ui: 'v2.11.4',
+    dreamkast_ui: 'v2.11.5',
     dreamkast_weaver: 'v0.3.0',
     seaman: '1.0.4',
   },
@@ -26,6 +23,7 @@
     'subnet-0e49e678a0ba4ad88',
     'subnet-0f77572d3d3153413',
   ],
+  region: 'ap-northeast-1',
   s3: {
     dreamkast: {
       name: 'dreamkast-prod-bucket',
@@ -50,4 +48,5 @@
     fifo: 'dreamkast-prod-fifo-queue',
     mail: 'dreamkast-prod-mail-queue',
   },
+  taskTargetRoleName: 'dreamkast-prod-ecs-scheduled-task-target-role',
 }
