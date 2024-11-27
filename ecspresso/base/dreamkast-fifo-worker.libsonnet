@@ -106,8 +106,8 @@ local const = import './const.libsonnet';
           },
           {
             name: 'BROWSER_PATH',
-            value: '/usr/bin/google-chrome'
-          }
+            value: '/usr/bin/google-chrome',
+          },
         ],
         secrets: [
           // from rails-app-secret Secret
