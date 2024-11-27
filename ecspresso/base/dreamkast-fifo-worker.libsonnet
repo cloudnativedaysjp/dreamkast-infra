@@ -104,6 +104,10 @@ local const = import './const.libsonnet';
             else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
             else family,
           },
+          {
+            name: 'BROWSER_PATH',
+            value: '/usr/bin/google-chrome',
+          },
         ],
         secrets: [
           // from rails-app-secret Secret
