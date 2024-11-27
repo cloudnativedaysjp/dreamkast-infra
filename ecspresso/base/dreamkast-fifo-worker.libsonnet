@@ -128,6 +128,10 @@ local const = import './const.libsonnet';
             valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:AUTH0_DOMAIN::' % [region, const.accountID, dreamkastSecretManagerName],
             name: 'AUTH0_DOMAIN',
           },
+          {
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s:PRINTNODE_API_KEY::' % [region, const.accountID, dreamkastSecretManagerName],
+            name: 'PRINTNODE_API_KEY',
+          },
         ] + if reviewapp == false then [
           // from rds-secret Secret
           {
