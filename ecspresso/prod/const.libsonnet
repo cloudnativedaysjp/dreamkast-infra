@@ -9,7 +9,7 @@
   },
   imageTags: {
     dreamkast_ecs: 'v4.11.18',
-    dreamkast_ui: 'v2.11.7',
+    dreamkast_ui: 'v2.11.8',
     dreamkast_weaver: 'v0.3.0',
     seaman: '1.0.4',
   },
