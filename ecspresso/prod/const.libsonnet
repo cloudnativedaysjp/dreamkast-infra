@@ -15,11 +15,13 @@
     dreamkast_ui: 'v2.11.4',
     dreamkast_weaver: 'v0.3.0',
     seaman: '1.0.4',
+    pushgateway: 'v1.10.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
     rdb: 'dreamkast-prod-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com',
     redis: 'redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379',
+    pushgateway: 'pushgateway.production.local:9091',
   },
   publicSubnetIDs: [
     'subnet-015fd58d325bd5220',
@@ -45,6 +47,7 @@
   },
   serviceDiscovery: {
     dk: 'srv-x5wza5r7otdcwmt3',
+    pushgateway: error 'TODO',
   },
   sqs: {
     fifo: 'dreamkast-prod-fifo-queue',
