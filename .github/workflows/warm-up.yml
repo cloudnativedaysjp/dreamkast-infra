@@ -42,7 +42,7 @@ jobs:
             if [ "$is_conference_day" == "true" ]; then
               replicas=10
             else
-              replicas=1
+              replicas=10
             fi
             echo "$replicas" > "$replicas_file"
           done
@@ -58,7 +58,7 @@ jobs:
             if [ "$is_conference_day" == "true" ]; then
               res="false"
             else
-              res="true"
+              res="false"
             fi
             echo "$res" > "$disabled_file"
           done
