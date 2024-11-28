@@ -15,11 +15,13 @@
     dreamkast_ui: 'be5c65b620f5216f5af50b8604a9555cd93be3bb',
     dreamkast_weaver: '3345e11eefc08d2d3fb6ba822950e4bf68e2fa69',
     redis: '6.0',
+    pushgateway: 'v1.10.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.staging.local',
     rdb: 'dreamkast-stg-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com',
     redis: 'redis://redis.staging.local',
+    pushgateway: 'pushgateway.staging.local:9091',
   },
   publicSubnetIDs: [
     'subnet-00709135a42bf907e',
@@ -45,6 +47,7 @@
   serviceDiscovery: {
     dk: 'srv-vb6353dahtneltjh',
     redis: 'srv-bbwl53e4dfx2omtm',
+    pushgateway: error 'TODO',
   },
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',

@@ -36,6 +36,7 @@ local const = import './const.libsonnet';
     region,
     dkInternalEndpoint,
     rdbInternalEndpoint,
+    promPushgatewayEndpoint="",
     rdsSecretManagerName,
     enableLogging=false,
     reviewapp=false,
@@ -145,10 +146,10 @@ local const = import './const.libsonnet';
             name: 'AWS_REGION',  // IVS REGION
             value: 'us-east-1',
           },
-          //{
-          //  name: 'PROM_PUSHGATEWAY_ENDPOINT',
-          //  value: 'http://prometheus-pushgateway.monitoring.svc.cluster.local:9091',
-          //},
+          {
+            name: 'PROM_PUSHGATEWAY_ENDPOINT',
+            value: promPushgatewayEndpoint,
+          },
         ],
         portMappings: [{
           containerPort: 8080,
