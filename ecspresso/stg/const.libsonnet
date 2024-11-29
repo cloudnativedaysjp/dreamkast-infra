@@ -9,7 +9,7 @@
   },
   imageTags: {
     dreamkast_ecs: 'b4738fe49870a934474dc0b4adef71996c671182',
-    dreamkast_ui: '3137a59af37ef36652348b67e12d05a96f46c811',
+    dreamkast_ui: 'f3741cbabb63bfd1b11042c9dc72facd8ac3edc6',
     dreamkast_weaver: '0ab27f46ebc878aa8a6c258f723c401bf752ca28',
     redis: '6.0',
   },
