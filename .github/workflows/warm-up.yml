@@ -24,9 +24,11 @@ jobs:
             const response = await fetch('https://event.cloudnativedays.jp/api/v1/events')
             const events = await response.json()
             const today = new Date().toISOString().split('T')[0]
+            console.log(`today: ${today}`)
             const isConferenceDay = events.some(event =>
               event.conferenceDays.some(day => day.date === today)
             )
+            console.log(`isConferenceDay: ${isConferenceDay}`)
             return isConferenceDay
 
       - name: Scale replicas
