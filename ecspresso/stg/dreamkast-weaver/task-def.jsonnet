@@ -10,6 +10,7 @@ dreamkast_weaver.taskDef(
   region=const.region,
   dkInternalEndpoint=const.internalEndpoints.dk,
   rdbInternalEndpoint=const.internalEndpoints.rdb,
+  promPushgatewayEndpoint=const.internalEndpoints.pushgateway
 
   rdsSecretManagerName=const.secretManager.rds,
 
