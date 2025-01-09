@@ -38,7 +38,7 @@
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
   },
   sentry: {
-    dsn: 'TODO',
+    dsn: 'https://403b71b05091475588e4d5db537a12aa@stg.sentry.cloudnativedays.jp/2',
   },
   serviceDiscovery: {
     dk: 'srv-vb6353dahtneltjh',
