@@ -10,6 +10,7 @@ local const = import '../const.libsonnet';
       taskDefinition: 'dreamkast-dev-%s-harvestjob' % [const.PR_NAME],
       launch_type: 'FARGATE',
       platform_version: 'LATEST',
+      disabled: true,
       network_configuration: {
         aws_vpc_configuration: {
           subnets: const.publicSubnetIDs,
