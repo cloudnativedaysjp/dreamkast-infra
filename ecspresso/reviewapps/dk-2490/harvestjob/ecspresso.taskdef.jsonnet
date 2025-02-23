@@ -2,6 +2,6 @@ local const = import '../const.libsonnet';
 {
   region: const.region,
   cluster: const.cluster,
-  role: const.taskTargetRoleName,
-  rules: [ ],
+  task_definition: 'task-def.jsonnet',
+  timeout: '5m',
 }
