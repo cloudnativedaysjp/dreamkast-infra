@@ -5,6 +5,7 @@ on:
     branches: ["main"]
   repository_dispatch:
     types: [trigger-ecspresso]
+  workflow_dispatch:
 
 # this workflow should be processed by FIFO
 concurrency: ecspresso
