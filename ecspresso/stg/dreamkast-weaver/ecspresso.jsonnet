@@ -5,5 +5,5 @@ local const = import '../const.libsonnet';
   service: 'dreamkast-weaver',
   service_definition: 'service-def.jsonnet',
   task_definition: 'task-def.jsonnet',
-  timeout: '10m',
+  timeout: '15m',
 }
