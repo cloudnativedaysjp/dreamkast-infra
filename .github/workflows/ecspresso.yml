@@ -5,6 +5,7 @@ on:
     branches: ["main"]
   repository_dispatch:
     types: [trigger-ecspresso]
+  workflow_dispatch:
 
 # this workflow should be processed by FIFO
 concurrency: ecspresso
@@ -31,7 +32,7 @@ jobs:
         run: |
           find . -name "ecspresso.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
-            '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
+            '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} --debug deploy'
 
   ecschedule:
     runs-on: "ubuntu-latest"
