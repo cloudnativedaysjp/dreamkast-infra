@@ -80,6 +80,7 @@ cd \$(dirname \$0)
 find . -name "ecspresso.jsonnet" | xargs -I{} -P10 ecspresso --config={} delete --force --terminate ||:
 sleep 10 # wait for ECS Services to be deleted
 aws events describe-rule --name ${PR_NAME}-harvestjob && \
+  aws events remove-targets --rule ${PR_NAME}-harvestjob --ids ${PR_NAME}-harvestjob \
   aws events delete-rule --name ${PR_NAME}-harvestjob --force
 aws ecs describe-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob && \
   aws ecs deregister-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob
