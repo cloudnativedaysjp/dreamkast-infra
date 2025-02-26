@@ -53,6 +53,7 @@ local util = import './util.libsonnet';
     lokiEndpoint='',
     enableMackerelSidecar=false,
     mackerelSecretManagerName='',
+    mackerelRoles='',
     reviewapp=false,
   ):: {
     local root = self,
@@ -327,6 +328,10 @@ local util = import './util.libsonnet';
             {
               name: 'MACKEREL_CONTAINER_PLATFORM',
               value: 'ecs',
+            },
+            {
+              name: 'MACKEREL_ROLES',
+              value: mackerelRoles,
             },
           ],
           secrets: [

@@ -31,4 +31,5 @@ dreamkast.taskDef(
 
   enableMackerelSidecar=true,
   mackerelSecretManagerName=const.secretManager.mackerel,
+  mackerelRoles='dreamkast-stg:app',
 )
