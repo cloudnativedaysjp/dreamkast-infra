@@ -83,7 +83,7 @@ aws events describe-rule --name ${PR_NAME}-harvestjob && \
   aws events remove-targets --rule ${PR_NAME}-harvestjob --ids ${PR_NAME}-harvestjob && \
   aws events delete-rule --name ${PR_NAME}-harvestjob --force
 aws ecs describe-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob && \
-  aws ecs deregister-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob
+  aws ecs deregister-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob:1
 aws servicediscovery get-service --id ${SERVICE_ID_MYSQL} && \
   aws servicediscovery delete-service --id ${SERVICE_ID_MYSQL}
 aws servicediscovery get-service --id ${SERVICE_ID_REDIS} && \
