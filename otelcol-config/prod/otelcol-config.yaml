@@ -1,0 +1,55 @@
+---
+extensions:
+  health_check:
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+  hostmetrics:
+    collection_interval: 1m
+    scrapers:
+      cpu:
+      disk:
+      filesystem:
+      load:
+      memory:
+      network:
+      paging:
+
+processors:
+  attributes/app:
+    actions:
+      - action: upsert
+        key: service.namespace
+        value: dreamkast
+      - action: upsert
+        key: service.name
+        value: app
+      - action: upsert
+        key: deployment.environment.name
+        value: prod
+  batch:
+    timeout: 1m
+  resourcedetection/app:
+    detectors: [env, ecs]
+    timeout: 2s
+    override: false
+
+exporters:
+  otlp/mackerel:
+    endpoint: otlp.mackerelio.com:4317
+    compression: gzip
+    headers:
+      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+
+service:
+  pipelines:
+    metrics/app:
+      receivers: [otlp, hostmetrics]
+      processors: [attributes/app, batch, resourcedetection/app]
+      exporters: [otlp/mackerel]
+  extensions: [health_check]
