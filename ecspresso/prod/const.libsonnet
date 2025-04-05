@@ -39,7 +39,7 @@
     releasebot: 'dreamkast-releasebot-zHsXND',
   },
   sentry: {
-    dsn: 'https://56a098a0a516e7e57b59573c3f2786b5@sentry.cloudnativedays.jp/2',
+    dsn: 'https://3ae606172e0b82cec45c674e905ab233@o414348.ingest.us.sentry.io/4509089530904576',
   },
   serviceDiscovery: {
     dk: 'srv-x5wza5r7otdcwmt3',
