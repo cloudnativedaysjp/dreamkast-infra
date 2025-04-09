@@ -36,7 +36,7 @@ local roleName = 'dreamkast-prod-ecs-harvestjob';
         },
         {
           name: 'SENTRY_DSN',
-          value: 'https://58d66ac32660e276ccc4f80ecf239563@sentry.cloudnativedays.jp/3',
+          value: 'https://a1c3137217d913ed746bfda3ef9c63ac@o414348.ingest.us.sentry.io/4509089544929280',
         },
         {
           name: 'S3_BUCKET',
