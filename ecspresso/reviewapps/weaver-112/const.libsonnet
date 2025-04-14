@@ -4,7 +4,7 @@
   executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
   externalEndpoints: {},
   imageTags: {
-    dreamkast_weaver: 'a592616ded917424326ab06edd0390ca32ccfcff',
+    dreamkast_weaver: '403cec5c14d8f4d611b13c8274fe793eb73296cc',
     mysql: '8.0.33',
   },
   internalEndpoints: {
