@@ -38,7 +38,7 @@
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
   },
   sentry: {
-    dsn: 'https://403b71b05091475588e4d5db537a12aa@stg.sentry.cloudnativedays.jp/2',
+    dsn: 'https://3ae606172e0b82cec45c674e905ab233@o414348.ingest.us.sentry.io/4509089530904576',
   },
   serviceDiscovery: {
     dk: 'srv-vb6353dahtneltjh',
