@@ -30,7 +30,7 @@ jobs:
       - name: jsonnet format
         working-directory: ecspresso
         run: |
-          find . -name "*.jsonnet" -or -name "*.libsonnet" | xargs -I{} jsonnetfmt -i {}
+          find . \( -name "*.jsonnet" -or -name "*.libsonnet" \) -exec jsonnetfmt -i {} \;
 
       - name: check diff
         id: check-diff

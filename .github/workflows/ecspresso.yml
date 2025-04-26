@@ -38,6 +38,7 @@ jobs:
       - name: run ecspresso
         working-directory: ecspresso
         run: |
+          # shellcheck disable=SC2016
           find . -name "ecspresso.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
@@ -69,6 +70,7 @@ jobs:
       - name: register taskdef by ecspresso
         working-directory: ecspresso
         run: |
+          # shellcheck disable=SC2016
           find . -name "ecspresso.taskdef.jsonnet" | grep -v "reviewapps/template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} register'

@@ -46,27 +46,31 @@ jobs:
         run: |
           failed=0
           for config in $(find . -name "ecspresso.jsonnet" | grep -E "^./${{ matrix.environment }}" | grep -v "reviewapps/template" ); do
-            ecspresso --config=$config diff >> preview.stdout.txt 2> preview.stderr.txt
-            [ $? -ne 0 ] && failed=1 && break
+            if ! ecspresso --config="$config" diff >> preview.stdout.txt 2> preview.stderr.txt; then
+              failed=1
+              break
+            fi
           done
 
-          echo "status=$failed"  >> $GITHUB_OUTPUT
+          echo "status=$failed"  >> "$GITHUB_OUTPUT"
 
           function no-color {
             sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"
           }
-
-          echo "stdout<<EOF" >> $GITHUB_OUTPUT
-          cat preview.stdout.txt | no-color >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-          echo "stderr<<EOF" >> $GITHUB_OUTPUT
-          cat preview.stderr.txt | no-color >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          {
+            echo "stdout<<EOF"
+            no-color < preview.stdout.txt
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "stderr<<EOF"
+            no-color < preview.stderr.txt
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: report for preview
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
-        if: ${{ steps.preview.outputs.status == '0' }}
+        if: steps.preview.outputs.status == '0'
         with:
           header: "preview for ${{ matrix.environment }}"
           message: |
@@ -80,7 +84,7 @@ jobs:
 
       - name: report error for preview
         uses: marocchino/sticky-pull-request-comment@52423e01640425a022ef5fd42c6fb5f633a02728 # v2.9.1
-        if: ${{ steps.preview.outputs.status == '1' }}
+        if: steps.preview.outputs.status == '1'
         with:
           header: "preview for ${{ matrix.environment }}"
           message: |
@@ -93,5 +97,5 @@ jobs:
             </details>
 
       - name: raise error
-        if: ${{ steps.preview.outputs.status == '1' }}
+        if: steps.preview.outputs.status == '1'
         run: exit 1
