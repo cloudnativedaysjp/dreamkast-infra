@@ -9,22 +9,31 @@ on:
 # this workflow should be processed by FIFO
 concurrency: ecspresso
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   ecspresso:
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      id-token: write
+    timeout-minutes: 30
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
+          role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
 
       - name: Install ecspresso
-        uses: kayac/ecspresso@v2
+        uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
 
       - name: run ecspresso
         working-directory: ecspresso
@@ -35,22 +44,27 @@ jobs:
 
   ecschedule:
     runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      id-token: write
+    timeout-minutes: 30
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502 # v4.0.2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
+          role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
 
       - name: Install ecspresso
-        uses: kayac/ecspresso@v2
+        uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
 
       - name: Install ecschedule
-        uses: Songmu/ecschedule@main
+        uses: Songmu/ecschedule@c5cb62a5bc365f548f342f7bf234d262a1a24a5e # v0.13.0
 
       - name: register taskdef by ecspresso
         working-directory: ecspresso

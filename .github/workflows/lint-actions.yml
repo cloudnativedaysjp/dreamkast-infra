@@ -1,0 +1,17 @@
+name: run common linters for GitHub Action
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+
+jobs:
+  lint:
+    name: lint actions
+    uses: cloudnativedaysjp/reusable-workflows/.github/workflows/wc-lint-actions.yml@main
+    permissions:
+      contents: write
+      pull-requests: write
+    secrets:
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
