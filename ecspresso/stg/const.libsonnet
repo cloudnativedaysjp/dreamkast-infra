@@ -9,7 +9,7 @@
   },
   imageTags: {
     dreamkast_ecs: 'commit-7f74ad086a9091fd34fde5c67f7795e1daeb7e5a',
-    dreamkast_ui: 'commit-cc044b0356ceae2e5b7b1682b15951c396ca8f33',
+    dreamkast_ui: 'commit-258ab46deeef342a466669a1a758dfc6c4016d06',
     dreamkast_weaver: '562b70634b8e8a75b341c64c4a10a640a99e0178',
     redis: '6.0',
   },
