@@ -9,7 +9,7 @@ local const = import './const.libsonnet';
     securityGroupID,
     serviceDiscoveryID='',
   ):: {
-    availabilityZoneRebalancing: "DISABLED",
+    availabilityZoneRebalancing: 'DISABLED',
     deploymentConfiguration: {
       deploymentCircuitBreaker: {
         enable: false,
