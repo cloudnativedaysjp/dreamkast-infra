@@ -9,6 +9,7 @@ local const = import './const.libsonnet';
     securityGroupID,
     serviceDiscoveryID='',
   ):: {
+    availabilityZoneRebalancing: 'DISABLED',
     deploymentConfiguration: {
       deploymentCircuitBreaker: {
         enable: false,
@@ -22,6 +23,7 @@ local const = import './const.libsonnet';
     enableExecuteCommand: true,
     launchType: 'FARGATE',
     loadBalancers: [],
+    healthCheckGracePeriodSeconds: 0,
     networkConfiguration: {
       awsvpcConfiguration: {
         assignPublicIp: 'ENABLED',

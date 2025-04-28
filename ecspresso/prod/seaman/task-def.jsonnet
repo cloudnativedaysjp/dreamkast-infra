@@ -95,6 +95,7 @@ local roleName = 'dreamkast-prod-ecs-seaman';
   volumes: [
     {
       name: 'config',
+      host: {},
     },
   ],
 }
