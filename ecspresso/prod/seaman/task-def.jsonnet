@@ -31,8 +31,7 @@ local roleName = 'dreamkast-prod-ecs-seaman';
     {
       local container = self,
       name: 'seaman',
-      //image: '607167088920.dkr.ecr.ap-northeast-1.amazonaws.com/seaman:%s' % [const.imageTags.seaman],
-      image: 'public.ecr.aws/f5j9d0q5/seaman:%s' % [const.imageTags.seaman],
+      image: '607167088920.dkr.ecr.%s.amazonaws.com/seaman:%s' % [const.region, const.imageTags.seaman],
       essential: true,
       command: [
         '--config=/mnt/config/config.yaml',
