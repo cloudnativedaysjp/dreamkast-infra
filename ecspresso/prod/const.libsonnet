@@ -11,7 +11,7 @@
     dreamkast_ecs: 'release-v4.14.2',
     dreamkast_ui: 'release-v2.11.13',
     dreamkast_weaver: 'v0.5.1',
-    seaman: 'release-v1.0.5',
+    seaman: 'release-v1.0.6',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
