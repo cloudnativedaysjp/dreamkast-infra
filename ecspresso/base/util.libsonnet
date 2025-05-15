@@ -6,12 +6,12 @@ local const = import './const.libsonnet';
     local cpu2 = if enableMackerelSidecar then cpu1 - const.mackerelSidecarResources.cpu else cpu1;
     local cpu3 = if enableOtelcolSidecar then cpu2 - const.otelcolSidecarResources.cpu else cpu2;
     cpu3,
-  mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar)::
+  mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar)::
     local memory1 = if enableLokiLogging then memory - const.fluentBitLokiResources.memory else memory;
     local memory2 = if enableMackerelSidecar then memory1 - const.mackerelSidecarResources.memory else memory1;
     local memory3 = if enableOtelcolSidecar then memory2 - const.otelcolSidecarResources.memory else memory2;
     memory3,
-  mainContainerMemoryReservation(memoryReservation, enableLokiLogging, enableMackerelSidecar)::
+  mainContainerMemoryReservation(memoryReservation, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar)::
     local memoryReservation1 = if enableLokiLogging then memoryReservation - const.fluentBitLokiResources.memory else memoryReservation;
     local memoryReservation2 = if enableMackerelSidecar then memoryReservation1 - const.mackerelSidecarResources.memory else memoryReservation1;
     local memoryReservation3 = if enableOtelcolSidecar then memoryReservation2 - const.otelcolSidecarResources.memory else memoryReservation2;
