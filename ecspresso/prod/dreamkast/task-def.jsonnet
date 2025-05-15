@@ -34,4 +34,6 @@ dreamkast.taskDef(
   enableMackerelSidecar=true,
   mackerelSecretManagerName=const.secretManager.mackerel,
   mackerelRoles='dreamkast-prod:app',
+
+  enableOtelcolSidecar=false,
 )
