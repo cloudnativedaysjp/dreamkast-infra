@@ -1,7 +1,6 @@
 local common = import './common.libsonnet';
 local const = import './const.libsonnet';
 local util = import './util.libsonnet';
-local otelcol_config = importstr './files/otelcol-config.yaml';
 
 {
   serviceDef(
@@ -56,6 +55,7 @@ local otelcol_config = importstr './files/otelcol-config.yaml';
     mackerelSecretManagerName='',
     mackerelRoles='',
     enableOtelcolSidecar=false,
+    otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,
@@ -371,7 +371,7 @@ local otelcol_config = importstr './files/otelcol-config.yaml';
           environment: [
             {
               name: 'OTELCOL_CONFIG',
-              value: otelcol_config,
+              value: otelcolConfig,
             },
           ],
           secrets: [
