@@ -8,7 +8,7 @@
     loki: 'https://stg.loki.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: 'commit-b72a1360cdfab5b0e3b61ee171cd5654813aea91',
+    dreamkast_ecs: 'commit-8c27bf2338ebedb34771948b2196546588a3e4ad',
     dreamkast_ui: 'commit-baf1d70b5707e33d77f243c0b4febceb5d95f2e5',
     dreamkast_weaver: 'commit-79cc7014404d97db542713304190c2fe149ab37a',
     redis: '6.0',
