@@ -11,4 +11,9 @@
     memory: 128,
     memoryReservation: 64,
   },
+  otelcolSidecarResources: {
+    cpu: 64,
+    memory: 128,
+    memoryReservation: 64,
+  },
 }
