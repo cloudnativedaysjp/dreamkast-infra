@@ -35,7 +35,7 @@ jobs:
             // )
             // console.log(`isConferenceDay: ${isConferenceDay}`)
             // return isConferenceDay
-            return true
+            return false
 
       - name: Scale replicas
         run: |
