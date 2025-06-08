@@ -1,4 +1,6 @@
 local const = import '../const.libsonnet';
+local disabled = import './vars/disabled.json';
+
 {
   region: const.region,
   cluster: const.cluster,
@@ -6,6 +8,7 @@ local const = import '../const.libsonnet';
   rules: [
     {
       name: 'harvestjob',
+      disabled: disabled,
       scheduleExpression: 'cron(*/3 * * * ? *)',
       taskDefinition: 'dreamkast-stg-harvestjob',
       launch_type: 'FARGATE',
