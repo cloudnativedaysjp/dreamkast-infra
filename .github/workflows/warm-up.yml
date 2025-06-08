@@ -83,6 +83,7 @@ jobs:
       - name: Commit and push changes
         if: steps.check-diff.outputs.changes == 'true'
         uses: suzuki-shunsuke/commit-action@cc96d3a3fd959d05e9b79ca395eb30b835aeba24 # v0.0.7
+        continue-on-error: true
         with:
           repository: cloudnativedaysjp/dreamkast-infra
           branch: main
