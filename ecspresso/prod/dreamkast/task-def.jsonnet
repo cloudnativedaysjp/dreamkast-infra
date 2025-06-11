@@ -1,4 +1,5 @@
 local dreamkast = import '../../base/dreamkast.libsonnet';
+local otelcol_config = importstr './files/otelcol-config.yaml';
 local const = import '../const.libsonnet';
 
 dreamkast.taskDef(
@@ -34,4 +35,7 @@ dreamkast.taskDef(
   enableMackerelSidecar=true,
   mackerelSecretManagerName=const.secretManager.mackerel,
   mackerelRoles='dreamkast-prod:app',
+
+  enableOtelcolSidecar=false,
+  otelcolConfig=otelcol_config,
 )
