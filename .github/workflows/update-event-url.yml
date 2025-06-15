@@ -1,0 +1,79 @@
+name: update event url based on dreamkast API
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # Runs every day at 3 PM UTC, which is midnight UTC+9
+  workflow_dispatch:
+
+
+env:
+  branch-name: dreamkast-infra-actions/update-event-name
+
+jobs:
+  latest-event:
+    name: Acquire latest event name
+    runs-on: ubuntu-latest
+    permissions: {}
+    timeout-minutes: 3
+    outputs:
+      latest-event: ${{ steps.latest-event.outputs.out }}
+    steps:
+      - id: latest-event
+        run: |
+          EVENT_NAME=$(curl -f -sS https://event.cloudnativedays.jp/api/v1/events | jq -r '. as $in | [.[].conferenceDays[0].date+"T00:00:00Z" | fromdate] | max as $max | $in | .[] | select(.conferenceDays[0].date+"T00:00:00Z" | fromdate == $max) | .abbr')
+          if [ "${EVENT_NAME}" = "" ];
+            echo "failed to get events from dreamkast API"
+            exit 1
+          fi
+          echo "out=${EVENT_NAME}" >> "$GITHUB_OUTPUT"
+
+  dreamkast-infra:
+    name: "create PR to cloudnativedays/dreamkast-infra repository"
+    needs: latest-event
+    permissions: {}
+    timeout-minutes: 3
+    env:
+      repository: cloudnativedaysjp/dreamkast-infra
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          repository: ${{ env.repository }}
+
+      - name: update
+        run: |
+          TODO
+
+      - name: check branch has already existed
+        id: branch-does-not-exist
+        continue-on-error: true
+        run: |
+          for branch in $(curl -f -sS https://api.github.com/repos/${{ env.repository }}/branches | jq -r '.[].name'); do
+            [ "$branch" = "${{ needs.latest-event.outputs.latest-event }}" ] && exit 1
+          done
+
+      - name: Generate token
+        if: ${{ steps.branch-does-not-exist.outcome }} == 'success'
+        id: app-token
+        uses: actions/create-github-app-token@df432ceedc7162793a195dd1713ff69aefc7379e # v2.0.6
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: cloudnativedaysjp
+          repositories: dreamkast-infra
+          permission-contents: write
+          permission-pull-requests: write
+
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: ${{ env.branch-name }}
+          title: Update event name to ${{ needs.latest-event.outputs.latest-event }}
+          body: |
+            This PR is created by [update-event-url.yml in dreamkast-infra](https://github.com/cloudnativedaysjp/dreamkast-infra/blob/main/.github/workflows/update-event-url.yml).
+
+  terraform:
+    name: "create PR to cloudnativedays/terraform repository"
+    needs: latest-event
+    permissions: {}
+    timeout-minutes: 3
