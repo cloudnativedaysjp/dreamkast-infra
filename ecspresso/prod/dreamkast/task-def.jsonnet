@@ -32,7 +32,7 @@ dreamkast.taskDef(
   enableLokiLogging=true,
   lokiEndpoint=const.externalEndpoints.loki,
 
-  enableMackerelSidecar=true,
+  enableMackerelSidecar=false,
   mackerelSecretManagerName=const.secretManager.mackerel,
   mackerelRoles='dreamkast-prod:app',
 
