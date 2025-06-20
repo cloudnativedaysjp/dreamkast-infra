@@ -54,6 +54,8 @@ local util = import './util.libsonnet';
     enableMackerelSidecar=false,
     mackerelSecretManagerName='',
     mackerelRoles='',
+    enableOtelcolSidecar=false,
+    otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,
@@ -214,9 +216,9 @@ local util = import './util.libsonnet';
       //
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableMackerelSidecar),
-        memory: util.mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar),
-        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableMackerelSidecar),
+        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
+        memory: util.mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -348,6 +350,44 @@ local util = import './util.libsonnet';
               'awslogs-create-group': 'true',
               'awslogs-region': region,
               'awslogs-stream-prefix': 'mackerel-agent',
+            },
+          },
+        } else {},
+      ] else []
+    ) + (
+      if enableOtelcolSidecar then [
+        //
+        // container: dreamkast-otelcol
+        //
+        assert mackerelSecretManagerName != '';
+        root.containerDefinitionCommon {
+          name: 'otelcol',
+          image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-otelcol:%s' % [const.accountID, region, imageTag],
+          cpu: const.otelcolSidecarResources.cpu,
+          memory: const.otelcolSidecarResources.memory,
+          memoryReservation: const.otelcolSidecarResources.memoryReservation,
+          entryPoint: ['bash', '-c'],
+          command: ['echo "${OTELCOL_CONFIG}" > /etc/otelcol-config.yaml; /usr/local/bin/otelcol --config=/etc/otelcol-config.yaml'],
+          environment: [
+            {
+              name: 'OTELCOL_CONFIG',
+              value: otelcolConfig,
+            },
+          ],
+          secrets: [
+            {
+              valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+              name: 'MACKEREL_APIKEY',
+            },
+          ],
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'otelcol',
             },
           },
         } else {},
