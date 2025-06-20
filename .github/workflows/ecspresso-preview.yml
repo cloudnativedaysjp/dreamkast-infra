@@ -70,7 +70,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: report for preview
-        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        uses: marocchino/sticky-pull-request-comment@d2ad0de260ae8b0235ce059e63f2949ba9e05943 # v2.9.3
         if: steps.preview.outputs.status == '0'
         with:
           header: "preview for ${{ matrix.environment }}"
@@ -84,7 +84,7 @@ jobs:
             </details>
 
       - name: report error for preview
-        uses: marocchino/sticky-pull-request-comment@67d0dec7b07ed060a405f9b2a64b8ab319fdd7db # v2.9.2
+        uses: marocchino/sticky-pull-request-comment@d2ad0de260ae8b0235ce059e63f2949ba9e05943 # v2.9.3
         if: steps.preview.outputs.status == '1'
         with:
           header: "preview for ${{ matrix.environment }}"
