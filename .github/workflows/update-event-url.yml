@@ -78,7 +78,7 @@ jobs:
         continue-on-error: true
         run: |
           for branch in $(curl -f -sS https://api.github.com/repos/cloudnativedaysjp/dreamkast-infra/branches | jq -r '.[].name'); do
-            [ "$branch" = "${{ env.branch-name }}" ] && exit 1
+            if [ "$branch" = "${{ env.branch-name }}" ]; then exit 1; fi
           done
 
       - name: Generate token
@@ -125,7 +125,7 @@ jobs:
         continue-on-error: true
         run: |
           for branch in $(curl -f -sS https://api.github.com/repos/cloudnativedaysjp/terraform/branches | jq -r '.[].name'); do
-            [ "$branch" = "${{ env.branch-name }}" ] && exit 1
+            if [ "$branch" = "${{ env.branch-name }}" ]; then exit 1; fi
           done
 
       - name: Generate token
