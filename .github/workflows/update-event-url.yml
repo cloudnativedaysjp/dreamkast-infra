@@ -50,6 +50,12 @@ jobs:
           fi
           echo "previous-event=${PREVIOUS_EVENT}" >> "$GITHUB_OUTPUT"
 
+          cat << _EOM_ >> "$GITHUB_STEP_SUMMARY"
+          |  latest-event   |  previous-event   |
+          |:---------------:|:-----------------:|
+          | ${LATEST_EVENT} | ${PREVIOUS_EVENT} |
+          _EOM_
+
   dreamkast-infra:
     name: "create PR to cloudnativedays/dreamkast-infra repository"
     needs: get-events
@@ -88,6 +94,7 @@ jobs:
           permission-pull-requests: write
 
       - uses: peter-evans/create-pull-request@4e1beaa7521e8b457b572c090b25bd3db56bf1c5 # v5.0.3
+        if: steps.branch-does-not-exist.outcome == 'success'
         with:
           token: ${{ steps.app-token.outputs.token }}
           branch: ${{ env.branch-name }}
@@ -134,11 +141,10 @@ jobs:
           permission-pull-requests: write
 
       - uses: peter-evans/create-pull-request@4e1beaa7521e8b457b572c090b25bd3db56bf1c5 # v5.0.3
+        if: steps.branch-does-not-exist.outcome == 'success'
         with:
           token: ${{ steps.app-token.outputs.token }}
           branch: ${{ env.branch-name }}
           title: Update event name to ${{ needs.get-events.outputs.latest-event }}
           body: |
             This PR is created by [update-event-url.yml in dreamkast-infra](https://github.com/cloudnativedaysjp/dreamkast-infra/blob/main/.github/workflows/update-event-url.yml).
-
-
