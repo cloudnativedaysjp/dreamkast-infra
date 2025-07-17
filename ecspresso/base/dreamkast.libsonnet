@@ -362,7 +362,7 @@ local util = import './util.libsonnet';
         assert mackerelSecretManagerName != '';
         root.containerDefinitionCommon {
           name: 'otelcol',
-          image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-otelcol:%s' % [const.accountID, region, imageTag],
+          image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-otelcol:branch-main' % [const.accountID, region],
           cpu: const.otelcolSidecarResources.cpu,
           memory: const.otelcolSidecarResources.memory,
           memoryReservation: const.otelcolSidecarResources.memoryReservation,
