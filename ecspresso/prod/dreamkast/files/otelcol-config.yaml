@@ -19,8 +19,6 @@ receivers:
       memory:
       network:
       paging:
-  logging:
-    log_level: info
 
 processors:
   attributes/app:
@@ -47,8 +45,6 @@ exporters:
     compression: gzip
     headers:
       Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
-  logging:
-    log_level: debug
 
 service:
   pipelines:
