@@ -390,6 +390,19 @@ local util = import './util.libsonnet';
               'awslogs-stream-prefix': 'otelcol',
             },
           },
+        } else if enableLokiLogging then {
+          assert lokiEndpoint != '',
+          logConfiguration: {
+            logDriver: 'awsfirelens',
+            options: {
+              RemoveKeys: 'container_id,ecs_task_arn',
+              LineFormat: 'key_value',
+              Labels: '{job="%s"}' % [family],
+              LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+              Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+              Name: 'grafana-loki',
+            },
+          },
         } else {},
       ] else []
     ),
