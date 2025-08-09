@@ -27,7 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:
           aws-region: ap-northeast-1
           role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
@@ -56,7 +56,7 @@ jobs:
           persist-credentials: false
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:
           aws-region: ap-northeast-1
           role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
@@ -65,7 +65,7 @@ jobs:
         uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
 
       - name: Install ecschedule
-        uses: Songmu/ecschedule@e7e55a86451b0816269a9d551951d517075477dd # v0.15.0
+        uses: Songmu/ecschedule@81a8b265305a9979cf4b32bb6220fa1bed19c2a0 # v0.15.1
 
       - name: register taskdef by ecspresso
         working-directory: ecspresso
