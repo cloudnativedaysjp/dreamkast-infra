@@ -10,7 +10,7 @@
   imageTags: {
     dreamkast_ecs: 'release-v4.17.1',
     dreamkast_ui: 'release-v2.11.19',
-    dreamkast_weaver: 'release-v0.5.2',
+    dreamkast_weaver: 'release-v0.5.3',
     seaman: 'release-v1.0.7',
   },
   internalEndpoints: {
