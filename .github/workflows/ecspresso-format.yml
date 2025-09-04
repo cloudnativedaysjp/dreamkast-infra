@@ -15,7 +15,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           ref: ${{ github.head_ref }}
           persist-credentials: false
@@ -44,7 +44,7 @@ jobs:
 
       - name: Commit and push changes
         if: steps.check-diff.outputs.changes == 'true'
-        uses: suzuki-shunsuke/commit-action@e3299afe2e5ffb76f1987743e3dbc0f00ece72d8 # v0.0.8
+        uses: suzuki-shunsuke/commit-action@ca8e761ccb3533295065c3e90a8555fcdde8b467 # v0.0.10
         with:
           repository: cloudnativedaysjp/dreamkast-infra
           branch: ${{ github.head_ref }}
