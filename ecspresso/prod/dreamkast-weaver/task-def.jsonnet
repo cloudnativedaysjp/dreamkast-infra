@@ -1,5 +1,6 @@
 local dreamkast_weaver = import '../../base/dreamkast-weaver.libsonnet';
 local const = import '../const.libsonnet';
+local otelcol_config = importstr './files/otelcol-config.yaml';
 
 dreamkast_weaver.taskDef(
   family='dreamkast-prod-weaver',
@@ -14,4 +15,8 @@ dreamkast_weaver.taskDef(
   rdsSecretManagerName=const.secretManager.rds,
 
   enableLogging=true,
+
+  enableOtelcolSidecar=true,
+  mackerelSecretManagerName=const.secretManager.mackerel,
+  otelcolConfig=otelcol_config,
 )

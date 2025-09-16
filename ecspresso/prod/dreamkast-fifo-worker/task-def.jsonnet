@@ -1,5 +1,6 @@
 local dreamkast_fifo_worker = import '../../base/dreamkast-fifo-worker.libsonnet';
 local const = import '../const.libsonnet';
+local otelcol_config = importstr './files/otelcol-config.yaml';
 
 dreamkast_fifo_worker.taskDef(
   family='dreamkast-prod-fifo-worker',
@@ -23,4 +24,8 @@ dreamkast_fifo_worker.taskDef(
   dreamkastSecretManagerName=const.secretManager.dk,
 
   enableLogging=true,
+
+  enableOtelcolSidecar=false,
+  mackerelSecretManagerName=const.secretManager.mackerel,
+  otelcolConfig=otelcol_config,
 )

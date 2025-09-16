@@ -38,6 +38,9 @@ local const = import './const.libsonnet';
     dkWeaverEndpoint,
     dkUiSecretManagerName,
     enableLogging=false,
+    enableOtelcolSidecar=false,
+    mackerelSecretManagerName='',
+    otelcolConfig='',
     reviewapp=true,
   ):: {
     local root = self,

@@ -51,8 +51,8 @@ local util = import './util.libsonnet';
     enableLogging=false,
     enableLokiLogging=false,
     lokiEndpoint='',
-    mackerelSecretManagerName='',
     enableOtelcolSidecar=false,
+    mackerelSecretManagerName='',
     otelcolConfig='',
     reviewapp=false,
   ):: {

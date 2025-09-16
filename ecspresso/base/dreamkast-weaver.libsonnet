@@ -38,6 +38,9 @@ local const = import './const.libsonnet';
     rdbInternalEndpoint,
     rdsSecretManagerName,
     enableLogging=false,
+    enableOtelcolSidecar=false,
+    mackerelSecretManagerName='',
+    otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,

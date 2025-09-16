@@ -36,6 +36,9 @@ local const = import './const.libsonnet';
     rdsSecretManagerName,
     dreamkastSecretManagerName,
     enableLogging=false,
+    enableOtelcolSidecar=false,
+    mackerelSecretManagerName='',
+    otelcolConfig='',
     reviewapp=false,
   ):: {
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
