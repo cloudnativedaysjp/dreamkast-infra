@@ -30,9 +30,7 @@ dreamkast.taskDef(
   enableLokiLogging=true,
   lokiEndpoint=const.externalEndpoints.loki,
 
-  enableMackerelSidecar=false,
   mackerelSecretManagerName=const.secretManager.mackerel,
-  mackerelRoles='dreamkast-stg:app',
 
   enableOtelcolSidecar=true,
   otelcolConfig=otelcol_config,
