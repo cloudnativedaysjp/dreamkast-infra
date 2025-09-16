@@ -34,6 +34,6 @@ dreamkast.taskDef(
 
   mackerelSecretManagerName=const.secretManager.mackerel,
 
-  enableOtelcolSidecar=false,
+  enableOtelcolSidecar=true,
   otelcolConfig=otelcol_config,
 )
