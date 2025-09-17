@@ -28,7 +28,7 @@ processors:
         value: dreamkast
       - action: upsert
         key: service.name
-        value: app
+        value: dreamkast-weaver
       - action: upsert
         key: deployment.environment.name
         value: stg

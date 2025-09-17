@@ -176,6 +176,57 @@ local const = import './const.libsonnet';
           },
         },
       } else {},
-    ],
+    ] + (
+      if enableOtelcolSidecar then [
+        //
+        // container: dreamkast-otelcol
+        //
+        assert mackerelSecretManagerName != '';
+        root.containerDefinitionCommon {
+          name: 'otelcol',
+          image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-otelcol:branch-main' % [const.accountID, region],
+          cpu: const.otelcolSidecarResources.cpu,
+          memory: const.otelcolSidecarResources.memory,
+          memoryReservation: const.otelcolSidecarResources.memoryReservation,
+          entryPoint: ['bash', '-c'],
+          command: ['echo "${OTELCOL_CONFIG}" > /mnt/otelcol-config.yaml; /usr/local/bin/otelcol --config=/mnt/otelcol-config.yaml'],
+          environment: [
+            {
+              name: 'OTELCOL_CONFIG',
+              value: otelcolConfig,
+            },
+          ],
+          secrets: [
+            {
+              valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
+              name: 'MACKEREL_APIKEY',
+            },
+          ],
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'otelcol',
+            },
+          },
+        } else if enableLokiLogging then {
+          assert lokiEndpoint != '',
+          logConfiguration: {
+            logDriver: 'awsfirelens',
+            options: {
+              RemoveKeys: 'container_id,ecs_task_arn',
+              LineFormat: 'key_value',
+              Labels: '{job="%s"}' % [family],
+              LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+              Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+              Name: 'grafana-loki',
+            },
+          },
+        } else {},
+      ] else []
+    ),
   },
 }
