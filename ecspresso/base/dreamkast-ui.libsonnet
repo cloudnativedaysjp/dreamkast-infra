@@ -162,7 +162,7 @@ local const = import './const.libsonnet';
               'awslogs-stream-prefix': 'otelcol',
             },
           },
-        }  else {},
+        } else {},
       ] else []
     ),
   },
