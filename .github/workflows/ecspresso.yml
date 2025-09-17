@@ -65,7 +65,7 @@ jobs:
         uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
 
       - name: Install ecschedule
-        uses: Songmu/ecschedule@e7e55a86451b0816269a9d551951d517075477dd # v0.15.0
+        uses: Songmu/ecschedule@5fcc5e5b08af78d797c2b9e94b6f9a8ff9f7b626 # v0.15.3
 
       - name: register taskdef by ecspresso
         working-directory: ecspresso
