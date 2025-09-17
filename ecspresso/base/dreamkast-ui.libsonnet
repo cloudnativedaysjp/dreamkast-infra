@@ -132,7 +132,7 @@ local const = import './const.libsonnet';
         // container: dreamkast-otelcol
         //
         assert mackerelSecretManagerName != '';
-        root.containerDefinitionCommon {
+        {
           name: 'otelcol',
           image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-otelcol:branch-main' % [const.accountID, region],
           cpu: const.otelcolSidecarResources.cpu,
