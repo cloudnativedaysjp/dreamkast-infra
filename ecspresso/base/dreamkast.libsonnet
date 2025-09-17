@@ -51,9 +51,7 @@ local util = import './util.libsonnet';
     enableLogging=false,
     enableLokiLogging=false,
     lokiEndpoint='',
-    enableMackerelSidecar=false,
     mackerelSecretManagerName='',
-    mackerelRoles='',
     enableOtelcolSidecar=false,
     otelcolConfig='',
     reviewapp=false,
@@ -216,9 +214,9 @@ local util = import './util.libsonnet';
       //
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
-        memory: util.mainContainerMemory(memory, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
-        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableMackerelSidecar, enableOtelcolSidecar),
+        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableOtelcolSidecar),
+        memory: util.mainContainerMemory(memory, enableLokiLogging, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableOtelcolSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -315,46 +313,6 @@ local util = import './util.libsonnet';
         } else {},
       ] else []
     ) + (
-      if enableMackerelSidecar then [
-        //
-        // container: mackerel-container-agent
-        //
-        assert mackerelSecretManagerName != '';
-        root.containerDefinitionCommon {
-          name: 'mackerel-container-agent',
-          image: 'mackerel/mackerel-container-agent:latest',
-          cpu: const.mackerelSidecarResources.cpu,
-          memory: const.mackerelSidecarResources.memory,
-          memoryReservation: const.mackerelSidecarResources.memoryReservation,
-          environment: [
-            {
-              name: 'MACKEREL_CONTAINER_PLATFORM',
-              value: 'ecs',
-            },
-            {
-              name: 'MACKEREL_ROLES',
-              value: mackerelRoles,
-            },
-          ],
-          secrets: [
-            {
-              valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, mackerelSecretManagerName],
-              name: 'MACKEREL_APIKEY',
-            },
-          ],
-        } + if enableLogging then {
-          logConfiguration: {
-            logDriver: 'awslogs',
-            options: {
-              'awslogs-group': family,
-              'awslogs-create-group': 'true',
-              'awslogs-region': region,
-              'awslogs-stream-prefix': 'mackerel-agent',
-            },
-          },
-        } else {},
-      ] else []
-    ) + (
       if enableOtelcolSidecar then [
         //
         // container: dreamkast-otelcol
@@ -367,7 +325,7 @@ local util = import './util.libsonnet';
           memory: const.otelcolSidecarResources.memory,
           memoryReservation: const.otelcolSidecarResources.memoryReservation,
           entryPoint: ['bash', '-c'],
-          command: ['echo "${OTELCOL_CONFIG}" > /etc/otelcol-config.yaml; /usr/local/bin/otelcol --config=/etc/otelcol-config.yaml'],
+          command: ['echo "${OTELCOL_CONFIG}" > /mnt/otelcol-config.yaml; /usr/local/bin/otelcol --config=/mnt/otelcol-config.yaml'],
           environment: [
             {
               name: 'OTELCOL_CONFIG',
