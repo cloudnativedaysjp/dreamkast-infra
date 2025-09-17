@@ -16,7 +16,7 @@ dreamkast_ui.taskDef(
 
   enableLogging=true,
 
-  enableOtelcolSidecar=true,
+  enableOtelcolSidecar=false,
   mackerelSecretManagerName=const.secretManager.mackerel,
   otelcolConfig=otelcol_config,
 )
