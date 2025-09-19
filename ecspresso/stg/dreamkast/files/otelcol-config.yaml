@@ -21,7 +21,7 @@ receivers:
       paging:
 
 processors:
-  attributes/app:
+  attributes:
     actions:
       - action: upsert
         key: service.namespace
@@ -34,7 +34,9 @@ processors:
         value: stg
   batch:
     timeout: 1m
-  resourcedetection/app:
+  probabilistic_sampler:
+    sampling_percentage: 5
+  resourcedetection:
     detectors: [env, ecs]
     timeout: 2s
     override: false
@@ -45,15 +47,20 @@ exporters:
     compression: gzip
     headers:
       Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+  otlphttp/mackerel-trace:
+    endpoint: https://otlp-vaxila.mackerelio.com
+    headers:
+      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+      Accept: "*/*"
 
 service:
   pipelines:
-    metrics/app:
+    metrics:
       receivers: [otlp, hostmetrics]
-      processors: [attributes/app, batch, resourcedetection/app]
+      processors: [attributes, resourcedetection, batch]
       exporters: [otlp/mackerel]
-    traces/app:
+    traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp/mackerel]
+      processors: [attributes, resourcedetection, probabilistic_sampler, batch]
+      exporters: [otlphttp/mackerel-trace]
   extensions: [health_check]
