@@ -1,5 +1,6 @@
 local dreamkast_ui = import '../../base/dreamkast-ui.libsonnet';
 local const = import '../const.libsonnet';
+local otelcol_config = importstr './files/otelcol-config.yaml';
 
 dreamkast_ui.taskDef(
   family='dreamkast-stg-ui',
@@ -14,4 +15,8 @@ dreamkast_ui.taskDef(
   dkUiSecretManagerName=const.secretManager.dkUi,
 
   enableLogging=true,
+
+  enableOtelcolSidecar=true,
+  mackerelSecretManagerName=const.secretManager.mackerel,
+  otelcolConfig=otelcol_config,
 )

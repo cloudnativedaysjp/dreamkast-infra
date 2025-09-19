@@ -28,7 +28,7 @@ processors:
         value: dreamkast
       - action: upsert
         key: service.name
-        value: dreamkast
+        value: dreamkast-fifo-worker
       - action: upsert
         key: deployment.environment.name
         value: stg

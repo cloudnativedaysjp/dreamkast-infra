@@ -28,10 +28,10 @@ processors:
         value: dreamkast
       - action: upsert
         key: service.name
-        value: dreamkast
+        value: dreamkast-ui
       - action: upsert
         key: deployment.environment.name
-        value: stg
+        value: prod
   batch:
     timeout: 1m
   resourcedetection/app:
