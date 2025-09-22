@@ -220,8 +220,8 @@ local util = import './util.libsonnet';
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
-            name: 'OTEL_SERVICE_NAME',
-            value: 'dreamkast',
+            name: 'OTEL_ENDPOINT',
+            value: 'http://localhost:4318/v1/traces',
           },
           {
             name: 'AWS_REGION',
