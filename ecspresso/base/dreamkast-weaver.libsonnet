@@ -55,7 +55,6 @@ local const = import './const.libsonnet';
       command: [],
       restartPolicy: { enabled: true },
 
-      cpu: error 'must be overridden',
       memory: error 'must be overridden',
       essential: false,
 
@@ -136,7 +135,6 @@ local const = import './const.libsonnet';
         name: 'dkw-serve',
         entryPoint: ['/dkw', 'serve'],
         command: ['--port=8080'],
-        cpu: cpu,
         memory: memory,
         memoryReservation: memory,
         essential: true,

@@ -101,7 +101,6 @@ local const = import './const.libsonnet';
           },
         ],
         essential: true,
-        cpu: cpu,
         memory: memory,
         memoryReservation: memory,
         portMappings: [
