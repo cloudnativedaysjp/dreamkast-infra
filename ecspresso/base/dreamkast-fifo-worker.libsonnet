@@ -1,5 +1,6 @@
 local common = import './common.libsonnet';
 local const = import './const.libsonnet';
+local util = import './util.libsonnet';
 
 {
   serviceDef(
@@ -57,8 +58,8 @@ local const = import './const.libsonnet';
         image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-ecs:%s' % [const.accountID, region, imageTag],
         entryPoint: ['bundle'],
         command: ['exec', 'rake', 'aws_sqs:fifo_job'],
-        memory: memory,
-        memoryReservation: memory,
+        memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
         essential: true,
         restartPolicy: { enabled: true },
         environment: [
@@ -176,6 +177,8 @@ local const = import './const.libsonnet';
           cpu: const.otelcolSidecarResources.cpu,
           memory: const.otelcolSidecarResources.memory,
           memoryReservation: const.otelcolSidecarResources.memoryReservation,
+          essential: false,
+          restartPolicy: { enabled: true },
           entryPoint: ['bash', '-c'],
           command: ['echo "${OTELCOL_CONFIG}" > /mnt/otelcol-config.yaml; /usr/local/bin/otelcol --config=/mnt/otelcol-config.yaml'],
           environment: [

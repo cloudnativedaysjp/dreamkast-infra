@@ -1,5 +1,6 @@
 local common = import './common.libsonnet';
 local const = import './const.libsonnet';
+local util = import './util.libsonnet';
 
 {
   serviceDef(
@@ -135,8 +136,8 @@ local const = import './const.libsonnet';
         name: 'dkw-serve',
         entryPoint: ['/dkw', 'serve'],
         command: ['--port=8080'],
-        memory: memory,
-        memoryReservation: memory,
+        memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
