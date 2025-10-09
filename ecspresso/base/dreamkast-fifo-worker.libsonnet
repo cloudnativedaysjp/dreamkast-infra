@@ -58,6 +58,7 @@ local util = import './util.libsonnet';
         image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-ecs:%s' % [const.accountID, region, imageTag],
         entryPoint: ['bundle'],
         command: ['exec', 'rake', 'aws_sqs:fifo_job'],
+        cpu: cpu,
         memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
         memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
         essential: true,

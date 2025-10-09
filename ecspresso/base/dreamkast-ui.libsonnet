@@ -102,6 +102,7 @@ local util = import './util.libsonnet';
           },
         ],
         essential: true,
+        cpu: cpu,
         memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
         memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
         portMappings: [
