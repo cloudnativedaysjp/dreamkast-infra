@@ -56,6 +56,7 @@ local util = import './util.libsonnet';
       command: [],
       restartPolicy: { enabled: true },
 
+      cpu: error 'must be overridden',
       memory: error 'must be overridden',
       essential: false,
 
@@ -136,6 +137,7 @@ local util = import './util.libsonnet';
         name: 'dkw-serve',
         entryPoint: ['/dkw', 'serve'],
         command: ['--port=8080'],
+        cpu: cpu,
         memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
         memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
         essential: true,
