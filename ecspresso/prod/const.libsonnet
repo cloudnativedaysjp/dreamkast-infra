@@ -8,7 +8,7 @@
     loki: 'https://loki.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: 'release-v4.17.7',
+    dreamkast_ecs: 'release-v4.17.8',
     dreamkast_ui: 'release-v2.11.19',
     dreamkast_weaver: 'release-v0.5.3',
     seaman: 'release-v1.0.8',
