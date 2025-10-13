@@ -15,69 +15,58 @@ permissions:
 
 jobs:
   ecspresso:
+    strategy:
+      matrix:
+        environment:
+        - prod
+        - stg
+        - reviewapps
     runs-on: "ubuntu-latest"
     permissions:
       contents: read
       id-token: write
     timeout-minutes: 30
     steps:
-      - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          persist-credentials: false
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5.0.0
         with:
           aws-region: ap-northeast-1
           role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
 
-      - name: Install ecspresso
-        uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
-
-      - name: run ecspresso
-        working-directory: ecspresso
-        run: |
-          # shellcheck disable=SC2016
-          find . -name "ecspresso.jsonnet" | grep -v "reviewapps/template" \
-            | xargs -I{} -P10 bash -c \
-            '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
-
-  ecschedule:
-    runs-on: "ubuntu-latest"
-    permissions:
-      contents: read
-      id-token: write
-    timeout-minutes: 30
-    steps:
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           persist-credentials: false
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5.0.0
-        with:
-          aws-region: ap-northeast-1
-          role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
-
       - name: Install ecspresso
         uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
-
       - name: Install ecschedule
         uses: Songmu/ecschedule@5fcc5e5b08af78d797c2b9e94b6f9a8ff9f7b626 # v0.15.3
 
-      - name: register taskdef by ecspresso
-        working-directory: ecspresso
+      #
+      # ecschedule
+      #
+      - name: register taskdef for ecschedule
+        working-directory: "ecspresso/${{matrix.environment}}"
         run: |
           # shellcheck disable=SC2016
-          find . -name "ecspresso.taskdef.jsonnet" | grep -v "reviewapps/template" \
+          find . -name "ecspresso.taskdef.jsonnet" | grep -vE "^./template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} register'
-
       - name: ecschedule apply
-        working-directory: ecspresso
+        working-directory: "ecspresso/${{matrix.environment}}"
         run: |
-          find . -name "ecschedule.jsonnet" | grep -v "reviewapps/template" \
+          find . -name "ecschedule.jsonnet" | grep -vE "^./template" \
             | xargs -I{} -P10 bash -c \
             'ecschedule apply -conf {} -all'
+
+      #
+      # ecspresso
+      #
+      - name: run ecspresso
+        working-directory: "ecspresso/${{matrix.environment}}"
+        run: |
+          # shellcheck disable=SC2016
+          find . -name "ecspresso.jsonnet" | grep -vE "^./template" \
+            | xargs -I{} -P10 bash -c \
+            '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
+
