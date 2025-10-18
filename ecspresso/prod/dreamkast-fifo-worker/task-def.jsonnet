@@ -3,7 +3,7 @@ local const = import '../const.libsonnet';
 local otelcol_config = importstr './files/otelcol-config.yaml';
 
 dreamkast_fifo_worker.taskDef(
-  family='dreamkast-prod-fifo-worker',
+  family='dreamkast-prod-dk',
   taskRoleName='dreamkast-prod-ecs-dreamkast-fifo-worker',
   executionRoleName=const.executionRoleName,
   imageTag=const.imageTags.dreamkast_ecs,
