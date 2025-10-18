@@ -48,7 +48,7 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
         },
         {
           name: 'DREAMKAST_NAMESPACE',
-          value: 'dreamkast-prod-dk',
+          value: 'dreamkast',
         },
       ],
       secrets: [
