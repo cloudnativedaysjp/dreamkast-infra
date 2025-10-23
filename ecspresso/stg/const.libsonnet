@@ -8,7 +8,7 @@
     loki: 'https://stg.loki.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: 'main-41d41435d5e58946d51379cb50d841a95e83dcdc',
+    dreamkast_ecs: 'main-04989a9be3aff6ee356be98ca78aade94d58f7f0',
     dreamkast_ui: 'main-6af781a8e2ae6e1e54dc21c4545adf8f77e99b36',
     dreamkast_weaver: 'main-bdb4717b60763212bbfe9955616393daf6fa54a0',
     redis: '6.0',
