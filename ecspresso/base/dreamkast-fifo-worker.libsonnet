@@ -106,8 +106,8 @@ local util = import './util.libsonnet';
           },
           {
             name: 'DREAMKAST_NAMESPACE',
-            value: if family == 'dreamkast-prd-ui' then 'dreamkast'
-            else if family == 'dreamkast-stg-ui' then 'dreamkast-staging'
+            value: if family == 'dreamkast-prod-fifo-worker' then 'dreamkast'
+            else if family == 'dreamkast-stg-fifo-worker' then 'dreamkast-staging'
             else family,
           },
           {
