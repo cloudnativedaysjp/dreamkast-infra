@@ -85,10 +85,6 @@ local util = import './util.libsonnet';
             value: sentryDsn,
           },
           {
-            name: 'OTEL_SERVICE_NAME',
-            value: 'dreamkast-fifo-worker',
-          },
-          {
             name: 'S3_BUCKET',
             value: s3BucketName,
           },
