@@ -25,7 +25,7 @@ dreamkast_fifo_worker.taskDef(
 
   enableLogging=true,
 
-  enableOtelcolSidecar=false,
+  enableOtelcolSidecar=true,
   mackerelSecretManagerName=const.secretManager.mackerel,
   otelcolConfig=otelcol_config,
 )
