@@ -21,7 +21,7 @@ receivers:
       paging:
 
 processors:
-  attributes/app:
+  attributes:
     actions:
       - action: upsert
         key: service.namespace
@@ -34,10 +34,36 @@ processors:
         value: prod
   batch:
     timeout: 1m
-  resourcedetection/app:
+  resourcedetection:
     detectors: [env, ecs]
     timeout: 2s
     override: false
+  tail_sampling:
+    policies:
+      - name: include http 5xx
+        type: or
+        or:
+          or_sub_policy:
+            - name: http response status
+              type: numeric_attribute
+              numeric_attribute:
+                key: http.response.status_code
+                min_value: 500
+                max_value: 599
+            - name: http status
+              type: numeric_attribute
+              numeric_attribute:
+                key: http.status_code
+                min_value: 500
+                max_value: 599
+      - name: include slow http
+        type: latency
+        latency:
+          threshold_ms: 1000
+      - name: include random sample
+        type: probabilistic
+        probabilistic:
+          sampling_percentage: 0.1
 
 exporters:
   otlp/mackerel:
@@ -45,15 +71,20 @@ exporters:
     compression: gzip
     headers:
       Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+  otlphttp/mackerel-trace:
+    endpoint: https://otlp-vaxila.mackerelio.com
+    headers:
+      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+      Accept: "*/*"
 
 service:
   pipelines:
-    metrics/app:
+    metrics:
       receivers: [otlp, hostmetrics]
-      processors: [attributes/app, batch, resourcedetection/app]
+      processors: [attributes, resourcedetection, batch]
       exporters: [otlp/mackerel]
-    traces/app:
+    traces:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp/mackerel]
+      processors: [attributes, resourcedetection, tail_sampling, batch]
+      exporters: [otlphttp/mackerel-trace]
   extensions: [health_check]
