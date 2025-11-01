@@ -52,8 +52,4 @@ service:
       receivers: [otlp, hostmetrics]
       processors: [attributes/app, batch, resourcedetection/app]
       exporters: [otlp/mackerel]
-    traces/app:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp/mackerel]
   extensions: [health_check]
