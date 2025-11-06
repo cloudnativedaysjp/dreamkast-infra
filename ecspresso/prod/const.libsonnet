@@ -33,7 +33,7 @@
   secretManager: {
     dk: 'dreamkast/production-env-DIVwmP',
     dkUi: 'dreamkast-ui/production-env-OEnUAF',
-    mackerel: 'dreamkast/mackerel-api-key-zz4Oyb',
+    mackerel: 'observability/mackerel/api-key-tjOHnb',
     railsApp: 'dreamkast/rails-app-secret-g6fKNJ',
     rds: 'dreamkast-prod-rds-secret-D2cSKm',
     releasebot: 'dreamkast-releasebot-zHsXND',
