@@ -40,22 +40,18 @@ processors:
     override: false
   tail_sampling:
     policies:
-      - name: include http 5xx
-        type: or
-        or:
-          or_sub_policy:
-            - name: http response status
-              type: numeric_attribute
-              numeric_attribute:
-                key: http.response.status_code
-                min_value: 500
-                max_value: 599
-            - name: http status
-              type: numeric_attribute
-              numeric_attribute:
-                key: http.status_code
-                min_value: 500
-                max_value: 599
+      - name: include http 5xx response status
+        type: numeric_attribute
+        numeric_attribute:
+          key: http.response.status_code
+          min_value: 500
+          max_value: 599
+      - name: include http 5xx status
+        type: numeric_attribute
+        numeric_attribute:
+          key: http.status_code  # dreamkastはこの古い仕様で送っている
+          min_value: 500
+          max_value: 599
       - name: include slow http
         type: latency
         latency:
