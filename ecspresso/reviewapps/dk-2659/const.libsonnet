@@ -7,7 +7,7 @@
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ecs: 'commit-e59dfefb1e2ec046b0b56681bf9613a972d6345e',
+    dreamkast_ecs: 'commit-c7bf7a957f39dc14bba5bdca167a51d50b161524',
     mysql: '8.0.33',
     redis: '6.0',
   },
