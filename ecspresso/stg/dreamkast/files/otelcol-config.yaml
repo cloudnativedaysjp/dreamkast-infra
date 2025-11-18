@@ -55,7 +55,7 @@ processors:
       - name: include slow http
         type: latency
         latency:
-          threshold_ms: 1000
+          threshold_ms: 6000
       - name: include random sample
         type: probabilistic
         probabilistic:
