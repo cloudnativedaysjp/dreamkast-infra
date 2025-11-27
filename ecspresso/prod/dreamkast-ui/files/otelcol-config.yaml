@@ -32,24 +32,18 @@ processors:
       - action: upsert
         key: deployment.environment.name
         value: prod
-  batch:
-    timeout: 1m
   resourcedetection/app:
     detectors: [env, ecs]
     timeout: 2s
     override: false
 
 exporters:
-  otlp/mackerel:
-    endpoint: otlp.mackerelio.com:4317
-    compression: gzip
-    headers:
-      Mackerel-Api-Key: ${env:MACKEREL_APIKEY}
+  mackerelotlp:
 
 service:
   pipelines:
     metrics/app:
       receivers: [otlp, hostmetrics]
-      processors: [attributes/app, batch, resourcedetection/app]
-      exporters: [otlp/mackerel]
+      processors: [attributes/app, resourcedetection/app]
+      exporters: [mackerelotlp]
   extensions: [health_check]
