@@ -114,7 +114,12 @@ local util = import './util.libsonnet';
             name: 'BROWSER_PATH',
             value: '/usr/bin/google-chrome',
           },
-        ],
+        ] + if reviewapp == true then [
+          {
+            name: 'REVIEW_APP',
+            value: 'true',
+          },
+        ] else [],
         secrets: [
           // from rails-app-secret Secret
           {
