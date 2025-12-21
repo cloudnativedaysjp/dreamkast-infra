@@ -1,6 +1,6 @@
 {
   accountID: '607167088920',
-  eventName: 'cndw2025',  // used by basePath for dreamkast-ui
+  eventName: 'cnk',  // used by basePath for dreamkast-ui
   fluentBitLokiResources: {
     cpu: 64,
     memory: 128,
