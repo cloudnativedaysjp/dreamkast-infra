@@ -2,7 +2,7 @@ name: Auto Warm-up ECS Replicas
 
 on:
   schedule:
-    - cron: '0 15 * * *'  # Runs every day at 3 PM UTC, which is midnight UTC+9
+    - cron: '0 15 * * *'  # every 00:15 AM (JST)
   workflow_dispatch:
 
 env:
