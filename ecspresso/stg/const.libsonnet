@@ -44,6 +44,9 @@
     dk: 'srv-vb6353dahtneltjh',
     redis: 'srv-bbwl53e4dfx2omtm',
   },
+  sgtm: {
+    containerConfig: 'PLACEHOLDER',
+  },
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',
   },
