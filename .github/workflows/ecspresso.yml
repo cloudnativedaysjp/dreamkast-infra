@@ -28,19 +28,19 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@a03048d87541d1d9fcf2ecf528a4a65ba9bd7838 # v5.0.0
+        uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
           aws-region: ap-northeast-1
           role-to-assume: "arn:aws:iam::607167088920:role/github-actions-dreamkast"
 
       - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
         with:
           persist-credentials: false
       - name: Install ecspresso
         uses: kayac/ecspresso@e048f284f6b81b4f99085a963838c762be99361c # v2
       - name: Install ecschedule
-        uses: Songmu/ecschedule@5fcc5e5b08af78d797c2b9e94b6f9a8ff9f7b626 # v0.15.3
+        uses: Songmu/ecschedule@f7cf72e12885168815ae575166aee38b055066d0 # v0.17.2
 
       #
       # ecschedule
