@@ -7,6 +7,6 @@ sgtm.taskDef(
   executionRoleName=const.executionRoleName,
   region=const.region,
   imageTag=const.imageTags.sgtm,
-  containerConfig=const.sgtm.containerConfig,
+  sgtmSecretManagerName=const.secretManager.sgtm,
   enableLogging=true,
 )

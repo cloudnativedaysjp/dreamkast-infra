@@ -33,7 +33,7 @@ local const = import './const.libsonnet';
 		executionRoleName,
 		region,
 		imageTag,
-		containerConfig,
+		sgtmSecretManagerName,
 		enableLogging=true,
 	):: {
 		executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
@@ -58,9 +58,11 @@ local const = import './const.libsonnet';
 						name: 'PORT',
 						value: '8080',
 					},
+				],
+				secrets: [
 					{
 						name: 'CONTAINER_CONFIG',
-						value: containerConfig,
+						valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, sgtmSecretManagerName],
 					},
 				],
 				portMappings: [{

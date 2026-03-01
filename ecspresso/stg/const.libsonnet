@@ -37,6 +37,7 @@
     mackerel: 'observability/mackerel/api-key-tjOHnb',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
+    sgtm: 'dreamkast/sgtm-config-staging-69uWUR',
   },
   sentry: {
     dsn: 'https://3ae606172e0b82cec45c674e905ab233@o414348.ingest.us.sentry.io/4509089530904576',
@@ -45,9 +46,7 @@
     dk: 'srv-vb6353dahtneltjh',
     redis: 'srv-bbwl53e4dfx2omtm',
   },
-  sgtm: {
-    containerConfig: 'PLACEHOLDER',
-  },
+  sgtm: {},
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',
   },
