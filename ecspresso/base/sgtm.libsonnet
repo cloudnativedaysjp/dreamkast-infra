@@ -25,69 +25,69 @@ local const = import './const.libsonnet';
       ],
     },
 
-	taskDef(
-		family,
-		cpu=256,
-		memory=512,
-		taskRoleName,
-		executionRoleName,
-		region,
-		imageTag,
-		sgtmSecretManagerName,
-		enableLogging=true,
-	):: {
-		executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
-		taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
-		family: family,
-		cpu: '%s' % [cpu],
-		memory: '%s' % [memory],
-		networkMode: 'awsvpc',
-		requiresCompatibilities: ['FARGATE'],
-		volumes: [],
-		containerDefinitions: [
-			{
-				name: 'sgtm',
-				image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-sgtm:%s' % [const.accountID, region, imageTag],
-				cpu: cpu,
-				memory: memory,
-				memoryReservation: memory,
-				essential: true,
-				restartPolicy: { enabled: true },
-				environment: [
-					{
-						name: 'PORT',
-						value: '8080',
-					},
-				],
-				secrets: [
-					{
-						name: 'CONTAINER_CONFIG',
-						valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, sgtmSecretManagerName],
-					},
-				],
-				portMappings: [{
-					containerPort: 8080,
-					hostPort: 8080,
-					protocol: 'tcp',
-				}],
-				healthCheck: {
-					command: ['CMD-SHELL', 'curl -f http://localhost:8080/healthz || exit 1'],
-					interval: 30,
-					timeout: 5,
-					retries: 3,
-					startPeriod: 60,
-				},
-			} + if enableLogging then {
-				logConfiguration: {
-					logDriver: 'awslogs',
-					options: {
-						'awslogs-group': family,
-						'awslogs-create-group': 'true',
-						'awslogs-region': region,
-						'awslogs-stream-prefix': 'sgtm',
-					},
-				},
-			} else {},
-		],
-	},
+  taskDef(
+    family,
+    cpu=256,
+    memory=512,
+    taskRoleName,
+    executionRoleName,
+    region,
+    imageTag,
+    sgtmSecretManagerName,
+    enableLogging=true,
+  ):: {
+    executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
+    taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
+    family: family,
+    cpu: '%s' % [cpu],
+    memory: '%s' % [memory],
+    networkMode: 'awsvpc',
+    requiresCompatibilities: ['FARGATE'],
+    volumes: [],
+    containerDefinitions: [
+      {
+        name: 'sgtm',
+        image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-sgtm:%s' % [const.accountID, region, imageTag],
+        cpu: cpu,
+        memory: memory,
+        memoryReservation: memory,
+        essential: true,
+        restartPolicy: { enabled: true },
+        environment: [
+          {
+            name: 'PORT',
+            value: '8080',
+          },
+        ],
+        secrets: [
+          {
+            name: 'CONTAINER_CONFIG',
+            valueFrom: 'arn:aws:secretsmanager:%s:%s:secret:%s' % [region, const.accountID, sgtmSecretManagerName],
+          },
+        ],
+        portMappings: [{
+          containerPort: 8080,
+          hostPort: 8080,
+          protocol: 'tcp',
+        }],
+        healthCheck: {
+          command: ['CMD-SHELL', 'curl -f http://localhost:8080/healthz || exit 1'],
+          interval: 30,
+          timeout: 5,
+          retries: 3,
+          startPeriod: 60,
+        },
+      } + if enableLogging then {
+        logConfiguration: {
+          logDriver: 'awslogs',
+          options: {
+            'awslogs-group': family,
+            'awslogs-create-group': 'true',
+            'awslogs-region': region,
+            'awslogs-stream-prefix': 'sgtm',
+          },
+        },
+      } else {},
+    ],
+  },
 }
