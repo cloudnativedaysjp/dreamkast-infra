@@ -12,6 +12,7 @@
     dreamkast_ui: 'main-daa1144c8655bb806987a794b12c3a79ec72ad20',
     dreamkast_weaver: 'main-2e3a8f1fd93e2f9e6b571bb226a136e70705c7b8',
     redis: '6.0',
+    sgtm: '4.2.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.staging.local',
@@ -36,6 +37,7 @@
     mackerel: 'observability/mackerel/api-key-tjOHnb',
     railsApp: 'dreamkast/rails-app-secret-SqidNC',
     rds: 'dreamkast-stg-rds-secret-0dsVhM',
+    sgtm: 'dreamkast/sgtm-config-staging-69uWUR',
   },
   sentry: {
     dsn: 'https://3ae606172e0b82cec45c674e905ab233@o414348.ingest.us.sentry.io/4509089530904576',
@@ -44,6 +46,7 @@
     dk: 'srv-vb6353dahtneltjh',
     redis: 'srv-bbwl53e4dfx2omtm',
   },
+  sgtm: {},
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',
   },
