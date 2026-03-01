@@ -2,28 +2,28 @@ local common = import './common.libsonnet';
 local const = import './const.libsonnet';
 
 {
-	serviceDef(
-		region,
-		replicas=1,
-		subnetIDs=[],
-		securityGroupID,
-		targetGroupArn,
-	)::
-		common.serviceDef(
-			region,
-			replicas,
-			subnetIDs,
-			securityGroupID,
-		) + {
-			healthCheckGracePeriodSeconds: 60,
-			loadBalancers: [
-				{
-					containerName: 'sgtm',
-					containerPort: 8080,
-					targetGroupArn: targetGroupArn,
-				},
-			],
-		},
+  serviceDef(
+    region,
+    replicas=1,
+    subnetIDs=[],
+    securityGroupID,
+    targetGroupArn,
+  )::
+    common.serviceDef(
+      region,
+      replicas,
+      subnetIDs,
+      securityGroupID,
+    ) + {
+      healthCheckGracePeriodSeconds: 60,
+      loadBalancers: [
+        {
+          containerName: 'sgtm',
+          containerPort: 8080,
+          targetGroupArn: targetGroupArn,
+        },
+      ],
+    },
 
 	taskDef(
 		family,
