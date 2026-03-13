@@ -70,13 +70,6 @@ local const = import './const.libsonnet';
           hostPort: 8080,
           protocol: 'tcp',
         }],
-        healthCheck: {
-          command: ['CMD-SHELL', 'curl -f http://localhost:8080/healthz || exit 1'],
-          interval: 30,
-          timeout: 5,
-          retries: 3,
-          startPeriod: 60,
-        },
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
