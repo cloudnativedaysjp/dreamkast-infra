@@ -12,6 +12,7 @@
     dreamkast_ui: 'release-v2.11.23',
     dreamkast_weaver: 'release-v0.5.3',
     seaman: 'release-v1.0.8',
+    sgtm: '4.2.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
@@ -37,6 +38,7 @@
     railsApp: 'dreamkast/rails-app-secret-g6fKNJ',
     rds: 'dreamkast-prod-rds-secret-D2cSKm',
     releasebot: 'dreamkast-releasebot-zHsXND',
+    sgtm: 'dreamkast/sgtm-config-production',
   },
   sentry: {
     dsn: 'https://3ae606172e0b82cec45c674e905ab233@o414348.ingest.us.sentry.io/4509089530904576',
@@ -44,6 +46,7 @@
   serviceDiscovery: {
     dk: 'srv-x5wza5r7otdcwmt3',
   },
+  sgtm: {},
   sqs: {
     fifo: 'dreamkast-prod-fifo-queue',
     mail: 'dreamkast-prod-mail-queue',
