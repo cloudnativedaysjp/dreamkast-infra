@@ -24,7 +24,7 @@
     },
   },
   sqs: {
-    fifo: 'dreamkast-stg-fifo-queue',
+    fifo: 'dreamkast-dev-fifo-queue',
   },
   targetGroupArn: {
     dk: error 'you must replace this value',
