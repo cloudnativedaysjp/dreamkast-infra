@@ -37,12 +37,15 @@ local util = import './util.libsonnet';
     rdsSecretManagerName,
     dreamkastSecretManagerName,
     enableLogging=false,
+    enableLokiLogging=false,
+    lokiEndpoint='',
     enableOtelcolSidecar=false,
     mackerelSecretManagerName='',
     otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,
+    assert (enableLogging && enableLokiLogging) != true,
 
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
     taskRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, taskRoleName],
@@ -58,9 +61,9 @@ local util = import './util.libsonnet';
         image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-ecs:%s' % [const.accountID, region, imageTag],
         entryPoint: ['bundle'],
         command: ['exec', 'rake', 'aws_sqs:fifo_job'],
-        cpu: cpu,
-        memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
-        memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
+        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableOtelcolSidecar),
+        memory: util.mainContainerMemory(memory, enableLokiLogging, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableOtelcolSidecar),
         essential: true,
         restartPolicy: { enabled: true },
         environment: [
@@ -159,7 +162,12 @@ local util = import './util.libsonnet';
         links: [],
         mountPoints: [],
         volumesFrom: [],
-        dependsOn: [],
+        dependsOn: if enableLokiLogging then [
+          {
+            containerName: 'log_router',
+            condition: 'START',
+          },
+        ] else [],
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
@@ -170,8 +178,58 @@ local util = import './util.libsonnet';
             'awslogs-stream-prefix': 'dreamkast-fifo-worker',
           },
         },
+      } else if enableLokiLogging then {
+        assert lokiEndpoint != '',
+        logConfiguration: {
+          logDriver: 'awsfirelens',
+          options: {
+            RemoveKeys: 'container_id,ecs_task_arn',
+            LineFormat: 'key_value',
+            Labels: '{job="%s"}' % [family],
+            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+            Name: 'grafana-loki',
+          },
+        },
       } else {},
     ] + (
+      if enableLokiLogging then [
+        //
+        // container: fluent-bit-plugin-loki
+        //
+        assert lokiEndpoint != '';
+        {
+          name: 'log_router',
+          user: '0',
+          image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+          cpu: const.fluentBitLokiResources.cpu,
+          memory: const.fluentBitLokiResources.memory,
+          memoryReservation: const.fluentBitLokiResources.memoryReservation,
+          essential: false,
+          environment: [],
+          secrets: [],
+          portMappings: [],
+          mountPoints: [],
+          volumesFrom: [],
+          firelensConfiguration: {
+            type: 'fluentbit',
+            options: {
+              'enable-ecs-log-metadata': 'true',
+            },
+          },
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'firelens',
+            },
+          },
+        } else {},
+      ] else []
+    ) + (
       if enableOtelcolSidecar then [
         //
         // container: dreamkast-otelcol
@@ -207,6 +265,19 @@ local util = import './util.libsonnet';
               'awslogs-create-group': 'true',
               'awslogs-region': region,
               'awslogs-stream-prefix': 'otelcol',
+            },
+          },
+        } else if enableLokiLogging then {
+          assert lokiEndpoint != '',
+          logConfiguration: {
+            logDriver: 'awsfirelens',
+            options: {
+              RemoveKeys: 'container_id,ecs_task_arn',
+              LineFormat: 'key_value',
+              Labels: '{job="%s"}' % [family],
+              LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+              Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+              Name: 'grafana-loki',
             },
           },
         } else {},
