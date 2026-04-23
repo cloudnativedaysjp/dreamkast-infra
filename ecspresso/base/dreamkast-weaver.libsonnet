@@ -39,12 +39,15 @@ local util = import './util.libsonnet';
     rdbInternalEndpoint,
     rdsSecretManagerName,
     enableLogging=false,
+    enableLokiLogging=false,
+    lokiEndpoint='',
     enableOtelcolSidecar=false,
     mackerelSecretManagerName='',
     otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,
+    assert (enableLogging && enableLokiLogging) != true,
     //
     // Templates
     //
@@ -122,6 +125,12 @@ local util = import './util.libsonnet';
         entryPoint: ['/dkw', 'dbmigrate'],
         cpu: 0,
         memory: memory,
+        dependsOn: if enableLokiLogging then [
+          {
+            containerName: 'log_router',
+            condition: 'START',
+          },
+        ] else [],
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
@@ -132,14 +141,27 @@ local util = import './util.libsonnet';
             'awslogs-stream-prefix': 'dkw-dbmigrate',
           },
         },
+      } else if enableLokiLogging then {
+        assert lokiEndpoint != '',
+        logConfiguration: {
+          logDriver: 'awsfirelens',
+          options: {
+            RemoveKeys: 'container_id,ecs_task_arn',
+            LineFormat: 'key_value',
+            Labels: '{job="%s"}' % [family],
+            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+            Name: 'grafana-loki',
+          },
+        },
       } else {},
       root.containerDefinitionCommon {
         name: 'dkw-serve',
         entryPoint: ['/dkw', 'serve'],
         command: ['--port=8080'],
-        cpu: cpu,
-        memory: util.mainContainerMemory(memory, false, enableOtelcolSidecar),
-        memoryReservation: util.mainContainerMemoryReservation(memory, false, enableOtelcolSidecar),
+        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableOtelcolSidecar),
+        memory: util.mainContainerMemory(memory, enableLokiLogging, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableOtelcolSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -165,7 +187,12 @@ local util = import './util.libsonnet';
             containerName: 'dkw-dbmigrate',
             condition: 'SUCCESS',
           },
-        ],
+        ] + if enableLokiLogging then [
+          {
+            containerName: 'log_router',
+            condition: 'START',
+          },
+        ] else [],
       } + if enableLogging then {
         logConfiguration: {
           logDriver: 'awslogs',
@@ -176,8 +203,54 @@ local util = import './util.libsonnet';
             'awslogs-stream-prefix': 'dkw-serve',
           },
         },
+      } else if enableLokiLogging then {
+        assert lokiEndpoint != '',
+        logConfiguration: {
+          logDriver: 'awsfirelens',
+          options: {
+            RemoveKeys: 'container_id,ecs_task_arn',
+            LineFormat: 'key_value',
+            Labels: '{job="%s"}' % [family],
+            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+            Name: 'grafana-loki',
+          },
+        },
       } else {},
     ] + (
+      if enableLokiLogging then [
+        //
+        // container: fluent-bit-plugin-loki
+        //
+        assert lokiEndpoint != '';
+        root.containerDefinitionCommon {
+          name: 'log_router',
+          user: '0',
+          image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+          cpu: const.fluentBitLokiResources.cpu,
+          memory: const.fluentBitLokiResources.memory,
+          memoryReservation: const.fluentBitLokiResources.memoryReservation,
+          environment: [],
+          secrets: [],
+          firelensConfiguration: {
+            type: 'fluentbit',
+            options: {
+              'enable-ecs-log-metadata': 'true',
+            },
+          },
+        } + if enableLogging then {
+          logConfiguration: {
+            logDriver: 'awslogs',
+            options: {
+              'awslogs-group': family,
+              'awslogs-create-group': 'true',
+              'awslogs-region': region,
+              'awslogs-stream-prefix': 'firelens',
+            },
+          },
+        } else {},
+      ] else []
+    ) + (
       if enableOtelcolSidecar then [
         //
         // container: dreamkast-otelcol
@@ -211,6 +284,19 @@ local util = import './util.libsonnet';
               'awslogs-create-group': 'true',
               'awslogs-region': region,
               'awslogs-stream-prefix': 'otelcol',
+            },
+          },
+        } else if enableLokiLogging then {
+          assert lokiEndpoint != '',
+          logConfiguration: {
+            logDriver: 'awsfirelens',
+            options: {
+              RemoveKeys: 'container_id,ecs_task_arn',
+              LineFormat: 'key_value',
+              Labels: '{job="%s"}' % [family],
+              LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+              Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+              Name: 'grafana-loki',
             },
           },
         } else {},
