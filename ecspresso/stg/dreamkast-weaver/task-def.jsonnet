@@ -14,7 +14,10 @@ dreamkast_weaver.taskDef(
 
   rdsSecretManagerName=const.secretManager.rds,
 
-  enableLogging=true,
+  enableLogging=false,
+
+  enableLokiLogging=true,
+  lokiEndpoint=const.externalEndpoints.loki,
 
   enableOtelcolSidecar=false,
   mackerelSecretManagerName=const.secretManager.mackerel,
