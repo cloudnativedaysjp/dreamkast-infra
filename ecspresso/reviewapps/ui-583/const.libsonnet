@@ -7,7 +7,7 @@
     dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
   },
   imageTags: {
-    dreamkast_ui: 'commit-a54fcf6bb6c79425bd1d6631934c6d3e98978ab2',
+    dreamkast_ui: 'commit-44abc5dd13e00537a5394b39bb5a68ba594b1ee3',
   },
   internalEndpoints: {},
   publicSubnetIDs: [
