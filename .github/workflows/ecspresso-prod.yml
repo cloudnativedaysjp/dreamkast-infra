@@ -1,13 +1,16 @@
-name: ecspresso deploy
+name: ecspresso deploy (prod)
 
 on:
   push:
     branches: ["main"]
+    paths:
+      - 'ecspresso/prod/**'
+      - 'ecspresso/base/**'
+      - '.github/workflows/ecspresso-prod.yml'
   repository_dispatch:
     types: [trigger-ecspresso]
 
-# this workflow should be processed by FIFO
-concurrency: ecspresso
+concurrency: ecspresso-prod
 
 permissions:
   contents: read
@@ -15,12 +18,6 @@ permissions:
 
 jobs:
   ecspresso:
-    strategy:
-      matrix:
-        environment:
-        - prod
-        - stg
-        - reviewapps
     runs-on: "ubuntu-latest"
     permissions:
       contents: read
@@ -46,14 +43,14 @@ jobs:
       # ecschedule
       #
       - name: register taskdef for ecschedule
-        working-directory: "ecspresso/${{matrix.environment}}"
+        working-directory: "ecspresso/prod"
         run: |
           # shellcheck disable=SC2016
           find . -name "ecspresso.taskdef.jsonnet" | grep -vE "^./template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} register'
       - name: ecschedule apply
-        working-directory: "ecspresso/${{matrix.environment}}"
+        working-directory: "ecspresso/prod"
         run: |
           find . -name "ecschedule.jsonnet" | grep -vE "^./template" \
             | xargs -I{} -P10 bash -c \
@@ -63,10 +60,9 @@ jobs:
       # ecspresso
       #
       - name: run ecspresso
-        working-directory: "ecspresso/${{matrix.environment}}"
+        working-directory: "ecspresso/prod"
         run: |
           # shellcheck disable=SC2016
           find . -name "ecspresso.jsonnet" | grep -vE "^./template" \
             | xargs -I{} -P10 bash -c \
             '[ "$(ecspresso --config={} diff)" = "" ] || ecspresso --config={} deploy'
-
