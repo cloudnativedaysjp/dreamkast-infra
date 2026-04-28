@@ -10,7 +10,7 @@
   imageTags: {
     dreamkast_ecs: 'main-ff4197136ec89151b78070749381ad357c7a9c96',
     dreamkast_ui: 'main-1190cbd29f929155e547c9c03b302e84802b7ede',
-    dreamkast_weaver: 'main-a3184bd9c91e1803a3c88750781375188b7ae92f',
+    dreamkast_weaver: 'main-9f1417d8c15e136bdb4e0919114166beb864ed60',
     redis: '6.0',
     sgtm: '4.2.0',
   },
