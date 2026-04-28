@@ -6,8 +6,7 @@ on:
     paths:
       - 'ecspresso/**'
 
-# this workflow should be processed by FIFO
-concurrency: ecspresso
+concurrency: ecspresso-preview
 
 jobs:
   preview:
