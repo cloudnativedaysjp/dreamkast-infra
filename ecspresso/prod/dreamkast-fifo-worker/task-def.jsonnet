@@ -23,7 +23,10 @@ dreamkast_fifo_worker.taskDef(
   rdsSecretManagerName=const.secretManager.rds,
   dreamkastSecretManagerName=const.secretManager.dk,
 
-  enableLogging=true,
+  enableLogging=false,
+
+  enableLokiLogging=true,
+  lokiEndpoint=const.externalEndpoints.loki,
 
   enableOtelcolSidecar=false,
   mackerelSecretManagerName=const.secretManager.mackerel,
