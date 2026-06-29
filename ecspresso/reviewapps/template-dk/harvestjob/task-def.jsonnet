@@ -110,5 +110,9 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
   requiresCompatibilities: [
     'FARGATE',
   ],
+  runtimePlatform: {
+    cpuArchitecture: 'ARM64',
+    operatingSystemFamily: 'LINUX',
+  },
   volumes: [],
 }

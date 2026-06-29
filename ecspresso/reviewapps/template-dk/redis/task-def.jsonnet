@@ -8,6 +8,7 @@ redis.taskDef(
   imageTag=const.imageTags.redis,
 
   region=const.region,
+  cpuArchitecture='ARM64',
 
   enableLogging=false,
 )

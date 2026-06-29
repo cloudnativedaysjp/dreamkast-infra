@@ -8,6 +8,7 @@ mysql.taskDef(
   imageTag=const.imageTags.mysql,
 
   region=const.region,
+  cpuArchitecture='ARM64',
 
   enableLogging=false,
 )

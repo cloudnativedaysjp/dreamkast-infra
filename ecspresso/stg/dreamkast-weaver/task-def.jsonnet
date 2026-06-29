@@ -9,6 +9,7 @@ dreamkast_weaver.taskDef(
   imageTag=const.imageTags.dreamkast_weaver,
 
   region=const.region,
+  cpuArchitecture='ARM64',
   dkInternalEndpoint=const.internalEndpoints.dk,
   rdbInternalEndpoint=const.internalEndpoints.rdb,
 
