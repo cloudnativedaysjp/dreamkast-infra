@@ -37,6 +37,7 @@ local util = import './util.libsonnet';
     executionRoleName,
     imageTag,
     region,
+    cpuArchitecture='X86_64',
     dkApiEndpoint,
     dkWeaverEndpoint,
     rdbInternalEndpoint,
@@ -168,6 +169,10 @@ local util = import './util.libsonnet';
     memory: '%s' % [memory],
     networkMode: 'awsvpc',
     requiresCompatibilities: ['FARGATE'],
+    runtimePlatform: {
+      cpuArchitecture: cpuArchitecture,
+      operatingSystemFamily: 'LINUX',
+    },
     volumes: [],
     containerDefinitions: [
       //

@@ -28,6 +28,7 @@ local const = import './const.libsonnet';
     executionRoleName,
     imageTag,
     region,
+    cpuArchitecture='X86_64',
     enableLogging=false,
   ):: {
     executionRoleArn: 'arn:aws:iam::%s:role/%s' % [const.accountID, executionRoleName],
@@ -37,6 +38,10 @@ local const = import './const.libsonnet';
     memory: '%s' % [memory],
     networkMode: 'awsvpc',
     requiresCompatibilities: ['FARGATE'],
+    runtimePlatform: {
+      cpuArchitecture: cpuArchitecture,
+      operatingSystemFamily: 'LINUX',
+    },
     volumes: [],
     containerDefinitions: [
       {

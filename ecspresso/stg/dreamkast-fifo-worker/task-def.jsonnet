@@ -9,6 +9,7 @@ dreamkast_fifo_worker.taskDef(
   imageTag=const.imageTags.dreamkast_ecs,
 
   region=const.region,
+  cpuArchitecture='ARM64',
   rdbInternalEndpoint=const.internalEndpoints.rdb,
   redisInternalEndpoint=const.internalEndpoints.redis,
 

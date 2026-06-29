@@ -8,6 +8,7 @@ dreamkast_ui.taskDef(
   imageTag=const.imageTags.dreamkast_ui,
 
   region=const.region,
+  cpuArchitecture='ARM64',
   dkEndpoint=const.externalEndpoints.dk,
   dkWeaverEndpoint=const.externalEndpoints.dkWeaver,
 
