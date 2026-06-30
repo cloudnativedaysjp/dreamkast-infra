@@ -115,6 +115,10 @@ local util = import './util.libsonnet';
           name: 'REVIEW_APP',
           value: 'true',
         },
+        {
+          name: 'MYSQL_SSL_MODE',
+          value: 'disabled',
+        },
       ] else [],
       secrets: [
         // from rails-app-secret Secret
