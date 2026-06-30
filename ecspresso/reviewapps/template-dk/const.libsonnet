@@ -55,6 +55,6 @@
   imageTags: {
     dreamkast_ecs: error 'you must replace this value',
     redis: '6.0',
-    mysql: '8.0.33',
+    mysql: '8.4.9',
   },
 }
