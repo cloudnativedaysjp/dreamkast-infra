@@ -106,5 +106,9 @@ local roleName = 'dreamkast-prod-ecs-medialive-alert';
   requiresCompatibilities: [
     'FARGATE',
   ],
+  runtimePlatform: {
+    cpuArchitecture: 'ARM64',
+    operatingSystemFamily: 'LINUX',
+  },
   volumes: [],
 }

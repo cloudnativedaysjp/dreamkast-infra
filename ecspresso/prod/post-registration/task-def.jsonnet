@@ -106,5 +106,9 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
   requiresCompatibilities: [
     'FARGATE',
   ],
+  runtimePlatform: {
+    cpuArchitecture: 'ARM64',
+    operatingSystemFamily: 'LINUX',
+  },
   volumes: [],
 }
