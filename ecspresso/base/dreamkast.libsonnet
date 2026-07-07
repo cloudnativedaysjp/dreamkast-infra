@@ -51,6 +51,7 @@ local util = import './util.libsonnet';
     dreamkastSecretManagerName,
     enableLogging=false,
     enableLokiLogging=false,
+    enableMackerelLogRouting=false,
     lokiEndpoint='',
     enableOtelcolSidecar=false,
     mackerelSecretManagerName='',
@@ -58,7 +59,54 @@ local util = import './util.libsonnet';
     reviewapp=false,
   ):: {
     local root = self,
-    assert (enableLogging && enableLokiLogging) != true,
+    local logRouterEnabled = enableLokiLogging || enableMackerelLogRouting,
+    local awslogsLogConfiguration(streamPrefix) = {
+      logConfiguration: {
+        logDriver: 'awslogs',
+        options: {
+          'awslogs-group': family,
+          'awslogs-create-group': 'true',
+          'awslogs-region': region,
+          'awslogs-stream-prefix': streamPrefix,
+        },
+      },
+    },
+    local lokiLogConfiguration = {
+      assert lokiEndpoint != '',
+      logConfiguration: {
+        logDriver: 'awsfirelens',
+        options: {
+          RemoveKeys: 'container_id,ecs_task_arn',
+          LineFormat: 'key_value',
+          Labels: '{job="%s"}' % [family],
+          LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
+          Url: '%s/loki/api/v1/push' % [lokiEndpoint],
+          Name: 'grafana-loki',
+        },
+      },
+    },
+    local mackerelLogConfiguration = {
+      logConfiguration: {
+        logDriver: 'awsfirelens',
+        options: {
+          Name: 'opentelemetry',
+          Host: '127.0.0.1',
+          Port: '4318',
+          logs_uri: '/v1/logs',
+          logs_body_key: '$log',
+          logs_body_key_attributes: 'true',
+          log_response_payload: 'true',
+        },
+      },
+    },
+    local firelensLogConfiguration =
+      if enableLokiLogging then lokiLogConfiguration
+      else if enableMackerelLogRouting then mackerelLogConfiguration
+      else {},
+    assert !(enableLogging && enableLokiLogging),
+    assert !(enableLogging && enableMackerelLogRouting),
+    assert !(enableLokiLogging && enableMackerelLogRouting),
+    assert !enableMackerelLogRouting || enableOtelcolSidecar,
 
     //
     // Templates
@@ -188,44 +236,21 @@ local util = import './util.libsonnet';
         command: ['bundle exec rails db:migrate; bundle exec rails db:seed;'],
         cpu: 0,
         memory: memory,
-        dependsOn: if enableLokiLogging then [
+        dependsOn: if logRouterEnabled then [
           {
             containerName: 'log_router',
             condition: 'START',
           },
         ] else [],
-      } + if enableLogging then {
-        logConfiguration: {
-          logDriver: 'awslogs',
-          options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'dreamkast',
-          },
-        },
-      } else if enableLokiLogging then {
-        assert lokiEndpoint != '',
-        logConfiguration: {
-          logDriver: 'awsfirelens',
-          options: {
-            RemoveKeys: 'container_id,ecs_task_arn',
-            LineFormat: 'key_value',
-            Labels: '{job="%s"}' % [family],
-            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
-            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
-            Name: 'grafana-loki',
-          },
-        },
-      } else {},
+      } + if enableLogging then awslogsLogConfiguration('dreamkast') else firelensLogConfiguration,
       //
       // container: dreamkast
       //
       root.containerDefinitionCommon {
         name: 'dreamkast',
-        cpu: util.mainContainerCPU(cpu, enableLokiLogging, enableOtelcolSidecar),
-        memory: util.mainContainerMemory(memory, enableLokiLogging, enableOtelcolSidecar),
-        memoryReservation: util.mainContainerMemoryReservation(memory, enableLokiLogging, enableOtelcolSidecar),
+        cpu: util.mainContainerCPU(cpu, logRouterEnabled, enableOtelcolSidecar),
+        memory: util.mainContainerMemory(memory, logRouterEnabled, enableOtelcolSidecar),
+        memoryReservation: util.mainContainerMemoryReservation(memory, logRouterEnabled, enableOtelcolSidecar),
         essential: true,
         environment: root.containerDefinitionCommon.environment + [
           {
@@ -264,62 +289,35 @@ local util = import './util.libsonnet';
             condition: 'SUCCESS',
           },
         ],
-      } + if enableLogging then {
-        logConfiguration: {
-          logDriver: 'awslogs',
-          options: {
-            'awslogs-group': family,
-            'awslogs-create-group': 'true',
-            'awslogs-region': region,
-            'awslogs-stream-prefix': 'dreamkast',
-          },
-        },
-      } else if enableLokiLogging then {
-        assert lokiEndpoint != '',
-        logConfiguration: {
-          logDriver: 'awsfirelens',
-          options: {
-            RemoveKeys: 'container_id,ecs_task_arn',
-            LineFormat: 'key_value',
-            Labels: '{job="%s"}' % [family],
-            LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
-            Url: '%s/loki/api/v1/push' % [lokiEndpoint],
-            Name: 'grafana-loki',
-          },
-        },
-      } else {},
+      } + if enableLogging then awslogsLogConfiguration('dreamkast') else firelensLogConfiguration,
     ] + (
-      if enableLokiLogging then [
+      if logRouterEnabled then [
         //
-        // container: fluent-bit-plugin-loki
+        // container: log_router
         //
-        assert lokiEndpoint != '';
         root.containerDefinitionCommon {
           name: 'log_router',
           user: '0',
-          image: 'grafana/fluent-bit-plugin-loki:2.9.10',
+          image: if enableMackerelLogRouting then 'public.ecr.aws/aws-observability/aws-for-fluent-bit:3.4.0'
+          else 'grafana/fluent-bit-plugin-loki:2.9.10',
           cpu: const.fluentBitLokiResources.cpu,
           memory: const.fluentBitLokiResources.memory,
           memoryReservation: const.fluentBitLokiResources.memoryReservation,
           environment: [],
           secrets: [],
+          dependsOn: if enableMackerelLogRouting then [
+            {
+              containerName: 'otelcol',
+              condition: 'START',
+            },
+          ] else [],
           firelensConfiguration: {
             type: 'fluentbit',
             options: {
               'enable-ecs-log-metadata': 'true',
             },
           },
-        } + if enableLogging then {
-          logConfiguration: {
-            logDriver: 'awslogs',
-            options: {
-              'awslogs-group': family,
-              'awslogs-create-group': 'true',
-              'awslogs-region': region,
-              'awslogs-stream-prefix': 'firelens',
-            },
-          },
-        } else {},
+        } + if enableLogging then awslogsLogConfiguration('firelens') else {},
       ] else []
     ) + (
       if enableOtelcolSidecar then [
@@ -347,30 +345,9 @@ local util = import './util.libsonnet';
               name: 'MACKEREL_APIKEY',
             },
           ],
-        } + if enableLogging then {
-          logConfiguration: {
-            logDriver: 'awslogs',
-            options: {
-              'awslogs-group': family,
-              'awslogs-create-group': 'true',
-              'awslogs-region': region,
-              'awslogs-stream-prefix': 'otelcol',
-            },
-          },
-        } else if enableLokiLogging then {
-          assert lokiEndpoint != '',
-          logConfiguration: {
-            logDriver: 'awsfirelens',
-            options: {
-              RemoveKeys: 'container_id,ecs_task_arn',
-              LineFormat: 'key_value',
-              Labels: '{job="%s"}' % [family],
-              LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
-              Url: '%s/loki/api/v1/push' % [lokiEndpoint],
-              Name: 'grafana-loki',
-            },
-          },
-        } else {},
+        } + if enableLogging then awslogsLogConfiguration('otelcol')
+        else if enableLokiLogging then lokiLogConfiguration
+        else {},
       ] else []
     ),
   },
