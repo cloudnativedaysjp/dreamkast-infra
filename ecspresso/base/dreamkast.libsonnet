@@ -93,7 +93,7 @@ local util = import './util.libsonnet';
           Host: '127.0.0.1',
           Port: '4318',
           logs_uri: '/v1/logs',
-          logs_body_key: '$log',
+          logs_body_key: 'log',
           logs_body_key_attributes: 'true',
           log_response_payload: 'true',
         },
