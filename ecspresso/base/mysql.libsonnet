@@ -47,8 +47,13 @@ local const = import './const.libsonnet';
       {
         name: 'mysql',
         image: '%s.dkr.ecr.%s.amazonaws.com/ecr-public/docker/library/mysql:%s' % [const.accountID, region, imageTag],
-        command: [],
-        entryPoint: [],
+        // solid_cable 用の専用データベース(dreamkast_cable)を review app 用 MySQL にも作成する。
+        // 公式 MySQL イメージは MYSQL_DATABASE を1つしか作らないため、
+        // 初期化スクリプト(/docker-entrypoint-initdb.d)を注入してから mysqld を起動する。
+        entryPoint: ['bash', '-c'],
+        command: [
+          "echo \"CREATE DATABASE IF NOT EXISTS dreamkast_cable CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci; GRANT ALL PRIVILEGES ON dreamkast_cable.* TO 'user'@'%';\" > /docker-entrypoint-initdb.d/10-create-cable-db.sql && exec docker-entrypoint.sh mysqld",
+        ],
         essential: true,
         restartPolicy: { enabled: true },
         cpu: cpu,
