@@ -32,10 +32,25 @@ processors:
       - action: upsert
         key: deployment.environment.name
         value: stg
+  resource/dreamkast:
+    attributes:
+      - action: upsert
+        key: service.namespace
+        value: dreamkast
+      - action: upsert
+        key: service.name
+        value: dreamkast
+      - action: upsert
+        key: deployment.environment.name
+        value: stg
+
   resourcedetection:
     detectors: [env, ecs]
     timeout: 2s
     override: false
+  batch/logs:
+    send_batch_size: 1000
+    send_batch_max_size: 1000
   tail_sampling:
     policies:
       - name: include http 5xx response status
@@ -61,6 +76,8 @@ processors:
 
 exporters:
   mackerelotlp:
+  otlphttp/loki:
+      endpoint: https://stg.loki.cloudnativedays.jp/otlp
 
 service:
   pipelines:
@@ -72,4 +89,8 @@ service:
       receivers: [otlp]
       processors: [attributes, resourcedetection, tail_sampling]
       exporters: [mackerelotlp]
+    logs:
+      receivers: [otlp]
+      processors: [resource/dreamkast, resourcedetection, batch/logs]
+      exporters: [mackerelotlp,otlphttp/loki]
   extensions: [health_check]
