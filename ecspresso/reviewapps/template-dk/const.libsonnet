@@ -31,7 +31,6 @@
   },
   serviceDiscovery: {
     mysql: error 'you must replace this value',
-    redis: error 'you must replace this value',
   },
   sentry: {
     dsn: 'TODO',
@@ -46,7 +45,6 @@
   },
   internalEndpoints: {
     rdb: 'mysql-%s.development.local' % [$.PR_NAME],
-    redis: 'redis://redis-%s.development.local' % [$.PR_NAME],
   },
 
   //
@@ -54,7 +52,6 @@
   //
   imageTags: {
     dreamkast_ecs: error 'you must replace this value',
-    redis: '6.0',
     mysql: '8.4.9',
   },
 }

@@ -10,7 +10,6 @@ dreamkast_fifo_worker.taskDef(
   region=const.region,
   cpuArchitecture='ARM64',
   rdbInternalEndpoint=const.internalEndpoints.rdb,
-  redisInternalEndpoint=const.internalEndpoints.redis,
 
   s3BucketName=const.s3.dreamkast.name,
   s3BucketRegion=const.s3.dreamkast.region,
