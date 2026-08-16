@@ -1,0 +1,48 @@
+{
+  PR_NAME: 'dk-2857',
+  cluster: 'dreamkast-dev',
+  executionRoleName: 'dreamkast-dev-ecs-task-execution-role',
+  externalEndpoints: {
+    dkApi: 'https://api.dev.cloudnativedays.jp',
+    dkWeaver: 'https://dkw.dev.cloudnativedays.jp',
+  },
+  imageTags: {
+    dreamkast_ecs: 'commit-450a53b3b262f7822c40c46fa738cacb0a8ba46c',
+    mysql: '8.4.9',
+    redis: '6.0',
+  },
+  internalEndpoints: {
+    rdb: 'mysql-dk-2857.development.local',
+    redis: 'redis://redis-dk-2857.development.local',
+  },
+  publicSubnetIDs: [
+    'subnet-00709135a42bf907e',
+    'subnet-0d07831c8fc073511',
+    'subnet-033491d41490494b6',
+  ],
+  region: 'us-west-2',
+  s3: {
+    dreamkast: {
+      name: 'dreamkast-dev-bucket',
+      region: 'us-west-2',
+    },
+  },
+  secretManager: {
+    dk: 'dreamkast/reviewapp-env-yGJKrj',
+    railsApp: 'dreamkast/rails-app-secret-SqidNC',
+  },
+  sentry: {
+    dsn: 'TODO',
+  },
+  serviceDiscovery: {
+    mysql: 'srv-4wbqgpizd4pdiyby',
+    redis: 'srv-n5kl7ebn3bzzqhcj',
+  },
+  sqs: {
+    fifo: 'dreamkast-dev-fifo-queue',
+  },
+  targetGroupArn: {
+    dk: 'arn:aws:elasticloadbalancing:us-west-2:607167088920:targetgroup/dev-dk-2857/e76206189258a34a',
+  },
+  taskTargetRoleName: 'dreamkast-dev-ecs-scheduled-task-target-role',
+}
