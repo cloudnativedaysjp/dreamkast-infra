@@ -31,10 +31,6 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
           value: 'dreamkast',
         },
         {
-          name: 'REDIS_URL',
-          value: const.internalEndpoints.redis,
-        },
-        {
           name: 'SENTRY_DSN',
           value: const.sentry.dsn,
         },
