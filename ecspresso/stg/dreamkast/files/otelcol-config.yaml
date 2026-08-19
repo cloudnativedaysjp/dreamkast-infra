@@ -35,6 +35,9 @@ processors:
   resource/dreamkast:
     attributes:
       - action: upsert
+        key: service.namespace
+        value: dreamkast
+      - action: upsert
         key: service.name
         value: dreamkast
       - action: upsert
