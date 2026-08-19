@@ -43,6 +43,40 @@ processors:
       - action: upsert
         key: deployment.environment.name
         value: stg
+  transform/mackerel_logs:
+    error_mode: ignore
+    log_statements:
+      - context: log
+        statements:
+          # JSON文字列を構造化ログに変換
+          - set(body, ParseJSON(body))
+            where IsString(body)
+
+          # log level -> OpenTelemetry Severity
+          - set(severity_text, body["level"])
+            where IsMap(body) and body["level"] != nil
+
+          - set(severity_number, SEVERITY_NUMBER_DEBUG)
+            where IsMap(body) and body["level"] == "DEBUG"
+
+          - set(severity_number, SEVERITY_NUMBER_INFO)
+            where IsMap(body) and body["level"] == "INFO"
+
+          - set(severity_number, SEVERITY_NUMBER_WARN)
+            where IsMap(body) and (body["level"] == "WARN" or body["level"] == "WARNING")
+
+          - set(severity_number, SEVERITY_NUMBER_ERROR)
+            where IsMap(body) and body["level"] == "ERROR"
+
+          - set(severity_number, SEVERITY_NUMBER_FATAL)
+            where IsMap(body) and body["level"] == "FATAL"
+
+          # Mackerelの構造化ログ検索用
+          - set(body["deployment.environment.name"], resource.attributes["deployment.environment.name"])
+            where IsMap(body) and resource.attributes["deployment.environment.name"] != nil
+
+          - set(body["service.name"], resource.attributes["service.name"])
+            where IsMap(body) and resource.attributes["service.name"] != nil
 
   resourcedetection:
     detectors: [env, ecs]
@@ -91,6 +125,11 @@ service:
       exporters: [mackerelotlp]
     logs:
       receivers: [otlp]
-      processors: [resource/dreamkast, resourcedetection, batch/logs]
+      processors:
+        - attributes
+        - resource/dreamkast
+        - resourcedetection
+        - transform/mackerel_logs
+        - batch/logs
       exporters: [mackerelotlp,otlphttp/loki]
   extensions: [health_check]
