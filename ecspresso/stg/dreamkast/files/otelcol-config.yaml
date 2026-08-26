@@ -21,17 +21,6 @@ receivers:
       paging:
 
 processors:
-  attributes:
-    actions:
-      - action: upsert
-        key: service.namespace
-        value: dreamkast
-      - action: upsert
-        key: service.name
-        value: dreamkast
-      - action: upsert
-        key: deployment.environment.name
-        value: stg
   resource/dreamkast:
     attributes:
       - action: upsert
@@ -51,6 +40,12 @@ processors:
           # JSON文字列を構造化ログに変換
           - set(body, ParseJSON(body))
             where IsString(body)
+
+          # trace_id/span_idを設定
+          - set(trace_id.string, body["trace_id"]) where IsMap(body) and body["trace_id"] != nil
+          - delete_key(body, "trace_id") where IsMap(body)
+          - set(span_id.string, body["span_id"]) where IsMap(body) and body["span_id"] != nil
+          - delete_key(body, "span_id") where IsMap(body)
 
           # log level -> OpenTelemetry Severity
           - set(severity_text, body["level"])
@@ -117,18 +112,22 @@ service:
   pipelines:
     metrics:
       receivers: [otlp, hostmetrics]
-      processors: [attributes, resourcedetection]
+      processors:
+        - resourcedetection
+        - resource/dreamkast
       exporters: [mackerelotlp]
     traces:
       receivers: [otlp]
-      processors: [attributes, resourcedetection, tail_sampling]
+      processors:
+        - resourcedetection
+        - resource/dreamkast
+        - tail_sampling
       exporters: [mackerelotlp]
     logs:
       receivers: [otlp]
       processors:
-        - attributes
-        - resource/dreamkast
         - resourcedetection
+        - resource/dreamkast
         - transform/mackerel_logs
         - batch/logs
       exporters: [mackerelotlp,otlphttp/loki]
