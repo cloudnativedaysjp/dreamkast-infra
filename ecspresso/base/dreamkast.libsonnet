@@ -277,9 +277,9 @@ local util = import './util.libsonnet';
           name: 'log_router',
           user: '0',
           image: 'public.ecr.aws/aws-observability/aws-for-fluent-bit:3.4.0',
-          cpu: const.fluentBitLokiResources.cpu,
-          memory: const.fluentBitLokiResources.memory,
-          memoryReservation: const.fluentBitLokiResources.memoryReservation,
+          cpu: const.fluentBitResources.cpu,
+          memory: const.fluentBitResources.memory,
+          memoryReservation: const.fluentBitResources.memoryReservation,
           environment: [],
           secrets: [],
           dependsOn: [
