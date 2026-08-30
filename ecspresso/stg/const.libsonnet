@@ -11,12 +11,10 @@
     dreamkast_ecs: 'main-e1c9e386024771805ba47f9f2ec0a5b873421275',
     dreamkast_ui: 'main-ecaa967788841a699b82c111ca785aff8f366c22',
     dreamkast_weaver: 'main-d173d0400ebfbee5b39d9f099b382e5a8cb10f48',
-    redis: '6.0',
   },
   internalEndpoints: {
     dk: 'http://dreamkast.staging.local',
     rdb: 'dreamkast-stg-rds.cctlaulyxvbk.us-west-2.rds.amazonaws.com',
-    redis: 'redis://redis.staging.local',
   },
   publicSubnetIDs: [
     'subnet-00709135a42bf907e',
@@ -42,7 +40,6 @@
   },
   serviceDiscovery: {
     dk: 'srv-vb6353dahtneltjh',
-    redis: 'srv-bbwl53e4dfx2omtm',
   },
   sqs: {
     fifo: 'dreamkast-stg-fifo-queue',

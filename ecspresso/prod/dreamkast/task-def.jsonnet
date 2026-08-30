@@ -15,7 +15,6 @@ dreamkast.taskDef(
   dkApiEndpoint=const.externalEndpoints.dkApi,
   dkWeaverEndpoint=const.externalEndpoints.dkWeaver,
   rdbInternalEndpoint=const.internalEndpoints.rdb,
-  redisInternalEndpoint=const.internalEndpoints.redis,
 
   s3BucketName=const.s3.dreamkast.name,
   s3BucketRegion=const.s3.dreamkast.region,

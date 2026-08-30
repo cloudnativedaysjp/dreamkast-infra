@@ -41,7 +41,8 @@ local util = import './util.libsonnet';
     dkApiEndpoint,
     dkWeaverEndpoint,
     rdbInternalEndpoint,
-    redisInternalEndpoint,
+    // 脱Redis 後は既定で空。未取り込みブランチの review app のみ値を渡す。
+    redisInternalEndpoint='',
     s3BucketName,
     s3BucketRegion,
     sqsFifoQueueName,
@@ -116,10 +117,6 @@ local util = import './util.libsonnet';
           value: 'dreamkast',
         },
         {
-          name: 'REDIS_URL',
-          value: redisInternalEndpoint,
-        },
-        {
           name: 'SENTRY_DSN',
           value: sentryDsn,
         },
@@ -137,7 +134,18 @@ local util = import './util.libsonnet';
           else if family == 'dreamkast-stg-dk' then 'dreamkast-staging'
           else family,
         },
-      ] + if reviewapp == true then [
+      ] + (
+        // 脱Redis (dreamkast#2844) 後は REDIS_URL を渡さない。
+        // まだ main を取り込んでいないブランチの review app だけが
+        // redisInternalEndpoint を指定し、その場合のみ REDIS_URL を付与する。
+        // 対象の review app が無くなったらこの分岐ごと削除する。
+        if redisInternalEndpoint != '' then [
+          {
+            name: 'REDIS_URL',
+            value: redisInternalEndpoint,
+          },
+        ] else []
+      ) + if reviewapp == true then [
         {
           name: 'REVIEW_APP',
           value: 'true',
