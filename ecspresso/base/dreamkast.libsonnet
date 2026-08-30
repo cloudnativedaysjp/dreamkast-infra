@@ -50,16 +50,14 @@ local util = import './util.libsonnet';
     rdsSecretManagerName,
     dreamkastSecretManagerName,
     enableLogging=false,
-    enableLokiLogging=false,
     enableMackerelLogRouting=false,
-    lokiEndpoint='',
     enableOtelcolSidecar=false,
     mackerelSecretManagerName='',
     otelcolConfig='',
     reviewapp=false,
   ):: {
     local root = self,
-    local logRouterEnabled = enableLokiLogging || enableMackerelLogRouting,
+    local logRouterEnabled = enableMackerelLogRouting,
     local awslogsLogConfiguration(streamPrefix) = {
       logConfiguration: {
         logDriver: 'awslogs',
@@ -68,20 +66,6 @@ local util = import './util.libsonnet';
           'awslogs-create-group': 'true',
           'awslogs-region': region,
           'awslogs-stream-prefix': streamPrefix,
-        },
-      },
-    },
-    local lokiLogConfiguration = {
-      assert lokiEndpoint != '',
-      logConfiguration: {
-        logDriver: 'awsfirelens',
-        options: {
-          RemoveKeys: 'container_id,ecs_task_arn',
-          LineFormat: 'key_value',
-          Labels: '{job="%s"}' % [family],
-          LabelKeys: 'container_name,ecs_task_definition,source,ecs_cluster',
-          Url: '%s/loki/api/v1/push' % [lokiEndpoint],
-          Name: 'grafana-loki',
         },
       },
     },
@@ -99,20 +83,14 @@ local util = import './util.libsonnet';
         },
       },
     },
-    local firelensLogConfiguration =
-      if enableLokiLogging then lokiLogConfiguration
-      else if enableMackerelLogRouting then mackerelLogConfiguration
-      else {},
-    assert !(enableLogging && enableLokiLogging),
+    local firelensLogConfiguration = if enableMackerelLogRouting then mackerelLogConfiguration else {},
     assert !(enableLogging && enableMackerelLogRouting),
-    assert !(enableLokiLogging && enableMackerelLogRouting),
     assert !enableMackerelLogRouting || enableOtelcolSidecar,
 
     //
     // Templates
     //
     containerDefinitionCommon:: {
-      local containerDefinitionCommon = self,
       name: error 'must be overridden',
       image: '%s.dkr.ecr.%s.amazonaws.com/dreamkast-ecs:%s' % [const.accountID, region, imageTag],
       entryPoint: [],
@@ -298,26 +276,25 @@ local util = import './util.libsonnet';
         root.containerDefinitionCommon {
           name: 'log_router',
           user: '0',
-          image: if enableMackerelLogRouting then 'public.ecr.aws/aws-observability/aws-for-fluent-bit:3.4.0'
-          else 'grafana/fluent-bit-plugin-loki:2.9.10',
-          cpu: const.fluentBitLokiResources.cpu,
-          memory: const.fluentBitLokiResources.memory,
-          memoryReservation: const.fluentBitLokiResources.memoryReservation,
+          image: 'public.ecr.aws/aws-observability/aws-for-fluent-bit:3.4.0',
+          cpu: const.fluentBitResources.cpu,
+          memory: const.fluentBitResources.memory,
+          memoryReservation: const.fluentBitResources.memoryReservation,
           environment: [],
           secrets: [],
-          dependsOn: if enableMackerelLogRouting then [
+          dependsOn: [
             {
               containerName: 'otelcol',
               condition: 'START',
             },
-          ] else [],
+          ],
           firelensConfiguration: {
             type: 'fluentbit',
             options: {
               'enable-ecs-log-metadata': 'true',
             },
           },
-        } + if enableLogging then awslogsLogConfiguration('firelens') else {},
+        },
       ] else []
     ) + (
       if enableOtelcolSidecar then [
@@ -345,9 +322,7 @@ local util = import './util.libsonnet';
               name: 'MACKEREL_APIKEY',
             },
           ],
-        } + if enableLogging then awslogsLogConfiguration('otelcol')
-        else if enableLokiLogging then lokiLogConfiguration
-        else {},
+        } + if enableLogging then awslogsLogConfiguration('otelcol') else {},
       ] else []
     ),
   },
