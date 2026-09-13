@@ -45,12 +45,6 @@ SERVICE_ID_MYSQL=$(aws servicediscovery create-service \
   --health-check-custom-config FailureThreshold=1 \
   | jq -r ".Service.Id")
 
-SERVICE_ID_REDIS=$(aws servicediscovery create-service \
-  --name "redis-${PR_NAME}" \
-  --dns-config "NamespaceId="${SERVICE_DISCOVERY_NAMESPACE}",DnsRecords=[{Type="A",TTL="10"}]" \
-  --health-check-custom-config FailureThreshold=1 \
-  | jq -r ".Service.Id")
-
 # replace variables in const.libsonnet
 cat << _EOL_ | jsonnet - > ./const.libsonnet.tmp
 local const = import './const.libsonnet';
@@ -62,7 +56,6 @@ const + {
   },
   serviceDiscovery: {
     mysql: "${SERVICE_ID_MYSQL}",
-    redis: "${SERVICE_ID_REDIS}",
   },
   imageTags: const.imageTags + {
     dreamkast_ecs: "${IMAGE_TAG}",
@@ -86,8 +79,6 @@ aws ecs describe-task-definition --task-definition dreamkast-dev-${PR_NAME}-harv
   aws ecs deregister-task-definition --task-definition dreamkast-dev-${PR_NAME}-harvestjob:1
 aws servicediscovery get-service --id ${SERVICE_ID_MYSQL} && \
   aws servicediscovery delete-service --id ${SERVICE_ID_MYSQL}
-aws servicediscovery get-service --id ${SERVICE_ID_REDIS} && \
-  aws servicediscovery delete-service --id ${SERVICE_ID_REDIS}
 aws elbv2 describe-rules --rule-arn ${LISTENER_RULE_ARN} && \
   aws elbv2 delete-rule --rule-arn ${LISTENER_RULE_ARN}
 aws elbv2 describe-target-groups --target-group-arn ${TARGET_GROUP_ARN} && \

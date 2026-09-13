@@ -31,10 +31,6 @@ local roleName = 'dreamkast-dev-ecs-harvestjob';
           value: 'dreamkast',
         },
         {
-          name: 'REDIS_URL',
-          value: const.internalEndpoints.redis,
-        },
-        {
           name: 'SENTRY_DSN',
           value: 'https://a1c3137217d913ed746bfda3ef9c63ac@o414348.ingest.us.sentry.io/4509089544929280',
         },

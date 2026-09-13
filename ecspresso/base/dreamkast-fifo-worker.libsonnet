@@ -29,7 +29,8 @@ local util = import './util.libsonnet';
     region,
     cpuArchitecture='X86_64',
     rdbInternalEndpoint,
-    redisInternalEndpoint,
+    // 脱Redis 後は既定で空。未取り込みブランチの review app のみ値を渡す。
+    redisInternalEndpoint='',
     s3BucketName,
     s3BucketRegion,
     sqsFifoQueueName,
@@ -85,10 +86,6 @@ local util = import './util.libsonnet';
             value: 'dreamkast',
           },
           {
-            name: 'REDIS_URL',
-            value: redisInternalEndpoint,
-          },
-          {
             name: 'SENTRY_DSN',
             value: sentryDsn,
           },
@@ -122,7 +119,17 @@ local util = import './util.libsonnet';
             name: 'BROWSER_PATH',
             value: '/usr/bin/google-chrome',
           },
-        ] + if reviewapp == true then [
+        ] + (
+          // 脱Redis (dreamkast#2844) 後は REDIS_URL を渡さない。
+          // まだ main を取り込んでいないブランチの review app のみ値を指定する。
+          // 対象の review app が無くなったらこの分岐ごと削除する。
+          if redisInternalEndpoint != '' then [
+            {
+              name: 'REDIS_URL',
+              value: redisInternalEndpoint,
+            },
+          ] else []
+        ) + if reviewapp == true then [
           {
             name: 'REVIEW_APP',
             value: 'true',
