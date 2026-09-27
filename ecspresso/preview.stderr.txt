@@ -1,0 +1,6 @@
+2025/05/17 09:57:30 [INFO] ecspresso version: v2.4.5
+[31m2025/05/17 09:57:30 [ERROR] FAILED. failed to load task definition stg/harvestjob/task-def.jsonnet: stg/harvestjob/task-def.jsonnet:115:60-64 Unknown variable: task
+
+  executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [task.executionRoleName],
+
+[0m

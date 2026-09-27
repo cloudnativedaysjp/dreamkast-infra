@@ -16,7 +16,6 @@
   internalEndpoints: {
     dk: 'http://dreamkast.production.local',
     rdb: 'dreamkast-prod-rds.c6eparu1hmbv.ap-northeast-1.rds.amazonaws.com',
-    redis: 'redis://dreamkast-prod-redis.bp6loy.ng.0001.apne1.cache.amazonaws.com:6379',
   },
   publicSubnetIDs: [
     'subnet-015fd58d325bd5220',
