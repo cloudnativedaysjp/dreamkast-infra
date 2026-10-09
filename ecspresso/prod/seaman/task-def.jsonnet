@@ -89,6 +89,10 @@ local roleName = 'dreamkast-prod-ecs-seaman';
   executionRoleArn: 'arn:aws:iam::607167088920:role/%s' % [executionRoleName],
   taskRoleArn: 'arn:aws:iam::607167088920:role/%s' % [roleName],
   networkMode: 'awsvpc',
+  runtimePlatform: {
+    cpuArchitecture: 'ARM64',
+    operatingSystemFamily: 'LINUX',
+  },
   requiresCompatibilities: [
     'FARGATE',
   ],
