@@ -27,6 +27,7 @@ TARGET_GROUP_ARN=$(aws elbv2 create-target-group \
   --target-type ip \
   --protocol HTTP \
   --port 3000 \
+  --health-check-path "/up" \
   --vpc-id ${VPC_ID} \
   --ip-address-type ipv4 \
   | jq -r ".TargetGroups[0].TargetGroupArn")
