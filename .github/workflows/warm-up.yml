@@ -43,7 +43,6 @@ jobs:
           is_conference_day="${{ steps.is_conference_day.outputs.result }}"
           replicas_files=(
             "ecspresso/${{ env.ENVIRONMENT }}/dreamkast/vars/replicas.json"
-            "ecspresso/${{ env.ENVIRONMENT }}/dreamkast-ui/vars/replicas.json"
             "ecspresso/${{ env.ENVIRONMENT }}/dreamkast-weaver/vars/replicas.json"
           )
 
