@@ -69,6 +69,10 @@ local roleName = 'dreamkast-prod-ecs-post-registration';
           valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_TOKEN::' % [const.region, const.secretManager.dk],
         },
         {
+          name: 'SLACK_CHANNEL',
+          valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:SLACK_CHANNEL::' % [const.region, const.secretManager.dk],
+        },
+        {
           name: 'MYSQL_USER',
           valueFrom: 'arn:aws:secretsmanager:%s:607167088920:secret:%s:username::' % [const.region, const.secretManager.rds],
         },
